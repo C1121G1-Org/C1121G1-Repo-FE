@@ -1,0 +1,41 @@
+footer {
+  margin-top: 20px;
+  padding: 30px 0;
+  background-color: #D70018;
+  color: white;
+}
+
+.fa-brands {
+  margin-right: 10px;
+}
+
+.footer-bottom .col-12 {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+footer ul li a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.footer-list-payment .footer-item {
+  padding-bottom: 10px;
+}
+
+.footer-list-payment .footer-item img:first-child {
+  margin-right: 5px;
+}
+
+.footer-list-transport .footer-item {
+  padding-bottom: 10px;
+}
+
+.footer-list-transport .footer-item img:first-child {
+  margin-right: 5px;
+}
+
+a {
+  color: white;
+}
