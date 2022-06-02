@@ -14,7 +14,6 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class ReportAndHistoryService {
-  private url = environment.baseApi;
 
   constructor(private httpClient: HttpClient) {
   }
