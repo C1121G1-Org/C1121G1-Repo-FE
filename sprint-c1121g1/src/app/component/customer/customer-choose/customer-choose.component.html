@@ -1,163 +1,281 @@
-<div
-  class="modal fade"
-  id="chooseProductId"
-  data-backdrop="static"
-  data-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content tam">
-      <div class="modal-header">
-        <h5 class="modal-title" id="updateEmployeeModalLabel">Chọn sản phẩm</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body modals">
 
-        <section>
-          <select class="custom-select">
-            <option selected>Tìm kiếm theo</option>
-            <option>Tên sản phẩm</option>
-            <option value="1">Số điện thoại</option>
-          </select>
-          <div style="display: flex" class="navbar-light  bg-light">
-            <nav class="navbar navbar-light">
-              <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Tìm Kiếm" aria-label="Search">
-                <button class="btn btn-primary my-2 my-sm-0" type="submit">TÌM KIẾM</button>
-              </form>
-            </nav>
-          </div>
-          <!--for demo wrap-->
-          <div class="tbl-header">
-            <table cellpadding="0" cellspacing="0" border="0">
-              <thead>
-              <tr>
-                <th>STT</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Mã Sản Phẩm</th>
-                <th>Năm Sản Xuất</th>
-                <th>Giá(VND)</th>
-                <th>CPU</th>
-                <th>Lưu Trữ</th>
-                <th>Ngày Tạo</th>
-              </tr>
-              </thead>
-            </table>
-          </div>
-          <div class="tbl-content">
-            <table cellpadding="0" cellspacing="0" border="0">
-              <tbody>
-              <tr>
-                <!--                <td>{{(i+1)}}</td>-->
-                <!--                <td>{{customer.customerName}}</td>-->
-                <!--                <td>{{customer.id}}</td>-->
-                <!--                <td>{{customer.customerName}}</td>-->
-                <!--                <td>{{customer.customerName}}</td>-->
-                <!--                <td>{{customer.customerName}}</td>-->
-                <!--                <td>{{customer.customerName}}</td>-->
-                <!--                <td>{{customer.customerName}}</td>-->
-              </tr>
-              </tbody>
-            </table>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#customerModal">
+  CHỌN KHÁCH HÀNG
+</button>
 
-          </div>
-          <div class="mt-2">
-            <button style="margin-right: 10px" type="button" class="btn btn-primary btn-delete" data-dismiss="modal">
-              HỦY
-            </button>
-            <button type="button" class="btn btn-primary btn-delete">CHỌN</button>
-            <button style="float: right" class="btn btn-primary btn-delete ml-2">TRANG KẾ TIẾP</button>
-            <button style="float: right" class="btn btn-primary  btn-delete">TRANG TRƯỚC</button>
-          </div>
-        </section>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
+  CHỌN sản phẩm
+</button>
 
+<div class="modal fade" id="productModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card card-body">
+          <h3 class="text-center font-weight-bold text-uppercase  py-4">
+            Quản Lý Danh Sách Nhà Cung Cấp
+          </h3>
+        </div>
+        <div class="card card-body">
+          <div class="table-editable">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-3" style="display: flex; justify-content: space-evenly">
+                  <div>
+                    <p style="margin-top: 10px">Tìm kiếm theo: </p>
+                  </div>
+                  <div>
+                    <select class="search-select background-search">
+                      <option value="">Tên nhà cung cấp</option>
+                      <option value="">Địa chỉ</option>
+                      <option value="">Số điện thoại</option>
+                      <option value="">Email</option>
+                    </select>
+                  </div>
+
+                  <div style="position: relative">
+                    <input style="width: 300px" class="header-search search-input background-search"
+                           placeholder="Bạn cần tìm gì?"
+                           type="text"><i
+                    class="fa fa-search"
+                    style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
+                  </div>
+                  <div>
+                    <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm
+                      kiếm
+                    </button>
+                  </div>
+                </div>
+                <!--                search-->
+
+              </div>
+            </div>
+            <div>
+              <div class="tbl-header">
+                <table class="table table-bordered table-responsive-md ">
+                  <thead>
+                  <tr>
+                    <th class="text-center" style="width: 100px">STT</th>
+                    <th class="text-center">Họ và tên</th>
+                    <th class="text-center">Mã khách hàng</th>
+                    <th class="text-center">số điện thoại</th>
+                    <th class="text-center">Địa chỉ</th>
+                    <th class="text-center">Tuổi</th>
+                    <th class="text-center">Email</th>
+                  </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="tbl-content">
+                <table class=" table table-bordered table-responsive-md">
+                  <tbody>
+                  <tr (click)="getProduct(product)" *ngFor="let product of productList; index as i"
+                      [class.heightLight]="isSelectedProduct(product)">
+                    <td class="text-center">{{(i + 1)}}</td>
+                    <td class="pt-3-half">{{product.name}}</td>
+                    <td class="pt-3-half">{{product.id}}</td>
+                    <td class="pt-3-half">{{product.supplier}}</td>
+                    <td class="text-center">{{product.price}}</td>
+                    <td class="pt-3-half">{{product.cpu}}</td>
+                    <td class="pt-3-half">{{product.memory}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-6">
+                  <button type="button" class="btn-edit btn-rounded  btn-lg my-0">
+                    <i class="fa fa-paper-plane"></i>
+                    Chọn</button>
+                  <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
+                          data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
+                  </button>
+                </div>
+
+                <div class="col-6">
+                  <!--Pagination-->
+                  <nav class="d-flex justify-content-center wow fadeIn float-right">
+                    <ul class="pagination pg-blue">
+
+                      <!--Arrow left-->
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+
+                      <li class="page-item active">
+                        <a class="page-link" href="#">1
+                          <span class="sr-only">(current)</span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">4</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">5</a>
+                      </li>
+
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                  <!--Pagination-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
 
 <!--chọn khách hàng-->
 
-<div
-  class="modal fade"
-  id="customer-modal"
-  data-backdrop="static"
-  data-keyboard="false"
-  tabindex="-1"
-  aria-labelledby="staticBackdropLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-xl" role="document">
-    <div class="modal-content tam">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal-customer">Chọn khách hàng có sẵn</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body modals">
-        <section>
-          <select class="custom-select">
-            <option selected>Tên khách hàng</option>
-            <option value="2">Số điện thoại</option>
-          </select>
-          <div style="display: flex" class="navbar-light  bg-light">
-            <nav class="navbar navbar-light">
-              <form class="form-inline">
-                <input [(ngModel)]="searchByName" class="form-control mr-sm-2" type="search" placeholder="Tìm Kiếm"
-                       aria-label="Search">
-                <button class="btn btn-primary btn-outline-primary my-2 my-sm-0" type="submit">TÌM KIẾM</button>
-              </form>
-            </nav>
-          </div>
+<div class="modal fade" id="customerModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card card-body">
+          <h3 class="text-center font-weight-bold text-uppercase  py-4">
+            Quản Lý Danh Sách Nhà Cung Cấp
+          </h3>
+        </div>
+        <div class="card card-body">
+          <div  class="table-editable">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-3" style="display: flex; justify-content: space-evenly">
+                  <div>
+                    <p style="margin-top: 10px">Tìm kiếm theo: </p>
+                  </div>
+                  <div>
+                    <select class="search-select background-search">
+                      <option value="">Tên nhà cung cấp</option>
+                      <option value="">Địa chỉ</option>
+                      <option value="">Số điện thoại</option>
+                      <option value="">Email</option>
+                    </select>
+                  </div>
 
-          <div class="tbl-header">
-            <table class="table" id="fontsize" cellpadding="0" cellspacing="0" border="0">
-              <thead>
-              <tr>
-                <th style="width: 100px">STT</th>
-                <th>Họ và tên</th>
-                <th>Mã khách hàng</th>
-                <th>số điện thoại</th>
-                <th>Địa chỉ</th>
-                <th>Tuổi</th>
-                <th>Email</th>
-              </tr>
-              </thead>
-            </table>
-          </div>
-          <div class="tbl-content">
-            <table cellpadding="0" cellspacing="0" border="0">
-              <tbody>
-              <tr *ngFor="let customer of customerList; index as i">
-                <td style="width: 100px">{{(i + 1)}}</td>
-                <td>{{customer.customerName}}</td>
-                <td>{{customer.id}}</td>
-                <td>{{customer.phoneNumber}}</td>
-                <td>{{customer.address}}</td>
-                <td>{{customer.dayOfBirth}}</td>
-                <td>{{customer.email}}</td>
-              </tr>
-              </tbody>
-            </table>
+                  <div style="position: relative">
+                    <input style="width: 300px" class="header-search search-input background-search"
+                           placeholder="Bạn cần tìm gì?"
+                           type="text"><i
+                    class="fa fa-search"
+                    style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
+                  </div>
+                  <div>
+                    <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm
+                      kiếm
+                    </button>
+                  </div>
+                </div>
+                <!--                search-->
 
+              </div>
+            </div>
+            <div>
+              <div class="tbl-header">
+                <tr>
+                  <th class="text-center" style="width: 100px">STT</th>
+                  <th class="text-center">Họ và tên</th>
+                  <th class="text-center">Mã khách hàng</th>
+                  <th class="text-center">số điện thoại</th>
+                  <th class="text-center">Địa chỉ</th>
+                  <th class="text-center">Tuổi</th>
+                  <th class="text-center">Email</th>
+                </tr>
+              </div>
+              <div class="tbl-content">
+                <table class=" table table-bordered table-responsive-md">
+                  <tbody>
+                  <tr (click)="getCustomer(customer)" *ngFor="let customer of customerList; index as i "
+                      [class.heightLight]="isSelected(customer)">
+                    <td class="text-center">{{(i + 1)}}</td>
+                    <td class="pt-3-half">{{customer.customerName}}</td>
+                    <td class="pt-3-half">{{customer.id}}</td>
+                    <td class="pt-3-half">{{customer.phoneNumber}}</td>
+                    <td class="text-center">{{customer.address}}</td>
+                    <td class="text-center">{{customer.dayOfBirth}}</td>
+                    <td class="text-center">{{customer.email}}</td>
+
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-6">
+                  <button type="button" class="btn-edit btn-rounded  btn-lg my-0">
+                    <i class="fa fa-paper-plane"></i>
+                    Chọn</button>
+                  <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
+                          data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
+                  </button>
+                </div>
+
+                <div class="col-6">
+                  <!--Pagination-->
+                  <nav class="d-flex justify-content-center wow fadeIn float-right">
+                    <ul class="pagination pg-blue">
+
+                      <!--Arrow left-->
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+
+                      <li class="page-item active">
+                        <a class="page-link" href="#">1
+                          <span class="sr-only">(current)</span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">4</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">5</a>
+                      </li>
+
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                  <!--Pagination-->
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="mt-2">
-            <button style="margin-right: 10px" type="button" class="btn btn-primary btn-delete" data-dismiss="modal">
-              HỦY
-            </button>
-            <button type="button" class="btn btn-primary btn-delete">CHỌN</button>
-            <button style="float: right" class="btn btn-primary btn-delete ml-2">TRANG KẾ TIẾP</button>
-            <button style="float: right" class="btn btn-primary btn-delete  btn-delete">TRANG TRƯỚC</button>
-          </div>
-        </section>
+        </div>
       </div>
     </div>
   </div>
 </div>
-

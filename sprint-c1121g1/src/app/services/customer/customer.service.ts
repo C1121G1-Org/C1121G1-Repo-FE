@@ -10,11 +10,18 @@ import {ICustomer} from '../../models/ICustomer';
 })
 export class CustomerService {
   private url = environment.baseApi;
+  private urlProduct = environment.baseApiProduct;
 
   constructor(private http: HttpClient) {
   }
-  getAllProduct(pageable, name , phone): Observable<ICustomer[]>{
-    return this.http.get<ICustomer[]>(`${this.url}/list?page=${pageable}&keyName=${name}&keyPhone=${phone}`);
+
+  getAllCustomer(pageable, name, phone): Observable<any> {
+    return this.http.get<any>(`${this.url}/list?page=${pageable}&keyName=${name}&keyPhone=${phone}`);
   }
+
+  getAllProduct(pageable, name, price): Observable<any> {
+    return this.http.get<any>(`${this.urlProduct}/list`);
+  }
+
 }
 
