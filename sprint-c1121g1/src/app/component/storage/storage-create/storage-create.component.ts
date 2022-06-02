@@ -12,4 +12,7 @@ export class StorageCreateComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  receiveItem(item: any) {
+    console.log(item);
+  }
 }
