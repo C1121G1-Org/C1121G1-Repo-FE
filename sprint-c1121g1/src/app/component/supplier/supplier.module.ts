@@ -8,10 +8,13 @@ import { SupplierUpdateComponent } from './supplier-update/supplier-update.compo
 
 
 @NgModule({
-  declarations: [SupplierCreateComponent, SupplierListComponent, SupplierUpdateComponent],
-  imports: [
-    CommonModule,
-    SupplierRoutingModule
-  ]
+    declarations: [SupplierCreateComponent, SupplierListComponent, SupplierUpdateComponent],
+    exports: [
+        SupplierCreateComponent
+    ],
+    imports: [
+        CommonModule,
+        SupplierRoutingModule
+    ]
 })
 export class SupplierModule { }
