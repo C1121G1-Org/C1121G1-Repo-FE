@@ -1,0 +1,242 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.menu-bar-content a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+}
+
+header {
+  background-color: #D70018;
+}
+
+.menu-bar-content > ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 65px;
+}
+
+header ul li, a {
+  color: white;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.header-search {
+  width: 500px;
+}
+
+header ul li:nth-child(2) {
+  position: relative;
+}
+
+header ul li:nth-child(2) input {
+  height: 30px;
+  width: 100%;
+  border-radius: 5px;
+  border: none;
+  padding-left: 6px;
+  outline: none;
+}
+
+header ul li:nth-child(2) i {
+  position: absolute;
+  font-size: 16px;
+  right: 12px;
+  color: #707070;
+  line-height: 30px;
+  cursor: pointer;
+
+}
+
+.menu-bar-content > ul > li:last-child {
+  font-weight: bold;
+}
+
+.fa-sort-down {
+  margin-left: 4px;
+}
+
+header ul li {
+  position: relative;
+}
+
+.sub-menu {
+  position: absolute;
+  background-color: white;
+  min-width: 230px;
+  height: auto;
+  left: 0;
+  top: 100%;
+  padding: 10px;
+  display: none;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+
+}
+
+.sub-menu ul li a {
+  color: black;
+}
+
+.sub-menu ul {
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-menu ul li {
+  padding: 6px 0;
+  transition: all 0.25s linear;
+}
+
+.sub-menu ul li:hover a {
+  color: #D70018;
+  font-weight: bold;
+}
+
+.menu-bar-content ul li:hover .sub-menu {
+  display: block;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  padding: 1.5rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  border: none;
+  position: relative;
+}
+
+body {
+  padding: 0 1rem;
+  background: #f3f3f3;
+  font-family: 'Roboto', sans-serif;
+}
+
+input {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+
+.btn-rounded {
+  border-radius: 0px;
+}
+
+.btn-create {
+  border: none;
+  background-position: center;
+  transition: background 0.8s;
+  background-color: #277CEA;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;
+  width: 100%;
+  color: white;
+  /*margin: 10px;*/
+}
+
+.btn-create:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+}
+
+.btn-create:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.btn-confirm {
+  border: none;
+  background-position: center;
+  transition: background 0.8s;
+  background-color: #277CEA;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;
+  width: 50%;
+  color: white;
+  /*margin: 10px;*/
+}
+
+.btn-confirm:hover {
+  background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
+}
+
+.btn-confirm:active {
+  background-color: #6eb9f7;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+.btn-cancel {
+  border: none;
+  background-position: center;
+  transition: background 0.8s;
+  background-color: #D70018;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;
+  width: 50%;
+  color: white;
+  /*margin: 10px;*/
+}
+
+.btn-cancel:hover {
+  background: #fa4665 radial-gradient(circle, transparent 1%, #fa4665 1%) center/15000%;
+}
+
+.btn-cancel:active {
+  background-color: #D70018;;
+  background-size: 100%;
+  transition: background 0s;
+}
+
+label {
+  margin-top: 15px;
+}
+
+.input-icons i {
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+}
+
+.input-icons {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.icon {
+  padding: 10px;
+  color: red;
+  min-width: 50px;
+  text-align: center;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  /*text-align: center;*/
+}
+
+.container {
+  max-width: 1500px;
+  margin: auto;
+}
