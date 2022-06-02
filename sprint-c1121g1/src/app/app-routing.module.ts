@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {HomepageRoutingModule} from './component/homepage/homepage-routing.module';
-import {HomepageModule} from './component/homepage/homepage.module';
 import {ProductListBestsellerComponent} from './component/homepage/product-list-bestseller/product-list-bestseller.component';
-import {QrcodeComponent} from "./common/qrcode/qrcode.component";
+import {QrcodeComponent} from './common/qrcode/qrcode.component';
+
 import { StorageCreateComponent } from './component/storage/storage-create/storage-create.component';
 
 
@@ -11,10 +10,12 @@ import { StorageCreateComponent } from './component/storage/storage-create/stora
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
 
+  {path: 'qrcode', component: QrcodeComponent}
+
+
   {path: 'qrcode', component: QrcodeComponent},
 
   {path: 'storage/create', component: StorageCreateComponent}
-
 ];
 
 @NgModule({
