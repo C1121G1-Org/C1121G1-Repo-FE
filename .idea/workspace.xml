@@ -21,9 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="1b8c1817-28fe-49a0-bb4b-d9db38ee17f2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/model/sale-report.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/sale-report.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/qrcode/qrcode.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/qrcode/qrcode.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +49,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../module6/prototype/ModalQuetMaQR.html" />
     <property name="ts.external.directory.path" value="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\node_modules\typescript\lib" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\models" />
+    </key>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -55,7 +64,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1654142327836</updated>
-      <workItem from="1654142329517" duration="7554000" />
+      <workItem from="1654142329517" duration="13119000" />
     </task>
     <servers />
   </component>
