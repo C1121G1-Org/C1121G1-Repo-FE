@@ -7,6 +7,12 @@ import {ReportAndHistoryService} from '../../../services/report/report-and-histo
   templateUrl: './customer-report.component.html',
   styleUrls: ['./customer-report.component.css']
 })
+
+/*
+    Created by TuanNQ
+    Time: 18:00 31/05/2022
+    Function: Show all list report customer
+*/
 export class CustomerReportComponent implements OnInit {
 
   customerReports: ReportCustomerDto[] = [];

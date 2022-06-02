@@ -18,6 +18,7 @@ import {environment} from '../environments/environment';
 
 import { QrcodeComponent } from './common/qrcode/qrcode.component';
 import {FormsModule} from '@angular/forms';
+import {SecurityModule} from './component/security/security.module';
 
 
 @NgModule({
