@@ -15,13 +15,14 @@ import {HomepageModule} from './component/homepage/homepage.module';
 import {ReportModule} from './component/report/report.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {SecurityModule} from "./component/security/security.module";
+import {SecurityModule} from './component/security/security.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
