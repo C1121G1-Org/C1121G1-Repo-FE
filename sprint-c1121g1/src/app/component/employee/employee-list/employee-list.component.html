@@ -1,1 +1,189 @@
-<p>employee-list works!</p>
+<div class="card card-body" style="border: hidden">
+  <h3 class="text-center font-weight-bold text-uppercase  py-4">
+    Quản Lý Nhân Viên
+  </h3>
+</div>
+
+
+
+<div class="card card-body">
+  <div id="table" class="table-editable">
+
+
+    <div style="display: flex; justify-content: space-between">
+      <div style="display: flex; justify-content: space-between">
+        <div>
+          <input style="width: 300px" class="header-search search-input background-search"
+                 placeholder="Bạn cần tìm gì?"
+                 type="text"><i
+          class="fa fa-search"
+          style="position: absolute; left: 35px;margin-top: 10px ;font-size: 20px"></i>
+        </div>
+        <div style="margin-left: 20px">
+          <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm kiếm</button>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 10px">
+        <button type="button" style="width: 150px; height: 40px" class="btn-edit btn-rounded">Thêm mới</button>
+      </div>
+    </div>
+
+
+    <div>
+      <div class="tbl-header">
+        <table class="table table-bordered table-responsive-md ">
+          <thead>
+          <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Họ và tên</th>
+            <th class="text-center">Ngày sinh</th>
+            <th class="text-center">Địa chỉ</th>
+            <th class="text-center">Công việc</th>
+            <th class="text-center">Số điện thoại</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content   ">
+        <table class=" table table-bordered table-responsive-md">
+          <tbody>
+          <tr>
+            <td class="text-center">1</td>
+            <td>Nguyễn Tuấn Anh</td>
+            <td class="text-center">20/12/1990</td>
+            <td>Hòa Khánh</td>
+            <td>Nhân viên kinh doanh</td>
+            <td class="text-center">093 212 3123</td>
+          </tr>
+          <tr>
+            <td class="text-center">2</td>
+            <td>Phan Thanh Tùng</td>
+            <td class="text-center">12/03/1991</td>
+            <td>Xuân Hà</td>
+            <td>Admin</td>
+            <td class="text-center">090 576 7212</td>
+          </tr>
+          <tr>
+            <td class="text-center">3</td>
+            <td>Nguyễn Minh Trí</td>
+            <td class="text-center">12/05/2000</td>
+            <td>Nại Hiên Đông</td>
+            <td>Nhân viên bán hàng</td>
+            <td class="text-center">090 275 6325</td>
+          </tr>
+          <tr>
+            <td class="text-center">4</td>
+            <td>Trần Thị Thanh Tú</td>
+            <td class="text-center">01/05/2001</td>
+            <td>Hòa Minh</td>
+            <td>Nhân viên bán hàng</td>
+            <td class="text-center">090 522 2675</td>
+          </tr>
+          <tr>
+            <td class="text-center">5</td>
+            <td>Nguyễn Thị Vân Anh</td>
+            <td class="text-center">17/06/1999</td>
+            <td>Chính Gián</td>
+            <td>Nhân viên bán hàng</td>
+            <td class="text-center">090 275 6325</td>
+          </tr>
+          <tr>
+            <td class="text-center">6</td>
+            <td>Lê Anh Tú</td>
+            <td class="text-center">25/08/1998</td>
+            <td>Tân Chính</td>
+            <td>Nhân viên kinh doanh</td>
+            <td class="text-center">098 743 5213</td>
+          </tr>
+          <tr>
+            <td class="text-center">7</td>
+            <td>Lê Hồng Ân</td>
+            <td class="text-center">01/08/2000</td>
+            <td>Hòa Khánh</td>
+            <td>Nhân viên bán hàng</td>
+            <td class="text-center">090 254 5225</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <br>
+
+      <div style="display: flex; justify-content: space-between">
+        <div>
+          <button type="button" class=" btn-edit btn-rounded" style="width: 120px">Cập nhật</button>
+          <button type="button" class="btn-delete btn-rounded" style="width: 70px" data-toggle="modal"
+                  data-target="#staticBackdrop">Xóa</button>
+        </div>
+        <!--Pagination-->
+        <div>
+          <nav class="d-flex justify-content-center wow fadeIn">
+            <ul class="pagination pg-blue">
+
+              <!--Arrow left-->
+              <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+
+              <li class="page-item active">
+                <a class="page-link" href="#">1
+                  <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">3</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">4</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">5</a>
+              </li>
+
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!--Pagination-->
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--Modal delete-->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header " style="background-color: #D70018; color: white">
+        <h5 class="modal-title" id="staticBackdropLabel">Xác nhận xóa nhà cung cấp</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p><span>Bạn có muốn xóa nhà cung cấp</span>
+        <p>
+        <p>Tên công ty: <span style="font-weight: bold">Công ty TNHH Thương Mại Công Nghệ Bạch Long</span></p>
+        <p>Địa chỉ: 134 Trần Phú, phường 4, quận 5, Tp. Hồ Chí Minh</p>
+        <p>Lưu ý: Hành động này không thể hoàn tác!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-edit btn-rounded" data-dismiss="modal">Hủy</button>
+        <button type="button" class="btn-delete btn-rounded">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--Modal delete-->

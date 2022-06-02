@@ -9,6 +9,9 @@ import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 @NgModule({
   declarations: [EmployeeCreateComponent, EmployeeUpdateComponent, EmployeeListComponent],
+  exports: [
+    EmployeeListComponent
+  ],
   imports: [
     CommonModule,
     EmployeeRoutingModule
