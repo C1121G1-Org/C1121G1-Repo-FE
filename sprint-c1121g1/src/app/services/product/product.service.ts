@@ -1,12 +1,17 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
+
+import { Injectable } from '@angular/core';
+import {environment} from '../../../environments/environment';
 import {Product} from '../../models/product';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  private apiBaseUrl = environment.apiBaseUrl;
+  private products: Product[];
 
   constructor(private http: HttpClient) {
   }
@@ -21,5 +26,9 @@ export class ProductService {
   }
   updateProduct(id: number, value: any): Observable<any> {
     return this.http.patch<any>(this.productApi + '/' + id, value);
+
+  list(): Observable<Product[]>{
+    return this.http.get<Product[]>(`${this.apiBaseUrl}/api/product/list`);
+
   }
 }
