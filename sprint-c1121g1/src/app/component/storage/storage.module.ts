@@ -10,7 +10,8 @@ import { StorageListSuppliersModalComponent } from './storage-list-suppliers-mod
 
 
 @NgModule({
-  declarations: [StorageCreateComponent, QrcodeCreateComponent, StorageUpdateComponent, StorageListComponent, StorageListSuppliersModalComponent],
+  declarations: [StorageCreateComponent, QrcodeCreateComponent, StorageUpdateComponent,
+    StorageListComponent, StorageListSuppliersModalComponent],
   imports: [
     CommonModule,
     StorageRoutingModule

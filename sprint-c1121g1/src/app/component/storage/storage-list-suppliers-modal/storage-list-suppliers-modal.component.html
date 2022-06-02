@@ -65,14 +65,13 @@
               <div class="tbl-content   ">
                 <table class=" table table-bordered table-responsive-md">
                   <tbody>
-                  <tr *ngFor="let item of list" (click)="getItem(item)" [class.highlight]="item === chosenItem && flag">{{item.name}}</tr>
-                  <!--                  <tr>-->
-                  <!--                    <td class="text-center">1</td>-->
-                  <!--                    <td class="pt-3-half">Công Ty TNHH Mi Home</td>-->
-                  <!--                    <td class="pt-3-half">261 Lê Lợi, P. Lê Lợi, Q. Ngô Quyền, Tp. Hải Phòng</td>-->
-                  <!--                    <td class="text-center">0888888261</td>-->
-                  <!--                    <td>info@mihome.vn</td>-->
-                  <!--                  </tr>-->
+                  <tr *ngFor="let item of suppliers" (click)="getItem(item)" [class.highlight]="item === chosenItem && flag">
+                    <td class="text-center">{{item.id}}</td>
+                    <td class="pt-3-half">{{item.supplierName}}</td>
+                    <td class="pt-3-half">{{item.address}}</td>
+                    <td class="text-center">{{item.phone}}</td>
+                    <td>{{item.email}}</td>
+                  </tr>
                   <!--                  <tr>-->
                   <!--                    <td class="text-center">2</td>-->
                   <!--                    <td>Công Ty TNHH Công Nghệ Di Động Mai Nguyên</td>-->
@@ -145,16 +144,16 @@
                 </table>
               </div>
               <br>
-              <div *ngIf="!flag">
-                <span *ngIf="!this.errorMessage">{{this.errorMessage}}</span>
-              </div>
+<!--              <div *ngIf="!flag">-->
+<!--                <span *ngIf="!this.errorMessage">{{this.errorMessage}}</span>-->
+<!--              </div>-->
               <div class="row">
                 <div class="col-6">
                   <button type="button" class="btn-edit btn-rounded  btn-lg my-0" (click)="sendItem()">
                     <i class="fa fa-paper-plane"></i>
                     Chọn</button>
                   <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
-                          data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
+                          data-dismiss="modal" #btnClose><i class="fa-solid fa-right-from-bracket"></i> Thoát
                   </button>
                 </div>
 
