@@ -1,1 +1,163 @@
-<p>customer-choose works!</p>
+<div
+  class="modal fade"
+  id="chooseProductId"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content tam">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateEmployeeModalLabel">Chọn sản phẩm</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modals">
+
+        <section>
+          <select class="custom-select">
+            <option selected>Tìm kiếm theo</option>
+            <option>Tên sản phẩm</option>
+            <option value="1">Số điện thoại</option>
+          </select>
+          <div style="display: flex" class="navbar-light  bg-light">
+            <nav class="navbar navbar-light">
+              <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Tìm Kiếm" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">TÌM KIẾM</button>
+              </form>
+            </nav>
+          </div>
+          <!--for demo wrap-->
+          <div class="tbl-header">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <thead>
+              <tr>
+                <th>STT</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Mã Sản Phẩm</th>
+                <th>Năm Sản Xuất</th>
+                <th>Giá(VND)</th>
+                <th>CPU</th>
+                <th>Lưu Trữ</th>
+                <th>Ngày Tạo</th>
+              </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+              <tr>
+                <!--                <td>{{(i+1)}}</td>-->
+                <!--                <td>{{customer.customerName}}</td>-->
+                <!--                <td>{{customer.id}}</td>-->
+                <!--                <td>{{customer.customerName}}</td>-->
+                <!--                <td>{{customer.customerName}}</td>-->
+                <!--                <td>{{customer.customerName}}</td>-->
+                <!--                <td>{{customer.customerName}}</td>-->
+                <!--                <td>{{customer.customerName}}</td>-->
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="mt-2">
+            <button style="margin-right: 10px" type="button" class="btn btn-primary btn-delete" data-dismiss="modal">
+              HỦY
+            </button>
+            <button type="button" class="btn btn-primary btn-delete">CHỌN</button>
+            <button style="float: right" class="btn btn-primary btn-delete ml-2">TRANG KẾ TIẾP</button>
+            <button style="float: right" class="btn btn-primary  btn-delete">TRANG TRƯỚC</button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--chọn khách hàng-->
+
+<div
+  class="modal fade"
+  id="customer-modal"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content tam">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-customer">Chọn khách hàng có sẵn</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body modals">
+        <section>
+          <select class="custom-select">
+            <option selected>Tên khách hàng</option>
+            <option value="2">Số điện thoại</option>
+          </select>
+          <div style="display: flex" class="navbar-light  bg-light">
+            <nav class="navbar navbar-light">
+              <form class="form-inline">
+                <input [(ngModel)]="searchByName" class="form-control mr-sm-2" type="search" placeholder="Tìm Kiếm"
+                       aria-label="Search">
+                <button class="btn btn-primary btn-outline-primary my-2 my-sm-0" type="submit">TÌM KIẾM</button>
+              </form>
+            </nav>
+          </div>
+
+          <div class="tbl-header">
+            <table class="table" id="fontsize" cellpadding="0" cellspacing="0" border="0">
+              <thead>
+              <tr>
+                <th style="width: 100px">STT</th>
+                <th>Họ và tên</th>
+                <th>Mã khách hàng</th>
+                <th>số điện thoại</th>
+                <th>Địa chỉ</th>
+                <th>Tuổi</th>
+                <th>Email</th>
+              </tr>
+              </thead>
+            </table>
+          </div>
+          <div class="tbl-content">
+            <table cellpadding="0" cellspacing="0" border="0">
+              <tbody>
+              <tr *ngFor="let customer of customerList; index as i">
+                <td style="width: 100px">{{(i + 1)}}</td>
+                <td>{{customer.customerName}}</td>
+                <td>{{customer.id}}</td>
+                <td>{{customer.phoneNumber}}</td>
+                <td>{{customer.address}}</td>
+                <td>{{customer.dayOfBirth}}</td>
+                <td>{{customer.email}}</td>
+              </tr>
+              </tbody>
+            </table>
+
+          </div>
+          <div class="mt-2">
+            <button style="margin-right: 10px" type="button" class="btn btn-primary btn-delete" data-dismiss="modal">
+              HỦY
+            </button>
+            <button type="button" class="btn btn-primary btn-delete">CHỌN</button>
+            <button style="float: right" class="btn btn-primary btn-delete ml-2">TRANG KẾ TIẾP</button>
+            <button style="float: right" class="btn btn-primary btn-delete  btn-delete">TRANG TRƯỚC</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
