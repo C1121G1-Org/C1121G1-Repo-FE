@@ -6,4 +6,5 @@ interface CustomerDto {
   email ?: string;
   address ?: string;
   gender?:boolean;
+
 }

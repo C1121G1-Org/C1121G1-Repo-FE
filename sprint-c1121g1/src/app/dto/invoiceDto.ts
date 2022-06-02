@@ -3,4 +3,5 @@ interface InvoiceDto {
   totalMoney?: number;
   payments?: number;
   customerDto?: CustomerDto;
+
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {InvoiceService} from '../../../services/invoice/invoice.service';
 
 @Component({
   selector: 'app-invoice-history',
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoice-history.component.css']
 })
 export class InvoiceHistoryComponent implements OnInit {
-
-  constructor() { }
+  invoiceList: InvoiceDto[] = [];
+  constructor(private invoiceService: InvoiceService) { }
 
   ngOnInit(): void {
   }
