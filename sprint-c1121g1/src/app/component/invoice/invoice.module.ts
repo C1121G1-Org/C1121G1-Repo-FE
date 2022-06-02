@@ -4,18 +4,18 @@ import { CommonModule } from '@angular/common';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { InvoiceHistoryComponent } from './invoice-history/invoice-history.component';
 import { InvoiceCreateComponent } from './invoice-create/invoice-create.component';
-import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
-import { CustomerReportComponent } from './customer-report/customer-report.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
-    declarations: [InvoiceHistoryComponent, InvoiceCreateComponent, PurchaseHistoryComponent, CustomerReportComponent],
+    declarations: [InvoiceHistoryComponent, InvoiceCreateComponent],
     exports: [
 
     ],
     imports: [
         CommonModule,
-        InvoiceRoutingModule
+        InvoiceRoutingModule,
+        FormsModule
     ]
 })
 export class InvoiceModule { }
