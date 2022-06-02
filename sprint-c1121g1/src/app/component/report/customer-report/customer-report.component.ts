@@ -46,7 +46,8 @@ export class CustomerReportComponent implements OnInit {
 
   nextPage() {
     this.reportService.filterAllCustomerReport(this.pageNumber + 1).subscribe(customerReports => {
-      this.customerReports = customerReports.content;
+      this.customerReports = customerR
+      eports.content;
       this.pageNumber = this.pageNumber + 1;
     });
   }
