@@ -30,7 +30,7 @@
       <div class="col-3">
         <div class="form-group">
           <label><strong>Nhập mã sản phẩm :</strong></label>
-          <input type="text" class="form-control" placeholder="SP-0000">
+          <input type="text" class="form-control" placeholder="VD : 1111">
         </div>
       </div>
     </div>
@@ -38,7 +38,6 @@
     <div class="d-flex justify-content-center">
       <button class="btn btn-danger btn-block col-1 mb-5">XEM</button>
     </div>
-
   </div>
 
 
@@ -54,7 +53,8 @@
     <div class="col-4"></div>
     <div>
       <p id="tongDonHang" style="font-size: 30px"><strong>Tổng số đơn hàng : {{invoice}}</strong></p>
-      <p class="text-danger text-center" id="tongDoanhThu" style="font-size: 30px"><strong>Tổng Doanh Thu : {{sale}}</strong></p>
+      <p class="text-danger text-center" id="tongDoanhThu" style="font-size: 30px"><strong>Tổng Doanh Thu
+        : {{sale}}</strong></p>
     </div>
   </div>
 </div>
@@ -83,18 +83,26 @@
         <div class="form-group">
           <div class="row justify-content-center">
             <div class="col-6">
-              <label for="image-input"><strong>Chọn Mã QR :</strong></label>
-              <input type="file" (change)="readFile($event.target)" id="image-input" accept="image/png"
-                     class="form-control">
+              <label for="select"><strong>Chọn Chức năng :</strong></label>
+              <select [(ngModel)]="typeQRScan" id="select" class="form-control mb-2">
+                <option value="1">Quét mã</option>
+                <option value="2">Kiểm tra mã</option>
+              </select>
+              <div>
+                <input type="file" (change)="readFile($event.target)" accept="image/png"
+                       class="form-control">
+                <div class="row justify-content-center">
+                  <img [hidden]="typeQRScan=='1'" width="100px" height="100px" src="{{imageSRC}}">
+                  <img width="100px" height="100px" src="{{imageSRC}}">
+                </div>
+              </div>
+
             </div>
-          </div>
-          <div class="row justify-content-center">
-            <img width="200px" height="200px" id="image" src="{{imageSRC}}">
           </div>
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-danger col-3">Xác nhận</button>
+        <button (click)="scanQRCode()" type="button" class="btn btn-danger col-3">Xác nhận</button>
       </div>
     </div>
   </div>

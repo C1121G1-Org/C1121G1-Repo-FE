@@ -12,7 +12,12 @@ Chart.register(...registerables)
 })
 export class SaleReportComponent implements OnInit {
 
-  imageSRC = "";
+  typeQRScan = "1";
+
+  imageSRC = "https://png.pngtree.com/element_our/20190601/ourlarge/pngtree-file-upload-icon-image_1344464.jpg";
+
+  image1 = "https://png.pngtree.com/element_our/20190601/ourlarge/pngtree-file-upload-icon-image_1344464.jpg";
+  image2 = "https://png.pngtree.com/element_our/20190601/ourlarge/pngtree-file-upload-icon-image_1344464.jpg";
 
   months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
   doanhThus = [100, 200, 500, 900, 300, 800, 400, 1000, 1200, 1100, 600, 800];
@@ -80,6 +85,14 @@ export class SaleReportComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = e => {
       this.imageSRC = reader.result as string;
+    }
+  }
+
+
+  scanQRCode() {
+    let file: any = document.querySelectorAll("input[type='file']");
+    for (let a of file) {
+      console.log(a.files[0]);
     }
   }
 }

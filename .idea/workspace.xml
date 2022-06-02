@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1b8c1817-28fe-49a0-bb4b-d9db38ee17f2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" afterDir="false" />
@@ -57,7 +55,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1654142327836</updated>
-      <workItem from="1654142329517" duration="5226000" />
+      <workItem from="1654142329517" duration="7554000" />
     </task>
     <servers />
   </component>

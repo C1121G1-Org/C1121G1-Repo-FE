@@ -6,6 +6,7 @@ import { SaleReportComponent } from './sale-report/sale-report.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CustomerReportComponent} from "./customer-report/customer-report.component";
 import {PurchaseHistoryComponent} from "./purchase-history/purchase-history.component";
+import {FormsModule} from "@angular/forms";
 
 
 
@@ -15,7 +16,8 @@ import {PurchaseHistoryComponent} from "./purchase-history/purchase-history.comp
   imports: [
     CommonModule,
     ReportRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ]
 })
 export class ReportModule { }
