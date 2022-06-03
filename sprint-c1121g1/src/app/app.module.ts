@@ -15,10 +15,8 @@ import {HomepageModule} from './component/homepage/homepage.module';
 import {ReportModule} from './component/report/report.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import { QrcodeComponent } from './common/qrcode/qrcode.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
-
 import {HttpClientModule} from '@angular/common/http';
 
 
@@ -28,8 +26,7 @@ import {HttpClientModule} from '@angular/common/http';
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent,
-    QrcodeComponent
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +47,7 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
