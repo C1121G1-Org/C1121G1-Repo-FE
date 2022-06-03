@@ -1,6 +1,4 @@
 window.onload = function () {
-
-
 // Slider
   const rightbtn = document.querySelector('.fa-chevron-right');
   const leftbtn = document.querySelector('.fa-chevron-left');
