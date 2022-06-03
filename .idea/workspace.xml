@@ -19,35 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a24e3624-3080-48e7-9128-7663dec09853" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/qr-code/qr-code.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/qr-code/qr-code.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/qr-code/qr-code.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/qr-code/qr-code.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-list-suppliers-modal/storage-list-suppliers-modal.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-list-suppliers-modal/storage-list-suppliers-modal.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-list-suppliers-modal/storage-list-suppliers-modal.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-list-suppliers-modal/storage-list-suppliers-modal.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/dto/storageDto.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/account.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/employee.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/position.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/product.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/storage.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/supplier.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/assets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/common/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/common/header/header.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/storage/storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/storage/storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/supplier/supplier.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/supplier/supplier.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/environments/environment.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="a24e3624-3080-48e7-9128-7663dec09853" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +38,9 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../module6/prototype/ModalQuetMaQR.html" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="ts.external.directory.path" value="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -78,12 +53,13 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="1b8c1817-28fe-49a0-bb4b-d9db38ee17f2" name="Default Changelist" comment="" />
+      <changelist id="a24e3624-3080-48e7-9128-7663dec09853" name="Default Changelist" comment="" />
       <created>1654142327836</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1654142327836</updated>
       <workItem from="1654142329517" duration="13119000" />
+      <workItem from="1654223692050" duration="335000" />
     </task>
     <servers />
   </component>
