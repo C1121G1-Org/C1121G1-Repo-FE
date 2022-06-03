@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CustomerService} from '../../../services/customer/customer.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-customer-update',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerUpdateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private customerService: CustomerService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
   }

@@ -30,6 +30,6 @@ export class CustomerListComponent implements OnInit {
 
   sendId(id: number, e) {
     this.idClick = id;
-    e.target.style.background = 'blueviolet';
+    // id.target.style.background = 'blueviolet';
   }
 }

@@ -1,1 +1,51 @@
-<p>customer-update works!</p>
+<form>
+  <div class="container-fluid">
+    <div class="row" style="justify-content: center;display: flex">
+      <div class="col-md-8">
+        <div class="card ">
+          <div class="card card-body">
+            <h3 class="text-center font-weight-bold text-uppercase py-4">
+              Chỉnh sửa thông tin khách hàng
+            </h3>
+            <!--                        <h4 class="card-title" style="justify-content: center;display: flex">Thêm mới nhà cung cấp</h4>-->
+            <div class="row" style="justify-content: center;display: flex">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="id">Tên<span class="text-danger">(*):</span></label>
+                  <input type="text" class="form-control" name="id" id="id" value="Nguyễn Văn A" required>
+                </div>
+                <div class="form-group">
+                  <label for="supplier">Địa chỉ<span class="text-danger">(*):</span></label>
+                  <input type="text" class="form-control" name="supplier" id="supplier"
+                         value="52 Đống Đa, Hải Châu">
+                </div>
+
+                <div class="form-group">
+                  <label for="address">Email<span class="text-danger">(*):</span></label>
+                  <input type="text" class="form-control" name="address" id="address"
+                         value="nguyenvana@gmail.com">
+                </div>
+                <div class="form-group">
+                  <label for="phoneNumber">Số điện thoại<span class="text-danger">(*):</span></label>
+                  <input type="number" class="form-control" name="phoneNumber" id="phoneNumber" value="0912 635 254">
+                </div>
+                <div class="form-group">
+                  <label for="email">Tuổi<span class="text-danger">(*)</span>:</label>
+                  <input type="email" class="form-control" name="email" id="email" value="25">
+                </div>
+                <!--                                <div class="form-group">-->
+                <!--                                    <label for="website">Website<span class="text-danger">(*)</span></label>-->
+                <!--                                    <input type="website" class="form-control" name="website" id="website">-->
+                <!--                                </div>-->
+                <div style="justify-content: center;display: flex">
+                  <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#test" >Xác nhận</button>
+                  <button  type="button" class="btn btn-danger ">Thoát</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
