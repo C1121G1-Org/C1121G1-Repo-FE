@@ -10,15 +10,26 @@ import {Customer} from '../../../models/customer';
 })
 export class CustomerListComponent implements OnInit {
   customerList: Customer[];
+  private phone: string;
+  private name: string;
+  public idClick: number;
 
   constructor(private customerService: CustomerService,
               private router: Router) {
   }
 
+  collection: any[] = this.customerList;
 
-  ngOnInit(): void {}
-   /* this.customerService.getAllCustomer().subscribe(data => {
+  ngOnInit(): void {
+    this.customerService.getAllCustomer(name, this.phone).subscribe((data: any) => {
       this.customerList = data.content;
+      console.log(this.customerList);
+    });
 
-    });*/
   }
+
+  sendId(id: number, e) {
+    this.idClick = id;
+    e.target.style.background = 'blueviolet';
+  }
+}

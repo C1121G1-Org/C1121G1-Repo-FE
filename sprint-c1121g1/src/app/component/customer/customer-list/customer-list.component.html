@@ -22,13 +22,14 @@
           </div>
 
           <div style="position: relative">
-            <input style="width: 300px" class="header-search search-input background-search" placeholder="Bạn cần tìm gì?"
+            <input style="width: 300px" class="header-search search-input background-search"
+                   placeholder="Bạn cần tìm gì?"
                    type="text"><i
             class="fa fa-search"
             style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
           </div>
           <div>
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#test" >Tìm Kiếm</button>
+            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#test">Tìm Kiếm</button>
           </div>
         </div>
         <!--                search-->
@@ -44,9 +45,10 @@
             <th class="text-center">STT</th>
             <th class="text-center">Họ và tên</th>
             <th class="text-center">Số điện thoại</th>
+            <th class="text-center">Ngày sinh</th>
             <th class="text-center">Địa chỉ</th>
-            <th class="text-center">Tuổi</th>
             <th class="text-center">Email</th>
+            <th class="text-center">Giới tính</th>
           </tr>
           </thead>
         </table>
@@ -54,78 +56,20 @@
       <div class="tbl-content   ">
         <table class=" table table-bordered table-responsive-md">
           <tbody>
-          <tr>
-            <td class="text-center" >1</td>
-            <td class="pt-3-half">Nguyễn Văn B</td>
-            <td class="pt-3-half">0912 123 456</td>
-            <td class="pt-3-half">52 Nguyễn Lương Bằng</td>
-            <td class="text-center">22</td>
-            <td>nguyenvana@gmail.com</td>
+          <tr *ngFor="let cus of customerList" (click)="sendId(cus.id,$event)">
+            <td class="text-center">{{cus.id }}</td>
+            <td class="text-center">{{cus.customerName}}</td>
+            <td class="pt-3-half">{{cus.phoneNumber}}</td>
+            <td class="text-center">{{cus.dateOfBirth}}</td>
+            <td class="pt-3-half">{{cus.address}}</td>
+            <td class="pt-3-half">{{cus.email}}</td>
+            <td>
+              <span *ngIf="cus.gender==true">Nam</span>
+              <span *ngIf="cus.gender==false">Nữ</span>
+            </td>
+
           </tr>
-          <tr>
-            <td class="text-center" >2</td>
-            <td class="pt-3-half">Nguyễn Văn B</td>
-            <td class="pt-3-half">0912 321 456</td>
-            <td class="pt-3-half">102 Phan Thị Nể</td>
-            <td class="text-center">22</td>
-            <td>nguyenvanb@gmail.com</td>
-          </tr>
-          <tr>
-            <td class="text-center" >3</td>
-            <td class="pt-3-half">Nguyễn Văn C</td>
-            <td class="pt-3-half">0912 123 736</td>
-            <td class="pt-3-half">152 Điện Biên Phủ</td>
-            <td class="text-center">22</td>
-            <td>nguyenvanc@gmail.com</td>
-          </tr>
-          <tr>
-            <td class="text-center" >4</td>
-            <td class="pt-3-half">Nguyễn Văn D</td>
-            <td class="pt-3-half">0912 123 456</td>
-            <td class="pt-3-half">102 Phan Rang</td>
-            <td class="text-center">22</td>
-            <td>nguyenvana@gmail.com</td>
-          </tr>
-          <tr>
-            <td class="text-center" >5</td>
-            <td class="pt-3-half">Nguyễn Văn E</td>
-            <td class="pt-3-half">0912 123 456</td>
-            <td class="pt-3-half">520 Đê Gốm Sứ</td>
-            <td class="text-center">22</td>
-            <td>nguyenvana@gmail.com</td>
-          </tr>
-          <tr>
-            <td class="text-center" >6</td>
-            <td class="pt-3-half">Nguyễn Văn F</td>
-            <td class="pt-3-half">0912 123 456</td>
-            <td class="pt-3-half">522 Lê Ngọc Quyến</td>
-            <td class="text-center">22</td>
-            <td>nguyenvana@gmail.com</td>
-          </tr>
-          <tr>
-            <td class="text-center" >7</td>
-            <td class="pt-3-half">Nguyễn Văn G</td>
-            <td class="pt-3-half">0912 116 456</td>
-            <td class="pt-3-half">102 Phan Thanh</td>
-            <td class="text-center">22</td>
-            <td>nguyenvana@gmail.com</td>
-          </tr>
-          <tr>
-            <td class="text-center" >8</td>
-            <td class="pt-3-half">Nguyễn Văn H</td>
-            <td class="pt-3-half">0912 723 456</td>
-            <td class="pt-3-half">139 Lê Đình Bảo</td>
-            <td class="text-center">22</td>
-            <td>nguyenvana@gmail.com</td>
-          </tr>
-          <tr>
-            <td class="text-center" >9</td>
-            <td class="pt-3-half">Nguyễn Văn I</td>
-            <td class="pt-3-half">0912 129 456</td>
-            <td class="pt-3-half">52 Đê La Thành</td>
-            <td class="text-center">22</td>
-            <td>nguyenvana@gmail.com</td>
-          </tr>
+
           </tbody>
         </table>
       </div>
@@ -169,8 +113,12 @@
         </ul>
       </nav>
       <div class="text-center mt-5">
-        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#test" ><i class="fa fa-paper-plane"></i>Chỉnh sửa</button>
-        <button  type="button" class="btn btn-danger "> Hủy</button>
+        <a routerLink="/customer/edit/{{idClick}}">
+        <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#test"><i
+          class="fa fa-paper-plane"></i>Chỉnh sửa
+        </button>
+        </a>
+        <button type="button" class="btn btn-danger "> Hủy</button>
       </div>
       <!--Pagination-->
     </div>

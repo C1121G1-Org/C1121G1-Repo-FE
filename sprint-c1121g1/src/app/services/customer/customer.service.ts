@@ -21,6 +21,6 @@ export class CustomerService {
   }
 
   getAllCustomer(name: string, phone: string): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.URL_LIST + '/?' + 'keyName=' + name + '&' + 'keyPhone' + phone);
+    return this.http.get<Customer[]>(this.URL_LIST + '/list' + '/?' + 'keyName=' + name + '&' + 'keyPhone' + phone);
   }
 }
