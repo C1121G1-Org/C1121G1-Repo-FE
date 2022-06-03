@@ -10,6 +10,9 @@ import {ProductBestseller} from '../../../dto/product-bestseller';
 export class ProductListBestsellerComponent implements OnInit {
   productBestsellers: ProductBestseller[] = [];
 
+  topfiveproductBestsellers: ProductBestseller[] = [];
+  toptenproductBestsellers: ProductBestseller[] = [];
+  // rateNumber: number = Math.round(Math.random() * 100);
   constructor(private homepageService: HomepageService) {
   }
 
@@ -20,6 +23,12 @@ export class ProductListBestsellerComponent implements OnInit {
   getAll() {
     this.homepageService.getProductBestseller().subscribe((productBestsellers) => {
       this.productBestsellers = productBestsellers;
+      for (let i = 0; i < 5; i++) {
+        this.topfiveproductBestsellers.push(this.productBestsellers[i]);
+      }
+      for (let i = 5; i < 10; i++) {
+        this.toptenproductBestsellers.push(this.productBestsellers[i]);
+      }
     }, error => {
       console.log(error);
     });

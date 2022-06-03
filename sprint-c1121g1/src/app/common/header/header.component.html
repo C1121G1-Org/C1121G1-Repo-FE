@@ -22,7 +22,14 @@
               <li><a href="#">Quản lý thông tin cá nhân</a></li>
               <li><a href="#">Quản lý nhân viên</a></li>
               <li><a href="#">Quản lý kinh doanh</a></li>
-              <li><a href="#">Quản lý báo cáo</a></li>
+              <li><a href="#">Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
+                <div class="sub-menu-2">
+                  <ul>
+                    <li><a href="#">Quản lý báo cáo bán hàng</a></li>
+                    <li><a href="#">Quản lý báo cáo khách hàng</a></li>
+                  </ul>
+                </div>
+              </li>
               <li><a href="#">Xem thông tin hàng hóa</a></li>
               <li><a href="#">Quản lý nhà cung cấp</a></li>
               <li><a href="#">Quản lý bán hàng</a></li>
@@ -65,8 +72,6 @@
           </div>
         </li>
         <li class="header-item-login"><a href="#">Đăng nhập</a></li>
-        <li class="header-item-login"><a [routerLink]="['/chooseCustomer']">modal nhờ</a></li>
-        <li class="header-item-login"><a [routerLink]="['/chooseProduct']">modal nhờ product</a></li>
       </ul>
     </div>
   </div>

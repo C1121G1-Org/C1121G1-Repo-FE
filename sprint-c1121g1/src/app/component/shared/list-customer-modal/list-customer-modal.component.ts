@@ -8,6 +8,11 @@ import {Router} from '@angular/router';
   templateUrl: './list-customer-modal.component.html',
   styleUrls: ['./list-customer-modal.component.css']
 })
+/*
+  Created by tamHT
+  Time: 13:37 03/06/2022
+  Method: pageProduct()
+*/
 export class ListCustomerModalComponent implements OnInit {
   pageNumber: number;
   customerList: ICustomer[] = [];
@@ -88,7 +93,7 @@ export class ListCustomerModalComponent implements OnInit {
 
   chooseCustomer(exit) {
     alert(this.currentCustomer.id);
-    this.router.navigate(['/chooseCustomer'])
+    this.router.navigate(['/chooseCustomer']);
     this.currentCustomer = null;
     exit.click();
   }

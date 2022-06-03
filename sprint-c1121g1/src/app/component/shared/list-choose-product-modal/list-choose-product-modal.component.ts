@@ -9,6 +9,11 @@ import {Router} from '@angular/router';
   templateUrl: './list-choose-product-modal.component.html',
   styleUrls: ['./list-choose-product-modal.component.css']
 })
+/*
+  Created by tamHT
+  Time: 13:37 03/06/2022
+  Method: pageProduct()
+*/
 export class ListChooseProductModalComponent implements OnInit {
   productList: IProduct[] = [];
   pageNumber: number;
@@ -30,7 +35,7 @@ export class ListChooseProductModalComponent implements OnInit {
   }
 
   getModalProduct(pageNumber, searchByName, searchByPrice) {
-    this.productService.getAllProduct(pageNumber, searchByName, searchByPrice).subscribe((res: any) => {
+    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice).subscribe((res: any) => {
       this.productList = res.content;
       this.pageNumber = res.pageable.pageNumber;
       this.totalPages = res.totalPages;
