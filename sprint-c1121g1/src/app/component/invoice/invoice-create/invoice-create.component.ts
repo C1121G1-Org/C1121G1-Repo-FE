@@ -1,28 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-class Product{
-  name: string;
-  price: number;
-  qty: number;
-}
-class Invoice{
-  customerName: string;
-  address: string;
-  contactNo: number;
-  email: string;
-
-  products: Product[] = [];
-  additionalDetails: string;
-
-  constructor(){
-    // Initially one empty product row we will show
-    this.products.push(new Product());
-  }
-}
+import {Component, OnInit} from '@angular/core';
+import {InvoiceDto} from "../../../dto/invoiceDto";
+import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {CustomerDto} from "../../../dto/customerDto";
+import {InvoiceService} from "../../../services/invoice/invoice.service";
+import {ProductInvoiceDto} from "../../../dto/productInvoiceDto";
+import {Product} from "../../../models/product";
+import {InvoiceDetailDto} from "../../../dto/invoiceDetailDto";
+import {ProductService} from "../../../services/product/product.service";
+import validate = WebAssembly.validate;
 
 
 @Component({
@@ -31,122 +16,149 @@ class Invoice{
   styleUrls: ['./invoice-create.component.css']
 })
 export class InvoiceCreateComponent implements OnInit {
+  invoiceDetail = new InvoiceDetailDto();
+  invoice: InvoiceDto = new InvoiceDto();
+  totalMoney: string;
+  payments: string;
+  customer: CustomerDto;
+  productInvoice: ProductInvoiceDto;
 
-  invoice = new Invoice();
 
-  generatePDF(action) {
-    let docDefinition = {
-      content: [
-        {
-          text: 'ELECTRONIC SHOP',
-          fontSize: 16,
-          alignment: 'center',
-          color: '#047886'
-        },
-        {
-          text: 'INVOICE',
-          fontSize: 20,
-          bold: true,
-          alignment: 'center',
-          decoration: 'underline',
-          color: 'skyblue'
-        },
-        {
-          text: 'Customer Details',
-          style: 'sectionHeader'
-        },
-        {
-          columns: [
-            [
-              {
-                text: this.invoice.customerName,
-                bold:true
-              },
-              { text: this.invoice.address },
-              { text: this.invoice.email },
-              { text: this.invoice.contactNo }
-            ],
-            [
-              {
-                text: `Date: ${new Date().toLocaleString()}`,
-                alignment: 'right'
-              },
-              {
-                text: `Bill No : ${((Math.random() *1000).toFixed(0))}`,
-                alignment: 'right'
-              }
-            ]
-          ]
-        },
-        {
-          text: 'Order Details',
-          style: 'sectionHeader'
-        },
-        {
-          table: {
-            headerRows: 1,
-            widths: ['*', 'auto', 'auto', 'auto'],
-            body: [
-              ['Product', 'Price', 'Quantity', 'Amount'],
-              ...this.invoice.products.map(p => ([p.name, p.price, p.qty, (p.price*p.qty).toFixed(2)])),
-              [{text: 'Total Amount', colSpan: 3}, {}, {}, this.invoice.products.reduce((sum, p)=> sum + (p.qty * p.price), 0).toFixed(2)]
-            ]
-          }
-        },
-        {
-          text: 'Additional Details',
-          style: 'sectionHeader'
-        },
-        {
-          text: this.invoice.additionalDetails,
-          margin: [0, 0 ,0, 15]
-        },
-        {
-          columns: [
-            [{ qr: `${this.invoice.customerName}`, fit: '50' }],
-            [{ text: 'Signature', alignment: 'right', italics: true}],
-          ]
-        },
-        {
-          text: 'Terms and Conditions',
-          style: 'sectionHeader'
-        },
-        {
-          ul: [
-            'Order can be return in max 10 days.',
-            'Warrenty of the product will be subject to the manufacturer terms and conditions.',
-            'This is system generated invoice.',
-          ],
-        }
-      ],
-      styles: {
-        sectionHeader: {
-          bold: true,
-          decoration: 'underline',
-          fontSize: 14,
-          margin: [0, 15,0, 15]
-        }
-      }
-    };
+  fromCustomer: FormGroup = new FormGroup({
+    id: new FormControl(),
+    customerName: new FormControl('',Validators.required),
+    phoneNumber: new FormControl('',Validators.required),
+    dateOfBirth: new FormControl('',Validators.required),
+    email: new FormControl('',Validators.required),
+    address: new FormControl('',Validators.required),
+    gender: new FormControl('',Validators.required)
+  });
 
-    if(action==='download'){
-      pdfMake.createPdf(docDefinition).download();
-    }else if(action === 'print'){
-      pdfMake.createPdf(docDefinition).print();
-    }else{
-      pdfMake.createPdf(docDefinition).open();
-    }
 
-  }
+  products = new FormArray([])
 
-  addProduct(){
-    this.invoice.products.push(new Product());
+  addProduct (){
+    const productAdd = new FormGroup({
+      id : new FormControl(this.selectedProduct.id),
+      new : new FormControl(this.selectedProduct.id),
+      name: new FormControl(this.selectedProduct.name,Validators.required),
+      quantity: new FormControl(""),
+    });
+    this
   }
 
 
-  constructor() { }
+  get id() {
+    return this.fromCustomer.get('id');
+  }
+  get customerName() {
+    return this.fromCustomer.get('customerName');
+  }
+  get phoneNumber() {
+    return this.fromCustomer.get('phoneNumber');
+  }
+  get dateOfBirth() {
+    return this.fromCustomer.get('dateOfBirth');
+  }
+  get email() {
+    return this.fromCustomer.get('email');
+  }
+  get address() {
+    return this.fromCustomer.get('address');
+  }
+  get gender() {
+    return this.fromCustomer.get('gender');
+  }
+
+  /*
+      Created by TamHT
+      Time: 14:15 1/06/2022
+      Function: delete product
+  */
+   currentProduct:  Product;
+  productList: Product[] = []
+   selectedProduct: Product;
+
+
+
+
+  constructor(private invoiceService: InvoiceService,
+              private productService: ProductService) {
+  }
+
 
   ngOnInit(): void {
+    this.getAllProduct();
   }
+
+  private getAllProduct() {
+    this.productService.getAll().subscribe(data => {
+      this.productList = data;
+    });
+  }
+
+  removeProduct(i: number) {
+
+  }
+
+
+  getTotalMoney(quantity: number) {
+    this.productInvoice.quantity = quantity
+    this.totalMoney =  this.invoiceDetail.productInvoiceDtoList.reduce((sum, p)=> sum + (p.quantity * p.product.price), 0).toFixed(2);
+    this.invoice.totalMoney = parseInt(this.totalMoney);
+    console.log(this.totalMoney);
+  }
+
+
+  getCustomer() {
+    this.customer = this.fromCustomer.value;
+    if (this.fromCustomer.value.gender == 1){
+      this.customer.gender = true;
+    }else {
+      this.customer.gender = false;
+    }
+
+    console.log(this.customer);
+  }
+
+  create(submitCustomer: HTMLButtonElement) {
+      submitCustomer.click();
+
+
+    // this.invoiceService.createInvoice(this.invoice).subscribe(() => {
+    //   alert("ok")
+    // }, error => {
+    //   console.log(error)
+    // });
+  }
+
+
+
+  /*
+     Created by TamHT
+     Time: 14:15 1/06/2022
+     Function: delete product
+ */
+  getProduct(product: Product) {
+    this.currentProduct = product;
+  }
+
+  isSelectedProduct(product: Product) {
+    this.selectedProduct = product;
+    // console.log(this.selectedProduct);
+    // tslint:disable-next-line:triple-equals
+    if (!this.currentProduct) {
+      return false;
+    }
+    return this.currentProduct.name === this.selectedProduct.name ? true : false;
+
+  }
+
+  chooseProduct() {
+    console.log("hehe")
+    this.addProduct();
+    console.log(this.selectedProduct)
+  }
+
 
 }

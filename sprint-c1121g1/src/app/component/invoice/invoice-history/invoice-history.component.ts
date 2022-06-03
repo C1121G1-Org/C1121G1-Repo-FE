@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {InvoiceService} from '../../../services/invoice/invoice.service';
+import {InvoiceDto} from "../../../dto/invoiceDto";
 
 @Component({
   selector: 'app-invoice-history',

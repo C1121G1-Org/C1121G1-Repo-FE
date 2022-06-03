@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {InvoiceDto} from "../../dto/invoiceDto";
 
 
 
@@ -16,4 +17,9 @@ export class InvoiceService {
     return this.httpClient.get<InvoiceDto[]>(`${URL}/invoiceList`);
   }
 
+
+  createInvoice(invoice: InvoiceDto): Observable<InvoiceDto> {
+    return this.httpClient.post<InvoiceDto>(`http://localhost:8080/api/invoiceDetail/create`,invoice);
+
+  }
 }

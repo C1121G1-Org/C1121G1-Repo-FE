@@ -3,8 +3,7 @@ export interface Product {
   name?: string;
   price?: number;
   image?: string;
-  // qrScan: string;
-  screenSize: string;
+  screenSize?: string;
   camera?: string;
   selfie?: string;
   cpu?: string;
