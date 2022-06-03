@@ -12,13 +12,15 @@ import {InvoiceModule} from './component/invoice/invoice.module';
 import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
-import {ReportModule} from "./component/report/report.module";
+import {ReportModule} from './component/report/report.module';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
