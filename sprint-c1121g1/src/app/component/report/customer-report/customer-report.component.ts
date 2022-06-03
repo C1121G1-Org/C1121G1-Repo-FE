@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ReportCustomerDto} from '../../../dto/report-customer-dto';
 import {ReportAndHistoryService} from '../../../services/report/report-and-history.service';
 
@@ -19,15 +19,18 @@ export class CustomerReportComponent implements OnInit {
 
   pageNumber = 0;
   totalPages = 0;
+  ageSearch: number;
+  chooseGenderSearch = false;
+  // chooseAgeSearch = false;
 
-  constructor(private reportService: ReportAndHistoryService) { }
+  constructor(private reportService: ReportAndHistoryService) {
+  }
 
   ngOnInit(): void {
     this.filterAllCustomerReport();
   }
 
   filterAllCustomerReport() {
-    console.log('haha');
     this.reportService.filterAllCustomerReport(this.pageNumber).subscribe(customerReports => {
       console.log(customerReports);
 
@@ -40,14 +43,38 @@ export class CustomerReportComponent implements OnInit {
   previousPage() {
     this.reportService.filterAllCustomerReport(this.pageNumber - 1).subscribe(customerReports => {
       this.customerReports = customerReports.content;
-      this.pageNumber = this.pageNumber - 1;
+      if (this.pageNumber - 1 <= 0) {
+        this.pageNumber = 0;
+      } else {
+        this.pageNumber = this.pageNumber - 1;
+      }
     });
   }
 
   nextPage() {
     this.reportService.filterAllCustomerReport(this.pageNumber + 1).subscribe(customerReports => {
       this.customerReports = customerReports.content;
-      this.pageNumber = this.pageNumber + 1;
+      if (this.pageNumber + 1 >= this.totalPages) {
+        this.pageNumber = this.totalPages - 1;
+      } else {
+        this.pageNumber = this.pageNumber + 1;
+      }
     });
   }
+
+  filterVariable(element: HTMLInputElement) {
+    console.log(element);
+    console.log(element.value);
+  }
+
+  chooseSearchGender() {
+    console.log(this.chooseGenderSearch);
+    this.chooseGenderSearch = !this.chooseGenderSearch;
+    // console.log(this.genderSearch);
+  }
+
+  // chooseAgeSearch() {
+  //   console.log(this.chooseAgeSearch);
+  //   this.chooseAgeSearch = !this.chooseAgeSearch;
+  // }
 }

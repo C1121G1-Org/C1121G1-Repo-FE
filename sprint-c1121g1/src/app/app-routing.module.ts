@@ -10,7 +10,7 @@ import { StorageCreateComponent } from './component/storage/storage-create/stora
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
 
-  {path: 'qrcode', component: QrcodeComponent}
+  // {path: 'qrcode', component: QrcodeComponent}
 
 
   {path: 'qrcode', component: QrcodeComponent},

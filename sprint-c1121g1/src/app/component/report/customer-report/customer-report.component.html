@@ -1,8 +1,8 @@
-/*
-Created by TuanNQ
-Time: 18:00 31/05/2022
-Function: Show all list report customer
-*/
+
+<!--Created by TuanNQ-->
+<!--Time: 18:00 31/05/2022-->
+<!--Function: Show all list report customer-->
+
 <link rel="stylesheet" href="customer-report.component.css">
 <div class="card card-body">
   <h3 style="text-align: center">Quản lý khách hàng</h3>
@@ -18,7 +18,8 @@ Function: Show all list report customer
 
     <div class="col-4 col-md-4">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1"
+        <input #element1 class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+               value="1" (change)="filterVariable(element1)"
                checked>
         <label class="form-check-label" for="exampleRadios1">
           Tất cả
@@ -30,7 +31,8 @@ Function: Show all list report customer
 
       <div class="row">
         <div class="form-check col-4 col-md-4">
-          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="2">
+          <input #element2 class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                 value="2" (change)="filterVariable(element2)">
           <label class="form-check-label" for="exampleRadios2">
             Chọn lọc:
           </label>
@@ -39,7 +41,8 @@ Function: Show all list report customer
         <div class="col-7 col-md-7">
           <div class="row">
             <div class="form-check col-4 col-md-4">
-              <input class="form-check-input" type="checkbox" value="1" id="defaultCheck1">
+              <input class="form-check-input" type="checkbox" value="false" id="defaultCheck1"
+              (click)="chooseSearchGender()">
               <label class="form-check-label" for="defaultCheck1">
                 Giới tính
               </label>
@@ -47,21 +50,22 @@ Function: Show all list report customer
 
             <div class="col-7 col-md-7">
               <select class="custom-select custom-select-sm">
-                <option selected>Gender selection</option>
-                <option value="0">Nữ</option>
-                <option value="1">Nam</option>
+                <option hidden>Gender selection</option>
+                <option value="false">Nữ</option>
+                <option value="true">Nam</option>
               </select>
             </div>
 
             <div class="form-check col-4 col-md-4">
-              <input class="form-check-input" type="checkbox" value="2" id="defaultCheck2">
+              <input class="form-check-input" type="checkbox" value="2" id="defaultCheck2"
+              (click)="chooseAgeSearch()">
               <label class="form-check-label" for="defaultCheck2">
                 Tuổi
               </label>
             </div>
 
-            <div class="col-7 col-md-7">
-              <input class="form-control" type="text">
+            <div class="col-7 col-md-7" [(ngModel)]="ageSearch">
+              <input class="form-control" type="number">
             </div>
           </div>
         </div>
@@ -78,7 +82,7 @@ Function: Show all list report customer
 </div>
 
 <div class="card card-body">
-  <h5>Số lượng khách hàng: {{customerReports.length}}</h5>
+  <h5>Số lượng khách hàng: </h5>
 
 
   <div class="tbl-header">
@@ -114,41 +118,42 @@ Function: Show all list report customer
         <td class="text-center">{{customerReport.phoneNumber}}</td>
         <td class="text-center">{{customerReport.purchaseTimes}}</td>
         <td class="text-center">
-          <button type="button" class="btn btn-primary">Xem</button>
+          <button type="button" class="btn btn-primary"
+          [routerLink]="['/report/purchase-hitory/', customerReport.id]">Xem</button>
         </td>
       </tr>
 
       </tbody>
     </table>
 
-    <!--Pagination-->
-    <nav class="d-flex justify-content-center wow fadeIn" style="float: right">
-      <ul class="pagination pg-blue">
+<!--    &lt;!&ndash;Pagination&ndash;&gt;-->
+<!--    <nav class="d-flex justify-content-center wow fadeIn" style="float: right">-->
+<!--      <ul class="pagination pg-blue">-->
 
-        <!--Arrow left-->
-        <li class="page-item disabled">
-          <a class="page-link" (click)="previousPage()" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
+<!--        &lt;!&ndash;Arrow left&ndash;&gt;-->
+<!--        <li class="page-item">-->
+<!--          <a class="page-link" (click)="previousPage()" aria-label="Previous">-->
+<!--            <span aria-hidden="true">&laquo;</span>-->
+<!--            <span class="sr-only">Previous</span>-->
+<!--          </a>-->
+<!--        </li>-->
 
 
-        <li class="page-item active" *ngFor="let page of pageNumber">
-          <a class="page-link" href="#">{{page}}
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
+<!--        <li class="page-item active" *ngFor="let page of pageNumber">-->
+<!--          <a class="page-link" href="#">{{page}}-->
+<!--            <span class="sr-only">(current)</span>-->
+<!--          </a>-->
+<!--        </li>-->
 
-        <li class="page-item">
-          <a class="page-link" (click)="nextPage()" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <!--Pagination-->
+<!--        <li class="page-item">-->
+<!--          <a class="page-link" (click)="nextPage()" aria-label="Next">-->
+<!--            <span aria-hidden="true">&raquo;</span>-->
+<!--            <span class="sr-only">Next</span>-->
+<!--          </a>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </nav>-->
+<!--    &lt;!&ndash;Pagination&ndash;&gt;-->
 
     <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
       <a type="button" class="btn btn-outline-info" (click)="previousPage()"
