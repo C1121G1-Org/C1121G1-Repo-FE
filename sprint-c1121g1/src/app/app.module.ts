@@ -15,11 +15,12 @@ import {HomepageModule} from './component/homepage/homepage.module';
 import {ReportModule} from './component/report/report.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {SecurityModule} from "./component/security/security.module";
+import {SecurityModule} from './component/security/security.module';
 
 import { QrcodeComponent } from './common/qrcode/qrcode.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [

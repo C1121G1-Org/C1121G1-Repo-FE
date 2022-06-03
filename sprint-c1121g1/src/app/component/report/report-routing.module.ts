@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SaleReportComponent} from "./sale-report/sale-report.component";
-import {QrCodeComponent} from "./qr-code/qr-code.component";
+import {SaleReportComponent} from './sale-report/sale-report.component';
+import {QrCodeComponent} from './qr-code/qr-code.component';
+import {CustomerReportComponent} from './customer-report/customer-report.component';
+import {QrcodeComponent} from '../../common/qrcode/qrcode.component';
 
 
 const routes: Routes = [
-  {path:'sale-report/list',component:SaleReportComponent},
-  {path:'qrcode',component:QrCodeComponent},
+  {path: 'sale-report/list', component: SaleReportComponent},
+  {path: 'report/customer-report', component: CustomerReportComponent},
+  {path: 'qrcode', component: QrcodeComponent}
 ];
 
 @NgModule({

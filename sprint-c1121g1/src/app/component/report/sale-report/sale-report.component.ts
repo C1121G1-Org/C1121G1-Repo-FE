@@ -1,10 +1,20 @@
+<<<<<<< HEAD
 import {Component, OnInit} from '@angular/core';
 import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from "chart.js";
 import {QrcodeService} from "../../../services/qrcode/qrcode.service";
 import {FormControl, FormGroup} from "@angular/forms";
+=======
+
+import {Component, OnInit} from '@angular/core';
+import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from 'chart.js';
+
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
-Chart.register(...registerables)
+Chart.register(...registerables);
+
+
+
 
 
 @Component({
@@ -13,6 +23,7 @@ Chart.register(...registerables)
   styleUrls: ['./sale-report.component.css']
 })
 export class SaleReportComponent implements OnInit {
+<<<<<<< HEAD
 
   formSearch = new FormGroup({
     startDay: new FormControl(),
@@ -54,12 +65,36 @@ export class SaleReportComponent implements OnInit {
           borderColor: "red",
           backgroundColor: "red",
           data: this.sales,
+=======
+  months = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+  doanhThus = [100, 200, 500, 900, 300, 800, 400, 1000, 1200, 1100, 600, 800];
+  donHangs = [10, 2, 4, 5, 8, 9, 3, 1, 6, 7, 12, 11];
+  sale = 0;
+  invoice = 0;
+  constructor() { }
+
+  ngOnInit(): void {
+    this.sale = this.sumArr(this.doanhThus);
+    this.invoice = this.sumArr(this.donHangs);
+    new Chart('doanhThu', {
+      type: 'line',
+      data: {
+        labels: this.months,
+        datasets: [{
+          label: 'Doanh Thu Theo Tháng (USD)',
+          pointRadius: 3,
+          pointBackgroundColor: 'red',
+          borderColor: 'red',
+          backgroundColor: 'red',
+          data: this.doanhThus,
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
           fill: false,
           tension: 0.1
         }]
       },
       options: {}
     });
+<<<<<<< HEAD
 
     new Chart("donHang", {
       type: "line",
@@ -73,23 +108,44 @@ export class SaleReportComponent implements OnInit {
           pointBackgroundColor: "blue",
           backgroundColor: "blue",
           borderColor: "blue",
+=======
+    new Chart('donHang', {
+      type: 'line',
+      data: {
+        labels: this.months,
+        datasets: [{
+          label: 'Đơn hàng Theo Tháng',
+          fill: false,
+          data: this.donHangs,
+          pointRadius: 3,
+          pointBackgroundColor: 'blue',
+          backgroundColor: 'blue',
+          borderColor: 'blue',
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
           tension: 0.1
         }]
       },
       options: {}
     });
+<<<<<<< HEAD
 
     this.changeTypeReport();
 
   }
 
+=======
+  }
+
+
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
   sumArr(arr) {
     let total = 0;
-    for (let a of arr) {
+    for (const a of arr) {
       total += a;
     }
     return total;
   }
+<<<<<<< HEAD
 
 
   scanQRCode() {
@@ -221,4 +277,6 @@ export class SaleReportComponent implements OnInit {
       this.formSearch.get('productId').enable();
     }
   }
+=======
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
 }
