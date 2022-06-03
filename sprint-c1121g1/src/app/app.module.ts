@@ -12,11 +12,16 @@ import {InvoiceModule} from './component/invoice/invoice.module';
 import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
-import {ReportModule} from './component/report/report.module';
+// import {ReportModule} from './component/report/report.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
-import {SecurityModule} from "./component/security/security.module";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
+import {ReportModule} from './component/report/report.module';
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,6 +32,9 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     EmployeeModule,
     ProductModule,
     CustomerModule,
@@ -37,9 +45,10 @@ import {HttpClientModule} from '@angular/common/http';
     ReportModule,
     SecurityModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HttpClientModule
+    FormsModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
