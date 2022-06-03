@@ -42,7 +42,6 @@ export class SaleReportComponent implements OnInit {
     this.changeTypeReport();
   }
 
-
   sumArr(arr) {
     let total = 0;
     for (const a of arr) {
@@ -50,6 +49,7 @@ export class SaleReportComponent implements OnInit {
     }
     return total;
   }
+
 
   showSaleReport() {
     console.log(this.formSearch.value);
@@ -110,6 +110,7 @@ export class SaleReportComponent implements OnInit {
   }
 
   changeTypeReport() {
+
     const type = this.formSearch.get('typeReport').value;
     // tslint:disable-next-line:triple-equals
     if (type != 'ID') {

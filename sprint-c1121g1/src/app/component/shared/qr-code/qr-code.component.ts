@@ -1,8 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {SaleReportService} from '../../services/report/sale-report.service';
-import {QrcodeService} from '../../services/qrcode/qrcode.service';
-import {ProductService} from '../../services/product/product.service';
-import {Product} from '../../models/product';
+
+import {SaleReportService} from '../../../services/report/sale-report.service';
+import {QrcodeService} from '../../../services/qrcode/qrcode.service';
+import {ProductService} from '../../../services/product/product.service';
+import {Product} from '../../../models/product';
 
 /*
     Created by HauPV
@@ -29,14 +30,15 @@ export class QrCodeComponent implements OnInit {
   image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
 
+
   constructor(private saleReportSerive: SaleReportService, private qrCodeService: QrcodeService, private productService: ProductService) {
   }
-
 
   ngOnInit(): void {
   }
 
   scanQRCode() {
+
     const file: any = document.querySelectorAll('input[type=\'file\']');
     // tslint:disable-next-line:triple-equals
     if (this.typeQRScan == '1') {

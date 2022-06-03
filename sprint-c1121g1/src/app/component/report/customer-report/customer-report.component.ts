@@ -1,18 +1,14 @@
+
 import {Component, OnInit} from '@angular/core';
 import {ReportCustomerDto} from '../../../dto/report-customer-dto';
 import {ReportAndHistoryService} from '../../../services/report/report-and-history.service';
+
 
 @Component({
   selector: 'app-customer-report',
   templateUrl: './customer-report.component.html',
   styleUrls: ['./customer-report.component.css']
 })
-
-/*
-    Created by TuanNQ
-    Time: 18:00 31/05/2022
-    Function: Show all list report customer
-*/
 export class CustomerReportComponent implements OnInit {
 
   customerReports: ReportCustomerDto[] = [];
@@ -32,9 +28,10 @@ export class CustomerReportComponent implements OnInit {
   constructor(private reportService: ReportAndHistoryService) {
   }
 
+
   ngOnInit(): void {
-    this.filterAllCustomerReport();
   }
+
 
   filterAllCustomerReport() {
     this.reportService.filterAllCustomerReport(this.pageNumber).subscribe(customerReports => {
@@ -118,46 +115,27 @@ export class CustomerReportComponent implements OnInit {
   }
 
   filterVariable(element: HTMLInputElement) {
-    console.log(element);
-    console.log(element.value);
     this.chooseFilter = Number(element.value);
-    console.log('chooseFilter' + this.chooseFilter);
   }
 
   chooseSearchGender() {
-    // console.log(this.chooseGenderSearch);
     this.chooseGenderSearch = !this.chooseGenderSearch;
-    console.log('choose gender search' + this.chooseGenderSearch);
   }
 
   chooseSearchAge() {
     this.chooseAgeSearch = !this.chooseAgeSearch;
-    console.log('choose age search' + this.chooseAgeSearch);
   }
 
   searchGender(target: any) {
     this.genderSearch = target.value;
-    console.log('search gender' + this.genderSearch);
   }
 
   searchAge(target: any) {
     this.ageSearch = target.value;
-    console.log('search age' + this.ageSearch);
   }
 
   filter() {
-    console.log('dasddd' + this.checkReportCustomers);
-    console.log('before search');
-
-    console.log('choose filter' + this.chooseFilter);
-    console.log('choose gender search' + this.chooseGenderSearch);
-    console.log('choose age search' + this.chooseAgeSearch);
-    console.log('search gender' + this.genderSearch);
-    console.log('search age' + this.ageSearch);
-
-    console.log('ahihi' + this.chooseFilter);
     if (this.chooseFilter === 1) {
-      console.log('age: ' + this.ageSearch);
       this.filterAllCustomerReport();
     } else if (this.chooseFilter === 2) {
       if (this.chooseGenderSearch === true) {
@@ -175,6 +153,7 @@ export class CustomerReportComponent implements OnInit {
       }
     }
   }
+
 
 }
 

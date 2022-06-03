@@ -6,9 +6,10 @@ import {Product} from '../../models/product';
 
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class QrcodeService {
+
   URL = 'http://localhost:8080/api/qrcode';
 
   constructor(private http: HttpClient) {
@@ -25,6 +26,5 @@ export class QrcodeService {
   check(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.URL}/check`, formData);
   }
-
 
 }
