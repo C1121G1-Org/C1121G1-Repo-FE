@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -15,6 +16,7 @@ const API_URL = `${environment.apiUrl}`;
 })
 export class EmployeeService {
 
+
   constructor(private http: HttpClient) { }
 
   saveEmployee(employeeDto): Observable<EmployeeDto> {
@@ -24,4 +26,6 @@ export class EmployeeService {
   getAllPosition(): Observable<Position[]> {
     return this.http.get<Position[]>(API_URL + '/position/list');
   }
+
+
 }
