@@ -6,7 +6,11 @@ import {ProductListBestsellerComponent} from './component/homepage/product-list-
 
 
 const routes: Routes = [
-  {path: '', component: ProductListBestsellerComponent}
+  // {path: '', component: ProductListBestsellerComponent}
+  {
+    path: 'invoice',
+    loadChildren: () => import('../app/component/invoice/invoice.module').then(module => module.InvoiceModule)
+  }
 ];
 
 @NgModule({
