@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {ICustomer} from '../../../models/ICustomer';
 import {ProductService} from '../../../services/product/product.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-choose-product-modal',
@@ -21,8 +22,9 @@ export class ListChooseProductModalComponent implements OnInit {
   selectedProduct: IProduct;
   currentProduct: IProduct;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
   }
+
   ngOnInit(): void {
     this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
   }
@@ -47,12 +49,12 @@ export class ListChooseProductModalComponent implements OnInit {
   previousPage() {
     this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice);
   }
+
   getProduct(product: IProduct): void {
     this.currentProduct = product;
   }
 
   isSelectedProduct(product: IProduct): boolean {
-
     this.selectedProduct = product;
     // tslint:disable-next-line:triple-equals
     if (!this.currentProduct) {
@@ -61,8 +63,10 @@ export class ListChooseProductModalComponent implements OnInit {
     return this.currentProduct.name === this.selectedProduct.name ? true : false;
   }
 
-  chooseProduct() {
-    // this.router.navigate(['/storage', this.currentProduct]);
+  chooseProduct(close) {
+    this.router.navigate(['/chooserProduct', this.currentProduct])
+    close.click();
+
   }
 
   getAllProductPage(index: any) {

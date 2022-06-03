@@ -78,9 +78,9 @@
               <div class="row">
                 <div class="col-6">
                   <button type="button" class="btn-edit btn-rounded  btn-lg my-0">
-                    <i class="fa fa-paper-plane"></i>
+                    <i (click)="chooseProduct(exits)" class="fa fa-paper-plane"></i>
                     Chọn</button>
-                  <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
+                  <button #exits type="button" class="btn-delete btn-rounded  btn-lg my-0"
                           data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
                   </button>
                 </div>

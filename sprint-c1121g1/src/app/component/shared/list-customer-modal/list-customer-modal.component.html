@@ -4,8 +4,7 @@
 
 <div class="modal fade" id="customerModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <h2 *ngIf="message">Không tìm thấy dữ liệu cần tìm</h2>
-  <div  *ngIf="!message"  class="modal-dialog modal-xl modal-dialog-centered">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-body">
         <div class="card card-body">
@@ -14,7 +13,7 @@
           </h3>
         </div>
         <div class="card card-body">
-          <div  class="table-editable">
+          <div class="table-editable">
             <div class="row">
               <div class="col-12">
                 <div class="mb-3" style="display: flex; justify-content: space-evenly">
@@ -23,7 +22,6 @@
                   </div>
                   <div>
                     <select [(ngModel)]="checkSearch" class="search-select background-search">
-                      <option value=''>chọn tìm kiếm</option>
                       <option value="name">Tên khách hàng</option>
                       <option value="phone">Số điện thoại</option>
                     </select>
@@ -32,12 +30,13 @@
                   <div style="position: relative">
                     <input #element style="width: 300px" class="header-search search-input background-search"
                            placeholder="Bạn cần tìm gì?"
-                           type="text"><i  (click)="search(element.value)"
-                    class="fa fa-search"
-                    style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
+                           type="text"><i (click)="search(element.value)"
+                                          class="fa fa-search"
+                                          style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                   </div>
                   <div>
-                    <button (click)="search(element.value)" class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm
+                    <button (click)="search(element.value)" class="btn-search btn-rounded  btn-sm my-0"
+                            style="width: 100px">Tìm
                       kiếm
                     </button>
                   </div>
@@ -46,45 +45,53 @@
 
               </div>
             </div>
+
             <div>
-              <div class="tbl-header">
-                <table class="table table-bordered table-responsive-md ">
-                  <thead>
-                  <tr>
-                    <th class="text-center">STT</th>
-                    <th class="text-center">Họ và tên</th>
-                    <th class="text-center">Mã khách hàng</th>
-                    <th class="text-center">số điện thoại</th>
-                    <th class="text-center">Địa chỉ</th>
-                    <th class="text-center">Tuổi</th>
-                    <th class="text-center">Email</th>
-                  </tr>
-                  </thead>
-                </table>
+              <h2 style="text-align: center ; color: #D70018" *ngIf="message">Không tìm thấy dữ liệu cần tìm!</h2>
+              <!--            làm viêvj  -->
+              <div *ngIf="!message">
+                <div class="tbl-header">
+                  <table class="table table-bordered table-responsive-md ">
+                    <thead>
+                    <tr>
+                      <th class="text-center">STT</th>
+                      <th class="text-center">Họ và tên</th>
+                      <th class="text-center">Mã khách hàng</th>
+                      <th class="text-center">số điện thoại</th>
+                      <th class="text-center">Địa chỉ</th>
+                      <th class="text-center">Tuổi</th>
+                      <th class="text-center">Email</th>
+                    </tr>
+                    </thead>
+                  </table>
+                </div>
+
+                <div class="tbl-content">
+                  <table class=" table table-bordered table-responsive-md">
+                    <tbody>
+                    <tr (click)="getCustomer(customer)" *ngFor="let customer of customerList; index as i "
+                        [class.heightLight]="isSelected(customer)">
+                      <td class="text-center">{{(i + 1)}}</td>
+                      <td class="pt-3-half">{{customer.customerName}}</td>
+                      <td class="pt-3-half">{{customer.id}}</td>
+                      <td class="pt-3-half">{{customer.phoneNumber}}</td>
+                      <td class="text-center">{{customer.address}}</td>
+                      <td class="text-center">{{customer.dateOfBirth}}</td>
+                      <td class="text-center">{{customer.email}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
-              <div class="tbl-content">
-                <table class=" table table-bordered table-responsive-md">
-                  <tbody>
-                  <tr (click)="getCustomer(customer)" *ngFor="let customer of customerList; index as i "
-                      [class.heightLight]="isSelected(customer)">
-                    <td class="text-center">{{(i + 1)}}</td>
-                    <td class="pt-3-half">{{customer.customerName}}</td>
-                    <td class="pt-3-half">{{customer.id}}</td>
-                    <td class="pt-3-half">{{customer.phoneNumber}}</td>
-                    <td class="text-center">{{customer.address}}</td>
-                    <td class="text-center">{{customer.dateOfBirth}}</td>
-                    <td class="text-center">{{customer.email}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
+
               <br>
               <div class="row">
                 <div class="col-6">
-                  <button type="button" class="btn-edit btn-rounded  btn-lg my-0">
+                  <button (click)="chooseCustomer(exit)" type="button" class="btn-edit btn-rounded  btn-lg my-0">
                     <i class="fa fa-paper-plane"></i>
-                    Chọn</button>
-                  <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
+                    Chọn
+                  </button>
+                  <button #exit type="button" class="btn-delete btn-rounded  btn-lg my-0"
                           data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
                   </button>
                 </div>
@@ -94,15 +101,19 @@
                   <nav class="d-flex justify-content-center wow fadeIn float-right">
                     <ul class="pagination pg-blue">
                       <div *ngIf="!first">
-                        <a  style="color: #D70018" type="button" class="page-link" (click)="previousPage()">   <button class="btn btn-success">trang trước</button></a>
+                        <a *ngIf="!message" style="color: #D70018" type="button" class="page-link" (click)="previousPage()">
+                          <button  style="width: 100px" class="btn btn">trang trước</button>
+                        </a>
                       </div>
                       <li class="page-item active" *ngFor="let index of totalPages">
-                        <a type="button" class="page-item" [ngClass]="index == pageNumber+1 ? 'active' : ''" (click)="getAllCustomerPage(index)">
-                          <span  style="color: #D70018">{{index}}</span>
+                        <a *ngIf="!message" type="button" class="page-item" [ngClass]="index == pageNumber+1 ? 'active' : ''"
+                           (click)="getAllCustomerPage(index)">
+                          <span style="color: #D70018">{{index}}</span>
                         </a>
                       </li>
-                      <a  *ngIf="!last" type="button" class="page-link" (click)="nextPage()">
-                        <button class="btn btn-success">trang sau</button></a>
+                      <a *ngIf="!last&& !message" type="button" class="page-link" (click)="nextPage()">
+                        <button  style="width: 100px"  class="btn btn-rounded">trang sau</button>
+                      </a>
                     </ul>
                   </nav>
 
@@ -132,13 +143,10 @@
                   <!--                  </nav>-->
 
 
-
-
-
-
                   <!--Pagination-->
                 </div>
               </div>
+
             </div>
           </div>
         </div>
