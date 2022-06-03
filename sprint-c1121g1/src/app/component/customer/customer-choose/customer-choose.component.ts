@@ -12,19 +12,23 @@ import {Router} from '@angular/router';
 export class CustomerChooseComponent implements OnInit {
   customerList: ICustomer[] = [];
   pageNumber: number;
-  totalPages = 0;
+  totalPages = [];
   searchByName = '';
   searchByPhone = '';
   productList: IProduct[] = [];
   searchByPrice = '';
   searchByNameProduct = '';
   pageNumberProduct: number;
-  totalPagesProduct = 0;
+  totalPagesProduct = [];
   selectedCustomer: ICustomer;
   currentCustomer: ICustomer;
   selectedProduct: IProduct;
   currentProduct: IProduct;
   a = 0;
+  flag = false;
+  lastCustomer: boolean;
+  firstCustomer: boolean;
+  checkSearch = '';
 
   constructor(private customerService: CustomerService, private router: Router) {
   }
@@ -38,16 +42,22 @@ export class CustomerChooseComponent implements OnInit {
     this.customerService.getAllCustomer(this.pageNumber - 1, this.searchByName, this.searchByPhone).subscribe((res: any) => {
       this.customerList = res.content;
       this.pageNumber = res.pageable.pageNumber;
-      this.totalPages = res.pageable.totalPages;
+      this.firstCustomer = res.first;
+      // @ts-ignore
+      this.totalPages = Array(res.totalPages).fill(1).map((x, i) => i + 1);
+      this.lastCustomer = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
     });
   }
 
   nextPage() {
     this.customerService.getAllCustomer(this.pageNumber + 1, this.searchByName, this.searchByPhone).subscribe((res: any) => {
       this.customerList = res.content;
-      console.log(this.customerList);
       this.pageNumber = res.pageable.pageNumber;
-      this.totalPages = res.pageable.totalPages;
+      this.totalPages = res.totalPages;
+      this.firstCustomer = res.first;
+      // @ts-ignore
+      this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
+      this.lastCustomer = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
     });
   }
 
@@ -55,7 +65,12 @@ export class CustomerChooseComponent implements OnInit {
     this.customerService.getAllCustomer(this.pageNumber, this.searchByName, this.searchByPhone).subscribe((res: any) => {
       this.customerList = res.content;
       this.pageNumber = res.pageable.pageNumber;
-      this.totalPages = res.pageable.totalPages;
+      this.totalPages = res.totalPages;
+      this.firstCustomer = res.first;
+      // @ts-ignore
+      this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
+      console.log(this.totalPages);
+      this.lastCustomer = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
     });
   }
 
@@ -63,7 +78,7 @@ export class CustomerChooseComponent implements OnInit {
     this.customerService.getAllProduct(this.pageNumberProduct, this.searchByNameProduct, this.searchByPrice).subscribe((res: any) => {
       this.productList = res.content;
       this.pageNumberProduct = res.pageable.pageNumber;
-      this.totalPagesProduct = res.pageable.totalPages;
+      this.totalPagesProduct = res.totalPages;
     });
   }
 
@@ -71,7 +86,7 @@ export class CustomerChooseComponent implements OnInit {
     this.customerService.getAllProduct(this.pageNumberProduct - 1, this.searchByNameProduct, this.searchByPrice).subscribe((res: any) => {
       this.customerList = res.content;
       this.pageNumberProduct = res.pageable.pageNumber;
-      this.totalPagesProduct = res.pageable.totalPages;
+      this.totalPagesProduct = res.totalPages;
     });
   }
 
@@ -79,18 +94,18 @@ export class CustomerChooseComponent implements OnInit {
     this.customerService.getAllProduct(this.pageNumberProduct - 1, this.searchByNameProduct, this.searchByPrice).subscribe((res: any) => {
       this.productList = res.content;
       this.pageNumberProduct = res.pageable.pageNumber;
-      this.totalPagesProduct = res.pageable.totalPages;
+      this.totalPagesProduct = res.totalPages;
     });
   }
 
   getCustomer(customer: ICustomer): void {
     this.currentCustomer = customer;
+    this.flag = !this.flag;
   }
 
   isSelected(customer: ICustomer): boolean {
     this.selectedCustomer = customer;
-    // tslint:disable-next-line:triple-equals
-    if (!this.currentCustomer) {
+    if (!this.currentCustomer || !this.flag) {
       return false;
     }
     return this.currentCustomer.customerName === this.selectedCustomer.customerName ? true : false;
@@ -109,9 +124,65 @@ export class CustomerChooseComponent implements OnInit {
     }
     return this.currentProduct.name === this.selectedProduct.name ? true : false;
   }
+
   chooseProduct() {
     this.router.navigate(['/storage', this.currentProduct]);
   }
-  chooseCustomer(){
+
+  chooseCustomer() {
   }
+
+  getAllCustomerPage(index: any) {
+    this.pageNumber = index - 1;
+    this.customerService.getAllCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+  }
+  // search cho customer
+  search(value: string) {
+    console.log(value);
+    if (this.checkSearch === '') {
+      this.searchByName = value;
+      this.searchByPhone = '';
+      this.customerService.getAllCustomer(this.pageNumber, this.searchByName, this.searchByPhone).subscribe((res: any) => {
+        console.log(res);
+        this.customerList = res.content;
+        this.pageNumber = res.pageable.pageNumber;
+        this.totalPages = res.totalPages;
+        this.firstCustomer = res.first;
+        // @ts-ignore
+        this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
+        console.log(this.totalPages);
+        this.lastCustomer = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
+      });
+    } else if (this.checkSearch === 'phone') {
+      this.searchByPhone = value;
+      this.searchByName = '';
+      console.log(value);
+      this.customerService.getAllCustomer(this.pageNumber, this.searchByName, this.searchByPhone).subscribe((res: any) => {
+        console.log(res);
+        this.customerList = res.content;
+        this.pageNumber = res.pageable.pageNumber;
+        this.totalPages = res.totalPages;
+        this.firstCustomer = res.first;
+        // @ts-ignore
+        this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
+        this.lastCustomer = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
+      });
+    } else {
+      alert('3');
+      this.searchByName = value;
+      this.searchByPhone = '';
+      this.customerService.getAllCustomer(this.pageNumber, this.searchByName, this.searchByPhone).subscribe((res: any) => {
+        console.log(res);
+        this.customerList = res.content;
+        this.pageNumber = res.pageable.pageNumber;
+        this.totalPages = res.totalPages;
+        this.firstCustomer = res.first;
+        // @ts-ignore
+        this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
+        this.lastCustomer = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
+      });
+    }
+  }
+//  search cho product
+
 }
