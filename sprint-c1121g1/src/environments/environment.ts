@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: "sprint1-c2e64.appspot.com",
     messagingSenderId: "715730046220",
     appId: "1:715730046220:web:e4e0e868fca6888dc2cd29",
-    measurementId: "G-2DDMRCPRQW"
+    measurementId: "G-2DDMRCPRQW",
   }
 };
 
