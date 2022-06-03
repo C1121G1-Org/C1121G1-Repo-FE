@@ -1,1 +1,194 @@
-<p>product-create works!</p>
+
+<!--form tao moi-->
+
+<form>
+  <div class="container-fluid">
+    <div class="row" style="justify-content: center;display: flex">
+      <div class="col-md-10">
+        <div class="card ">
+          <div class="card card-body">
+            <h3 class="text-center font-weight-bold text-uppercase py-4">
+              THÊM MỚI THÔNG TIN HÀNG HÓA
+            </h3>
+            <div class="row" style="justify-content: center;display: flex">
+              <div class="col-md-8 row">
+                <input type="hidden" formControlName="id">
+
+                <div class="form-group col-md-6">
+                  <label for="productName">Tên Hàng <span class="text-danger">(*):</span></label>
+                  <input formControlName="productName" type="text" class="form-control"
+                         name="productName" id="productName">
+                  <div
+                    *ngIf="productForm.controls.productName.invalid && (productForm.controls.productName.dirty || productForm.controls.productName.touched|| productForm.controls.category.errors?.empty)">
+
+                    <small
+                      *ngIf="productForm.controls.productName.hasError('required') || productForm.controls.productName.errors.empty"
+                      class="form-text text-danger">Require not empty.</small>
+                  </div>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="price">Giá <span class="text-danger">(*):</span></label>
+                  <input onChange="format_curency(this);" type="text" id=price formContronlName="price" class="form-control" name="price">
+                  <span>VND</span>
+
+                  <div
+                    *ngIf="productForm.controls.price.invalid && (productForm.controls.price.dirty || productForm.controls.price.touched|| productForm.controls.category.errors?.empty)">
+
+                    <small
+                      *ngIf="productForm.controls.price.hasError('required') || productForm.controls.productName.errors.empty"
+                      class="form-text text-danger">Require not empty.</small>
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-12">
+                  <div class="file">
+                    <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
+                    <input  formControlName="img"  name="img" id="img" type="file" class="file__input">
+                    <label for="img" class="file__label">
+                      <i class="fa fa-upload"></i>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="screenSize">Kích Thước Màn Hình <span
+                    class="text-danger">(*):</span></label>
+                  <input formControlName="screenSize" type="text" class="form-control"
+                         name="screenSize" id="screenSize">
+
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.screenSize.invalid && (productForm.controls.screenSize.dirty || productForm.controls.screenSize.touched || productForm.controls.screenSize.errors?.empty)">
+
+                    <small
+                      *ngIf="productForm.controls.screenSize.hasError('required') || productForm.controls.screenSize.errors.empty"
+                      class="form-text text-danger">Require not empty.</small>
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-6">
+                  <label for="camera">Camera<span
+                    class="text-danger">(*):</span></label>
+                  <input formControlName="camera" type="text" class="form-control"
+                         name="camera" id="camera">
+
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.camera.invalid && (productForm.controls.camera.dirty || productForm.controls.camera.touched || productForm.controls.camera.errors?.empty)">
+
+                    <small
+                      *ngIf="productForm.controls.camera.hasError('required') || productForm.controls.camera.errors.empty"
+                      class="form-text text-danger">Require not empty.</small>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="selfie">Selfie<span class="text-danger">(*):</span></label>
+                  <input formControlName="selfie" type="text" class="form-control" name="selfie"
+                         id="selfie">
+
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.selfie.invalid && (productForm.controls.selfie.dirty || productForm.controls.selfie.touched || productForm.controls.selfie.errors?.empty)">
+
+                    <small
+                      *ngIf="productForm.controls.selfie.hasError('required') || productForm.controls.selfie.errors.empty"
+                      class="form-text text-danger">Require not empty.</small>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="memory">Lưu trữ<span class="text-danger">(*):</span></label>
+                  <input formControlName="memory" type="text" class="form-control" name="memory"
+                         id="memory">
+
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.memory.invalid && (productForm.controls.memory.dirty || productForm.controls.memory.touched || productForm.controls.memory.errors?.empty)">
+                    <!--      <small *ngIf="productForm.controls.price.hasError('pattern')" class="form-text text-danger">Wrong format, ex:-->
+                    <!--        KH-0123</small>-->
+                    <small
+                      *ngIf="productForm.controls.memory.hasError('required') || productForm.controls.memory.errors.empty"
+                      class="form-text text-danger">Require not empty.</small>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                  <label for="cpu">CPU<span class="text-danger">(*)</span> </label>
+                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="cpu">
+
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.cpu.invalid && (productForm.controls.cpu.dirty || productForm.controls.cpu.touched || productForm.controls.cpu.errors?.empty)">
+
+                    <small
+                      *ngIf="productForm.controls.cpu.hasError('required') || productForm.controls.cpu.errors.empty"
+                      class="form-text text-danger">Require not empty.</small>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-12">
+                  <label for="otherDescription">Mô tả thêm </label>
+
+                  <textarea id="otherDescription" formControlName="otherDescription"
+                            class="form-control">    </textarea>
+
+                </div>
+
+                <div class=" col-md-12 text-center mx-auto mt-4">
+                  <button style="width: 200px;" type="button" class="btn btn-primary "
+                          data-toggle="modal"
+                          data-target="#createModal"><i class="fa fa-paper-plane"></i>Xác nhận
+                  </button>
+
+                  <a type="button" class="btn btn-danger" style="margin-left: 10px; width: 200px">
+                    Hủy</a>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script>
+  function format_curency(a) {
+    a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  }
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade " id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn thêm mới</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <p>Tên hàng: Iphone 13</p>
+        <p>Giá: 9.000.000</p>
+        <p>Kích thước màn hình: 6.4 inch</p>
+        <p>Camera: 64.0 MP</p>
+        <p>Selfie: 32.0 MP</p>
+        <p>Lưu trữ: 128 GB</p>
+        <p>CPU: Snapdragon 680</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">thêm mới</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+

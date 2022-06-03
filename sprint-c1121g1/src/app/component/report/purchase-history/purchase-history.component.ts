@@ -3,7 +3,7 @@ import {ReportAndHistoryService} from '../../../services/report/report-and-histo
 import {PurchaseHistoryDto} from '../../../dto/purchase-history-dto';
 import {ActivatedRoute, ParamMap} from '@angular/router';
 import {ReportCustomerDto} from '../../../dto/report-customer-dto';
-import {PurchaseProductDto} from "../../../dto/purchase-product-dto";
+import {PurchaseProductDto} from '../../../dto/purchase-product-dto';
 
 /*
     Created by TuanNQ

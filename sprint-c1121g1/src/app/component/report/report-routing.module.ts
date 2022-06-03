@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import {SaleReportComponent} from './sale-report/sale-report.component';
 import {CustomerReportComponent} from './customer-report/customer-report.component';
-
-import {QrcodeComponent} from '../../common/qrcode/qrcode.component';
 import {PurchaseHistoryComponent} from './purchase-history/purchase-history.component';
 
 
+/*
+    Created by HauPV
+    Time: 09:00 03/06/2022
+    Function: routing for sale-report
+*/
+
 const routes: Routes = [
+
   {path: 'sale-report/list', component: SaleReportComponent},
-  {path: 'qrcode', component: QrcodeComponent},
   /*
     Created by TuanNQ
     Time: 18:00 31/05/2022
@@ -22,7 +25,7 @@ const routes: Routes = [
     Time: 11:00 02/06/2022
     Function: Show detail purchase history
   */
-  {path: 'report/purchase-hitory/:id', component: PurchaseHistoryComponent}
+  {path: 'report/purchase-hitory/:id', component: PurchaseHistoryComponent},
 ];
 
 @NgModule({

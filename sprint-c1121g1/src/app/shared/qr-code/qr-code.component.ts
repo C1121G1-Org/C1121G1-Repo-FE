@@ -1,31 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {SaleReportService} from '../../services/report/sale-report.service';
 import {QrcodeService} from '../../services/qrcode/qrcode.service';
+import {ProductService} from '../../services/product/product.service';
+import {Product} from '../../models/product';
+
+/*
+    Created by HauPV
+    Time: 09:00 03/06/2022
+    Function: qr-code scan
+*/
 
 @Component({
-  selector: 'app-qrcode',
-  templateUrl: './qrcode.component.html',
-  styleUrls: ['./qrcode.component.css']
+  selector: 'app-qr-code',
+  templateUrl: './qr-code.component.html',
+  styleUrls: ['./qr-code.component.css']
 })
-export class QrcodeComponent implements OnInit {
+
+export class QrCodeComponent implements OnInit {
+
+  @Output()
+  sendProduct = new EventEmitter();
+
+  product: Product = {};
+
   message = '';
   typeQRScan = '1';
 
   image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
 
-  constructor(private qrCodeService: QrcodeService) { }
+  constructor(private saleReportSerive: SaleReportService, private qrCodeService: QrcodeService, private productService: ProductService) {
+  }
+
 
   ngOnInit(): void {
   }
 
   scanQRCode() {
     const file: any = document.querySelectorAll('input[type=\'file\']');
+    // tslint:disable-next-line:triple-equals
     if (this.typeQRScan == '1') {
       if (file[0].files[0]) {
         const formData = new FormData();
         formData.append('file', file[0].files[0]);
         this.qrCodeService.decode(formData).subscribe(data => {
-          console.log(data);
+          this.product = data;
+          this.sendProduct.emit(this.product);
         }, err => {
           console.log(err);
         });
