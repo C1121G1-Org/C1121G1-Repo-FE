@@ -233,7 +233,9 @@
                 <input type="text" class="form-control" name="supplierName" id="supplierName"
                        formControlName="supplierName">
                 <p style="color: red" *ngIf="( supplierForm.controls.supplierName.hasError( 'required')&&
-(supplierForm.controls.supplierName.touched|| supplierForm.controls.supplierName.dirty))">Ten KH không được để trống</p>
+(supplierForm.controls.supplierName.touched|| supplierForm.controls.supplierName.dirty))">Tên nhà cung cấp không được để trống</p>
+                <p style="color: red" *ngIf="errorSupplierName != ''">{{errorSupplierName}}</p>
+
               </div>
 
               <div class="form-group col-md-8">
@@ -264,7 +266,7 @@
               <div class=" col-md-12 text-center mx-auto mt-4">
                 <div class="text-center " style="margin-bottom: 40px" >
                   <button type="button" class="btn btn-danger " style="margin-right: 20px" [routerLink]="['']" > Hủy</button>
-                  <button [disabled]="!supplierForm.valid" type="submit" class="btn btn-primary ">
+                  <button  type="submit" class="btn btn-primary ">
                     <i class="fa fa-paper-plane"></i>Thêm mới
                   </button>
                 </div>
