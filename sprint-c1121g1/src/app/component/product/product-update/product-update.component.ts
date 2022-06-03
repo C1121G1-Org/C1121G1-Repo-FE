@@ -54,6 +54,11 @@ export class ProductUpdateComponent implements OnInit {
 
   }
 
+  /*
+    Created by TuanPA
+    Date: 9:08 3/6/2022
+    Function: This JwtFilter class extends OncePerRequestFilter class to override method doFilterInternal()
+*/
   save() {
     const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
     const fileRef = this.storage.ref(nameImg);
@@ -76,12 +81,22 @@ export class ProductUpdateComponent implements OnInit {
     ).subscribe();
   }
 
+  /*
+    Created by TuanPA
+    Date: 9:08 3/6/2022
+    Function: This JwtFilter class extends OncePerRequestFilter class to override method doFilterInternal()
+*/
+
   showPreview(event: any) {
     this.selectedImage = event;
 
   }
 
-
+  /*
+      Created by TuanPA
+      Date: 9:08 3/6/2022
+      Function: This JwtFilter class extends OncePerRequestFilter class to override method doFilterInternal()
+  */
   getCurrentDateTime(): string {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
   }

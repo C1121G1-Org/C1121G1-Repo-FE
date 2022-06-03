@@ -46,8 +46,7 @@
                   <label for="productName">Hình Ảnh <span class="text-danger">(*):</span></label>
                   <img style="width: 120px; height: 150px"
                        src="https://ecdn.game4v.com/g4v-content/uploads/2021/09/15122647/game4V-iPhone13-2-1631683607-83.jpg">
-                  <input formControlName="img" type="file" name="img" id="img">
-
+                  <input formControlName="img" type="file" name="img" id="img" (change)="showPreview($event)">
 
                 </div>
 
