@@ -1,20 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import {QrcodeService} from "../../services/qrcode/qrcode.service";
+import {Component, OnInit} from '@angular/core';
+import {QrcodeService} from "../../../services/qrcode/qrcode.service";
+import {Product} from "../../../models/product";
+import {ProductService} from "../../../services/product/product.service";
+import {SaleReport} from "../model/sale-report";
+import {SaleReportService} from "../../../services/report/sale-report.service";
 
 @Component({
-  selector: 'app-qrcode',
-  templateUrl: './qrcode.component.html',
-  styleUrls: ['./qrcode.component.css']
+  selector: 'app-qr-code',
+  templateUrl: './qr-code.component.html',
+  styleUrls: ['./qr-code.component.css']
 })
-export class QrcodeComponent implements OnInit {
+export class QrCodeComponent implements OnInit {
+
   message = "";
   typeQRScan = "1";
 
   image1 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
   image2 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
-  constructor(private qrCodeService:QrcodeService) { }
+
+  constructor(private saleReportSerive: SaleReportService, private qrCodeService: QrcodeService, private productService: ProductService) {
+  }
 
   ngOnInit(): void {
+    let saleReport: SaleReport[] = [];
+    this.saleReportSerive.getAllSaleREports().subscribe(data => {
+      saleReport = data;
+      console.log(saleReport);
+    })
   }
 
   scanQRCode() {
@@ -82,5 +94,6 @@ export class QrcodeComponent implements OnInit {
     }
 
   }
+
 
 }

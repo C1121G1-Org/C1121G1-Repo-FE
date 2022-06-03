@@ -6,17 +6,20 @@ import { SaleReportComponent } from './sale-report/sale-report.component';
 import {HttpClientModule} from "@angular/common/http";
 import {CustomerReportComponent} from './customer-report/customer-report.component';
 import {PurchaseHistoryComponent} from './purchase-history/purchase-history.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AppModule} from "../../app.module";
+import { QrCodeComponent } from './qr-code/qr-code.component';
 
 
 
 @NgModule({
-  declarations: [SaleReportComponent, CustomerReportComponent, PurchaseHistoryComponent],
+  declarations: [SaleReportComponent, CustomerReportComponent, PurchaseHistoryComponent, QrCodeComponent],
   imports: [
     CommonModule,
     ReportRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ReportModule { }
