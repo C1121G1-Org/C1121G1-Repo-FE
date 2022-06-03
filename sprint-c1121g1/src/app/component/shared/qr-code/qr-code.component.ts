@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {SaleReportService} from "../../services/report/sale-report.service";
-import {QrcodeService} from "../../services/qrcode/qrcode.service";
-import {ProductService} from "../../services/product/product.service";
-import {SaleReport} from "../../component/report/model/sale-report";
-import {Product} from "../../models/product";
+import {SaleReportService} from "../../../services/report/sale-report.service";
+import {QrcodeService} from "../../../services/qrcode/qrcode.service";
+import {ProductService} from "../../../services/product/product.service";
+import {SaleReport} from "../../report/model/sale-report";
+import {Product} from "../../../models/product";
 
 /*
     Created by HauPV
