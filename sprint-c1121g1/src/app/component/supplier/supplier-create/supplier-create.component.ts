@@ -10,9 +10,16 @@ import {Router} from '@angular/router';
   templateUrl: './supplier-create.component.html',
   styleUrls: ['./supplier-create.component.css']
 })
+/*
+    Created by NgocTTB
+    Time: 09:00 03/06/2022
+    Function: Create Supplier
+    */
 export class SupplierCreateComponent implements OnInit {
   supplierSave: Supplier;
   supplierDtoSave: SupplierDto;
+  errorSupplierName: string;
+
   supplierForm: FormGroup = new FormGroup({
     supplierName: new FormControl('', [Validators.required]),
     address: new FormControl('', [Validators.required]),
@@ -30,7 +37,6 @@ export class SupplierCreateComponent implements OnInit {
 
   submit(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
     if (this.supplierForm.valid){
-      console.log('hhi');
       this.supplierDtoSave = this.supplierForm.value;
       this.supplierDtoSave.deleteFlag = false;
       console.log(this.supplierSave);
@@ -38,9 +44,12 @@ export class SupplierCreateComponent implements OnInit {
       this.supplierService.save(this.supplierSave).subscribe(() => {
         successBtn.click();
         this.supplierForm.reset();
-        });
+        }, error => {
+        console.log(error);
+        console.log(error.error.errorMap.supplierName);
+        this.errorSupplierName = error.error.errorMap.supplierName;
+      });
     }else {
-      console.log('haha');
       errorBtn.click();
     }
 
