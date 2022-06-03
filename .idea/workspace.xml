@@ -19,21 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/common/qrcode/qrcode.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/common/qrcode/qrcode.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/common/qrcode/qrcode.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/common/qrcode/qrcode.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/shared/qr-code/qr-code.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/shared/qr-code/qr-code.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/shared/qr-code/qr-code.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/shared/qr-code/qr-code.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/shared/shared-routing.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/shared/shared.module.ts" beforeDir="false" />
-    </list>
+    <list default="true" id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,13 +55,14 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a24e3624-3080-48e7-9128-7663dec09853" name="Default Changelist" comment="" />
+      <changelist id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="" />
       <created>1654142327836</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1654142327836</updated>
       <workItem from="1654142329517" duration="13119000" />
       <workItem from="1654223692050" duration="335000" />
+      <workItem from="1654230508618" duration="444000" />
     </task>
     <servers />
   </component>
