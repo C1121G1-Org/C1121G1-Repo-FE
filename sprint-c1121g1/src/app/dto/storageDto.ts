@@ -1,17 +1,23 @@
+/*
+  Created by khoaVC
+  Time: 10:00 03/06/2022
+  Interface: StorageDto
+*/
+
 export interface StorageDto {
-  id: number;
+  id?: number;
 
-  createdDate: string;
+  createdDate?: string;
 
-  status: boolean;
+  status?: boolean;
 
-  quantity: number;
+  quantity?: number;
 
-  createdEmployee: number;
+  createdEmployee?: number;
 
-  product: number;
+  product?: number;
 
-  supplier: number;
+  supplier?: number;
 
-  deleteFlag: boolean;
+  deleteFlag?: boolean;
 }
