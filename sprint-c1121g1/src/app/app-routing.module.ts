@@ -6,8 +6,6 @@ import { StorageCreateComponent } from './component/storage/storage-create/stora
 import {ProductCreateComponent} from './component/product/product-create/product-create.component';
 
 
-
-
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
   {path: 'api/product/create', component: ProductCreateComponent},
