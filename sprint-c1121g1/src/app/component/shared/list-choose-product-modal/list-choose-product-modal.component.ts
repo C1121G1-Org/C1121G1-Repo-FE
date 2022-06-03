@@ -64,7 +64,9 @@ export class ListChooseProductModalComponent implements OnInit {
   }
 
   chooseProduct(close) {
-    this.router.navigate(['/chooserProduct', this.currentProduct])
+    alert(this.currentProduct.id);
+    this.router.navigate(['/chooserProduct', this.currentProduct]);
+    this.currentProduct = null;
     close.click();
 
   }
@@ -72,5 +74,18 @@ export class ListChooseProductModalComponent implements OnInit {
   getAllProductPage(index: any) {
     this.pageNumber = index - 1;
     this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
+  }
+
+  search(value: string) {
+    this.pageNumber = 0;
+    if (this.checkSearch === 'price') {
+      this.searchByPrice = value;
+      this.searchByName = '';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
+    } else {
+      this.searchByName = value;
+      this.searchByPrice = '';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
+    }
   }
 }

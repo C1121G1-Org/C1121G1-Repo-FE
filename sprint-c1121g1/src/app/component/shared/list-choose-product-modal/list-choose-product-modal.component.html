@@ -28,14 +28,14 @@
                   </div>
 
                   <div style="position: relative">
-                    <input  style="width: 300px" class="header-search search-input background-search"
+                    <input #element style="width: 300px" class="header-search search-input background-search"
                             placeholder="Bạn cần tìm gì?"
                             type="text"><i
                     class="fa fa-search"
                     style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                   </div>
                   <div>
-                    <button  class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm
+                    <button (click)="search(element.value)"  class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm
                       kiếm
                     </button>
                   </div>
@@ -77,8 +77,8 @@
               <br>
               <div class="row">
                 <div class="col-6">
-                  <button type="button" class="btn-edit btn-rounded  btn-lg my-0">
-                    <i (click)="chooseProduct(exits)" class="fa fa-paper-plane"></i>
+                  <button (click)="chooseProduct(exits)" type="button" class="btn-edit btn-rounded  btn-lg my-0">
+                    <i  class="fa fa-paper-plane"></i>
                     Chọn</button>
                   <button #exits type="button" class="btn-delete btn-rounded  btn-lg my-0"
                           data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
