@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {QrcodeService} from '../../services/qrcode/qrcode.service';
 
 @Component({
@@ -13,13 +13,16 @@ export class QrcodeComponent implements OnInit {
   image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
 
-  constructor(private qrCodeService: QrcodeService) { }
+  constructor(private qrCodeService: QrcodeService) {
+  }
+
 
   ngOnInit(): void {
   }
 
   scanQRCode() {
     const file: any = document.querySelectorAll('input[type=\'file\']');
+    // tslint:disable-next-line:triple-equals
     if (this.typeQRScan == '1') {
       if (file[0].files[0]) {
         const formData = new FormData();

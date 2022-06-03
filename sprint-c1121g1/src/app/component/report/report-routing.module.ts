@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import {SaleReportComponent} from './sale-report/sale-report.component';
+import {QrCodeComponent} from './qr-code/qr-code.component';
 import {CustomerReportComponent} from './customer-report/customer-report.component';
-
 import {QrcodeComponent} from '../../common/qrcode/qrcode.component';
 
 

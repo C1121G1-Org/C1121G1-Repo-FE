@@ -3,6 +3,32 @@
     <h1>BÁO CÁO DOANH THU BÁN HÀNG</h1>
   </div>
 
+<<<<<<< HEAD
+  <form [formGroup]="formSearch" (ngSubmit)="showSaleReport()">
+    <div>
+      <div class="row mt-3 justify-content-center">
+        <div class="col-3">
+          <div class="form-group">
+            <label><strong>Từ Ngày :</strong></label>
+            <input formControlName="startDay" type="date" class="form-control">
+          </div>
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label><strong>Đến Ngày :</strong></label>
+            <input formControlName="endDay" type="date" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-3">
+          <label for="select"><strong>Báo cáo theo :</strong></label>
+          <select (change)="changeTypeReport()" id="select" formControlName="typeReport" class="form-control"
+                  aria-label="Default select example">
+            <option value="ALL">TẤT CẢ</option>
+            <option value="ID">MÃ SẢN PHẨM</option>
+          </select>
+=======
   <div>
     <div class="row mt-3 justify-content-center">
       <div class="col-3">
@@ -16,9 +42,32 @@
         <div class="form-group">
           <label><strong>Đến Ngày :</strong></label>
           <input type="date" class="form-control">
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
+        </div>
+        <div class="col-3">
+          <div class="form-group">
+            <label><strong>Nhập mã sản phẩm :</strong></label>
+            <input formControlName="productId" type="text" class="form-control" placeholder="VD : 1111">
+          </div>
         </div>
       </div>
+      <div class="row d-flex justify-content-center">
+        <button [routerLink]="['/qrcode']" class="btn btn-primary col-1 mr-1 mt-2 ms-1">Quay Lại</button>
+        <button type="submit" class="btn btn-danger btn-block mr-1 col-1 mt-2">XEM</button>
+      </div>
     </div>
+<<<<<<< HEAD
+  </form>
+
+  <div class="row mt-3">
+    <div class="col-4"></div>
+    <div>
+      <p style="font-size: 30px"><strong>Tổng số đơn hàng : {{totalInvoices}}</strong></p>
+      <p class="text-danger text-center" style="font-size: 30px"><strong>Tổng Doanh Thu
+        : {{totalSales}}</strong></p>
+    </div>
+  </div>
+=======
     <div class="row d-flex justify-content-center">
       <div class="col-3">
         <label><strong>Báo cáo theo :</strong></label>
@@ -40,6 +89,7 @@
     </div>
   </div>
 
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
   <div class="row">
     <div class="col-6">
       <canvas id="donHang"></canvas>
@@ -48,6 +98,8 @@
       <canvas id="doanhThu"></canvas>
     </div>
   </div>
+<<<<<<< HEAD
+=======
   <div class="row mt-4">
     <div class="col-4"></div>
     <div>
@@ -61,13 +113,13 @@
 
 <div class="row d-flex justify-content-center">
   <button class="btn btn-danger col-1 mr-1">Quay Lại</button>
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Quét mã QR
-</button>
 
+<<<<<<< HEAD
+
+=======
 <!-- Modal -->
 <!--<div class="modal fade" id="exampleModal" tabindex="-1"-->
 <!--     aria-labelledby="exampleModalLabel" aria-hidden="true">-->
@@ -129,3 +181,4 @@
 <!--</div>-->
 
 
+>>>>>>> 5fdc4b95f466acb78b3d26a1da7dc5b164398035
