@@ -17,14 +17,13 @@ import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [SaleReportComponent, CustomerReportComponent, PurchaseHistoryComponent],
-    imports: [
-        CommonModule,
-        ReportRoutingModule,
-        HttpClientModule,
-        FormsModule,
-        ReactiveFormsModule,
-        SharedModule,
-        SharedModule
-    ]
+  imports: [
+    CommonModule,
+    ReportRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule
+  ]
 })
 export class ReportModule { }
