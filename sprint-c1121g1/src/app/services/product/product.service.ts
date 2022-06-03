@@ -10,6 +10,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
+  // @ts-ignore
   private apiBaseUrl = environment.apiBaseUrl;
   private products: Product[];
 
