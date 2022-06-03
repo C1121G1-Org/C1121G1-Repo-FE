@@ -1,9 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {QrcodeService} from "../../../services/qrcode/qrcode.service";
-import {Product} from "../../../models/product";
-import {ProductService} from "../../../services/product/product.service";
-import {SaleReportService} from "../../../services/report/sale-report.service";
-import {SaleReport} from "../../../models/sale-report";
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {SaleReportService} from "../../services/report/sale-report.service";
+import {QrcodeService} from "../../services/qrcode/qrcode.service";
+import {ProductService} from "../../services/product/product.service";
+import {SaleReport} from "../../component/report/model/sale-report";
+import {Product} from "../../models/product";
+
+/*
+    Created by HauPV
+    Time: 09:00 03/06/2022
+    Function: qr-code scan
+*/
 
 @Component({
   selector: 'app-qr-code',
@@ -11,6 +17,11 @@ import {SaleReport} from "../../../models/sale-report";
   styleUrls: ['./qr-code.component.css']
 })
 export class QrCodeComponent implements OnInit {
+
+  @Output()
+  sendProduct = new EventEmitter();
+
+  product: Product = {};
 
   message = "";
   typeQRScan = "1";
@@ -22,11 +33,6 @@ export class QrCodeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let saleReport: SaleReport[] = [];
-    this.saleReportSerive.getAllSaleREports().subscribe(data => {
-      saleReport = data;
-      console.log(saleReport);
-    })
   }
 
   scanQRCode() {
@@ -36,7 +42,8 @@ export class QrCodeComponent implements OnInit {
         let formData = new FormData();
         formData.append('file', file[0].files[0]);
         this.qrCodeService.decode(formData).subscribe(data => {
-          console.log(data);
+          this.product = data;
+          this.sendProduct.emit(this.product);
         }, err => {
           console.log(err)
         })
@@ -94,6 +101,5 @@ export class QrCodeComponent implements OnInit {
     }
 
   }
-
 
 }
