@@ -5,8 +5,7 @@ import {CustomerUpdateComponent} from './customer-update/customer-update.compone
 
 
 const routes: Routes = [
-  {path: 'customer/list', component: CustomerListComponent},
-  {path: 'customer/edit/:id', component: CustomerUpdateComponent}
+
 ];
 
 @NgModule({
