@@ -16,6 +16,12 @@ import {ReportModule} from './component/report/report.module';
 
 
 
+// @ts-ignore
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {SecurityModule} from './component/security/security.module';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +38,9 @@ import {ReportModule} from './component/report/report.module';
     SupplierModule,
     StorageModule,
     HomepageModule,
-    ReportModule
+    ReportModule,
+    SecurityModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

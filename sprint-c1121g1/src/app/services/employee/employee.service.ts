@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Employee} from '../../models/employee';
+import {EmployeeDto} from '../../dto/employeeDto';
 
 export const environment = {
   production: false,
@@ -17,8 +17,8 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  saveEmployee(employee): Observable<Employee> {
-      return this.http.post<Employee>(API_URL + '/create', employee);
+  saveEmployee(employeeDto): Observable<EmployeeDto> {
+      return this.http.post<EmployeeDto>(API_URL + '/create', employeeDto);
     }
 
   getAllPosition(): Observable<Position[]> {

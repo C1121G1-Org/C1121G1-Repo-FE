@@ -1,6 +1,6 @@
-<form [formGroup]="createEmployeeForm" (ngSubmit)="submit()" >
+<form [formGroup]="createEmployeeForm" (ngSubmit)="submit()">
 
-  <div class="container-fluid pt-lg-2" >
+  <div class="container-fluid pt-lg-2">
     <div class="col-8" style="margin: auto">
       <div class="card border-secondary">
         <div class="card-body">
@@ -9,7 +9,7 @@
 
             <div style="display: flex ; justify-content: left" class="col-md-12">
               <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
-              <input  formControlName="img"  name="img" id="img" type="file" class="file__input">
+              <input formControlName="img" name="img" id="img" type="file" class="file__input">
               <label for="img" class="file__label">
                 <i class="fa fa-upload"></i>
               </label>
@@ -18,12 +18,14 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="employeeName">Họ và Tên <span class="text-danger">(*):</span></label>
-                <input type="text"  formControlName="employeeName" name="employeeName" id="employeeName" class="form-control">
+                <input type="text" formControlName="employeeName" name="employeeName" id="employeeName"
+                       class="form-control">
               </div>
 
               <div class="form-group">
                 <label for="dateOfBirth">Ngày Tháng Năm Sinh <span class="text-danger">(*):</span></label>
-                <input type="date" formControlName="dateOfBirth" name="dateOfBirth" id="dateOfBirth" class="form-control">
+                <input type="date" formControlName="dateOfBirth" name="dateOfBirth" id="dateOfBirth"
+                       class="form-control">
               </div>
 
               <div class="form-group">
@@ -32,40 +34,46 @@
               </div>
               <div class="form-group">
                 <label for="phoneNumber">Số điện thoại<span class="text-danger">(*):</span></label>
-                <input type="text" formControlName="phoneNumber" name="phoneNumber" id="phoneNumber" class="form-control" >
+                <input type="text" formControlName="phoneNumber" name="phoneNumber" id="phoneNumber"
+                       class="form-control">
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="idCard">Số CMND/CCCD <span class="text-danger">(*):</span></label>
-                <input type="text"  formControlName="idCard" name="idCard" id="idCard" class="form-control">
+                <input type="text" formControlName="idCard" name="idCard" id="idCard" class="form-control">
               </div>
 
-              <div class="form-group">
-                <label for="email">Email <span class="text-danger">(*):</span></label>
-                <input type="text" formControlName="email" name="email" id="email" class="form-control">
+              <div formGroupName="accountDto">
+                <div class="form-group">
+                  <label for="email">Email <span class="text-danger">(*):</span></label>
+                  <input type="text" formControlName="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="userName">Tên Đăng Nhập <span class="text-danger">(*):</span></label>
+                  <input type="text" formControlName="userName" name="userName" id="userName" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="encryptPassword">Mật Khẩu <span class="text-danger">(*):</span></label>
+                  <input type="passWord" formControlName="encryptPassword" name="encryptPassword" id="encryptPassword"
+                         class="form-control">
+                </div>
+
               </div>
-              <div class="form-group">
-                <label for="userName">Tên Đăng Nhập  <span class="text-danger">(*):</span></label>
-                <input type="text" formControlName="userName" name="userName" id="userName" class="form-control">
-              </div>
-              <div class="form-group">
-                <label for="encryptPassword">Mật Khẩu <span class="text-danger">(*):</span></label>
-                <input type="passWord" formControlName="encryptPassword" name="encryptPassword" id="encryptPassword" class="form-control">
-              </div>
+
             </div>
             <div class="col-md-12">
               <div class="form-group">
                 <label for="position">Chức vụ <span class="text-danger">(*):</span></label>
-                <select name="position" id="position" formControlName="position" class="form-control">
-                  <option *ngFor="let p of positiones" [ngValue]="p" >{{p.positionName}}</option>
+                <select name="position" id="position" formControlName="positionDto" class="form-control">
+                  <option *ngFor="let p of positiones" [ngValue]="p">{{p.positionName}}</option>
                 </select>
               </div>
             </div>
             <div class="text-center" style="margin: auto">
-              <button type="button" class="btn btn-danger" style="margin-right: 20px" >huỷ</button>
-              <button type="button" class="btn btn-primary">thêm mới <i class="fa fa-paper-plane"></i></button>
+              <button type="button" class="btn btn-danger" style="margin-right: 20px">huỷ</button>
+              <button type="submit" class="btn btn-primary">thêm mới <i class="fa fa-paper-plane"></i></button>
 
             </div>
 

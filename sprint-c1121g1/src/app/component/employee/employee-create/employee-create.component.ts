@@ -4,6 +4,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {EmployeeService} from '../../../services/employee/employee.service';
 import {Positions} from '../../../models/positions';
 
+
 @Component({
   selector: 'app-employee-create',
   templateUrl: './employee-create.component.html',
@@ -21,8 +22,8 @@ export class EmployeeCreateComponent implements OnInit {
     idCard: new FormControl(),
     phoneNumber: new FormControl(),
     image: new FormControl(),
-    position: new FormControl(),
-    account: new FormGroup({
+    positionDto: new FormControl(),
+    accountDto: new FormGroup({
       userName: new FormControl(),
       encryptPassword: new FormControl(),
       email: new FormControl(),
@@ -44,8 +45,8 @@ export class EmployeeCreateComponent implements OnInit {
       });
   }
   submit() {
-    const employee = this.createEmployeeForm.value;
-    this.employeeService.saveEmployee(employee).subscribe(() => {
+    const employeeDto = this.createEmployeeForm.value;
+    this.employeeService.saveEmployee(employeeDto).subscribe(() => {
       this.createEmployeeForm.reset();
       this.router.navigate(['list']);
       alert('Tạo thành công');

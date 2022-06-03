@@ -8,6 +8,6 @@ export interface Employee {
   idCard?: string;
   phoneNumber?: string;
   image?: string;
-  positions?: Positions;
+  position?: Positions;
   account?: Account;
 }
