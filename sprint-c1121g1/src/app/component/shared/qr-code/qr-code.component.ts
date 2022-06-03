@@ -1,9 +1,9 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {SaleReportService} from "../../../services/report/sale-report.service";
-import {QrcodeService} from "../../../services/qrcode/qrcode.service";
-import {ProductService} from "../../../services/product/product.service";
-import {SaleReport} from "../../report/model/sale-report";
-import {Product} from "../../../models/product";
+import {SaleReportService} from '../../../services/report/sale-report.service';
+import {QrcodeService} from '../../../services/qrcode/qrcode.service';
+import {ProductService} from '../../../services/product/product.service';
+import {SaleReport} from '../../report/model/sale-report';
+import {Product} from '../../../models/product';
 
 /*
     Created by HauPV
@@ -23,11 +23,12 @@ export class QrCodeComponent implements OnInit {
 
   product: Product = {};
 
-  message = "";
-  typeQRScan = "1";
+  message = '';
+  typeQRScan = '1';
 
-  image1 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
-  image2 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
+  image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+  image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+
 
   constructor(private saleReportSerive: SaleReportService, private qrCodeService: QrcodeService, private productService: ProductService) {
   }
@@ -36,68 +37,70 @@ export class QrCodeComponent implements OnInit {
   }
 
   scanQRCode() {
-    let file: any = document.querySelectorAll("input[type='file']");
+
+    const file: any = document.querySelectorAll('input[type=\'file\']');
+    // tslint:disable-next-line:triple-equals
     if (this.typeQRScan == '1') {
       if (file[0].files[0]) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append('file', file[0].files[0]);
         this.qrCodeService.decode(formData).subscribe(data => {
           this.product = data;
           this.sendProduct.emit(this.product);
         }, err => {
-          console.log(err)
-        })
-        this.message = "";
+          console.log(err);
+        });
+        this.message = '';
       } else {
-        this.message = "Vui lòng chọn ảnh !";
-        this.image1 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
+        this.message = 'Vui lòng chọn ảnh !';
+        this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
       }
 
     } else {
       if (file[0].files[0] && file[1].files[0]) {
-        let formData = new FormData();
+        const formData = new FormData();
         formData.append('file1', file[0].files[0]);
         formData.append('file2', file[1].files[0]);
         this.qrCodeService.check(formData).subscribe(data => {
           console.log(data);
         }, err => {
           console.log(err);
-        })
-        this.message = "";
+        });
+        this.message = '';
       } else {
-        this.message = "Vui lòng chọn ảnh !";
+        this.message = 'Vui lòng chọn ảnh !';
       }
     }
   }
 
   readFile1(target: any) {
-    let file: File = target.files[0];
+    const file: File = target.files[0];
     if (file) {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image1 = reader?.result as string;
-      }
-      this.message = "";
+      };
+      this.message = '';
     } else {
-      this.message = "Vui lòng chọn ảnh !";
-      this.image1 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
+      this.message = 'Vui lòng chọn ảnh !';
+      this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
     }
 
   }
 
   readFile2(target: any) {
-    let file: File = target.files[0];
+    const file: File = target.files[0];
     if (file) {
-      let reader = new FileReader();
+      const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image2 = reader?.result as string;
-      }
-      this.message = "";
+      };
+      this.message = '';
     } else {
-      this.message = "Vui lòng chọn ảnh !";
-      this.image2 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
+      this.message = 'Vui lòng chọn ảnh !';
+      this.image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
     }
 
   }

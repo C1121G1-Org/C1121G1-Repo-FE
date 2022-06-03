@@ -2,19 +2,25 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
-import {FormsModule} from '@angular/forms';
-import {QrCodeComponent} from './qr-code/qr-code.component';
+import { ListProductModalComponent } from './list-product-modal/list-product-modal.component';
+import { QrCodeComponent } from './qr-code/qr-code.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ListSupplierModalComponent } from './list-supplier-modal/list-supplier-modal.component';
+import { ListCustomerModalComponent } from './list-customer-modal/list-customer-modal.component';
 
 
 @NgModule({
-  declarations: [QrCodeComponent],
+  declarations: [ListProductModalComponent, QrCodeComponent, ListSupplierModalComponent, ListCustomerModalComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
-    QrCodeComponent
+    ListProductModalComponent,
+    QrCodeComponent,
+    ListSupplierModalComponent
   ]
 })
 export class SharedModule { }

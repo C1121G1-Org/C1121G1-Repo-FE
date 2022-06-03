@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from "chart.js";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Product} from "../../../models/product";
+import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from 'chart.js';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Product} from '../../../models/product';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
-Chart.register(...registerables)
+Chart.register(...registerables);
 
 /*
     Created by HauPV
@@ -25,9 +25,9 @@ export class SaleReportComponent implements OnInit {
     endDay: new FormControl('', Validators.required),
     typeReport: new FormControl('ALL', Validators.required),
     productId: new FormControl('', Validators.required)
-  })
+  });
 
-  xValues = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+  xValues = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
   sales = [100, 200, 500, 900, 300, 800, 400, 1000, 1200, 1100, 600, 800];
   invoices = [10, 2, 4, 5, 8, 9, 3, 1, 6, 7, 12, 11];
   totalSales = 0;
@@ -39,12 +39,12 @@ export class SaleReportComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.changeTypeReport()
+    this.changeTypeReport();
   }
 
   sumArr(arr) {
     let total = 0;
-    for (let a of arr) {
+    for (const a of arr) {
       total += a;
     }
     return total;
@@ -55,16 +55,17 @@ export class SaleReportComponent implements OnInit {
     console.log(this.formSearch.value);
     this.totalSales = this.sumArr(this.sales);
     this.totalInvoices = this.sumArr(this.invoices);
-    new Chart("doanhThu", {
-      type: "line",
+    // tslint:disable-next-line:no-unused-expression
+    new Chart('doanhThu', {
+      type: 'line',
       data: {
         labels: this.xValues,
         datasets: [{
-          label: "Doanh Thu Theo Tháng (USD)",
+          label: 'Doanh Thu Theo Tháng (USD)',
           pointRadius: 3,
-          pointBackgroundColor: "red",
-          borderColor: "red",
-          backgroundColor: "red",
+          pointBackgroundColor: 'red',
+          borderColor: 'red',
+          backgroundColor: 'red',
           data: this.sales,
           fill: false,
           tension: 0.1
@@ -72,18 +73,19 @@ export class SaleReportComponent implements OnInit {
       },
       options: {}
     });
-    new Chart("donHang", {
-      type: "line",
+    // tslint:disable-next-line:no-unused-expression
+    new Chart('donHang', {
+      type: 'line',
       data: {
         labels: this.xValues,
         datasets: [{
-          label: "Đơn hàng Theo Tháng",
+          label: 'Đơn hàng Theo Tháng',
           fill: false,
           data: this.invoices,
           pointRadius: 3,
-          pointBackgroundColor: "blue",
-          backgroundColor: "blue",
-          borderColor: "blue",
+          pointBackgroundColor: 'blue',
+          backgroundColor: 'blue',
+          borderColor: 'blue',
           tension: 0.1
         }]
       },
@@ -108,7 +110,9 @@ export class SaleReportComponent implements OnInit {
   }
 
   changeTypeReport() {
-    let type = this.formSearch.get('typeReport').value;
+    // let type = this.formSearch.get('typeReport').value;
+    const type = this.formSearch.get('typeReport').value;
+    // tslint:disable-next-line:triple-equals
     if (type != 'ID') {
       this.formSearch.get('productId').disable();
     } else {

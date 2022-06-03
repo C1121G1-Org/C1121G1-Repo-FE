@@ -12,7 +12,7 @@ export class SupplierService {
   private suppliers: Supplier[];
   constructor(private http: HttpClient) { }
 
-  list(): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}/api/supplier/list`);
+  list(p: number, supplier: string, address: string, phone: string, email: string): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/api/supplier/list?page=${p}&su=${supplier}&ad=${address}&ph=${phone}&em=${email}`);
   }
 }
