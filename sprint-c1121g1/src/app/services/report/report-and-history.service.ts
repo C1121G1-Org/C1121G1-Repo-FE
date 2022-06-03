@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ReportCustomerDto} from '../../dto/report-customer-dto';
-import {environment} from '../../../environments/environment';
 import {PurchaseHistoryDto} from '../../dto/purchase-history-dto';
 import {PurchaseProductDto} from '../../dto/purchase-product-dto';
 
@@ -21,18 +20,43 @@ export class ReportAndHistoryService {
   }
 
   filterAllCustomerReport(page: number): Observable<ReportCustomerDto[]> {
-   return this.httpClient.get<ReportCustomerDto[]>('http://localhost:8080/api/customer/report-customer?page=' + page);
+    return this.httpClient.get<ReportCustomerDto[]>(
+      'http://localhost:8080/api/customer/report-customer?page=' + page);
   }
 
   getInfoCustomer(id: number): Observable<ReportCustomerDto> {
-    return this.httpClient.get<ReportCustomerDto>('http://localhost:8080/api/customer/info-customer/' + id);
+    return this.httpClient.get<ReportCustomerDto>(
+      'http://localhost:8080/api/customer/info-customer/' + id);
   }
 
   getPurchaseHistory(id: number, page: number): Observable<PurchaseHistoryDto[]> {
-    return this.httpClient.get<PurchaseHistoryDto[]>('http://localhost:8080/api/customer/purchase-history/' + id + '?page=' + page);
+    return this.httpClient.get<PurchaseHistoryDto[]>(
+      'http://localhost:8080/api/customer/purchase-history/' + id + '?page=' + page);
   }
 
   getPurchaseProduct(id: number, page: number): Observable<PurchaseProductDto[]> {
-    return this.httpClient.get<PurchaseProductDto[]>('http://localhost:8080/api/customer/purchase-products/' + id + '?page=' + page);
+    return this.httpClient.get<PurchaseProductDto[]>(
+      'http://localhost:8080/api/customer/purchase-products/' + id + '?page=' + page);
+  }
+
+  filterByGender(page: number, genderSearch: boolean):
+    Observable<ReportCustomerDto[]> {
+    return this.httpClient.get<ReportCustomerDto[]>(
+      'http://localhost:8080/api/customer/report-customer-search-gender?page=' +
+      page + '&gender=' + genderSearch);
+  }
+
+  filterByAge(page: number, ageSearch: number):
+  Observable<ReportCustomerDto[]> {
+    return this.httpClient.get<ReportCustomerDto[]>(
+      'http://localhost:8080/api/customer/report-customer-search-age?page=' +
+      page + '&age=' + ageSearch);
+  }
+
+  filterByGenderAndAge(page: number, genderSearch: boolean, ageSearch: number):
+  Observable<ReportCustomerDto[]> {
+    return this.httpClient.get<ReportCustomerDto[]>(
+      'http://localhost:8080/api/customer/report-customer-search?page=' +
+      page + '&gender=' + genderSearch + '&age=' + ageSearch);
   }
 }

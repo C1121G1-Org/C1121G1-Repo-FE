@@ -19,9 +19,15 @@ export class CustomerReportComponent implements OnInit {
 
   pageNumber = 0;
   totalPages = 0;
-  ageSearch: number;
+
+  chooseFilter: number;
+
   chooseGenderSearch = false;
-  // chooseAgeSearch = false;
+  chooseAgeSearch = false;
+
+  genderSearch: boolean;
+  ageSearch: number;
+  checkReportCustomers = true;
 
   constructor(private reportService: ReportAndHistoryService) {
   }
@@ -32,12 +38,61 @@ export class CustomerReportComponent implements OnInit {
 
   filterAllCustomerReport() {
     this.reportService.filterAllCustomerReport(this.pageNumber).subscribe(customerReports => {
-      console.log(customerReports);
+      console.log(this.checkReportCustomers);
+
+      this.checkReportCustomers = true;
 
       this.customerReports = customerReports.content;
       this.totalPages = customerReports.totalPages;
       this.pageNumber = customerReports.pageabel.pageNumber;
     });
+  }
+
+  filterByGender() {
+    this.reportService.filterByGender(this.pageNumber, this.genderSearch)
+      .subscribe(customerReports => {
+        if (customerReports == null) {
+          this.checkReportCustomers = false;
+        } else {
+          this.checkReportCustomers = true;
+
+          this.customerReports = customerReports.content;
+          this.totalPages = customerReports.totalPages;
+          this.pageNumber = customerReports.pageabel.pageNumber;
+        }
+      });
+  }
+
+  filterByAge() {
+    this.reportService.filterByAge(this.pageNumber, this.ageSearch)
+      .subscribe(customerReports => {
+        console.log(customerReports);
+        if (customerReports == null) {
+          this.checkReportCustomers = false;
+        } else {
+          this.checkReportCustomers = true;
+
+          this.customerReports = customerReports.content;
+          this.totalPages = customerReports.totalPages;
+          this.pageNumber = customerReports.pageabel.pageNumber;
+        }
+        console.log(this.checkReportCustomers);
+      });
+  }
+
+  filterByGenderAndAge() {
+    this.reportService.filterByGenderAndAge(this.pageNumber, this.genderSearch, this.ageSearch)
+      .subscribe(customerReports => {
+        if (customerReports == null) {
+          this.checkReportCustomers = false;
+        } else {
+          this.checkReportCustomers = true;
+
+          this.customerReports = customerReports.content;
+          this.totalPages = customerReports.totalPages;
+          this.pageNumber = customerReports.pageabel.pageNumber;
+        }
+      });
   }
 
   previousPage() {
@@ -65,16 +120,61 @@ export class CustomerReportComponent implements OnInit {
   filterVariable(element: HTMLInputElement) {
     console.log(element);
     console.log(element.value);
+    this.chooseFilter = Number(element.value);
+    console.log('chooseFilter' + this.chooseFilter);
   }
 
   chooseSearchGender() {
-    console.log(this.chooseGenderSearch);
+    // console.log(this.chooseGenderSearch);
     this.chooseGenderSearch = !this.chooseGenderSearch;
-    // console.log(this.genderSearch);
+    console.log('choose gender search' + this.chooseGenderSearch);
   }
 
-  // chooseAgeSearch() {
-  //   console.log(this.chooseAgeSearch);
-  //   this.chooseAgeSearch = !this.chooseAgeSearch;
-  // }
+  chooseSearchAge() {
+    this.chooseAgeSearch = !this.chooseAgeSearch;
+    console.log('choose age search' + this.chooseAgeSearch);
+  }
+
+  searchGender(target: any) {
+    this.genderSearch = target.value;
+    console.log('search gender' + this.genderSearch);
+  }
+
+  searchAge(target: any) {
+    this.ageSearch = target.value;
+    console.log('search age' + this.ageSearch);
+  }
+
+  filter() {
+    console.log('dasddd' + this.checkReportCustomers);
+    console.log('before search');
+
+    console.log('choose filter' + this.chooseFilter);
+    console.log('choose gender search' + this.chooseGenderSearch);
+    console.log('choose age search' + this.chooseAgeSearch);
+    console.log('search gender' + this.genderSearch);
+    console.log('search age' + this.ageSearch);
+
+    console.log('ahihi' + this.chooseFilter);
+    if (this.chooseFilter === 1) {
+      console.log('age: ' + this.ageSearch);
+      this.filterAllCustomerReport();
+    } else if (this.chooseFilter === 2) {
+      if (this.chooseGenderSearch === true) {
+        if (this.chooseAgeSearch === true) {
+          this.filterByGenderAndAge();
+        } else {
+          this.filterByGender();
+        }
+      } else {
+        if (this.chooseAgeSearch === true) {
+          this.filterByAge();
+        } else {
+          console.log('Chưa chọn lọc cách search');
+        }
+      }
+    }
+  }
+
 }
+

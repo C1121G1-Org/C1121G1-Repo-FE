@@ -49,7 +49,8 @@
             </div>
 
             <div class="col-7 col-md-7">
-              <select class="custom-select custom-select-sm">
+              <select class="custom-select custom-select-sm"
+              (change)="searchGender($event.target)">
                 <option hidden>Gender selection</option>
                 <option value="false">Nữ</option>
                 <option value="true">Nam</option>
@@ -58,13 +59,13 @@
 
             <div class="form-check col-4 col-md-4">
               <input class="form-check-input" type="checkbox" value="2" id="defaultCheck2"
-              (click)="chooseAgeSearch()">
+              (click)="chooseSearchAge()">
               <label class="form-check-label" for="defaultCheck2">
                 Tuổi
               </label>
             </div>
 
-            <div class="col-7 col-md-7" [(ngModel)]="ageSearch">
+            <div class="col-7 col-md-7" (change)="searchAge($event.target)">
               <input class="form-control" type="number">
             </div>
           </div>
@@ -76,7 +77,7 @@
 
   <div>
     <div style="text-align: center">
-      <button type="button" class="btn btn-primary">Lọc</button>
+      <button type="button" class="btn btn-primary" (click)="filter()">Lọc</button>
     </div>
   </div>
 </div>
@@ -84,7 +85,7 @@
 <div class="card card-body">
   <h5>Số lượng khách hàng: </h5>
 
-
+<div [hidden]="checkReportCustomers == false">
   <div class="tbl-header">
     <table class="table table-bordered table-responsive-md">
       <thead class="text-center">
@@ -167,4 +168,10 @@
       <button type="button" style="display: inline-block" class="btn btn-primary">Quay lại</button>
     </div>
   </div>
+</div>
+
+  <div [hidden]="checkReportCustomers == true" class="text-center">
+    <p>Không tìm thấy khách hàng nào.</p>
+  </div>
+
 </div>
