@@ -19,15 +19,42 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b8c1817-28fe-49a0-bb4b-d9db38ee17f2" name="Default Changelist" comment="">
+    <list default="true" id="a24e3624-3080-48e7-9128-7663dec09853" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/qr-code/qr-code.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/qr-code/qr-code.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/qr-code/qr-code.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/qr-code/qr-code.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-list-suppliers-modal/storage-list-suppliers-modal.component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-list-suppliers-modal/storage-list-suppliers-modal.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-list-suppliers-modal/storage-list-suppliers-modal.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-list-suppliers-modal/storage-list-suppliers-modal.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/dto/storageDto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/account.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/employee.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/position.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/product.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/storage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/supplier.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/assets/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/model/sale-report.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/sale-report.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/common/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/common/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/qrcode/qrcode.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/qrcode/qrcode.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/storage/storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/storage/storage.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/supplier/supplier.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/supplier/supplier.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +108,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="549" y="163" key="FileChooserDialogImpl" timestamp="1654151334336">

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from "chart.js";
 import {QrcodeService} from "../../../services/qrcode/qrcode.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 Chart.register(...registerables)
@@ -13,38 +14,46 @@ Chart.register(...registerables)
 })
 export class SaleReportComponent implements OnInit {
 
+  formSearch = new FormGroup({
+    startDay: new FormControl(),
+    endDay: new FormControl(),
+    typeReport: new FormControl(),
+    productId: new FormControl()
+  })
+
   message = "";
   typeQRScan = "1";
 
   image1 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
   image2 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
 
-  months = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
-  doanhThus = [100, 200, 500, 900, 300, 800, 400, 1000, 1200, 1100, 600, 800];
-  donHangs = [10, 2, 4, 5, 8, 9, 3, 1, 6, 7, 12, 11];
+  xValues = ["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"];
+  sales = [100, 200, 500, 900, 300, 800, 400, 1000, 1200, 1100, 600, 800];
+  invoices = [10, 2, 4, 5, 8, 9, 3, 1, 6, 7, 12, 11];
+  totalSales = 0;
+  totalInvoices = 0;
 
-  sale = 0;
-  invoice = 0;
 
   constructor(private qrCodeService: QrcodeService) {
 
   }
 
   ngOnInit(): void {
-    this.sale = this.sumArr(this.doanhThus);
-    this.invoice = this.sumArr(this.donHangs);
+
+    this.totalSales = this.sumArr(this.sales);
+    this.totalInvoices = this.sumArr(this.invoices);
 
     new Chart("doanhThu", {
       type: "line",
       data: {
-        labels: this.months,
+        labels: this.xValues,
         datasets: [{
           label: "Doanh Thu Theo Tháng (USD)",
           pointRadius: 3,
           pointBackgroundColor: "red",
           borderColor: "red",
           backgroundColor: "red",
-          data: this.doanhThus,
+          data: this.sales,
           fill: false,
           tension: 0.1
         }]
@@ -55,11 +64,11 @@ export class SaleReportComponent implements OnInit {
     new Chart("donHang", {
       type: "line",
       data: {
-        labels: this.months,
+        labels: this.xValues,
         datasets: [{
           label: "Đơn hàng Theo Tháng",
           fill: false,
-          data: this.donHangs,
+          data: this.invoices,
           pointRadius: 3,
           pointBackgroundColor: "blue",
           backgroundColor: "blue",
@@ -69,6 +78,9 @@ export class SaleReportComponent implements OnInit {
       },
       options: {}
     });
+
+    this.changeTypeReport();
+
   }
 
   sumArr(arr) {
@@ -143,6 +155,70 @@ export class SaleReportComponent implements OnInit {
       this.message = "Vui lòng chọn ảnh !";
       this.image2 = "https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png";
     }
+  }
 
+  showSaleReport() {
+    console.log(this.formSearch.value);
+    this.totalSales = this.sumArr(this.sales);
+    this.totalInvoices = this.sumArr(this.invoices);
+    new Chart("doanhThu", {
+      type: "line",
+      data: {
+        labels: this.xValues,
+        datasets: [{
+          label: "Doanh Thu Theo Tháng (USD)",
+          pointRadius: 3,
+          pointBackgroundColor: "red",
+          borderColor: "red",
+          backgroundColor: "red",
+          data: this.sales,
+          fill: false,
+          tension: 0.1
+        }]
+      },
+      options: {}
+    });
+    new Chart("donHang", {
+      type: "line",
+      data: {
+        labels: this.xValues,
+        datasets: [{
+          label: "Đơn hàng Theo Tháng",
+          fill: false,
+          data: this.invoices,
+          pointRadius: 3,
+          pointBackgroundColor: "blue",
+          backgroundColor: "blue",
+          borderColor: "blue",
+          tension: 0.1
+        }]
+      },
+      options: {}
+    });
+  }
+
+  getStartDay() {
+    return this.formSearch.get('startDay');
+  }
+
+  getEndDay() {
+    return this.formSearch.get('endDay');
+  }
+
+  getTypeReport() {
+    return this.formSearch.get('typeReport');
+  }
+
+  getProductId() {
+    return this.formSearch.get('productId');
+  }
+
+  changeTypeReport() {
+    let type = this.formSearch.get('typeReport').value;
+    if (type != 'ID') {
+      this.formSearch.get('productId').disable();
+    } else {
+      this.formSearch.get('productId').enable();
+    }
   }
 }
