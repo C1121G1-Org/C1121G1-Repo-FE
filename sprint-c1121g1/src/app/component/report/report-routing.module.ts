@@ -9,6 +9,7 @@ import {SaleReportComponent} from './sale-report/sale-report.component';
 */
 
 const routes: Routes = [
+  // Role : Admin , Business Staff
   {path: 'sale-report/list', component: SaleReportComponent}
 ];
 
