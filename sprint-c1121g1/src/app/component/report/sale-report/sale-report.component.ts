@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from 'chart.js';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
+import {SaleReportService} from "../../../services/report/sale-report.service";
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 Chart.register(...registerables);
@@ -21,8 +22,8 @@ export class SaleReportComponent implements OnInit {
   product: Product = {};
 
   formSearch = new FormGroup({
-    startDay: new FormControl('', Validators.required),
-    endDay: new FormControl('', Validators.required),
+    startDay: new FormControl('', [Validators.required,Validators.pattern("^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$")]),
+    endDay: new FormControl('', [Validators.required,Validators.pattern("^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$")]),
     typeReport: new FormControl('ALL', Validators.required),
     productId: new FormControl('', Validators.required)
   });
@@ -34,8 +35,7 @@ export class SaleReportComponent implements OnInit {
   totalInvoices = 0;
 
 
-  constructor() {
-
+  constructor(private saleReportService: SaleReportService) {
   }
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class SaleReportComponent implements OnInit {
     console.log(this.formSearch.value);
     this.totalSales = this.sumArr(this.sales);
     this.totalInvoices = this.sumArr(this.invoices);
-    // tslint:disable-next-line:no-unused-expression
+
     new Chart('doanhThu', {
       type: 'line',
       data: {
@@ -73,7 +73,7 @@ export class SaleReportComponent implements OnInit {
       },
       options: {}
     });
-    // tslint:disable-next-line:no-unused-expression
+
     new Chart('donHang', {
       type: 'line',
       data: {
@@ -112,7 +112,7 @@ export class SaleReportComponent implements OnInit {
   changeTypeReport() {
 
     const type = this.formSearch.get('typeReport').value;
-    // tslint:disable-next-line:triple-equals
+
     if (type != 'ID') {
       this.formSearch.get('productId').disable();
     } else {
