@@ -1,9 +1,16 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from "chart.js";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Product} from "../../../models/product";
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 Chart.register(...registerables)
+
+/*
+    Created by HauPV
+    Time: 09:00 03/06/2022
+    Function: get sale report list and display view
+*/
 
 @Component({
   selector: 'app-sale-report',
@@ -11,6 +18,7 @@ Chart.register(...registerables)
   styleUrls: ['./sale-report.component.css']
 })
 export class SaleReportComponent implements OnInit {
+  product: Product = {};
 
   formSearch = new FormGroup({
     startDay: new FormControl('', Validators.required),
@@ -106,5 +114,10 @@ export class SaleReportComponent implements OnInit {
     } else {
       this.formSearch.get('productId').enable();
     }
+  }
+
+  getProductFromQRCode(product: any) {
+    this.product = product;
+    console.log(this.product);
   }
 }
