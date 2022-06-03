@@ -30,6 +30,7 @@ export class CustomerReportComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.filterAllCustomerReport();
   }
 
 
