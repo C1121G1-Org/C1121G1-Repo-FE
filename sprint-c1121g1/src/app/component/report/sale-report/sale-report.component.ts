@@ -110,6 +110,7 @@ export class SaleReportComponent implements OnInit {
   }
 
   changeTypeReport() {
+    // let type = this.formSearch.get('typeReport').value;
     const type = this.formSearch.get('typeReport').value;
     // tslint:disable-next-line:triple-equals
     if (type != 'ID') {

@@ -1,9 +1,9 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import {ProductListBestsellerComponent} from './component/homepage/product-list-bestseller/product-list-bestseller.component';
 import {ProductCreateComponent} from './component/product/product-create/product-create.component';
 import {StorageCreateComponent} from './component/storage/storage-create/storage-create.component';
-
 
 
 const routes: Routes = [

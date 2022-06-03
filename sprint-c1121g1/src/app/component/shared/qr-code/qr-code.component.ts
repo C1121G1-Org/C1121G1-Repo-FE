@@ -29,6 +29,7 @@ export class QrCodeComponent implements OnInit {
   image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
 
+
   constructor(private saleReportSerive: SaleReportService, private qrCodeService: QrcodeService, private productService: ProductService) {
   }
 
@@ -36,6 +37,7 @@ export class QrCodeComponent implements OnInit {
   }
 
   scanQRCode() {
+
     const file: any = document.querySelectorAll('input[type=\'file\']');
     // tslint:disable-next-line:triple-equals
     if (this.typeQRScan == '1') {

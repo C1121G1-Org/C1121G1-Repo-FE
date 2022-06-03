@@ -9,7 +9,11 @@ import {PurchaseHistoryComponent} from './purchase-history/purchase-history.comp
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
 
-
+/*
+    Created by HauPV
+    Time: 09:00 03/06/2022
+    Function: module for sale-report
+*/
 
 @NgModule({
   declarations: [SaleReportComponent, CustomerReportComponent, PurchaseHistoryComponent],
