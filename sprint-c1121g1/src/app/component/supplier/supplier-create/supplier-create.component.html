@@ -207,7 +207,6 @@
     }
 
     input {
-      /*box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;*/
       box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;
     }
 
@@ -220,78 +219,67 @@
 <body>
 
 <div class="container-fluid">
-  <div class="row" style="justify-content: center;display: flex">
-    <div class="col-md-10 ">
-      <div class="card ">
-        <div class="card card-body">
-          <h3 class="text-center font-weight-bold text-uppercase py-4">
-            THÊM MỚI NHÀ CUNG CẤP
-          </h3>
-          <div class="row" style="justify-content: center;display: flex">
-            <div class="form-group col-md-8">
-              <label for="supplier" class="mb-3">Tên nhà cung cấp<span class="text-danger">(*):</span></label>
-              <input type="text" class="form-control" name="supplier" id="supplier">
-              <div class="valid-feedback">hợp lệ</div>
-              <div class="invalid-feedback">Không để trống nhà cung cấp</div>
-            </div>
-            <div class="form-group col-md-8">
-              <label for="address" class="mb-3">Địa chỉ<span class="text-danger">(*):</span></label>
-              <input type="text" class="form-control" name="address" id="address">
-              <div class="valid-feedback">hợp lệ</div>
-              <div class="invalid-feedback">Không để trống địa chỉ</div>
-            </div>
-            <div class="form-group col-md-8">
-              <label for="phoneNumber" class="mb-3">Số điện thoại<span class="text-danger">(*):</span></label>
-              <input type="number" class="form-control" name="phoneNumber" id="phoneNumber">
-              <div class="valid-feedback">hợp lệ</div>
-              <div class="invalid-feedback">Vui lòng nhập đúng định dang, VD:+84XXXXXXXXX</div>
-            </div>
-            <div class="form-group col-md-8">
-              <label for="email" class="mb-3">Email<span class="text-danger">(*)</span>:</label>
-              <input type="email" class="form-control" name="email" id="email">
-              <div class="valid-feedback">hợp lệ</div>
-              <div class="invalid-feedback">Vui lòng nhập đúng định dang, VD:anguyen@gmail.com</div>
-            </div>
-            <div class=" col-md-12 text-center mx-auto mt-4">
-<!--              <button style="width: 200px;" type="button" class="btn btn-primary "-->
-<!--                      data-toggle="modal"-->
-<!--                      data-target="#createModal"><i class="fa fa-paper-plane"></i>Xác nhận-->
-<!--              </button>-->
+  <form [formGroup]="supplierForm" (ngSubmit)="submit(errorBtn, successBtn)">
+    <div class="row" style="justify-content: center;display: flex">
+      <div class="col-md-10 ">
+        <div class="card ">
+          <div class="card card-body">
+            <h3 class="text-center font-weight-bold text-uppercase py-4">
+              THÊM MỚI NHÀ CUNG CẤP
+            </h3>
+            <div class="row" style="justify-content: center;display: flex">
+              <div class="form-group col-md-8">
+                <label for="supplierName" class="mb-3">Tên nhà cung cấp<span class="text-danger">(*):</span></label>
+                <input type="text" class="form-control" name="supplierName" id="supplierName"
+                       formControlName="supplierName">
+                <p style="color: red" *ngIf="( supplierForm.controls.supplierName.hasError( 'required')&&
+(supplierForm.controls.supplierName.touched|| supplierForm.controls.supplierName.dirty))">Ten KH không được để trống</p>
+              </div>
 
-<!--              <a type="button" class="btn btn-danger" style="margin-left: 10px; width: 200px">-->
-<!--                Hủy</a>-->
+              <div class="form-group col-md-8">
+                <label for="address" class="mb-3">Địa chỉ<span class="text-danger">(*):</span></label>
+                <input type="text" class="form-control" name="address" id="address" formControlName="address">
+                <p style="color: red" *ngIf="( supplierForm.controls.address.hasError( 'required')&&
+(supplierForm.controls.address.touched|| supplierForm.controls.address.dirty))">Ten KH không được để trống</p>
+              </div>
 
-              <div class="text-center " style="margin-bottom: 40px">
-                <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#test" style="margin-right: 20px"><i
-                  class="fa fa-paper-plane"></i>Xác nhận
-                </button>
-                <button type="button" class="btn btn-danger "> Hủy</button>
+              <div class="form-group col-md-8">
+                <label for="phone" class="mb-3">Số điện thoại<span class="text-danger">(*):</span></label>
+                <input type="text" class="form-control" name="phone" id="phone" formControlName="phone">
+                <p style="color: red" *ngIf="( supplierForm.controls.phone.hasError( 'required')&&
+(supplierForm.controls.phone.touched|| supplierForm.controls.phone.dirty))"> không được để trống</p>
+                <p style="color: red" *ngIf="( supplierForm.controls.phone.hasError( 'pattern')&&
+(supplierForm.controls.phone.touched|| supplierForm.controls.phone.dirty))">không đúng định dạng</p>
+              </div>
+
+              <div class="form-group col-md-8">
+                <label for="email" class="mb-3">Email<span class="text-danger">(*)</span>:</label>
+                <input type="email" class="form-control" name="email" id="email" formControlName="email">
+                <p style="color: red" *ngIf="( supplierForm.controls.email.hasError( 'required')&&
+(supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))"> không được để trống</p>
+                <p style="color: red" *ngIf="( supplierForm.controls.email.hasError( 'pattern')&&
+(supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))">không đúng định dạng, vd:vana@gmail.com</p>
+              </div>
+              <!--              [disabled]="!supplierForm.valid"-->
+              <div class=" col-md-12 text-center mx-auto mt-4">
+                <div class="text-center " style="margin-bottom: 40px" >
+                  <button type="button" class="btn btn-danger " style="margin-right: 20px" [routerLink]="['']" > Hủy</button>
+                  <button [disabled]="!supplierForm.valid" type="submit" class="btn btn-primary ">
+                    <i class="fa fa-paper-plane"></i>Thêm mới
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </form>
 </div>
 
-<!--<h3 class="text-center font-weight-bold text-uppercase py-4">-->
-<!--  Thêm mới nhà cung cấp-->
-<!--</h3>-->
-<!--<div class="row" style="justify-content: center;display: flex">-->
-<!--  <form action="#" method="post" novalidate="novalidate">-->
-
-
-<!--    <div class="text-center mt-5">-->
-<!--      <button type="button" class="btn btn-danger " style="margin-right: 20px"> Hủy</button>-->
-<!--      <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#test"><i-->
-<!--        class="fa fa-paper-plane"></i>Xác nhận-->
-<!--      </button>-->
-<!--    </div>-->
-<!--  </form>-->
-<!--</div>-->
-
-<div class="modal" tabindex="-1" id="test">
+<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>
+<!--error modal-->
+<div class="modal fade " tabindex="-1" id="errorModal">
   <div class="modal-dialog" style="text-align: center">
     <div class="modal-content" style="text-align: center">
       <div class="modal-header">
@@ -303,19 +291,27 @@
       </div>
       <div class="modal-footer d-flex justify-content-center">
         <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-
       </div>
     </div>
   </div>
 </div>
 
-<!--</div>-->
-</body>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-        crossorigin="anonymous"></script>
-</html>
+<button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div class="modal fade" tabindex="-1" id="successModal">
+  <div class="modal-dialog" style="text-align: center">
+    <div class="modal-content" style="text-align: center">
+      <div class="modal-header">
+        <h5 class="modal-title">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ></button>
+      </div>
+      <div class="modal-body">
+        <p>Thêm mới nhà cung cấp thành công!</p>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/supplier/create']">OK</button>
+      </div>
+    </div>
+  </div>
+</div>
 

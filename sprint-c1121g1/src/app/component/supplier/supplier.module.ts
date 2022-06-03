@@ -5,6 +5,7 @@ import { SupplierRoutingModule } from './supplier-routing.module';
 import { SupplierCreateComponent } from './supplier-create/supplier-create.component';
 import { SupplierListComponent } from './supplier-list/supplier-list.component';
 import { SupplierUpdateComponent } from './supplier-update/supplier-update.component';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { SupplierUpdateComponent } from './supplier-update/supplier-update.compo
     ],
     imports: [
         CommonModule,
-        SupplierRoutingModule
+        SupplierRoutingModule,
+        ReactiveFormsModule
     ]
 })
 export class SupplierModule { }
