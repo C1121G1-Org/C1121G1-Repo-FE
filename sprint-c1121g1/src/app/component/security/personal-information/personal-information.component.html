@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-9">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card border border-light" style="background-color: #f6f6f8; border-radius: 5px">
+          <div class="card-body">
+            <h4 class="card-title" style="font-size: 40px">Thông tin cá nhân</h4>
+            <p>Quản lý thông tin cá nhân của bạn</p>
+            <form [formGroup]="personalInformationForm" (ngSubmit)="update(openSuccessModalBtn, closeModalBtn)">
+              <div class="row" style="padding: 10px 50px">
+                <div style="display: flex; justify-content: center" class="col-md-12 pb-4">
+                  <img
+                    src="{{imageLink}}"
+                    class="rounded-circle" width="100">
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="name"><span class="text-danger">*</span> Họ tên</label>
+                    <input type="text" class="form-control" name="name" id="name" formControlName="employeeName">
+                    <div *ngIf="employeeName?.touched">
+                      <small class="text-danger" *ngIf="employeeName?.errors?.required">Vui lòng nhập tên.</small>
+                    </div>
+                    <div *ngIf="employeeName.valid && employeeName?.touched">
+                      <small class="text-success">Hợp lệ.</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="birthday">Ngày sinh</label>
+                    <input type="date" class="form-control" name="birthday" id="birthday" formControlName="dateOfBirth">
+                    <div *ngIf="dateOfBirth?.touched">
+                      <small class="text-danger" *ngIf="dateOfBirth?.errors?.required">Vui lòng nhập ngày sinh.</small>
+                    </div>
+                    <div *ngIf="dateOfBirth.valid && dateOfBirth?.touched">
+                      <small class="text-success">Hợp lệ.</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="address">Địa chỉ</label>
+                    <input type="text" name="address" id="address" class="form-control" formControlName="address">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="idCard"><span class="text-danger">*</span> CMND/CCCD</label>
+                    <input type="text" name="idCard" id="idCard" class="form-control" formControlName="idCard">
+                  </div>
+                  <div class="form-group">
+                    <label for="email"><span class="text-danger">*</span> Email</label>
+                    <input type="email" name="email" id="email" class="form-control" formControlName="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" name="phone" id="phone" class="form-control" formControlName="phoneNumber">
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <button type="button" class="btn btn-danger mx-1">Hủy bỏ</button>
+                <button [disabled]="!personalInformationForm.valid" type="submit" class="btn btn-primary mx-1"><i class="fa fa-paper-plane"></i> Cập nhật
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button [hidden]="true" #openSuccessModalBtn data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Tuyệt!</h4>
+        <p>Cập nhật thông tin cá nhân thành công.</p>
+        <button #closeModalBtn type="button" class="btn btn-danger" id="delete_btn" data-dismiss="modal" >Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>

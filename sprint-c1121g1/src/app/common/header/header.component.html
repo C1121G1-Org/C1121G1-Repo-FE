@@ -23,7 +23,7 @@
               <li *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1"><a href="#">Quản lý kinh doanh</a></li>
               <li *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1"><a href="#">Quản lý báo cáo</a></li>
               <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_BUSINESS_STAFF'].indexOf(role)!==-1"><a href="#">Xem thông tin hàng hóa</a></li>
-              <li *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1"><a href="#">Quản lý nhà cung cấp</a></li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a href="#">Quản lý nhà cung cấp</a></li>
               <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER'].indexOf(role)!==-1"><a href="#">Quản lý bán hàng</a></li>
               <li *ngIf="['ROLE_ADMIN', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a href="#">Quản lý xuất nhập kho</a></li>
             </ul>
@@ -75,7 +75,8 @@
           </div>
           <div class="sub-menu">
             <ul>
-              <li><a href="#">Quản lý thông tin cá nhân</a></li>
+              <li><a [routerLink]="['/personal-information']">Thông tin cá nhân</a></li>
+              <li><a [routerLink]="['/change-personal-password']">Bảo mật</a></li>
               <li><a (click)="logOut()">Đăng xuất</a></li>
             </ul>
           </div>

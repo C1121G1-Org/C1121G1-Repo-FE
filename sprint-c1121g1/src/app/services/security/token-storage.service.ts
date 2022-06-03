@@ -6,6 +6,11 @@ const USER_KEY = 'auth-user';
 @Injectable({
   providedIn: 'root'
 })
+/*
+  Created by KhaiTT
+  Date: 10:47 03/05/2022
+  Function: This class use to interact with jwt in local storage or session storage.
+*/
 export class TokenStorageService {
 
   constructor() { }

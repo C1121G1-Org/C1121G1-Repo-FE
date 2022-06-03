@@ -10,6 +10,12 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
+/*
+  Created by KhaiTT
+  Date: 11:00 02/05/2022
+  Function: This class use to login.
+*/
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
     username: new FormControl(),
