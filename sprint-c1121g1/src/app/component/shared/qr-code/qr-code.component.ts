@@ -57,6 +57,7 @@ export class QrCodeComponent implements OnInit {
         }, err => {
           console.log(err);
         });
+
       } else {
         this.alertClass = 'alert alert-danger';
         this.message = 'Vui lòng chọn ảnh !';
@@ -95,12 +96,14 @@ export class QrCodeComponent implements OnInit {
   readFile1(target: any) {
     const file: File = target.files[0];
     if (file) {
+      this.alertClass = '';
+      this.message = '';
       const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image1 = reader?.result as string;
       };
-      this.message = '';
+
     } else {
       this.alertClass = 'alert alert-danger';
       this.message = 'Vui lòng chọn ảnh !';

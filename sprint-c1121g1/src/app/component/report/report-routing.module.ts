@@ -29,9 +29,7 @@ const routes: Routes = [
   */
   {path: 'report/purchase-hitory/:id', component: PurchaseHistoryComponent},
 
-
   // Role : Admin , Business Staff
-
   {path: 'sale-report/list', component: SaleReportComponent}
 
 ];
