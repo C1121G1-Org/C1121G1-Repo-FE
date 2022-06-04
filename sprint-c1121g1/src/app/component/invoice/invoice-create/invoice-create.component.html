@@ -1,99 +1,67 @@
-<div class="container pt-2">
-  <div class="row">
-    <div class="col-md-12 ">
-      <form [formGroup]="fromCustomer" (ngSubmit)="getCustomer()" >
-        <div class="card border-secondary shadow">
-          <div class="card-body">
-            <h4 class="card-title">Thông tin khách hàng
-              <button type="button" class="btn btn-outline-secondary">Chọn khách hàng cũ</button>
-            </h4>
-
-            <div class="row">
+<form [formGroup]="invoiceForm" (ngSubmit)="createInvoice()">
+  <div class="container pt-2" >
+    <div class="row">
+      <div class="col-md-12 " >
+        <div class="card border-secondary shadow"  >
+          <div class="card-body" >
+            <h4 class="card-title">Thông tin khách hàng</h4>
+            <div class="row" formGroupName="customerDto">
               <div class="col-md-8">
+<!--                <input type="hidden" formControlName="id">-->
                 <div class="form-group">
                   <label for="name">Họ và tên</label>
                   <input type="text" class="form-control" name="name" id="name" formControlName="customerName">
-                  <div *ngIf="customerName.invalid&&(customerName.touched||customerName.dirty)">
-                    <p [hidden]="!customerName.errors.required">
-                      <span style="color: red">Không được bỏ trống</span>
-                    </p>
+                  <div *ngIf="invoiceForm.get('customerName')?.errors?.required">
+                    <span>Vui lòng nhập tên khách hàng</span>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="address">Địa chỉ</label>
-                  <textarea class="form-control" name="address" id="address" row="7"
-                            formControlName="address"></textarea>
-                  <div *ngIf="customerName.invalid&&(customerName.touched||customerName.dirty)">
-                    <p [hidden]="!customerName.errors.required">
-                      <span style="color: red">Không được bỏ trống</span>
-                    </p>
-                  </div>
+                  <textarea class="form-control" name="address" id="address" row="3" formControlName="address"></textarea>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
                   <label for="email">Email</label>
                   <input type="email" class="form-control" name="email" id="email" formControlName="email">
-                  <div *ngIf="email.invalid&&(email.touched||email.dirty)">
-                    <p [hidden]="!email.errors.required">
-                      <span style="color: red">Không được bỏ trống</span>
-                    </p>
-                  </div>
                 </div>
                 <div class="form-group">
-                  <label for="phoneNumber">Số điện thoại</label>
-                  <input type="text" class="form-control" name="contactNo" id="phoneNumber"
-                         formControlName="phoneNumber">
-                  <div *ngIf="phoneNumber.invalid&&(phoneNumber.touched||phoneNumber.dirty)">
-                    <p [hidden]="!phoneNumber.errors.required">
-                      <span style="color: red">Không được bỏ trống</span>
-                    </p>
-                  </div>
+                  <label for="contactNo">Số điện thoại</label>
+                  <input type="text" class="form-control" name="contactNo" id="contactNo" formControlName="phoneNumber">
                 </div>
                 <div class="form-group">
-                  <label for="dateOfBirth">Ngày sinh</label>
-                  <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth"
-                         formControlName="dateOfBirth">
-                  <div *ngIf="dateOfBirth.invalid&&(dateOfBirth.touched||dateOfBirth.dirty)">
-                    <p [hidden]="!dateOfBirth.errors.required">
-                      <span style="color: red">Không được bỏ trống</span>
-                    </p>
-                  </div>
+                  <label for="contactNo">Ngày sinh</label>
+                  <input type="date" class="form-control" name="contactNo" id="Age" formControlName="dateOfBirth">
                 </div>
                 <div>
                   <label for="rdo1" style="margin-right: 10px">
-                    <input type="radio" id="rdo1" formControlName="gender" value="1" name="gender" >
+                    <input type="radio" id="rdo1" formControlName="gender" name="gender" value="True"  >
                     <span class="rdo"></span>
                     <span>Nam</span>
                   </label>
                   <label for="rdo2">
-                    <input type="radio" id="rdo2" formControlName="gender" name="gender" value="2">
+                    <input type="radio" id="rdo2" formControlName="gender" name="gender" value="False"  >
                     <span class="rdo"></span>
                     <span>Nữ</span>
                   </label>
-                  <div *ngIf="gender.invalid&&(gender.touched||gender.dirty)">
-                    <p [hidden]="!gender.errors.required">
-                      <span style="color: red">Không được bỏ trống</span>
-                    </p>
-                  </div>
+<!--                  <div *ngIf="gender.invalid&&(gender.touched||gender.dirty)">-->
+<!--                    <p [hidden]="!gender.errors.required">-->
+<!--                      <span style="color: red">Không được bỏ trống</span>-->
+<!--                    </p>-->
+<!--                  </div>-->
                 </div>
-                <button #submitCustomer hidden   type="submit"
-                        class="btn btn-outline-secondary">chọn
-                </button>
               </div>
             </div>
           </div>
         </div>
-      </form>
-<!--      <form #invoiceForm="ngForm">-->
-        <div class="card  border-secondary mt-2 mb-4 shadow" style="padding-top: 15px">
+        <div class="card border-secondary mt-2 shadow">
           <div class="card-body">
             <h4 class="card-title d-flex justify-content-between">Thông tin sản phẩm
               <button type="button"
                       class="btn btn-outline-secondary">Quét mã Qr
               </button>
               <button type="button"
-                      class="btn btn-outline-secondary" data-toggle="modal" data-target="#productModal" >+ Thêm sản phẩm
+                      class="btn btn-outline-secondary" data-toggle="modal" data-target="#productModal">+ Thêm sản phẩm
               </button>
             </h4>
             <div class="row">
@@ -103,89 +71,54 @@
                   <th width="25%">Tên sản phẩm</th>
                   <th width="25%">Giá</th>
                   <th width="25%">Số lượng</th>
-                  <th width="25%">Amount</th>
                   <th width="25%"></th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr *ngFor="let product of invoiceDetail.productInvoiceDtoList; let i=index">
-<!--                  <input type="hidden" [(ngModel)]="product.productId" >-->
+                <tbody formArrayName="products">
+                <tr *ngFor="let product of products.controls; let  i = index" [formGroupName]="i">
+                  <input type="hidden" formGroupName="id">
                   <td scope="row">
-                    <input type="text" class="form-control" name="productName{{i}}}" id="productName"
-                           [(ngModel)]="product.product.name" #productName='ngModel'>
+                    <input type="text" class="form-control" name="productName" id="productName" formControlName="name">
                   </td>
                   <td>
-                    <input type="number" class="form-control" name="price{{i}}" id="price"
-                           [(ngModel)]="product.product.price" #price='ngModel'>
+                    <input type="number" class="form-control" name="price" id="price" formControlName="price">
                   </td>
                   <td>
-                    <input type="number" class="form-control" name="quantity{{i}}" id="quantity"
-                           [(ngModel)]="product.quantity" #quantity='ngModel' (change)="getTotalMoney(product.quantity)">
+                    <input type="number" class="form-control" name="quantity" id="quantity" formControlName="quantity" (change)="getTotalMoney()">
                   </td>
                   <td>
-                    {{product.product.price * product.quantity || ''}}
                     <button type="button"
-                            class="btn btn-outline-secondary" >+ sản phẩm
-                    </button>
-                    <button type="button"
-                            class="btn btn-outline-secondary" (click)="removeProduct(i)">- sản phẩm
+                            class="btn btn-outline-secondary" (click)="deleteProduct(i)"> Xóa sản phẩm
                     </button>
                   </td>
                 </tr>
-
-
-
-<!--                <tr *ngFor="let product of invoiceDetail.productInvoiceDtoList; let i=index">-->
-<!--                  <input type="hidden" [(ngModel)]="product.productId" >-->
-<!--                  <td scope="row">-->
-<!--                    <input type="text" class="form-control" name="productName{{i}}}" id="productName"-->
-<!--                           [(ngModel)]="product.name" #productName='ngModel'>-->
-<!--                  </td>-->
-<!--                  <td>-->
-<!--                    <input type="number" class="form-control" name="price{{i}}" id="price"-->
-<!--                           [(ngModel)]="product.price" #price='ngModel'>-->
-<!--                  </td>-->
-<!--                  <td>-->
-<!--                    <input type="number" class="form-control" name="quantity{{i}}" id="quantity"-->
-<!--                           [(ngModel)]="product.quantity" #quantity='ngModel' (change)="getTotalMoney()">-->
-<!--                  </td>-->
-<!--                  <td>-->
-<!--                    {{product.price * product.quantity || ''}}-->
-<!--                    <button type="button"-->
-<!--                            class="btn btn-outline-secondary" data-toggle="modal" data-target="#productModal" (click)="chooseProduct(product[i])">+ sản phẩm-->
-<!--                    </button>-->
-<!--                    <button type="button"-->
-<!--                            class="btn btn-outline-secondary" (click)="removeProduct(i)">- sản phẩm-->
-<!--                    </button>-->
-<!--                  </td>-->
-<!--                </tr>-->
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-        <div class="card  border-secondary mt-2 mb-4 shadow">
+        <div class="card border-secondary mt-2 mb-4 shadow">
           <div class="mt-5 mb-2 ml-5 mr-5">
             <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">Thành tiền</label>
+              <label for="inputEmail3" class="col-sm-2 col-form-label" >Thành tiền</label>
               <div class="col-sm-6">
-                <input type="email" class="form-control" id="inputEmail3" value="{{invoice.totalMoney}}" readonly>
+                <input type="text" class="form-control" id="inputEmail3" value="{{money}}" readonly>
               </div>
             </div>
             <fieldset class="form-group row">
               <legend class="col-form-label col-sm-2 float-sm-left pt-0">Hình thức thanh toán</legend>
               <div class="col-sm-10">
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
-                         value="{{payments}}" checked>
+                  <input class="form-check-input" type="radio" name="payments" id="gridRadios1"
+                         value="Tiền mặt" formControlName="payments" checked>
                   <label class="form-check-label" for="gridRadios1">
                     Tiền mặt
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                         value="{{payments}}">
-                  <label class="form-check-label" for="gridRadios2" >
+                  <input class="form-check-input" type="radio" name="payments" id="gridRadios2"
+                         value="Dùng thẻ" formControlName="payments">
+                  <label class="form-check-label" for="gridRadios2">
                     Dùng thẻ
                   </label>
                 </div>
@@ -194,29 +127,24 @@
             <div class="form-group row">
               <div class="col-sm-10 offset-sm-2">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck1">
-                  <label class="form-check-label" for="gridCheck1">In hóa đơn</label>
+                  <input class="form-check-input" type="checkbox" id="gridCheck1" name="price" (click)="print('yes')">
+                  <label class="form-check-label" for="gridCheck1">
+                    In hóa đơn
+                  </label>
                 </div>
               </div>
             </div>
             <div class="form-group row ">
               <div class="col-sm-12 text-center" style="">
-                <button type="submit" class="btn btn-danger" (click)="create(submitCustomer)">Tiến hành thanh toán</button>
+                <button type="submit" class="btn btn-danger">Tiến hành thanh toán</button>
               </div>
             </div>
           </div>
         </div>
-<!--      </form>-->
+      </div>
     </div>
   </div>
-</div>
-
-
-
-
-<!--Created by TamHT-->
-<!--Time: 14:15 1/06/2022-->
-<!--Function: delete product-->
+</form>
 
 <!--modal product-->
 <div class="modal fade" id="productModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -296,7 +224,8 @@
                 <div class="col-6">
                   <button (click)="chooseProduct()" type="button" class="btn-edit btn-rounded  btn-lg my-0">
                     <i class="fa fa-paper-plane"></i>
-                    Chọn</button>
+                    Chọn
+                  </button>
                   <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
                           data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
                   </button>

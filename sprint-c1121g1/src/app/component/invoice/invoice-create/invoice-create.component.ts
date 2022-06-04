@@ -1,89 +1,59 @@
 import {Component, OnInit} from '@angular/core';
-import {InvoiceDto} from "../../../dto/invoiceDto";
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {CustomerDto} from "../../../dto/customerDto";
-import {InvoiceService} from "../../../services/invoice/invoice.service";
-import {ProductInvoiceDto} from "../../../dto/productInvoiceDto";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Product} from "../../../models/product";
-import {InvoiceDetailDto} from "../../../dto/invoiceDetailDto";
 import {ProductService} from "../../../services/product/product.service";
-import validate = WebAssembly.validate;
+import {ProductInvoice} from "../../../dto/productInvoice";
+import {InvoiceDetail} from "../../../dto/InvoiceDetail";
+import {InvoiceService} from "../../../services/invoice/invoice.service";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import {error} from "@angular/compiler/src/util";
 
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
+/*
+ Created by LongNHL
+ Time: 9:30 2/06/2022
+ Function: create invoice
+ */
 @Component({
   selector: 'app-invoice-create',
   templateUrl: './invoice-create.component.html',
   styleUrls: ['./invoice-create.component.css']
 })
 export class InvoiceCreateComponent implements OnInit {
-  invoiceDetail = new InvoiceDetailDto();
-  invoice: InvoiceDto = new InvoiceDto();
-  totalMoney: string;
-  payments: string;
-  customer: CustomerDto;
-  productInvoice: ProductInvoiceDto;
 
 
-  fromCustomer: FormGroup = new FormGroup({
-    id: new FormControl(),
-    customerName: new FormControl('',Validators.required),
-    phoneNumber: new FormControl('',Validators.required),
-    dateOfBirth: new FormControl('',Validators.required),
-    email: new FormControl('',Validators.required),
-    address: new FormControl('',Validators.required),
-    gender: new FormControl('',Validators.required)
-  });
+  invoiceForm: FormGroup;
 
 
-  products = new FormArray([])
+  currentProduct: Product;
 
-  addProduct (){
-    const productAdd = new FormGroup({
-      id : new FormControl(this.selectedProduct.id),
-      new : new FormControl(this.selectedProduct.id),
-      name: new FormControl(this.selectedProduct.name,Validators.required),
-      quantity: new FormControl(""),
+  productList: Product[] = [];
+  selectedProduct: Product;
+  invoiceDetail: InvoiceDetail;
+  printInvoice: string;
+  money: string;
+
+  constructor(private fb: FormBuilder,
+              private productService: ProductService,
+              private invoiceService: InvoiceService) {
+    this.invoiceForm = this.fb.group({
+      payments: this.fb.control('', [Validators.required]),
+      totalMoney: this.fb.control('', [Validators.required]),
+      customerDto: this.fb.group({
+        id: this.fb.control(''),
+        customerName: this.fb.control('', [Validators.required]),
+        phoneNumber: this.fb.control('', [Validators.required]),
+        dateOfBirth: this.fb.control('', [Validators.required]),
+        address: this.fb.control('', [Validators.required]),
+        email: this.fb.control('', [Validators.required]),
+        gender: this.fb.control('', [Validators.required]),
+      }),
+      products: this.fb.array(this.productList.map(product => this.createProducts(product))
+      ),
     });
-    this
-  }
 
-
-  get id() {
-    return this.fromCustomer.get('id');
-  }
-  get customerName() {
-    return this.fromCustomer.get('customerName');
-  }
-  get phoneNumber() {
-    return this.fromCustomer.get('phoneNumber');
-  }
-  get dateOfBirth() {
-    return this.fromCustomer.get('dateOfBirth');
-  }
-  get email() {
-    return this.fromCustomer.get('email');
-  }
-  get address() {
-    return this.fromCustomer.get('address');
-  }
-  get gender() {
-    return this.fromCustomer.get('gender');
-  }
-
-  /*
-      Created by TamHT
-      Time: 14:15 1/06/2022
-      Function: delete product
-  */
-   currentProduct:  Product;
-  productList: Product[] = []
-   selectedProduct: Product;
-
-
-
-
-  constructor(private invoiceService: InvoiceService,
-              private productService: ProductService) {
   }
 
 
@@ -91,56 +61,40 @@ export class InvoiceCreateComponent implements OnInit {
     this.getAllProduct();
   }
 
-  private getAllProduct() {
-    this.productService.getAll().subscribe(data => {
-      this.productList = data;
+  private createProducts(product: any) {
+    return this.fb.group({
+      id: [product.id],
+      name: [product.name],
+      price: [product.price],
+      quantity: ['', [Validators.required]]
     });
   }
 
-  removeProduct(i: number) {
+  get products() {
+    return <FormArray>this.invoiceForm.get('products')
+  }
 
+  get customerDto() {
+    return <FormGroup>this.invoiceForm.get('customerForm')
   }
 
 
-  getTotalMoney(quantity: number) {
-    this.productInvoice.quantity = quantity
-    this.totalMoney =  this.invoiceDetail.productInvoiceDtoList.reduce((sum, p)=> sum + (p.quantity * p.product.price), 0).toFixed(2);
-    this.invoice.totalMoney = parseInt(this.totalMoney);
-    console.log(this.totalMoney);
+  deleteProduct(i: number) {
+    this.products.removeAt(i);
   }
 
-
-  getCustomer() {
-    this.customer = this.fromCustomer.value;
-    if (this.fromCustomer.value.gender == 1){
-      this.customer.gender = true;
-    }else {
-      this.customer.gender = false;
-    }
-
-    console.log(this.customer);
-  }
-
-  create(submitCustomer: HTMLButtonElement) {
-      submitCustomer.click();
-
-
-    // this.invoiceService.createInvoice(this.invoice).subscribe(() => {
-    //   alert("ok")
-    // }, error => {
-    //   console.log(error)
-    // });
-  }
-
-
-
-  /*
-     Created by TamHT
-     Time: 14:15 1/06/2022
-     Function: delete product
- */
   getProduct(product: Product) {
     this.currentProduct = product;
+  }
+
+  getTotalMoney() {
+    this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
+  }
+
+  getAllProduct() {
+    this.productService.getAll().subscribe(data => {
+      this.productList = data;
+    });
   }
 
   isSelectedProduct(product: Product) {
@@ -151,13 +105,151 @@ export class InvoiceCreateComponent implements OnInit {
       return false;
     }
     return this.currentProduct.name === this.selectedProduct.name ? true : false;
+  }
+
+  //
+  chooseProduct() {
+    let productForm = this.createProducts(this.currentProduct)
+    console.log(productForm);
+    this.products.push(productForm);
+    console.log(this.products.getRawValue());
+  }
+
+
+  createInvoice() {
+    if (this.printInvoice == 'yes') {
+      this.generatePDF('yes');
+    }
+    this.invoiceDetail = this.invoiceForm.value;
+    this.invoiceDetail.totalMoney = this.money;
+    console.log(this.invoiceDetail);
+    console.log(this.print);
+    this.invoiceService.updateQuantity(this.invoiceDetail).subscribe(() => {
+      this.invoiceService.createInvoice(this.invoiceDetail).subscribe(() => {
+        this.invoiceForm.reset();
+        alert("thêm mới thành công")
+        if (this.printInvoice == 'yes') {
+          this.generatePDF('yes');
+        }
+      }, error => {
+        console.log(error);
+      })
+    }, error => {
+      console.log(error)
+    });
 
   }
 
-  chooseProduct() {
-    console.log("hehe")
-    this.addProduct();
-    console.log(this.selectedProduct)
+
+  /*
+   Created by LongNHL
+   Time: 9:30 2/06/2022
+   Function: prince PDF
+   */
+  docDefinition: any;
+  generatePDF(action) {
+    this.docDefinition = {
+      content: [
+        {
+          text: 'C1121G1 SHOP',
+          fontSize: 16,
+          alignment: 'center',
+          color: '#047886'
+        },
+        {
+          text: 'Hóa đơn mua bán di động',
+          fontSize: 20,
+          bold: true,
+          alignment: 'center',
+          decoration: 'underline',
+          color: 'skyblue'
+        },
+        {
+          text: 'Chi tiết khách hàng',
+          style: 'sectionHeader'
+        },
+        {
+          columns: [
+            [
+              {
+                text: this.invoiceForm.getRawValue().customerName,
+                bold: true
+              },
+              {text: this.invoiceForm.getRawValue().address},
+              {text: this.invoiceForm.getRawValue().email},
+            ],
+            [
+              {
+                text: `Ngày: ${new Date().toLocaleString()}`,
+                alignment: 'right'
+              },
+              {
+                text: `No.: ${((Math.random() * 1000).toFixed(0))}`,
+                alignment: 'right'
+              }
+            ]
+          ]
+        },
+        {
+          text: 'Chi tiết đơn hàng',
+          style: 'sectionHeader'
+        },
+        {
+          table: {
+            headerRows: 1,
+            widths: ['*', 'auto', 'auto', 'auto'],
+            body: [
+              ['Product', 'Price', 'Quantity', 'Amount'],
+              ...this.products.getRawValue().map(p => ([p.name, p.price, p.qty, (p.price * p.quantity).toFixed(2)])),
+              [{
+                text: 'Total Amount',
+                colSpan: 3
+              }, {}, {}, this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2)]
+            ]
+          }
+        },
+        {
+          text: 'Chi tiết bổ sung',
+          style: 'sectionHeader'
+        },
+        {
+          text: 'Bổ sung chi tiết',
+          margin: [0, 0, 0, 15]
+        },
+        {
+          columns: [
+            [{qr: `${this.invoiceForm.getRawValue().customerName}`, fit: '50'}],
+            [{text: 'Signature', alignment: 'right', italics: true}],
+          ]
+        },
+        {
+          text: 'Các điều khoản và điều kiện',
+          style: 'sectionHeader'
+        },
+        {
+          ul: [
+            'Đơn hàng có thể được trả lại sau không quá 10 ngày.',
+            'Việc bảo hành sản phẩm sẽ tùy thuộc vào các điều khoản và điều kiện của nhà sản xuất.',
+            'Đây là hóa đơn do hệ thống tạo.',
+          ],
+        }
+      ],
+      styles: {
+        sectionHeader: {
+          bold: true,
+          decoration: 'underline',
+          fontSize: 14,
+          margin: [0, 15, 0, 15]
+        }
+      }
+    };
+    if (action === 'yes') {
+      pdfMake.createPdf(this.docDefinition).download();
+    }
+  }
+
+  print(yes: string) {
+    this.printInvoice = yes;
   }
 
 
