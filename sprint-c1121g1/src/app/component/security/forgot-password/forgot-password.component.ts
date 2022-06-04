@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SecurityService} from '../../../services/security/security.service';
 import {Router} from '@angular/router';
+import {DataService} from '../../../services/common/data.service';
+import {CountdownComponent, CountdownConfig} from 'ngx-countdown';
+import {config} from 'rxjs';
 
 @Component({
   selector: 'app-forgot-password',
@@ -14,31 +17,61 @@ import {Router} from '@angular/router';
   Function: This class use to change personal password.
 */
 export class ForgotPasswordComponent implements OnInit {
+  config: CountdownConfig = {
+    leftTime: 60,
+    formatDate: ({ date }) => `${date / 1000}`,
+    demand: true
+  };
   usernameForm: FormGroup = new FormGroup({
-    username: new FormControl('', [Validators.required])
+    email: new FormControl('', [Validators.required]),
+    code: new FormControl()
   });
   confirmCode: string;
   errorMessage: string;
   notFoundMessage: string;
   spinFlag = false;
   constructor(private securityService: SecurityService,
-              private router: Router) { }
+              private router: Router,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
   }
 
-  submit(openSuccessModalBtn: HTMLButtonElement) {
-    this.securityService.findAccountByUserName(this.usernameForm.value.username).subscribe(() => {
+  submit(openSuccessModalBtn: HTMLButtonElement, countdowm: CountdownComponent,
+         closeModal: HTMLButtonElement, errorModalBtn: HTMLButtonElement, resetCodeBtn: HTMLButtonElement) {
+    console.log(countdowm.i.value);
+    this.securityService.findAccountByEmail(this.usernameForm.value.email).subscribe(() => {
       openSuccessModalBtn.click();
+      countdowm.resume();
       this.spinFlag = false;
+      this.dataService.sendData(this.usernameForm.value.email);
+      // tslint:disable-next-line:only-arrow-functions
+      setTimeout(function(){
+        closeModal.click();
+        // tslint:disable-next-line:only-arrow-functions
+        setTimeout(function(){
+          errorModalBtn.click();
+        }, 500);
+        countdowm.restart();
+        resetCodeBtn.click();
+      }, 60000);
     }, error => {
       this.spinFlag = false;
-      this.notFoundMessage = 'Tên đăng nhập không tồn tại.';
+      this.notFoundMessage = 'Không tìm thấy tài khoản của bạn.';
+    });
+  }
+
+  refreshCode() {
+    this.securityService.refreshChangePasswordCode(this.usernameForm.value.email).subscribe(res => {
+      console.log('refresh success');
+    }, error => {
+      console.log('refresh false');
     });
   }
 
   checkCode(closeModal: HTMLButtonElement) {
-    this.securityService.checkChangePasswordCode(this.usernameForm.value.username, this.confirmCode).subscribe(res => {
+    this.usernameForm.controls.code.setValue(this.confirmCode);
+    this.securityService.checkChangePasswordCode(this.usernameForm.value).subscribe(res => {
       closeModal.click();
       this.router.navigate(['/reset-password']);
     }, error => {

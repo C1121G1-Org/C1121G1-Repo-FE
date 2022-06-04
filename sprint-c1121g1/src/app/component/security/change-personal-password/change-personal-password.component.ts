@@ -14,7 +14,7 @@ import {SecurityService} from '../../../services/security/security.service';
 */
 export class ChangePersonalPasswordComponent implements OnInit {
   changePasswordForm: FormGroup = new FormGroup({
-    currentPassword: new FormControl('', [Validators.required, Validators.pattern('^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$')]),
+    currentPassword: new FormControl('', [Validators.required]),
     newPassword: new FormControl('', [Validators.required, Validators.pattern('^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$')]),
     confirmNewPassword: new FormControl()
   });

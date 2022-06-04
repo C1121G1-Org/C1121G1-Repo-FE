@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SecurityService} from '../../../services/security/security.service';
 import {TokenStorageService} from '../../../services/security/token-storage.service';
 import {ShareService} from '../../../services/security/share.service';
@@ -18,8 +18,8 @@ import {Router} from '@angular/router';
 */
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = new FormGroup({
-    username: new FormControl(),
-    password: new FormControl(),
+    username: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    password: new FormControl('', [Validators.required, Validators.maxLength(100)]),
     remember_me: new FormControl()
   });
 
@@ -39,6 +39,15 @@ export class LoginComponent implements OnInit {
       this.username = this.tokenStorageService.getUser().username;
     }
   }
+
+  get usernameForm() {
+    return this.loginForm.get('username');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
+
 
   login() {
     this.securityService.login(this.loginForm.value).subscribe(data => {

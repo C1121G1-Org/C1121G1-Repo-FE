@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {SecurityService} from '../../../services/security/security.service';
+import {DataService} from '../../../services/common/data.service';
+import {CountdownConfig} from 'ngx-countdown';
 
 @Component({
   selector: 'app-reset-pasword',
@@ -8,10 +11,15 @@ import {FormControl, FormGroup} from '@angular/forms';
 })
 export class ResetPaswordComponent implements OnInit {
   changePasswordForm: FormGroup = new FormGroup({
-    newPassword: new FormControl(),
-    comfirmNewPassword: new FormControl()
+    email: new FormControl(),
+    newPassword: new FormControl('', [Validators.required, Validators.pattern('^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$')]),
+    confirmNewPassword: new FormControl('', [Validators.required])
   });
-  constructor() { }
+  emailResetPassword: string;
+  constructor(private dataService: DataService,
+              private securityService: SecurityService) {
+    this.getEmailOfAccount();
+  }
 
   ngOnInit(): void {
   }
@@ -20,8 +28,36 @@ export class ResetPaswordComponent implements OnInit {
     return this.changePasswordForm.get('newPassword');
   }
 
-  get comfirmNewPassword() {
-    return this.changePasswordForm.get('comfirmNewPassword');
+  get confirmNewPassword() {
+    return this.changePasswordForm.get('confirmNewPassword');
   }
 
+  checkConfirmNewPassword() {
+    const newPassword = this.changePasswordForm.get('newPassword').value;
+    const confirmNewPassword = this.changePasswordForm.get('confirmNewPassword').value;
+    if (newPassword !== confirmNewPassword) {
+      this.changePasswordForm.get('confirmNewPassword').setErrors({passwordNoMatch: true});
+    }
+  }
+
+  getEmailOfAccount() {
+    this.dataService.data.subscribe(res => {
+      this.emailResetPassword = res;
+    });
+  }
+
+  // tslint:disable-next-line:max-line-length
+  updatePassword(openSuccessModalBtn: HTMLButtonElement, closeModalBtn: HTMLButtonElement, errorModalBtn: HTMLButtonElement, closeErrorModalBtn: HTMLButtonElement) {
+    this.changePasswordForm.get('email').setValue(this.emailResetPassword);
+    console.log(this.changePasswordForm);
+    this.securityService.resetPassword(this.changePasswordForm.value).subscribe(res => {
+      openSuccessModalBtn.click();
+    }, error => {
+      errorModalBtn.click();
+      // tslint:disable-next-line:only-arrow-functions
+      setTimeout(function(){
+        closeErrorModalBtn.click();
+      }, 5000);
+    });
+  }
 }

@@ -32,11 +32,19 @@ export class SecurityService {
     return this.http.patch('http://localhost:8080/api/public/personal/change-password', changePasswordRequest);
   }
 
-  findAccountByUserName(username: string): Observable<any> {
-    return this.http.get<any>('http://localhost:8080/api/public/find-by-username?username=' + username);
+  findAccountByEmail(email: string): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/api/public/find-by-email', email);
   }
 
-  checkChangePasswordCode(username: string, code: string) {
-    return this.http.get<any>('http://localhost:8080/api/public/check-code?username=' + username + '&code=' + code);
+  checkChangePasswordCode(checkVerificationCodeRequest: any) {
+    return this.http.post<any>('http://localhost:8080/api/public/check-code', checkVerificationCodeRequest);
+  }
+
+  resetPassword(resetPasswordRequest: any): Observable<any> {
+    return this.http.patch<any>('http://localhost:8080/api/public/reset-password', resetPasswordRequest);
+  }
+
+  refreshChangePasswordCode(email: string) {
+    return this.http.patch('http://localhost:8080/api/public/refresh-code', email);
   }
 }

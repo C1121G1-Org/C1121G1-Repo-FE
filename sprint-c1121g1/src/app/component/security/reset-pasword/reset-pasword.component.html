@@ -1,6 +1,6 @@
+<div class="p-1"></div>
 <div class="d-flex justify-content-center">
-
-  <div class="col-9">
+  <div class="col-6">
     <div class="row">
       <div class="col-md-12">
         <div class="card border border-light" style="background-color: #f6f6f8; border-radius: 5px">
@@ -8,7 +8,7 @@
             <h4 class="card-title" style="font-size: 40px">Đổi mật khẩu</h4>
             <p>Thay đổi mật khẩu cho tài khoản của bạn. Bạn nên đặt mật khẩu mạnh để chặn những truy cập
               trái phép vào tài khoản của mình</p>
-            <form [formGroup]="changePasswordForm" (ngSubmit)="update(openSuccessModalBtn, closeModalBtn, errorModalBtn, closeErrorModalBtn)">
+            <form [formGroup]="changePasswordForm" (ngSubmit)="updatePassword(openSuccessModalBtn, closeModalBtn, errorModalBtn, closeErrorModalBtn)">
               <div class="row" style="padding: 15px 50px">
                 <div class="col-md-12">
 
@@ -45,6 +45,47 @@
             </form>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="p-1"></div>
+
+<button [hidden]="true" #openSuccessModalBtn data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Tuyệt!</h4>
+        <p>Thay đổi mật khẩu thành công.</p>
+        <button #closeModalBtn [routerLink]="['/login']" type="button" class="btn btn-danger" id="delete_btn" data-dismiss="modal" >Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
+<!--error modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Ooops!</h4>
+        <p>Đã có lỗi xảy ra !!!</p>
+        <button #closeErrorModalBtn class="btn btn-success" data-dismiss="modal">Thử lại</button>
       </div>
     </div>
   </div>

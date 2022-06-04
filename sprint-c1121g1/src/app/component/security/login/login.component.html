@@ -8,11 +8,19 @@
     <div class="form-group ">
       <label for="username"><h4>Tài khoản</h4></label>
       <input type="email" class="form-control form-control-lg" id="username" aria-describedby="emailHelp" formControlName="username">
+      <div *ngIf="usernameForm?.touched">
+        <p class="text-danger" *ngIf="usernameForm?.errors?.required">Vui lòng nhập tên tài khoản.</p>
+        <p class="text-danger" *ngIf="usernameForm?.errors?.maxlength">Vui lòng đúng định dạng.</p>
+      </div>
     </div>
 
     <div class="form-group ">
       <label for="password"><h4>Mật khẩu</h4></label>
       <input type="password" class="form-control form-control-lg" id="password" formControlName="password">
+      <div *ngIf="password?.touched">
+        <p class="text-danger" *ngIf="password?.errors?.required">Vui lòng nhập mật khẩu.</p>
+        <p class="text-danger" *ngIf="password?.errors?.maxlength">Vui lòng đúng định dạng.</p>
+      </div>
     </div>
     <p class="text-danger">{{errorMessage}}</p>
 
@@ -33,7 +41,7 @@
     </div>
 
     <!-- Submit button -->
-    <input type="submit" class="btn btn-outline-danger btn-block mb-4 btn-lg" value="Đăng nhập">
+    <input [disabled]="!loginForm.valid" type="submit" class="btn btn-outline-danger btn-block mb-4 btn-lg" value="Đăng nhập">
   </form>
 </div>
 <div class="p-4"></div>

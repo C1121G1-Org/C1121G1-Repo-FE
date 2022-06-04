@@ -8,10 +8,12 @@
             <p>Quản lý thông tin cá nhân của bạn</p>
             <form [formGroup]="personalInformationForm" (ngSubmit)="update(openSuccessModalBtn, closeModalBtn)">
               <div class="row" style="padding: 10px 50px">
-                <div style="display: flex; justify-content: center" class="col-md-12 pb-4">
-                  <img
-                    src="{{imageLink}}"
-                    class="rounded-circle" width="100">
+                <div style="display: flex ; justify-content: center" class="col-md-12 pb-4">
+                  <input name="image" id="image" type="file" class="file__input" (change)="showReview($event)" >
+                  <img class="avatar rounded-circle" style="height: 128px; width: 128px;" src="{{imageLink}}" alt="personal-ava">
+                  <label for="image" class="file__label">
+                    <i class="fa fa-upload"></i>
+                  </label>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
@@ -55,8 +57,8 @@
                 </div>
               </div>
               <div class="text-center">
-                <button type="button" class="btn btn-danger mx-1">Hủy bỏ</button>
-                <button [disabled]="!personalInformationForm.valid" type="submit" class="btn btn-primary mx-1"><i class="fa fa-paper-plane"></i> Cập nhật
+                <button [routerLink]="['']" type="button" class="btn btn-danger mx-1">Hủy bỏ</button>
+                <button (click)="changeSpinFlag()" [disabled]="!personalInformationForm.valid" type="submit" class="btn btn-primary mx-1"><i *ngIf="!spinFlag" class="fa fa-paper-plane"></i> <span *ngIf="spinFlag" class="spinner-border spinner-border-sm" role="status"></span> Cập nhật
                 </button>
               </div>
             </form>

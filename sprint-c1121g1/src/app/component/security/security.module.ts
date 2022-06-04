@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SecurityRoutingModule } from './security-routing.module';
 import { LoginComponent } from './login/login.component';
 import {RouterModule} from '@angular/router';
@@ -10,17 +9,22 @@ import { PersonalInformationComponent } from './personal-information/personal-in
 import { ChangePersonalPasswordComponent } from './change-personal-password/change-personal-password.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPaswordComponent } from './reset-pasword/reset-pasword.component';
+import { ErrorPageComponent } from './error-page/error-page.component';
+import {CountdownModule} from 'ngx-countdown';
+
 
 
 @NgModule({
-  declarations: [LoginComponent, PersonalInformationComponent, ChangePersonalPasswordComponent, ForgotPasswordComponent, ResetPaswordComponent],
+  declarations: [LoginComponent, PersonalInformationComponent, ChangePersonalPasswordComponent,
+    ForgotPasswordComponent, ResetPaswordComponent, ErrorPageComponent],
   imports: [
     CommonModule,
     SecurityRoutingModule,
     RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    CountdownModule
   ]
 })
 export class SecurityModule { }
