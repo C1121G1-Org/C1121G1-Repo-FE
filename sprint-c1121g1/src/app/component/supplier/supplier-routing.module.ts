@@ -5,7 +5,7 @@ import {SupplierCreateComponent} from './supplier-create/supplier-create.compone
 
 const routes: Routes = [
   {
-    path: 'supplier/create',
+    path: 'supplier',
     component: SupplierCreateComponent
   }
 ];
