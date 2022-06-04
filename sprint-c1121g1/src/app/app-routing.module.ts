@@ -1,12 +1,11 @@
-
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {ProductListBestsellerComponent} from './component/homepage/product-list-bestseller/product-list-bestseller.component';
 
-import { StorageCreateComponent } from './component/storage/storage-create/storage-create.component';
+import {StorageCreateComponent} from './component/storage/storage-create/storage-create.component';
 
 import {ProductCreateComponent} from './component/product/product-create/product-create.component';
-
+import {ReportModule} from "./component/report/report.module";
 
 
 const routes: Routes = [
@@ -17,7 +16,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes),
+    ReportModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

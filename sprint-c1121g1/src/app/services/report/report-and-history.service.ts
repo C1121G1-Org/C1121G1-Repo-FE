@@ -29,12 +29,12 @@ export class ReportAndHistoryService {
       'http://localhost:8080/api/customer/info-customer/' + id);
   }
 
-  getPurchaseHistory(id: number, page: number): Observable<PurchaseHistoryDto[]> {
+  getPurchaseHistory(id: number, page: number): Observable<any> {
     return this.httpClient.get<PurchaseHistoryDto[]>(
       'http://localhost:8080/api/customer/purchase-history/' + id + '?page=' + page);
   }
 
-  getPurchaseProduct(id: number, page: number): Observable<PurchaseProductDto[]> {
+  getPurchaseProduct(id: number, page: number): Observable<any> {
     return this.httpClient.get<PurchaseProductDto[]>(
       'http://localhost:8080/api/customer/purchase-products/' + id + '?page=' + page);
   }

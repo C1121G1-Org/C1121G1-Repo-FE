@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {SaleReportComponent} from './sale-report/sale-report.component';
 
 import {CustomerReportComponent} from './customer-report/customer-report.component';
 import {PurchaseHistoryComponent} from './purchase-history/purchase-history.component';
-
 
 
 /*
@@ -14,7 +13,6 @@ import {PurchaseHistoryComponent} from './purchase-history/purchase-history.comp
 */
 
 const routes: Routes = [
-
 
 
   {path: 'sale-report/list', component: SaleReportComponent},
@@ -42,4 +40,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ReportRoutingModule { }
+export class ReportRoutingModule {
+}
