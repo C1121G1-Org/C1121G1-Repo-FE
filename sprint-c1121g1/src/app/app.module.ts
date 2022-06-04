@@ -15,19 +15,26 @@ import {HomepageModule} from './component/homepage/homepage.module';
 import {ReportModule} from './component/report/report.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
+
+import { QrcodeComponent } from './common/qrcode/qrcode.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
+
 import {HttpClientModule} from '@angular/common/http';
-import {Validators} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    QrcodeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     EmployeeModule,
     ProductModule,
     CustomerModule,

@@ -12,3 +12,4 @@ export interface Product {
   otherDescription?: string;
   deleteFlag?: boolean;
 }
+

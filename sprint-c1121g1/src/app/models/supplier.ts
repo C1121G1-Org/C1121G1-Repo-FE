@@ -5,4 +5,5 @@ export interface Supplier{
   phone?: string;
   email?: string;
   deleteFlag?: boolean;
+
 }
