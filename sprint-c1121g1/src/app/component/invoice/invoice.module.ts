@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { InvoiceHistoryComponent } from './invoice-history/invoice-history.component';
 import { InvoiceCreateComponent } from './invoice-create/invoice-create.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import {FormsModule} from "@angular/forms";
     imports: [
         CommonModule,
         InvoiceRoutingModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class InvoiceModule { }

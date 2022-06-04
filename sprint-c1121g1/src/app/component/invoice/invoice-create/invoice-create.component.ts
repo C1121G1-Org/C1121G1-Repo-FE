@@ -1,30 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Product} from "../../../models/product";
+import {ProductService} from "../../../services/product/product.service";
+import {ProductInvoice} from "../../../dto/productInvoice";
+import {InvoiceDetail} from "../../../dto/InvoiceDetail";
+import {InvoiceService} from "../../../services/invoice/invoice.service";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-
+import {error} from "@angular/compiler/src/util";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-class Product{
-  name: string;
-  price: number;
-  qty: number;
-}
-class Invoice{
-  customerName: string;
-  address: string;
-  contactNo: number;
-  email: string;
 
-  products: Product[] = [];
-  additionalDetails: string;
-
-  constructor(){
-    // Initially one empty product row we will show
-    this.products.push(new Product());
-  }
-}
-
-
+/*
+ Created by LongNHL
+ Time: 9:30 2/06/2022
+ Function: create invoice
+ */
 @Component({
   selector: 'app-invoice-create',
   templateUrl: './invoice-create.component.html',
@@ -32,19 +23,141 @@ class Invoice{
 })
 export class InvoiceCreateComponent implements OnInit {
 
-  invoice = new Invoice();
 
+  invoiceForm: FormGroup;
+
+
+  currentProduct: Product;
+
+  productList: Product[] = [];
+  selectedProduct: Product;
+  invoiceDetail: InvoiceDetail;
+  printInvoice: string;
+  money: string;
+
+  constructor(private fb: FormBuilder,
+              private productService: ProductService,
+              private invoiceService: InvoiceService) {
+    this.invoiceForm = this.fb.group({
+      payments: this.fb.control('', [Validators.required]),
+      totalMoney: this.fb.control('', [Validators.required]),
+      customerDto: this.fb.group({
+        id: this.fb.control(''),
+        customerName: this.fb.control('', [Validators.required]),
+        phoneNumber: this.fb.control('', [Validators.required]),
+        dateOfBirth: this.fb.control('', [Validators.required]),
+        address: this.fb.control('', [Validators.required]),
+        email: this.fb.control('', [Validators.required]),
+        gender: this.fb.control('', [Validators.required]),
+      }),
+      products: this.fb.array(this.productList.map(product => this.createProducts(product))
+      ),
+    });
+
+  }
+
+
+  ngOnInit(): void {
+    this.getAllProduct();
+  }
+
+  private createProducts(product: any) {
+    return this.fb.group({
+      id: [product.id],
+      name: [product.name],
+      price: [product.price],
+      quantity: ['', [Validators.required]]
+    });
+  }
+
+  get products() {
+    return <FormArray>this.invoiceForm.get('products')
+  }
+
+  get customerDto() {
+    return <FormGroup>this.invoiceForm.get('customerForm')
+  }
+
+
+  deleteProduct(i: number) {
+    this.products.removeAt(i);
+  }
+
+  getProduct(product: Product) {
+    this.currentProduct = product;
+  }
+
+  getTotalMoney() {
+    this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
+  }
+
+  getAllProduct() {
+    this.productService.getAll().subscribe(data => {
+      this.productList = data;
+    });
+  }
+
+  isSelectedProduct(product: Product) {
+    this.selectedProduct = product;
+    // console.log(this.selectedProduct);
+    // tslint:disable-next-line:triple-equals
+    if (!this.currentProduct) {
+      return false;
+    }
+    return this.currentProduct.name === this.selectedProduct.name ? true : false;
+  }
+
+  //
+  chooseProduct() {
+    let productForm = this.createProducts(this.currentProduct)
+    console.log(productForm);
+    this.products.push(productForm);
+    console.log(this.products.getRawValue());
+  }
+
+
+  createInvoice() {
+    if (this.printInvoice == 'yes') {
+      this.generatePDF('yes');
+    }
+    this.invoiceDetail = this.invoiceForm.value;
+    this.invoiceDetail.totalMoney = this.money;
+    console.log(this.invoiceDetail);
+    console.log(this.print);
+    this.invoiceService.updateQuantity(this.invoiceDetail).subscribe(() => {
+      this.invoiceService.createInvoice(this.invoiceDetail).subscribe(() => {
+        this.invoiceForm.reset();
+        alert("thêm mới thành công")
+        if (this.printInvoice == 'yes') {
+          this.generatePDF('yes');
+        }
+      }, error => {
+        console.log(error);
+      })
+    }, error => {
+      console.log(error)
+    });
+
+  }
+
+
+  /*
+   Created by LongNHL
+   Time: 9:30 2/06/2022
+   Function: prince PDF
+   */
+  docDefinition: any;
   generatePDF(action) {
-    let docDefinition = {
+    this.docDefinition = {
       content: [
         {
-          text: 'ELECTRONIC SHOP',
+          text: 'C1121G1 SHOP',
           fontSize: 16,
           alignment: 'center',
           color: '#047886'
         },
         {
-          text: 'INVOICE',
+          text: 'Hóa đơn mua bán di động',
           fontSize: 20,
           bold: true,
           alignment: 'center',
@@ -52,34 +165,33 @@ export class InvoiceCreateComponent implements OnInit {
           color: 'skyblue'
         },
         {
-          text: 'Customer Details',
+          text: 'Chi tiết khách hàng',
           style: 'sectionHeader'
         },
         {
           columns: [
             [
               {
-                text: this.invoice.customerName,
-                bold:true
+                text: this.invoiceForm.getRawValue().customerName,
+                bold: true
               },
-              { text: this.invoice.address },
-              { text: this.invoice.email },
-              { text: this.invoice.contactNo }
+              {text: this.invoiceForm.getRawValue().address},
+              {text: this.invoiceForm.getRawValue().email},
             ],
             [
               {
-                text: `Date: ${new Date().toLocaleString()}`,
+                text: `Ngày: ${new Date().toLocaleString()}`,
                 alignment: 'right'
               },
               {
-                text: `Bill No : ${((Math.random() *1000).toFixed(0))}`,
+                text: `No.: ${((Math.random() * 1000).toFixed(0))}`,
                 alignment: 'right'
               }
             ]
           ]
         },
         {
-          text: 'Order Details',
+          text: 'Chi tiết đơn hàng',
           style: 'sectionHeader'
         },
         {
@@ -88,34 +200,37 @@ export class InvoiceCreateComponent implements OnInit {
             widths: ['*', 'auto', 'auto', 'auto'],
             body: [
               ['Product', 'Price', 'Quantity', 'Amount'],
-              ...this.invoice.products.map(p => ([p.name, p.price, p.qty, (p.price*p.qty).toFixed(2)])),
-              [{text: 'Total Amount', colSpan: 3}, {}, {}, this.invoice.products.reduce((sum, p)=> sum + (p.qty * p.price), 0).toFixed(2)]
+              ...this.products.getRawValue().map(p => ([p.name, p.price, p.qty, (p.price * p.quantity).toFixed(2)])),
+              [{
+                text: 'Total Amount',
+                colSpan: 3
+              }, {}, {}, this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2)]
             ]
           }
         },
         {
-          text: 'Additional Details',
+          text: 'Chi tiết bổ sung',
           style: 'sectionHeader'
         },
         {
-          text: this.invoice.additionalDetails,
-          margin: [0, 0 ,0, 15]
+          text: 'Bổ sung chi tiết',
+          margin: [0, 0, 0, 15]
         },
         {
           columns: [
-            [{ qr: `${this.invoice.customerName}`, fit: '50' }],
-            [{ text: 'Signature', alignment: 'right', italics: true}],
+            [{qr: `${this.invoiceForm.getRawValue().customerName}`, fit: '50'}],
+            [{text: 'Signature', alignment: 'right', italics: true}],
           ]
         },
         {
-          text: 'Terms and Conditions',
+          text: 'Các điều khoản và điều kiện',
           style: 'sectionHeader'
         },
         {
           ul: [
-            'Order can be return in max 10 days.',
-            'Warrenty of the product will be subject to the manufacturer terms and conditions.',
-            'This is system generated invoice.',
+            'Đơn hàng có thể được trả lại sau không quá 10 ngày.',
+            'Việc bảo hành sản phẩm sẽ tùy thuộc vào các điều khoản và điều kiện của nhà sản xuất.',
+            'Đây là hóa đơn do hệ thống tạo.',
           ],
         }
       ],
@@ -124,29 +239,18 @@ export class InvoiceCreateComponent implements OnInit {
           bold: true,
           decoration: 'underline',
           fontSize: 14,
-          margin: [0, 15,0, 15]
+          margin: [0, 15, 0, 15]
         }
       }
     };
-
-    if(action==='download'){
-      pdfMake.createPdf(docDefinition).download();
-    }else if(action === 'print'){
-      pdfMake.createPdf(docDefinition).print();
-    }else{
-      pdfMake.createPdf(docDefinition).open();
+    if (action === 'yes') {
+      pdfMake.createPdf(this.docDefinition).download();
     }
-
   }
 
-  addProduct(){
-    this.invoice.products.push(new Product());
+  print(yes: string) {
+    this.printInvoice = yes;
   }
 
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
