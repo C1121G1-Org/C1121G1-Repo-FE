@@ -1,0 +1,13 @@
+.shadow {
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.btn btn-danger {
+  background-color: #D70018;
+  color: white;
+}
+.heightLight{
+  background-color: black;
+}
+
+

@@ -1,1 +1,273 @@
-<p>invoice-create works!</p>
+<form [formGroup]="invoiceForm" (ngSubmit)="createInvoice()">
+  <div class="container pt-2" >
+    <div class="row">
+      <div class="col-md-12 " >
+        <div class="card border-secondary shadow"  >
+          <div class="card-body" >
+            <h4 class="card-title">Thông tin khách hàng</h4>
+            <div class="row" formGroupName="customerDto">
+              <div class="col-md-8">
+<!--                <input type="hidden" formControlName="id">-->
+                <div class="form-group">
+                  <label for="name">Họ và tên</label>
+                  <input type="text" class="form-control" name="name" id="name" formControlName="customerName">
+                  <div *ngIf="invoiceForm.get('customerName')?.errors?.required">
+                    <span>Vui lòng nhập tên khách hàng</span>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="address">Địa chỉ</label>
+                  <textarea class="form-control" name="address" id="address" row="3" formControlName="address"></textarea>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" name="email" id="email" formControlName="email">
+                </div>
+                <div class="form-group">
+                  <label for="contactNo">Số điện thoại</label>
+                  <input type="text" class="form-control" name="contactNo" id="contactNo" formControlName="phoneNumber">
+                </div>
+                <div class="form-group">
+                  <label for="contactNo">Ngày sinh</label>
+                  <input type="date" class="form-control" name="contactNo" id="Age" formControlName="dateOfBirth">
+                </div>
+                <div>
+                  <label for="rdo1" style="margin-right: 10px">
+                    <input type="radio" id="rdo1" formControlName="gender" name="gender" value="True"  >
+                    <span class="rdo"></span>
+                    <span>Nam</span>
+                  </label>
+                  <label for="rdo2">
+                    <input type="radio" id="rdo2" formControlName="gender" name="gender" value="False"  >
+                    <span class="rdo"></span>
+                    <span>Nữ</span>
+                  </label>
+<!--                  <div *ngIf="gender.invalid&&(gender.touched||gender.dirty)">-->
+<!--                    <p [hidden]="!gender.errors.required">-->
+<!--                      <span style="color: red">Không được bỏ trống</span>-->
+<!--                    </p>-->
+<!--                  </div>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card border-secondary mt-2 shadow">
+          <div class="card-body">
+            <h4 class="card-title d-flex justify-content-between">Thông tin sản phẩm
+              <button type="button"
+                      class="btn btn-outline-secondary">Quét mã Qr
+              </button>
+              <button type="button"
+                      class="btn btn-outline-secondary" data-toggle="modal" data-target="#productModal">+ Thêm sản phẩm
+              </button>
+            </h4>
+            <div class="row">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th width="25%">Tên sản phẩm</th>
+                  <th width="25%">Giá</th>
+                  <th width="25%">Số lượng</th>
+                  <th width="25%"></th>
+                </tr>
+                </thead>
+                <tbody formArrayName="products">
+                <tr *ngFor="let product of products.controls; let  i = index" [formGroupName]="i">
+                  <input type="hidden" formGroupName="id">
+                  <td scope="row">
+                    <input type="text" class="form-control" name="productName" id="productName" formControlName="name">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" name="price" id="price" formControlName="price">
+                  </td>
+                  <td>
+                    <input type="number" class="form-control" name="quantity" id="quantity" formControlName="quantity" (change)="getTotalMoney()">
+                  </td>
+                  <td>
+                    <button type="button"
+                            class="btn btn-outline-secondary" (click)="deleteProduct(i)"> Xóa sản phẩm
+                    </button>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card border-secondary mt-2 mb-4 shadow">
+          <div class="mt-5 mb-2 ml-5 mr-5">
+            <div class="form-group row">
+              <label for="inputEmail3" class="col-sm-2 col-form-label" >Thành tiền</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputEmail3" value="{{money}}" readonly>
+              </div>
+            </div>
+            <fieldset class="form-group row">
+              <legend class="col-form-label col-sm-2 float-sm-left pt-0">Hình thức thanh toán</legend>
+              <div class="col-sm-10">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payments" id="gridRadios1"
+                         value="Tiền mặt" formControlName="payments" checked>
+                  <label class="form-check-label" for="gridRadios1">
+                    Tiền mặt
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payments" id="gridRadios2"
+                         value="Dùng thẻ" formControlName="payments">
+                  <label class="form-check-label" for="gridRadios2">
+                    Dùng thẻ
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-group row">
+              <div class="col-sm-10 offset-sm-2">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="gridCheck1" name="price" (click)="print('yes')">
+                  <label class="form-check-label" for="gridCheck1">
+                    In hóa đơn
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group row ">
+              <div class="col-sm-12 text-center" style="">
+                <button type="submit" class="btn btn-danger">Tiến hành thanh toán</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+<!--modal product-->
+<div class="modal fade" id="productModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="card card-body">
+          <h3 class="text-center font-weight-bold text-uppercase  py-4">
+            Quản Lý Danh Sách Nhà Cung Cấp
+          </h3>
+        </div>
+        <div class="card card-body">
+          <div class="table-editable">
+            <div class="row">
+              <div class="col-12">
+                <div class="mb-3" style="display: flex; justify-content: space-evenly">
+                  <div>
+                    <p style="margin-top: 10px">Tìm kiếm theo: </p>
+                  </div>
+                  <div>
+                    <select class="search-select background-search">
+                      <option value="">Tên sản phẩm</option>
+                      <option value="">Số giá</option>
+                    </select>
+                  </div>
+
+                  <div style="position: relative">
+                    <input style="width: 300px" class="header-search search-input background-search"
+                           placeholder="Bạn cần tìm gì?"
+                           type="text"><i
+                    class="fa fa-search"
+                    style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
+                  </div>
+                  <div>
+                    <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm
+                      kiếm
+                    </button>
+                  </div>
+                </div>
+                <!--                search-->
+
+              </div>
+            </div>
+            <div>
+              <div class="tbl-header">
+                <table class="table table-bordered table-responsive-md ">
+                  <thead>
+                  <tr>
+                    <th class="text-center">STT</th>
+                    <th class="text-center">Tên Sản Phẩm</th>
+                    <th class="text-center">Mã Sản Phẩm</th>
+                    <th class="text-center">Giá(VND)</th>
+                    <th class="text-center">CPU</th>
+                    <th class="text-center">Lưu Trữ</th>
+                  </tr>
+                  </thead>
+                </table>
+              </div>
+              <div class="tbl-content">
+                <table class=" table table-bordered table-responsive-md">
+                  <tbody>
+                  <tr (click)="getProduct(product)" *ngFor="let product of productList; index as i"
+                      [class.heightLight]="isSelectedProduct(product)">
+                    <td class="text-center">{{(i + 1)}}</td>
+                    <td class="pt-3-half">{{product.name}}</td>
+                    <td class="pt-3-half">{{product.id}}</td>
+                    <td class="text-center">{{product.price}}</td>
+                    <td class="pt-3-half">{{product.cpu}}</td>
+                    <td class="pt-3-half">{{product.memory}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-6">
+                  <button (click)="chooseProduct()" type="button" class="btn-edit btn-rounded  btn-lg my-0">
+                    <i class="fa fa-paper-plane"></i>
+                    Chọn
+                  </button>
+                  <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
+                          data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
+                  </button>
+                </div>
+
+                <div class="col-6">
+                  <!--Pagination-->
+                  <nav class="d-flex justify-content-center wow fadeIn float-right">
+                    <ul class="pagination pg-blue">
+
+                      <!--Arrow left-->
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" aria-label="Previous">
+                          <span aria-hidden="true">&laquo;</span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                      </li>
+
+                      <li class="page-item active">
+                        <a class="page-link" href="#">1
+                          <span class="sr-only">(current)</span>
+                        </a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                      </li>
+                      <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                          <span aria-hidden="true">&raquo;</span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </nav>
+                  <!--Pagination-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--modal product-->

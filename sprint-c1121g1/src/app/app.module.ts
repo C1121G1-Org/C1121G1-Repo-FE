@@ -13,11 +13,19 @@ import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
 import {ReportModule} from './component/report/report.module';
+import {SecurityModule} from './component/security/security.module';
+import {HttpClientModule} from '@angular/common/http';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+
+// import {FormGroup} from "@angular/forms";
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -29,7 +37,10 @@ import {ReportModule} from './component/report/report.module';
     SupplierModule,
     StorageModule,
     HomepageModule,
-    ReportModule
+    ReportModule,
+    SecurityModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,9 @@
+
 import {Component, OnInit} from '@angular/core';
 import {InvoiceService} from '../../../services/invoice/invoice.service';
 import {InvoiceDto} from '../../../dto/invoiceDto';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+
 
 
 @Component({
@@ -32,7 +34,6 @@ export class InvoiceHistoryComponent implements OnInit {
   Date : 04/06/2022
   Function: Search,Pageable
 */
-
   ngOnInit(): void {
     this.getSearch('', '', this.page);
   }
