@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {InvoiceDto} from '../../dto/invoiceDto';
 
 
 
@@ -13,14 +12,14 @@ export class InvoiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAll(): Observable<InvoiceDto[]> {
-    return this.httpClient.get<InvoiceDto[]>(`${this.URl}`);
+  /*
+Created by CongNV
+Date : 04/06/2022
+Function: Search,Pageable
+*/
+
+  getAll(keyword: string, sort: string, page: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.URl}?keyword=${keyword}&sort=${sort}&page=${page}`);
   }
-
-  getSearch(value1: string, value2: string , value3: string , value4: string, page: number): Observable<InvoiceDto[]> {
-    return this.httpClient.get<InvoiceDto[]>(this.URl + '/');
-  }
-
-
 
 }

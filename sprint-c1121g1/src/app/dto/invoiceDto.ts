@@ -10,4 +10,11 @@ export interface InvoiceDto {
   productName?: string;
   totalMoney?: number;
   quantity?: number;
+  invoiceDetailId?: string;
+
+  /*
+Created by CongNV
+Date : 04/06/2022
+Function: Search,Pageable
+*/
 }

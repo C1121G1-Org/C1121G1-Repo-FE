@@ -7,6 +7,7 @@ import {InvoiceCreateComponent} from './invoice-create/invoice-create.component'
 import {PurchaseHistoryComponent} from './purchase-history/purchase-history.component';
 import {CustomerReportComponent} from './customer-report/customer-report.component';
 import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
@@ -20,6 +21,8 @@ import {HttpClientModule} from '@angular/common/http';
     CommonModule,
     InvoiceRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
 
   ]
 })
