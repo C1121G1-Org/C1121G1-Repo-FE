@@ -133,7 +133,7 @@ Function: get list product bestseller from database
                   <p>Siêu hot</p></li>
                 <li>{{productBestseller.name}}</li>
                 <li>{{productBestseller.price | currency: "VND"}}</li>
-                <li><a>{{productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
+                <li><a>{{productBestseller.price + productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
                 <li>Giảm 440.000<sup>đ</sup> khi thanh toán qua Moca</li>
                 <li>
                   <i class="fas fa-star"></i>
@@ -155,7 +155,7 @@ Function: get list product bestseller from database
                   <p>Siêu hot</p></li>
                 <li>{{productBestseller.name}}</li>
                 <li>{{productBestseller.price | currency: "VND"}}</li>
-                <li><a>{{productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
+                <li><a>{{productBestseller.price + productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
                 <li>Giảm 440.000<sup>đ</sup> khi thanh toán qua Moca</li>
                 <li>
                   <i class="fas fa-star"></i>
