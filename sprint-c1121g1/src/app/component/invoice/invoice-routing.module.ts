@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {InvoiceCreateComponent} from "./invoice-create/invoice-create.component";
+import {InvoiceHistoryComponent} from './invoice-history/invoice-history.component';
+import {InvoiceCreateComponent} from './invoice-create/invoice-create.component';
 
 
 const routes: Routes = [
-  {path: "invoice", component: InvoiceCreateComponent}
+  {path: 'listInvoice', component: InvoiceHistoryComponent},
+  {path: 'invoice', component: InvoiceCreateComponent}
 ];
 
 @NgModule({

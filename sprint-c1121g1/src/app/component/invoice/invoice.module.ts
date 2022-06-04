@@ -1,10 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+
+
 
 import { InvoiceRoutingModule } from './invoice-routing.module';
 import { InvoiceHistoryComponent } from './invoice-history/invoice-history.component';
 import { InvoiceCreateComponent } from './invoice-create/invoice-create.component';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 
 
 @NgModule({
@@ -19,4 +22,5 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         ReactiveFormsModule
     ]
 })
-export class InvoiceModule { }
+export class InvoiceModule {
+}

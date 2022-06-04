@@ -71,11 +71,11 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
   get products() {
-    return <FormArray>this.invoiceForm.get('products')
+    return <FormArray> this.invoiceForm.get('products');
   }
 
   get customerDto() {
-    return <FormGroup>this.invoiceForm.get('customerForm')
+    return < FormGroup>this.invoiceForm.get('customerForm');
   }
 
 
@@ -109,7 +109,7 @@ export class InvoiceCreateComponent implements OnInit {
 
   //
   chooseProduct() {
-    let productForm = this.createProducts(this.currentProduct)
+    const productForm = this.createProducts(this.currentProduct);
     console.log(productForm);
     this.products.push(productForm);
     console.log(this.products.getRawValue());
@@ -127,13 +127,13 @@ export class InvoiceCreateComponent implements OnInit {
     this.invoiceService.updateQuantity(this.invoiceDetail).subscribe(() => {
       this.invoiceService.createInvoice(this.invoiceDetail).subscribe(() => {
         this.invoiceForm.reset();
-        alert("thêm mới thành công")
-        if (this.printInvoice == 'yes') {
+        alert('thêm mới thành công');
+        if (this.printInvoice === 'yes') {
           this.generatePDF('yes');
         }
       }, error => {
         console.log(error);
-      })
+      });
     }, error => {
       console.log(error)
     });
