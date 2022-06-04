@@ -1,8 +1,8 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+
 import {SaleReportService} from '../../../services/report/sale-report.service';
 import {QrcodeService} from '../../../services/qrcode/qrcode.service';
 import {ProductService} from '../../../services/product/product.service';
-import {SaleReport} from '../../report/model/sale-report';
 import {Product} from '../../../models/product';
 
 /*
@@ -16,6 +16,7 @@ import {Product} from '../../../models/product';
   templateUrl: './qr-code.component.html',
   styleUrls: ['./qr-code.component.css']
 })
+
 export class QrCodeComponent implements OnInit {
 
   @Output()
