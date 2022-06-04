@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from '@angular/core';
 import {ReportCustomerDto} from '../../../dto/report-customer-dto';
 import {ReportAndHistoryService} from '../../../services/report/report-and-history.service';
@@ -16,7 +15,7 @@ export class CustomerReportComponent implements OnInit {
   pageNumber = 0;
   totalPages = 0;
 
-  chooseFilter: number;
+  chooseFilter = 1;
 
   chooseGenderSearch = false;
   chooseAgeSearch = false;
@@ -35,8 +34,8 @@ export class CustomerReportComponent implements OnInit {
 
 
   filterAllCustomerReport() {
+
     this.reportService.filterAllCustomerReport(this.pageNumber).subscribe(customerReports => {
-      console.log(this.checkReportCustomers);
 
       this.checkReportCustomers = true;
 
@@ -64,7 +63,6 @@ export class CustomerReportComponent implements OnInit {
   filterByAge() {
     this.reportService.filterByAge(this.pageNumber, this.ageSearch)
       .subscribe(customerReports => {
-        console.log(customerReports);
         if (customerReports == null) {
           this.checkReportCustomers = false;
         } else {
@@ -74,7 +72,6 @@ export class CustomerReportComponent implements OnInit {
           this.totalPages = customerReports.totalPages;
           this.pageNumber = customerReports.pageabel.pageNumber;
         }
-        console.log(this.checkReportCustomers);
       });
   }
 
@@ -94,25 +91,112 @@ export class CustomerReportComponent implements OnInit {
   }
 
   previousPage() {
-    this.reportService.filterAllCustomerReport(this.pageNumber - 1).subscribe(customerReports => {
-      this.customerReports = customerReports.content;
-      if (this.pageNumber - 1 <= 0) {
-        this.pageNumber = 0;
+    if (this.chooseFilter === 1) {
+      this.reportService.filterAllCustomerReport(this.pageNumber - 1).subscribe(customerReports => {
+        this.customerReports = customerReports.content;
+        if (this.pageNumber - 1 <= 0) {
+          this.pageNumber = 0;
+        } else {
+          this.pageNumber = this.pageNumber - 1;
+        }
+      });
+    } else if (this.chooseFilter === 2) {
+      if (this.chooseGenderSearch === true) {
+        if (this.chooseAgeSearch === true) {
+          this.reportService.filterByGenderAndAge(
+            this.pageNumber - 1, this.genderSearch, this.ageSearch)
+            .subscribe(customerReports => {
+              this.customerReports = customerReports.content;
+              if (this.pageNumber - 1 <= 0) {
+                this.pageNumber = 0;
+              } else {
+                this.pageNumber = this.pageNumber - 1;
+              }
+            });
+        } else {
+          this.reportService.filterByGender(
+            this.pageNumber - 1, this.genderSearch)
+            .subscribe(customerReports => {
+              this.customerReports = customerReports.content;
+              if (this.pageNumber - 1 <= 0) {
+                this.pageNumber = 0;
+              } else {
+                this.pageNumber = this.pageNumber - 1;
+              }
+            });
+        }
       } else {
-        this.pageNumber = this.pageNumber - 1;
+        if (this.chooseAgeSearch === true) {
+          this.reportService.filterByAge(
+            this.pageNumber - 1, this.ageSearch)
+            .subscribe(customerReports => {
+              this.customerReports = customerReports.content;
+              if (this.pageNumber - 1 <= 0) {
+                this.pageNumber = 0;
+              } else {
+                this.pageNumber = this.pageNumber - 1;
+              }
+            });
+        } else {
+          console.log('Chưa chọn lọc cách search');
+        }
       }
-    });
+    }
   }
 
   nextPage() {
-    this.reportService.filterAllCustomerReport(this.pageNumber + 1).subscribe(customerReports => {
-      this.customerReports = customerReports.content;
-      if (this.pageNumber + 1 >= this.totalPages) {
-        this.pageNumber = this.totalPages - 1;
+
+    if (this.chooseFilter === 1) {
+      this.reportService.filterAllCustomerReport(this.pageNumber + 1).subscribe(customerReports => {
+        this.customerReports = customerReports.content;
+        if (this.pageNumber + 1 >= this.totalPages) {
+          this.pageNumber = this.totalPages - 1;
+        } else {
+          this.pageNumber = this.pageNumber + 1;
+        }
+      });
+    } else if (this.chooseFilter === 2) {
+      if (this.chooseGenderSearch === true) {
+        if (this.chooseAgeSearch === true) {
+          this.reportService.filterByGenderAndAge(
+            this.pageNumber + 1, this.genderSearch, this.ageSearch)
+            .subscribe(customerReports => {
+              this.customerReports = customerReports.content;
+              if (this.pageNumber + 1 >= this.totalPages) {
+                this.pageNumber = this.totalPages - 1;
+              } else {
+                this.pageNumber = this.pageNumber + 1;
+              }
+            });
+        } else {
+          this.reportService.filterByGender(
+            this.pageNumber + 1, this.genderSearch)
+            .subscribe(customerReports => {
+              this.customerReports = customerReports.content;
+              if (this.pageNumber + 1 >= this.totalPages) {
+                this.pageNumber = this.totalPages - 1;
+              } else {
+                this.pageNumber = this.pageNumber + 1;
+              }
+            });
+        }
       } else {
-        this.pageNumber = this.pageNumber + 1;
+        if (this.chooseAgeSearch === true) {
+          this.reportService.filterByAge(
+            this.pageNumber + 1, this.ageSearch)
+            .subscribe(customerReports => {
+              this.customerReports = customerReports.content;
+              if (this.pageNumber + 1 >= this.totalPages) {
+                this.pageNumber = this.totalPages - 1;
+              } else {
+                this.pageNumber = this.pageNumber + 1;
+              }
+            });
+        } else {
+          console.log('Chưa chọn lọc cách search');
+        }
       }
-    });
+    }
   }
 
   filterVariable(element: HTMLInputElement) {
@@ -136,6 +220,8 @@ export class CustomerReportComponent implements OnInit {
   }
 
   filter() {
+    this.pageNumber = 0;
+
     if (this.chooseFilter === 1) {
       this.filterAllCustomerReport();
     } else if (this.chooseFilter === 2) {
@@ -157,4 +243,3 @@ export class CustomerReportComponent implements OnInit {
 
 
 }
-

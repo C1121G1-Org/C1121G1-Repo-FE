@@ -6,163 +6,102 @@
   <h3 style="text-align: center">Lịch sử mua hàng</h3>
 </div>
 
-<div>
+<div class="row">
 
-  <div class="row row1" style="padding-right: 40px; margin-top: 15px">
-    <div class="col-md-4">
-      <strong>
-        <label>Họ và tên: </label>
-        <span> {{customerReport.name}}</span>
-      </strong>
-    </div>
-
-    <div class="col-md-4">
-      <strong>
-        <label>Email: </label>
-        <span> {{customerReport.email}}</span>
-      </strong>
-    </div>
-  </div>
-
-  <div class="row row1" style="padding-right: 40px; margin-top: 15px">
-    <div class="col-md-4">
-      <strong>
-        <label>Giới tính: </label>
+  <div class="card col col-md-3 col-lg-3" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: center">Thông tin khách hàng:</h5>
+      <p><strong class="card-text">Họ và tên: </strong><span> {{customerReport.name}}</span></p>
+      <p><strong class="card-text">Email: </strong><span> {{customerReport.email}}</span></p>
+      <p><strong class="card-text">Giới tính: </strong>
         <span *ngIf="customerReport.gender == false"> Nữ</span>
         <span *ngIf="customerReport.gender == true"> Nam</span>
-      </strong>
-    </div>
-
-    <div class="col-md-4">
-      <strong>
-        <label>Số điện thoại: </label>
-        <span> {{customerReport.phoneNumber}}</span>
-      </strong>
-    </div>
-
-    <div class="col-md-4">
-      <strong>
-        <label>Ngày sinh: </label>
-        <span> {{customerReport.dateOfBirth}}</span>
-      </strong>
+      </p>
+      <p><strong class="card-text">Số điện thoại: </strong><span> {{customerReport.phoneNumber}}</span></p>
+      <p><strong class="card-text">Ngày sinh: </strong><span> {{customerReport.dateOfBirth}}</span></p>
+      <p><strong class="card-text">Số lượng đơn hàng: </strong><span> {{customerReport.purchaseTimes}}</span></p>
     </div>
   </div>
 
-  <div class="row row1" style="padding-right: 40px; margin-top: 15px">
-    <div class="col-md-4">
-      <strong>
-        <label>Số lượng đơn hàng: </label>
-        <span> {{customerReport.purchaseTimes}}</span>
-      </strong>
-    </div>
-  </div>
+  <div class="col col-md-8 col-lg-8">
+    <div>
+      <!-- Search form -->
+      <br>
+      <div class="navbar-nav ms-auto d-flex flex-row">
+        <div class="input-group mb-3 col-md-3">
+          <input type="date" class="form-control" placeholder="Start date"
+                 [(ngModel)]="startDate">
+        </div>
 
-
-  <!--  <div>-->
-  <!--    <div class="input-group mb-3 col-2">-->
-  <!--      <input type="text" class="form-control" aria-label="Sizing example input"-->
-  <!--             aria-describedby="inputGroup-sizing-default" placeholder="Search by product name">-->
-  <!--    </div>-->
-
-  <!--    <div class="col">-->
-  <!--      <button type="button" class="btn btn-primary">Tìm kiếm</button>-->
-  <!--    </div>-->
-  <!--  </div>-->
-
-  <!--  <br>-->
-
-  <div>
-    <h5>Chi tiết lịch sử mua hàng: </h5>
-
-    <div class="tbl-header">
-      <table class="table table-bordered table-responsive-md">
-        <thead>
-        <tr>
-          <th class="text-center" scope="col">STT</th>
-          <th class="text-center" scope="col">Ngày mua</th>
-          <th class="text-center" scope="col">Sản phẩm mua</th>
-          <th class="text-center" scope="col">Số tiền (VND)</th>
-        </tr>
-        </thead>
-      </table>
-    </div>
-
-    <div class="tbl-content">
-      <table class="table table-bordered table-responsive-md">
-        <tbody>
-
-        <tr *ngFor="let purchaseHitory of purchaseHistories, index as i">
-          <td class="text-center">{{i + 1}}</td>
-          <td class="text-center">{{purchaseHitory.purchaseDate}}</td>
-          <td class="text-center">
-            <button type="button" class="btn btn-primary" data-toggle="modal"
-                    data-target="#deleteModal"
-                    (click)="getPurchaseProduct(purchaseHitory.id)">Xem chi tiết
-            </button>
-          </td>
-          <td class="text-center">{{purchaseHitory.totalMoney | currency: "VND"}}</td>
-        </tr>
-
-        </tbody>
-      </table>
-
-      <!--Pagination-->
-      <!--      <nav class="d-flex justify-content-center wow fadeIn" style="float:right;">-->
-      <!--        <ul class="pagination pg-blue">-->
-
-      <!--          &lt;!&ndash;Arrow left&ndash;&gt;-->
-      <!--          <li class="page-item disabled">-->
-      <!--            <a class="page-link" href="#" aria-label="Previous">-->
-      <!--              <span aria-hidden="true">&laquo;</span>-->
-      <!--              <span class="sr-only">Previous</span>-->
-      <!--            </a>-->
-      <!--          </li>-->
-
-      <!--          <li class="page-item active">-->
-      <!--            <a class="page-link" href="#">1-->
-      <!--              <span class="sr-only">(current)</span>-->
-      <!--            </a>-->
-      <!--          </li>-->
-      <!--          <li class="page-item">-->
-      <!--            <a class="page-link" href="#">2</a>-->
-      <!--          </li>-->
-      <!--          <li class="page-item">-->
-      <!--            <a class="page-link" href="#">3</a>-->
-      <!--          </li>-->
-      <!--          <li class="page-item">-->
-      <!--            <a class="page-link" href="#">4</a>-->
-      <!--          </li>-->
-      <!--          <li class="page-item">-->
-      <!--            <a class="page-link" href="#">5</a>-->
-      <!--          </li>-->
-
-      <!--          <li class="page-item">-->
-      <!--            <a class="page-link" href="#" aria-label="Next">-->
-      <!--              <span aria-hidden="true">&raquo;</span>-->
-      <!--              <span class="sr-only">Next</span>-->
-      <!--            </a>-->
-      <!--          </li>-->
-      <!--        </ul>-->
-      <!--      </nav>-->
-      <!--Pagination-->
-
-      <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
-        <a type="button" class="btn btn-outline-info" (click)="previousPage()"
-           [hidden]="pageNumber == 0">Previous</a>
-        <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
-        <a type="button" class="btn btn-outline-info" (click)="nextPage()"
-           [hidden]="pageNumber == totalPages - 1">Next</a>
+        <div class="input-group mb-3 col-md-3">
+          <input type="date" class="form-control" placeholder="End date"
+                 [(ngModel)]="endDate">
+        </div>
       </div>
 
-      <div style="text-align: center" class="container col-6">
-        <button type="button" style="display: inline-block" class="btn btn-primary"
-                [routerLink]="['/report/customer-report']">Quay lại
+      <div>
+        <button type="button" class="btn btn-primary"
+                (click)="detailPurchaseHitory()">Tìm kiếm
         </button>
+      </div>
+
+      <h5>Chi tiết lịch sử mua hàng: </h5>
+
+      <div [hidden]="checkPurchaseHistories == false">
+        <div class="tbl-header">
+          <table class="table table-bordered table-responsive-md">
+            <thead>
+            <tr>
+              <th class="text-center" scope="col">STT</th>
+              <th class="text-center" scope="col">Ngày mua</th>
+              <th class="text-center" scope="col">Sản phẩm mua</th>
+              <th class="text-center" scope="col">Số tiền (VND)</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div class="tbl-content">
+          <table class="table table-bordered table-responsive-md">
+            <tbody>
+
+            <tr *ngFor="let purchaseHitory of purchaseHistories, index as i">
+              <td class="text-center">{{i + 1}}</td>
+              <td class="text-center">{{purchaseHitory.purchaseDate}}</td>
+              <td class="text-center">
+                <button type="button" class="btn btn-primary" data-toggle="modal"
+                        data-target="#deleteModal"
+                        (click)="getPurchaseProduct(purchaseHitory.id)">Xem chi tiết
+                </button>
+              </td>
+              <td class="text-center">{{purchaseHitory.totalMoney | currency: "VND"}}</td>
+            </tr>
+
+            </tbody>
+          </table>
+
+          <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
+            <a type="button" class="btn btn-outline-info" (click)="previousPage()"
+               [hidden]="pageNumber == 0">Previous</a>
+            <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
+            <a type="button" class="btn btn-outline-info" (click)="nextPage()"
+               [hidden]="pageNumber == totalPages - 1">Next</a>
+          </div>
+        </div>
+      </div>
+
+      <div [hidden]="checkPurchaseHistories == true" class="text-center">
+        <h2>Không tìm thấy lịch sử mua hàng nào phù hợp.</h2>
       </div>
     </div>
   </div>
 </div>
 
+<div style="text-align: center" class="container col-6">
+  <button type="button" style="display: inline-block" class="btn btn-primary"
+          [routerLink]="['/report/customer-report']">Quay lại
+  </button>
+</div>
 
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1">

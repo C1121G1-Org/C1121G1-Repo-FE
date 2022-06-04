@@ -21,6 +21,8 @@ export class PurchaseHistoryComponent implements OnInit {
 
   purchaseProducts: PurchaseProductDto[] = [];
 
+  checkPurchaseHistories = true;
+
   productPageNumber = 0;
   productTotalPages = 0;
   invoiceIdPage: number;
@@ -31,11 +33,17 @@ export class PurchaseHistoryComponent implements OnInit {
   id: number;
   customerReport: ReportCustomerDto = {};
 
+  startDate = '01-01-1800';
+  endDate = '31-12-2100';
+
   constructor(private reportService: ReportAndHistoryService,
               private activatedRoute: ActivatedRoute) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
       this.getInfoCustomer();
+      console.log(this.endDate);
+      console.log(this.startDate);
+
       this.detailPurchaseHitory();
     });
   }
@@ -45,15 +53,24 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   detailPurchaseHitory() {
-    this.reportService.getPurchaseHistory(this.id, this.pageNumber).subscribe(purchaseHitories => {
-      this.purchaseHistories = purchaseHitories.content;
-      this.totalPages = purchaseHitories.totalPages;
-      this.pageNumber = purchaseHitories.pageabel.pageNumber;
+    this.reportService.getPurchaseHistory(this.id, this.startDate, this.endDate, this.pageNumber)
+      .subscribe(purchaseHitories => {
+        if (purchaseHitories == null) {
+          this.checkPurchaseHistories = false;
+        } else {
+          this.checkPurchaseHistories = true;
+
+          this.purchaseHistories = purchaseHitories.content;
+          this.totalPages = purchaseHitories.totalPages;
+          this.pageNumber = purchaseHitories.pageabel.pageNumber;
+        }
+
     });
   }
 
   previousPage() {
-    this.reportService.getPurchaseHistory(this.id, this.pageNumber - 1).subscribe(purchaseHitories => {
+    this.reportService.getPurchaseHistory(this.id, this.startDate, this.endDate, this.pageNumber - 1)
+      .subscribe(purchaseHitories => {
       this.purchaseHistories = purchaseHitories.content;
       if (this.pageNumber - 1 <= 0) {
         this.pageNumber = 0;
@@ -64,7 +81,8 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   nextPage() {
-    this.reportService.getPurchaseHistory(this.id, this.pageNumber + 1).subscribe(purchaseHitories => {
+    this.reportService.getPurchaseHistory(this.id, this.startDate, this.endDate, this.pageNumber + 1)
+      .subscribe(purchaseHitories => {
       this.purchaseHistories = purchaseHitories.content;
       if (this.pageNumber + 1 >= this.totalPages) {
         this.pageNumber = this.totalPages - 1;

@@ -28,10 +28,6 @@ const routes: Routes = [
     Function: Show detail purchase history
   */
   {path: 'report/purchase-hitory/:id', component: PurchaseHistoryComponent},
-
-  // Role : Admin , Business Staff
-  {path: 'sale-report/list', component: SaleReportComponent}
-
 ];
 
 @NgModule({
