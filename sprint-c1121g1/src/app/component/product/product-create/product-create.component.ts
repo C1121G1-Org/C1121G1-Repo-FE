@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
+import {Product} from '../../../models/product';
 
 @Component({
   selector: 'app-product-create',
@@ -12,11 +13,12 @@ import {formatDate} from '@angular/common';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-
+  imgVip = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
   productForm: FormGroup;
   selectedImage: any = null;
   flag = false;
-  img2 = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+  productName: string;
+  errorProductName: string;
 
   constructor(private productService: ProductService,
               private router: Router,
@@ -32,7 +34,7 @@ export class ProductCreateComponent implements OnInit {
       selfie: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       cpu: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       memory: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      otherDescription: new FormControl(''),
+      otherDescription: new FormControl(  ''),
     });
 
   }
@@ -43,58 +45,17 @@ export class ProductCreateComponent implements OnInit {
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
-      Function: This JwtFilter class extends OncePerRequestFilter class to override method doFilterInternal()
   */
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
-    console.log(this.selectedImage);
-    const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
-    const fileRef = this.storage.ref(nameImg);
-    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-      finalize(() => {
-
-        fileRef.getDownloadURL().subscribe((url) => {
-          this.img2 = url;
-          console.log(this.img2);
-          // this.productForm.patchValue({image: url});
-          // console.log(this.productForm.controls.image);
-          // Call API to create vaccine
-
-        });
-      })
-    ).subscribe();
+    const reader = new FileReader();
+    reader.readAsDataURL(this.selectedImage);
+    reader.onload = e => {
+      console.log(e);
+      this.imgVip = reader.result as string;
+    };
   }
 
-  /*
-    Created by TuanPA
-    Date: 9:08 3/6/2022
-    Function: This JwtFilter class extends OncePerRequestFilter class to override method doFilterInternal()
-*/
-  // save() {
-  //   console.log(this.productForm.value);
-  //   // const nameImg = this.getCurrentDateTime();
-  //   console.log('submited');
-  //   const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
-  //   const fileRef = this.storage.ref(nameImg);
-  //   this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-  //     finalize(() => {
-  //
-  //       fileRef.getDownloadURL().subscribe((url) => {
-  //         this.img2 = url;
-  //         this.productForm.patchValue({image: url});
-  //         // console.log(this.productForm.controls.image);
-  //         // Call API to create vaccine
-  //         this.productService.createProduct(this.productForm.value).subscribe(() => {
-  //           this.productForm.reset();
-  //           alert('Created successfully');
-  //           // this.router.navigateByUrl('/api/product');
-  //           // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
-  //           console.log('success');
-  //         });
-  //       });
-  //     })
-  //   ).subscribe();
-  // }
 
   /*
     Created by TuanPA
@@ -105,8 +66,11 @@ export class ProductCreateComponent implements OnInit {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
   }
 
-
-  save() {
+  /*
+      Created by TuanPA
+      Date: 9:08 3/6/2022
+  */
+  save(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
     if (this.productForm.invalid) {
       console.log(this.productForm.value);
       if (this.productForm.controls.name.value == '') {
@@ -136,29 +100,34 @@ export class ProductCreateComponent implements OnInit {
     } else {
       console.log(this.productForm.value);
       // const nameImg = this.getCurrentDateTime();
-      console.log('submited');
-      const nameImg = this.getCurrentDateTime() + this.selectedImage.name;
+      const nameImg = '/PD-' + this.productName + '.jpg';
       const fileRef = this.storage.ref(nameImg);
       this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
-
           fileRef.getDownloadURL().subscribe((url) => {
-            this.img2 = url;
             this.productForm.patchValue({image: url});
-            // console.log(this.productForm.controls.image);
-            // Call API to create vaccine
             this.productService.createProduct(this.productForm.value).subscribe(() => {
-              this.productForm.reset();
-              alert('Created successfully');
-              // this.router.navigateByUrl('/api/product');
-              // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
-              console.log('success');
-            });
+                this.productForm.reset();
+                successBtn.click();
+                this.router.navigateByUrl('/api/product/list');
+                // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
+                console.log('success');
+              }, error => {
+              console.log(error);
+              console.log(error.error.errorMap.name);
+              this.errorProductName = error.error.errorMap.name;
+              }
+            );
           });
         })
       ).subscribe();
     }
   }
+
+  /*
+    Created by TuanPA
+    Date: 9:08 3/6/2022
+*/
 
 
   get name() {

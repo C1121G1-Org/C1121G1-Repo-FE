@@ -1,5 +1,4 @@
-
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Product} from '../../models/product';
 import {HttpClient} from '@angular/common/http';
@@ -18,31 +17,35 @@ export class ProductService {
   }
 
   productApi = 'http://localhost:8080/api/product';
+
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
-      Function: This JwtFilter class extends OncePerRequestFilter class to override method doFilterInternal()
+      Function: createProduct
   */
   createProduct(product: any): Observable<any> {
     return this.http.post<any>(this.productApi + '/create', product);
   }
+
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
-    Function: This JwtFilter class extends OncePerRequestFilter class to override method doFilterInternal()
+    Function: find by id
 */
   findById(id: number): Observable<Product> {
     return this.http.get<Product>(this.productApi + '/' + id);
   }
+
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
-    Function: This JwtFilter class extends OncePerRequestFilter class to override method doFilterInternal()
+    Function: edit product
 */
   updateProduct(id: number, value: any): Observable<any> {
-    return this.http.patch<any>(this.productApi + '/' + id, value);
+    return this.http.patch<any>(this.productApi + '/' + 'update/' + id, value);
   }
-    list(): Observable<Product[]>{
+
+  list(): Observable<Product[]> {
     return this.http.get<Product[]>(`${this.apiBaseUrl}/api/product/list`);
   }
 }
