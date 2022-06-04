@@ -36,6 +36,7 @@ export class SupplierCreateComponent implements OnInit {
   }
 
   submit(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
+    this.errorSupplierName = '';
     if (this.supplierForm.valid){
       this.supplierDtoSave = this.supplierForm.value;
       this.supplierDtoSave.deleteFlag = false;
@@ -44,7 +45,7 @@ export class SupplierCreateComponent implements OnInit {
       this.supplierService.save(this.supplierSave).subscribe(() => {
         successBtn.click();
         this.supplierForm.reset();
-        }, error => {
+      }, error => {
         console.log(error);
         console.log(error.error.errorMap.supplierName);
         this.errorSupplierName = error.error.errorMap.supplierName;
@@ -52,7 +53,5 @@ export class SupplierCreateComponent implements OnInit {
     }else {
       errorBtn.click();
     }
-
   }
-
 }
