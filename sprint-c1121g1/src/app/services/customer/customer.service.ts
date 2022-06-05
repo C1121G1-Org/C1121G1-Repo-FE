@@ -27,7 +27,7 @@ export class CustomerService {
     Function: update customer object by id from database
     */
   updateCustomer(id: number, customer: Customer): Observable<Customer> {
-    return this.http.put<Customer>(this.URL_LIST + '/' + id, customer);
+    return this.http.patch<Customer>(this.URL_LIST + '/' + id, customer);
   }
 
   /*

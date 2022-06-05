@@ -6,6 +6,7 @@ import { CustomerChooseComponent } from './customer-choose/customer-choose.compo
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerUpdateComponent } from './customer-update/customer-update.component';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
   imports: [
     CommonModule,
     CustomerRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ]
 })
 export class CustomerModule { }

@@ -29,7 +29,7 @@
             style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
           </div>
           <div>
-            <button type="button" class="btn btn-primary " data-toggle="modal" data-target="#test">Tìm Kiếm</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#test">Tìm Kiếm</button>
           </div>
         </div>
         <!--                search-->
@@ -56,7 +56,8 @@
       <div class="tbl-content   ">
         <table class=" table table-bordered table-responsive-md">
           <tbody>
-          <tr *ngFor="let cus of customerList" (click)="sendId(cus.id,$event)">
+          <tr *ngFor="let cus of customerList,let j=index" routerLinkActive="active" (click)="activeProject(j,cus.id)"
+              [ngStyle]="{'background-color': activeProjectIndex === j ? '#9ddceb' : 'white' }">
             <td class="text-center">{{cus.id }}</td>
             <td class="text-center">{{cus.customerName}}</td>
             <td class="pt-3-half">{{cus.phoneNumber}}</td>
@@ -118,7 +119,7 @@
           class="fa fa-paper-plane"></i>Chỉnh sửa
         </button>
         </a>
-        <button type="button" class="btn btn-danger "> Hủy</button>
+        <button type="button" class="btn btn-danger" (click)="testClick()"> Hủy</button>
       </div>
       <!--Pagination-->
     </div>
