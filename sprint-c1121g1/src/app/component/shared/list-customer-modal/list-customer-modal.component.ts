@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {ICustomer} from '../../../models/ICustomer';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {Router} from '@angular/router';
@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
   Method: pageProduct()
 */
 export class ListCustomerModalComponent implements OnInit {
+  @Output() itemOutput = new EventEmitter();
   pageNumber: number;
   customerList: ICustomer[] = [];
   totalPages = [];
@@ -26,6 +27,9 @@ export class ListCustomerModalComponent implements OnInit {
   first: boolean;
   checkSearch = 'name';
   message: boolean;
+  searchValue = '';
+  indexCurrent: number;
+  selectedIndex: number;
 
   constructor(private customerService: CustomerService, private router: Router) {
   }
@@ -33,6 +37,12 @@ export class ListCustomerModalComponent implements OnInit {
   ngOnInit(): void {
     this.message = false;
     this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+  }
+
+  chooseCustomer(exit) {
+    this.itemOutput.emit(this.currentCustomer);
+    this.currentCustomer = null;
+    exit.click();
   }
 
   getModalCustomer(pageNumber, searchByName, searchByPhone) {
@@ -43,10 +53,9 @@ export class ListCustomerModalComponent implements OnInit {
         this.pageNumber = res.pageable.pageNumber;
         this.totalPages = res.totalPages;
         this.first = res.first;
+        this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
         // @ts-ignore
         this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
-        console.log(this.totalPages);
-        this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
       }
     }, error => {
       this.message = true;
@@ -74,11 +83,13 @@ export class ListCustomerModalComponent implements OnInit {
   }
 
   getAllCustomerPage(index: any) {
+    this.indexCurrent = index;
     this.pageNumber = index - 1;
     this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
   }
 
   search(value: string) {
+    this.currentCustomer = null;
     this.pageNumber = 0;
     if (this.checkSearch === 'phone') {
       this.searchByPhone = value;
@@ -91,10 +102,33 @@ export class ListCustomerModalComponent implements OnInit {
     }
   }
 
-  chooseCustomer(exit) {
-    alert(this.currentCustomer.id);
-    this.router.navigate(['/chooseCustomer']);
+  close() {
     this.currentCustomer = null;
-    exit.click();
+    this.searchByPhone = '';
+    this.searchByName = '';
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#successModal');
+    container.appendChild(button);
+    button.click();
+
+  }
+
+  getAll() {
+    this.searchValue = '';
+    this.searchByPhone = '';
+    this.searchByName = '';
+    this.ngOnInit();
+  }
+
+  checkColorIndex(index: number) {
+    this.selectedIndex = index;
+    if (!this.indexCurrent) {
+      return false;
+    }
+    return this.indexCurrent === this.selectedIndex ? true : false;
   }
 }

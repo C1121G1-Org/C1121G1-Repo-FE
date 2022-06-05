@@ -12,9 +12,6 @@ export class CustomerService {
   constructor(private http: HttpClient) { }
 
   getAllCustomer(pageable, name, phone): Observable<any> {
-    return this.http.get<any>(`${this.url}/customer/list?page=${pageable}&keyName=${name}&keyPhone=${phone}`);
+    return this.http.get<any>(`${this.url}/api/customer/list?page=${pageable}&keyName=${name}&keyPhone=${phone}`);
   }
 }
-// getList(searchName: string, page: number): Observable<Customer[]> {
-//   return this.http.get<Customer[]>(API_URL + '/customer_list?page=' + page + '&searchVal=' + searchName);
-// }

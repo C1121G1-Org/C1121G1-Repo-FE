@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
-import {ICustomer} from '../../../models/ICustomer';
 import {ProductService} from '../../../services/product/product.service';
 import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-list-choose-product-modal',
@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
   Method: pageProduct()
 */
 export class ListChooseProductModalComponent implements OnInit {
+  @Output() itemOutput = new EventEmitter();
   productList: IProduct[] = [];
   pageNumber: number;
   totalPages = [];
@@ -23,9 +24,13 @@ export class ListChooseProductModalComponent implements OnInit {
   flag = false;
   last: boolean;
   first: boolean;
-  checkSearch = '';
+  checkSearch = 'name';
   selectedProduct: IProduct;
   currentProduct: IProduct;
+  message: boolean;
+  searchValue = '';
+  selectedIndex: number;
+  indexCurrent: number;
 
   constructor(private productService: ProductService, private router: Router) {
   }
@@ -35,15 +40,17 @@ export class ListChooseProductModalComponent implements OnInit {
   }
 
   getModalProduct(pageNumber, searchByName, searchByPrice) {
+    this.message = false;
     this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice).subscribe((res: any) => {
       this.productList = res.content;
       this.pageNumber = res.pageable.pageNumber;
       this.totalPages = res.totalPages;
       this.first = res.first;
+      this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
       // @ts-ignore
       this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
-      console.log(this.totalPages);
-      this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
+    }, error => {
+      this.message = true;
     });
   }
 
@@ -69,19 +76,19 @@ export class ListChooseProductModalComponent implements OnInit {
   }
 
   chooseProduct(close) {
-    alert(this.currentProduct.id);
-    this.router.navigate(['/chooserProduct', this.currentProduct]);
+    this.itemOutput.emit(this.currentProduct);
     this.currentProduct = null;
     close.click();
-
   }
 
   getAllProductPage(index: any) {
+    this.indexCurrent = index;
     this.pageNumber = index - 1;
     this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
   }
 
-  search(value: string) {
+  search(value: any) {
+    this.currentProduct = null;
     this.pageNumber = 0;
     if (this.checkSearch === 'price') {
       this.searchByPrice = value;
@@ -92,5 +99,36 @@ export class ListChooseProductModalComponent implements OnInit {
       this.searchByPrice = '';
       this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
     }
+  }
+
+  close() {
+    this.currentProduct = null;
+    this.searchByName = '';
+    this.searchByPrice = '';
+    const container = document.getElementById('main-container');
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.style.display = 'none';
+    button.setAttribute('data-toggle', 'modal');
+    button.setAttribute('data-target', '#successModal');
+    container.appendChild(button);
+    // this.check = true;
+    button.click();
+
+  }
+
+  getAll(a) {
+    this.searchValue = '';
+    this.searchByPrice = '';
+    this.searchByName = '';
+    this.ngOnInit();
+  }
+
+  checkColorIndex(index: number) {
+    this.selectedIndex = index;
+    if (!this.indexCurrent) {
+      return false;
+    }
+    return this.indexCurrent === this.selectedIndex ? true : false;
   }
 }
