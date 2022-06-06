@@ -21,8 +21,12 @@ export class CustomerReportComponent implements OnInit {
   chooseAgeSearch = false;
 
   genderSearch: boolean;
-  ageSearch: number;
+  ageSearch: string;
   checkReportCustomers = true;
+
+  checkGenderValue = true;
+  checkAgeValue = true;
+  checkSelectiveValue = true;
 
   constructor(private reportService: ReportAndHistoryService) {
   }
@@ -61,7 +65,7 @@ export class CustomerReportComponent implements OnInit {
   }
 
   filterByAge() {
-    this.reportService.filterByAge(this.pageNumber, this.ageSearch)
+    this.reportService.filterByAge(this.pageNumber, parseInt(this.ageSearch))
       .subscribe(customerReports => {
         if (customerReports == null) {
           this.checkReportCustomers = false;
@@ -76,7 +80,7 @@ export class CustomerReportComponent implements OnInit {
   }
 
   filterByGenderAndAge() {
-    this.reportService.filterByGenderAndAge(this.pageNumber, this.genderSearch, this.ageSearch)
+    this.reportService.filterByGenderAndAge(this.pageNumber, this.genderSearch, parseInt(this.ageSearch))
       .subscribe(customerReports => {
         if (customerReports == null) {
           this.checkReportCustomers = false;
@@ -104,7 +108,7 @@ export class CustomerReportComponent implements OnInit {
       if (this.chooseGenderSearch === true) {
         if (this.chooseAgeSearch === true) {
           this.reportService.filterByGenderAndAge(
-            this.pageNumber - 1, this.genderSearch, this.ageSearch)
+            this.pageNumber - 1, this.genderSearch, parseInt(this.ageSearch))
             .subscribe(customerReports => {
               this.customerReports = customerReports.content;
               if (this.pageNumber - 1 <= 0) {
@@ -128,7 +132,7 @@ export class CustomerReportComponent implements OnInit {
       } else {
         if (this.chooseAgeSearch === true) {
           this.reportService.filterByAge(
-            this.pageNumber - 1, this.ageSearch)
+            this.pageNumber - 1, parseInt(this.ageSearch))
             .subscribe(customerReports => {
               this.customerReports = customerReports.content;
               if (this.pageNumber - 1 <= 0) {
@@ -159,7 +163,7 @@ export class CustomerReportComponent implements OnInit {
       if (this.chooseGenderSearch === true) {
         if (this.chooseAgeSearch === true) {
           this.reportService.filterByGenderAndAge(
-            this.pageNumber + 1, this.genderSearch, this.ageSearch)
+            this.pageNumber + 1, this.genderSearch, parseInt(this.ageSearch))
             .subscribe(customerReports => {
               this.customerReports = customerReports.content;
               if (this.pageNumber + 1 >= this.totalPages) {
@@ -183,7 +187,7 @@ export class CustomerReportComponent implements OnInit {
       } else {
         if (this.chooseAgeSearch === true) {
           this.reportService.filterByAge(
-            this.pageNumber + 1, this.ageSearch)
+            this.pageNumber + 1, parseInt(this.ageSearch))
             .subscribe(customerReports => {
               this.customerReports = customerReports.content;
               if (this.pageNumber + 1 >= this.totalPages) {
@@ -204,10 +208,12 @@ export class CustomerReportComponent implements OnInit {
   }
 
   chooseSearchGender() {
+    this.checkGenderValue = true;
     this.chooseGenderSearch = !this.chooseGenderSearch;
   }
 
   chooseSearchAge() {
+    this.checkAgeValue = true;
     this.chooseAgeSearch = !this.chooseAgeSearch;
   }
 
@@ -216,30 +222,60 @@ export class CustomerReportComponent implements OnInit {
   }
 
   searchAge(target: any) {
-    this.ageSearch = target.value;
+      this.ageSearch = target.value;
+
   }
 
-  filter() {
-    this.pageNumber = 0;
-
-    if (this.chooseFilter === 1) {
+  filter(errorBtn: HTMLButtonElement) {
+    if (this.chooseFilter == 1) {
       this.filterAllCustomerReport();
-    } else if (this.chooseFilter === 2) {
-      if (this.chooseGenderSearch === true) {
-        if (this.chooseAgeSearch === true) {
-          this.filterByGenderAndAge();
+    } else if (this.chooseFilter == 2) {
+      this.checkSelectiveValue = true;
+      if (this.chooseGenderSearch == true) {
+        if (this.chooseAgeSearch == true) {
+          if (this.genderSearch == undefined) {
+            this.checkGenderValue = false;
+            errorBtn.click();
+            if (this.ageSearch == undefined || this.ageSearch == '') {
+              this.checkAgeValue = false;
+              errorBtn.click();
+            } else {
+              this.checkAgeValue = true;
+            }
+          } else {
+            if (this.ageSearch == undefined || this.ageSearch == '') {
+              this.checkAgeValue = false;
+              errorBtn.click();
+            } else {
+              this.checkAgeValue = true;
+            }
+            this.checkGenderValue = true;
+            this.filterByGenderAndAge();
+          }
         } else {
-          this.filterByGender();
+          if (this.genderSearch == undefined) {
+            this.checkGenderValue = false;
+            errorBtn.click();
+          } else {
+            this.checkGenderValue = true;
+            this.filterByGender();
+          }
         }
       } else {
-        if (this.chooseAgeSearch === true) {
-          this.filterByAge();
-        } else {
-          console.log('Chưa chọn lọc cách search');
-        }
+         if (this.chooseAgeSearch == true) {
+           if (this.ageSearch == undefined || this.ageSearch == '') {
+             this.checkAgeValue = false;
+             errorBtn.click();
+           } else {
+             this.checkAgeValue = true;
+             this.filterByAge();
+           }
+         } else {
+           this.checkSelectiveValue = false;
+           errorBtn.click();
+         }
       }
     }
   }
-
 
 }

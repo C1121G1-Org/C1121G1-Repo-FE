@@ -79,7 +79,7 @@
 
   <div>
     <div style="text-align: center">
-      <button type="button" class="btn btn-primary" (click)="filter()">Lọc</button>
+      <button type="button" class="btn btn-primary" (click)="filter(errorBtn)">Lọc</button>
     </div>
   </div>
 </div>
@@ -177,4 +177,28 @@
     <p>Không tìm thấy khách hàng nào.</p>
   </div>
 
+</div>
+
+<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>
+<!--success modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <!--        <h4>Great!</h4>-->
+        <!--        <p>Create service success.</p>-->
+        <!--        <button type="button" class="btn btn-danger" id="delete_btn" data-mdb-dismiss="modal" [routerLink]="['/services/list']">OK</button>-->
+        <h4>Lỗi.</h4>
+        <p *ngIf="checkGenderValue == false">Mời bạn chọn giới tính cần lọc.</p>
+        <p *ngIf="checkAgeValue == false">Mời bạn nhập số tuổi cần lọc.</p>
+        <p *ngIf="checkSelectiveValue == false">Chưa chọn cách chọn lọc.</p>
+      </div>
+    </div>
+  </div>
 </div>
