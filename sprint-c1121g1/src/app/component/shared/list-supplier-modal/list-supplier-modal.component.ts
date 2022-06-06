@@ -48,10 +48,16 @@ export class ListSupplierModalComponent implements OnInit {
     this.flag = !this.flag;
   }
 
+  closeModal() {
+    this.btnClose.nativeElement.click();
+    this.ngOnInit();
+  }
+
   sendItem() {
     if (this.flag) {
       this.itemOutput.emit(this.chosenItem);
-      this.btnClose.nativeElement.click();
+      this.closeModal();
+      this.ngOnInit();
       this.flagCreate.emit(true);
     }
   }
@@ -74,16 +80,16 @@ export class ListSupplierModalComponent implements OnInit {
   search() {
     switch (this.searchForm.value.field) {
       case 'supplier':
-        this.getAllSuppliers(this.searchForm.value.value, '', '', '');
+        this.getAllSuppliers(this.searchForm.value.value.trim(), '', '', '');
         break;
       case 'address':
-        this.getAllSuppliers('', this.searchForm.value.value, '', '');
+        this.getAllSuppliers('', this.searchForm.value.value.trim(), '', '');
         break;
       case 'phone':
-        this.getAllSuppliers('', '', this.searchForm.value.value, '');
+        this.getAllSuppliers('', '', this.searchForm.value.value.trim(), '');
         break;
       case 'email':
-        this.getAllSuppliers('', '', '', this.searchForm.value.value);
+        this.getAllSuppliers('', '', '', this.searchForm.value.value.trim());
         break;
     }
   }
