@@ -116,13 +116,14 @@ export class QrCodeComponent implements OnInit {
   readFile2(target: any) {
     const file: File = target.files[0];
     if (file) {
+      this.message = '';
+      this.alertClass = '';
       const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image2 = reader?.result as string;
       };
-      this.message = '';
-      this.alertClass = '';
+
     } else {
       this.alertClass = 'alert alert-danger';
       this.message = 'Vui lòng chọn ảnh !';
