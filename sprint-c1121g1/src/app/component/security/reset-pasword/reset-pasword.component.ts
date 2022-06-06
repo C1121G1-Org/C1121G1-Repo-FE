@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {SecurityService} from '../../../services/security/security.service';
 import {DataService} from '../../../services/common/data.service';
 import {CountdownConfig} from 'ngx-countdown';
+import {TokenStorageService} from '../../../services/security/token-storage.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-reset-pasword',
@@ -17,11 +19,16 @@ export class ResetPaswordComponent implements OnInit {
   });
   emailResetPassword: string;
   constructor(private dataService: DataService,
-              private securityService: SecurityService) {
+              private securityService: SecurityService,
+              private tokenStorageService: TokenStorageService,
+              private router: Router) {
     this.getEmailOfAccount();
   }
 
   ngOnInit(): void {
+    if (this.tokenStorageService.getToken() && this.emailResetPassword) {
+      this.router.navigate(['']);
+    }
   }
 
   get newPassword() {
@@ -43,13 +50,15 @@ export class ResetPaswordComponent implements OnInit {
   getEmailOfAccount() {
     this.dataService.data.subscribe(res => {
       this.emailResetPassword = res;
+      // if (this.emailResetPassword) {
+      //   this.router.navigate(['']);
+      // }
     });
   }
 
   // tslint:disable-next-line:max-line-length
   updatePassword(openSuccessModalBtn: HTMLButtonElement, closeModalBtn: HTMLButtonElement, errorModalBtn: HTMLButtonElement, closeErrorModalBtn: HTMLButtonElement) {
     this.changePasswordForm.get('email').setValue(this.emailResetPassword);
-    console.log(this.changePasswordForm);
     this.securityService.resetPassword(this.changePasswordForm.value).subscribe(res => {
       openSuccessModalBtn.click();
     }, error => {

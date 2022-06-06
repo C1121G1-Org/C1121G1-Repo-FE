@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       this.securityService.isLoggedIn = true;
       this.roles = this.tokenStorageService.getUser().roles;
       this.username = this.tokenStorageService.getUser().username;
+      this.router.navigate(['']);
     }
   }
 
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-  login() {
+  login(errorModalBtn: HTMLButtonElement, closeErrorModal: HTMLButtonElement) {
     this.securityService.login(this.loginForm.value).subscribe(data => {
       if (this.loginForm.value.remember_me) {
         this.tokenStorageService.saveTokenLocal(data.accessToken);
@@ -65,9 +66,17 @@ export class LoginComponent implements OnInit {
       this.shareService.sendClickEvent();
       this.router.navigate(['']);
     }, error => {
-      console.log(error);
-      this.errorMessage = 'Sai tên đăng nhập hoặc mật khẩu.';
-      this.securityService.isLoggedIn = false;
+      if (error.status === 403) {
+        this.errorMessage = 'Sai tên đăng nhập hoặc mật khẩu.';
+        this.securityService.isLoggedIn = false;
+      } else if (error.status === 0) {
+        errorModalBtn.click();
+        // tslint:disable-next-line:only-arrow-functions
+        setTimeout(function() {
+          closeErrorModal.click();
+        }, 3000);
+        this.securityService.isLoggedIn = false;
+      }
     });
   }
 }

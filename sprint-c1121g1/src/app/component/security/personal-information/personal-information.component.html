@@ -9,7 +9,7 @@
             <form [formGroup]="personalInformationForm" (ngSubmit)="update(openSuccessModalBtn, closeModalBtn)">
               <div class="row" style="padding: 10px 50px">
                 <div style="display: flex ; justify-content: center" class="col-md-12 pb-4">
-                  <input name="image" id="image" type="file" class="file__input" (change)="showReview($event)" >
+                  <input name="image" id="image" type="file" class="file__input" (change)="showReview($event)" accept="image/jpeg, image/jpg">
                   <img class="avatar rounded-circle" style="height: 128px; width: 128px;" src="{{imageLink}}" alt="personal-ava">
                   <label for="image" class="file__label">
                     <i class="fa fa-upload"></i>
@@ -27,7 +27,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="birthday">Ngày sinh</label>
+                    <label for="birthday"><span class="text-danger">*</span> Ngày sinh</label>
                     <input type="date" class="form-control" name="birthday" id="birthday" formControlName="dateOfBirth">
                     <div *ngIf="dateOfBirth?.touched">
                       <small class="text-danger" *ngIf="dateOfBirth?.errors?.required">Vui lòng nhập ngày sinh.</small>
@@ -37,27 +37,54 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="address">Địa chỉ</label>
+                    <label for="address"><span class="text-danger">*</span> Địa chỉ</label>
                     <input type="text" name="address" id="address" class="form-control" formControlName="address">
+                    <div *ngIf="address?.touched">
+                      <small class="text-danger" *ngIf="address?.errors?.required">Vui lòng nhập địa chỉ.</small>
+                    </div>
+                    <div *ngIf="address.valid && address?.touched">
+                      <small class="text-success">Hợp lệ.</small>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="idCard"><span class="text-danger">*</span> CMND/CCCD</label>
                     <input type="text" name="idCard" id="idCard" class="form-control" formControlName="idCard">
+                    <div *ngIf="idCard?.touched">
+                      <small class="text-danger" *ngIf="idCard?.errors?.required">Vui lòng nhập CMND/CCCD.</small>
+                      <small class="text-danger" *ngIf="idCard?.errors?.pattern">Vui lòng nhập đúng định dạng CMND/CCCD, CMND/CCCD phải là số và có 9 hoặc 12 chữ số.</small>
+                    </div>
+                    <div *ngIf="idCard.valid && idCard?.touched">
+                      <small class="text-success">Hợp lệ.</small>
+                    </div>
                   </div>
                   <div class="form-group">
                     <label for="email"><span class="text-danger">*</span> Email</label>
                     <input type="email" name="email" id="email" class="form-control" formControlName="email">
+                    <div *ngIf="email?.touched">
+                      <small class="text-danger" *ngIf="email?.errors?.required">Vui lòng nhập email.</small>
+                      <small class="text-danger" *ngIf="email?.errors?.pattern">Vui lòng nhập đúng định dạng email.</small>
+                    </div>
+                    <div *ngIf="email.valid && email?.touched">
+                      <small class="text-success">Hợp lệ.</small>
+                    </div>
                   </div>
                   <div class="form-group">
-                    <label for="phone">Số điện thoại</label>
+                    <label for="phone"><span class="text-danger">*</span> Số điện thoại</label>
                     <input type="text" name="phone" id="phone" class="form-control" formControlName="phoneNumber">
+                    <div *ngIf="phoneNumber?.touched">
+                      <small class="text-danger" *ngIf="phoneNumber?.errors?.required">Vui lòng nhập số điện thoại.</small>
+                      <small class="text-danger" *ngIf="phoneNumber?.errors?.pattern">Vui lòng nhập đúng định dạng số điện thoại.</small>
+                    </div>
+                    <div *ngIf="phoneNumber.valid && phoneNumber?.touched">
+                      <small class="text-success">Hợp lệ.</small>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="text-center">
-                <button [routerLink]="['']" type="button" class="btn btn-danger mx-1">Hủy bỏ</button>
+                <button [routerLink]="['']" type="button" class="btn btn-danger mx-1"><i class="fa-regular fa-x"></i> Hủy bỏ</button>
                 <button (click)="changeSpinFlag()" [disabled]="!personalInformationForm.valid" type="submit" class="btn btn-primary mx-1"><i *ngIf="!spinFlag" class="fa fa-paper-plane"></i> <span *ngIf="spinFlag" class="spinner-border spinner-border-sm" role="status"></span> Cập nhật
                 </button>
               </div>

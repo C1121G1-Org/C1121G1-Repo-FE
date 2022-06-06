@@ -20,11 +20,11 @@ export class PersonalInformationComponent implements OnInit {
   personalInformationForm: FormGroup = new FormGroup({
     id: new FormControl(),
     employeeName: new FormControl('', [Validators.required]),
-    idCard: new FormControl(),
+    idCard: new FormControl('', [Validators.required, Validators.pattern('^((\\d{9})|(\\d{12}))$')]),
     dateOfBirth: new FormControl('', [Validators.required]),
-    email: new FormControl(),
-    address: new FormControl(),
-    phoneNumber: new FormControl(),
+    email: new FormControl('', [Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')]),
+    address: new FormControl('', [Validators.required]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
     image: new FormControl(),
   });
   imageLink: string;

@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {DataService} from '../../../services/common/data.service';
 import {CountdownComponent, CountdownConfig} from 'ngx-countdown';
 import {config} from 'rxjs';
+import {TokenStorageService} from '../../../services/security/token-storage.service';
 
 @Component({
   selector: 'app-forgot-password',
@@ -32,9 +33,13 @@ export class ForgotPasswordComponent implements OnInit {
   spinFlag = false;
   constructor(private securityService: SecurityService,
               private router: Router,
-              private dataService: DataService) { }
+              private dataService: DataService,
+              private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {
+    if (this.tokenStorageService.getToken()) {
+      this.router.navigate(['']);
+    }
   }
 
   submit(openSuccessModalBtn: HTMLButtonElement, countdowm: CountdownComponent,
@@ -75,7 +80,7 @@ export class ForgotPasswordComponent implements OnInit {
       closeModal.click();
       this.router.navigate(['/reset-password']);
     }, error => {
-      this.errorMessage = 'Không hợp lệ';
+      this.errorMessage = 'Mã xác nhận không hợp lệ';
     });
   }
 

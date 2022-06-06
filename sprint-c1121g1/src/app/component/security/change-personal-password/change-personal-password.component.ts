@@ -44,7 +44,7 @@ export class ChangePersonalPasswordComponent implements OnInit {
   }
 
   // tslint:disable-next-line:max-line-length
-  update(openSuccessModalBtn: HTMLButtonElement, closeModalBtn: HTMLButtonElement, errorModalBtn: HTMLButtonElement, closeErrorModalBtn: HTMLButtonElement) {
+  update(openSuccessModalBtn: HTMLButtonElement, closeModalBtn: HTMLButtonElement, errorModalBtn: HTMLButtonElement, closeErrorModalBtn: HTMLButtonElement, serverErrorModal: HTMLButtonElement, closeServerErrorModalBtn: HTMLButtonElement) {
     const changePassword = this.changePasswordForm.value;
     this.securityService.changePersonalPassword(changePassword).subscribe(res => {
       this.changePasswordForm.reset();
@@ -54,11 +54,20 @@ export class ChangePersonalPasswordComponent implements OnInit {
         closeModalBtn.click();
       }, 5000);
     }, error => {
-      errorModalBtn.click();
-      // tslint:disable-next-line:only-arrow-functions
-      setTimeout(function(){
-        closeErrorModalBtn.click();
-      }, 5000);
+      if (error.status === 0) {
+        serverErrorModal.click();
+        // tslint:disable-next-line:only-arrow-functions
+        setTimeout(function() {
+          closeServerErrorModalBtn.click();
+        }, 3000);
+      }
+      if (error.status === 403) {
+        errorModalBtn.click();
+        // tslint:disable-next-line:only-arrow-functions
+        setTimeout(function(){
+          closeErrorModalBtn.click();
+        }, 5000);
+      }
     });
   }
 }
