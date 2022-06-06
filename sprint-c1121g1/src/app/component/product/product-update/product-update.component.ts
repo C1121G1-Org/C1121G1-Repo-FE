@@ -125,28 +125,43 @@ export class ProductUpdateComponent implements OnInit {
         this.productForm.controls.memory.setErrors({empty: 'Empty! Please input!'});
       }
     } else {
-      // const nameImg = this.getCurrentDateTime();
-      const nameImg = '/PD-' + this.productForm.get('name').value + '.jpg';
-      const fileRef = this.storage.ref(nameImg);
-      this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-        finalize(() => {
-          fileRef.getDownloadURL().subscribe((url) => {
-            this.productForm.patchValue({image: url});
+      if (this.selectedImage != null) {
+        // const nameImg = this.getCurrentDateTime();
+        const nameImg = '/PD-' + this.productForm.get('name').value + '.jpg';
+        console.log(nameImg);
+        const fileRef = this.storage.ref(nameImg);
+        this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
+          finalize(() => {
+            fileRef.getDownloadURL().subscribe((url) => {
+              this.productForm.patchValue({image: url});
 
-            this.productService.updateProduct(this.id, this.productForm.value).subscribe(() => {
-                // alert('edited successfully');
-                successBtn.click();
-                this.router.navigateByUrl('/api/product/list');
-                // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
-                console.log('success');
-              }, error => {
-                console.log(error.error.errorMap.name);
-                this.errorProductName = error.error.errorMap.name;
-              }
-            );
-          });
-        })
-      ).subscribe();
+              this.productService.updateProduct(this.id, this.productForm.value).subscribe(() => {
+                  // alert('edited successfully');
+                  successBtn.click();
+                  this.router.navigateByUrl('/api/product/listProduct');
+                  // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
+                  console.log('success');
+                }, error => {
+                  console.log(error.error.errorMap.name);
+                  this.errorProductName = error.error.errorMap.name;
+                }
+              );
+            });
+          })
+        ).subscribe();
+      } else {
+        this.productService.updateProduct(this.id, this.productForm.value).subscribe(() => {
+            // alert('edited successfully');
+            successBtn.click();
+            this.router.navigateByUrl('/api/product/listProduct');
+            // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
+            console.log('success');
+          }, error => {
+            console.log(error.error.errorMap.name);
+            this.errorProductName = error.error.errorMap.name;
+          }
+        );
+      }
     }
   }
 
