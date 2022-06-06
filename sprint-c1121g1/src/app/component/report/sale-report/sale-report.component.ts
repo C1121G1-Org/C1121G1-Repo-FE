@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from 'chart.js';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
+import {SaleReportService} from '../../../services/report/sale-report.service';
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 Chart.register(...registerables);
@@ -19,8 +20,6 @@ Chart.register(...registerables);
 })
 export class SaleReportComponent implements OnInit {
   product: Product = {};
-<<<<<<< HEAD
-=======
   chart1 = Chart.getChart('');
   chart2 = Chart.getChart('');
   notFound = '';
@@ -28,24 +27,18 @@ export class SaleReportComponent implements OnInit {
 
   notValid = '';
   alertNotValid = '';
->>>>>>> e4837ffe24d5547f69d85a6bc4e0fac7f0ba52d8
 
   formSearch = new FormGroup({
-    startDay: new FormControl('', Validators.required),
-    endDay: new FormControl('', Validators.required),
+    startDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+    endDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
     typeReport: new FormControl('ALL', Validators.required),
     productId: new FormControl('', Validators.required)
   });
 
-  xValues = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
-  sales = [100, 200, 500, 900, 300, 800, 400, 1000, 1200, 1100, 600, 800];
-  invoices = [10, 2, 4, 5, 8, 9, 3, 1, 6, 7, 12, 11];
   totalSales = 0;
   totalInvoices = 0;
 
-
-  constructor() {
-
+  constructor(private saleReportService: SaleReportService) {
   }
 
   ngOnInit(): void {
@@ -55,54 +48,13 @@ export class SaleReportComponent implements OnInit {
   sumArr(arr) {
     let total = 0;
     for (const a of arr) {
-      total += a;
+      total += +a;
     }
     return total;
   }
 
 
   showSaleReport() {
-<<<<<<< HEAD
-    console.log(this.formSearch.value);
-    this.totalSales = this.sumArr(this.sales);
-    this.totalInvoices = this.sumArr(this.invoices);
-    // tslint:disable-next-line:no-unused-expression
-    new Chart('doanhThu', {
-      type: 'line',
-      data: {
-        labels: this.xValues,
-        datasets: [{
-          label: 'Doanh Thu Theo Tháng (USD)',
-          pointRadius: 3,
-          pointBackgroundColor: 'red',
-          borderColor: 'red',
-          backgroundColor: 'red',
-          data: this.sales,
-          fill: false,
-          tension: 0.1
-        }]
-      },
-      options: {}
-    });
-    // tslint:disable-next-line:no-unused-expression
-    new Chart('donHang', {
-      type: 'line',
-      data: {
-        labels: this.xValues,
-        datasets: [{
-          label: 'Đơn hàng Theo Tháng',
-          fill: false,
-          data: this.invoices,
-          pointRadius: 3,
-          pointBackgroundColor: 'blue',
-          backgroundColor: 'blue',
-          borderColor: 'blue',
-          tension: 0.1
-        }]
-      },
-      options: {}
-    });
-=======
     this.chart1?.destroy();
     this.chart2?.destroy();
 
@@ -174,7 +126,6 @@ export class SaleReportComponent implements OnInit {
       this.alertNotValid = 'alert alert-warning';
     }
 
->>>>>>> e4837ffe24d5547f69d85a6bc4e0fac7f0ba52d8
   }
 
   getStartDay() {
@@ -194,15 +145,13 @@ export class SaleReportComponent implements OnInit {
   }
 
   changeTypeReport() {
-    // let type = this.formSearch.get('typeReport').value;
+
     const type = this.formSearch.get('typeReport').value;
-<<<<<<< HEAD
-=======
 
 
->>>>>>> e4837ffe24d5547f69d85a6bc4e0fac7f0ba52d8
     // tslint:disable-next-line:triple-equals
     if (type != 'ID') {
+      this.formSearch.get('productId').setValue('');
       this.formSearch.get('productId').disable();
     } else {
       this.formSearch.get('productId').enable();
@@ -213,8 +162,6 @@ export class SaleReportComponent implements OnInit {
     this.product = product;
     console.log(this.product);
   }
-<<<<<<< HEAD
-=======
 
   checkDay() {
     let date1 = new Date(this.formSearch.get('startDay')?.value);
@@ -228,5 +175,4 @@ export class SaleReportComponent implements OnInit {
     this.notValid = '';
     this.alertNotValid = '';
   }
->>>>>>> e4837ffe24d5547f69d85a6bc4e0fac7f0ba52d8
 }

@@ -1,6 +1,10 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {SaleReportComponent} from './sale-report/sale-report.component';
+
+import {CustomerReportComponent} from './customer-report/customer-report.component';
+import {PurchaseHistoryComponent} from './purchase-history/purchase-history.component';
+
 
 /*
     Created by HauPV
@@ -9,9 +13,6 @@ import {SaleReportComponent} from './sale-report/sale-report.component';
 */
 
 const routes: Routes = [
-<<<<<<< HEAD
-  {path: 'sale-report/list', component: SaleReportComponent}
-=======
 
   // Role : Admin , Business Staff
   {path: 'sale-report/list', component: SaleReportComponent},
@@ -27,11 +28,11 @@ const routes: Routes = [
     Function: Show detail purchase history
   */
   {path: 'report/purchase-hitory/:id', component: PurchaseHistoryComponent},
->>>>>>> e4837ffe24d5547f69d85a6bc4e0fac7f0ba52d8
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ReportRoutingModule { }
+export class ReportRoutingModule {
+}
