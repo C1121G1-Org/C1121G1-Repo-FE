@@ -14,6 +14,7 @@ export class ProductListBestsellerComponent implements OnInit {
   productBestsellers: ProductBestseller[] = [];
   topfiveproductBestsellers: ProductBestseller[] = [];
   toptenproductBestsellers: ProductBestseller[] = [];
+  flag = false;
 
   constructor(private homepageService: HomepageService) {
   }
@@ -31,7 +32,11 @@ export class ProductListBestsellerComponent implements OnInit {
       for (let i = 5; i < 10; i++) {
         this.toptenproductBestsellers.push(this.productBestsellers[i]);
       }
+      if (this.productBestsellers.length === 0) {
+        this.flag = true;
+      }
     }, error => {
+      this.flag = true;
       console.log(error);
     });
   }

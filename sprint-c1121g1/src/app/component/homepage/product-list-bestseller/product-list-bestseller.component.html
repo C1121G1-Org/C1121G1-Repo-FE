@@ -125,6 +125,7 @@ Function: get list product bestseller from database
       <div class="slider-product-one-content-container">
         <div class="slider-product-one-content-items-content">
           <div class="slider-product-one-content-items">
+            <h3 class="error-messsage" *ngIf="flag">Điện thoại nổi bật nhất chưa được cập nhật!</h3>
             <div class="slider-product-one-content-item"
                  *ngFor="let productBestseller of topfiveproductBestsellers; index as i">
               <img src="{{productBestseller.image}}" alt="">
@@ -193,6 +194,7 @@ Function: get list product bestseller from database
         </ul>
       </div>
       <div class="product-gallery-one-content-product">
+        <h3 *ngIf="flag">Điện thoại bán chạy chưa được cập nhật!</h3>
         <div class="product-gallery-one-content-product-item" *ngFor="let productBestseller of productBestsellers">
           <img src="{{productBestseller.image}}" alt="">
           <div class="product-gallery-one-content-product-item-text">
