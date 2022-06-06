@@ -21,8 +21,8 @@ declare var $: any;
 
 export class QrCodeComponent implements OnInit {
 
-  @ViewChild("imageInput1") imageInput1 : ElementRef;
-  @ViewChild("imageInput2") imageInput2 : ElementRef;
+  @ViewChild("imageInput1") imageInput1: ElementRef;
+  @ViewChild("imageInput2") imageInput2: ElementRef;
 
   @Output()
   sendProduct = new EventEmitter();
@@ -149,4 +149,5 @@ export class QrCodeComponent implements OnInit {
     this.imageInput2.nativeElement.value = '';
     this.image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   }
+
 }

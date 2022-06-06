@@ -20,41 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/success-modal/success-modal.component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/success-modal/success-modal.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/success-modal/success-modal.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/storage/gte-quantity-storage.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/homepage/product-list-bestseller/product-list-bestseller.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/homepage/product-list-bestseller/product-list-bestseller.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/homepage/product-list-bestseller/product-list-bestseller.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/homepage/product-list-bestseller/product-list-bestseller.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/homepage/product-list-bestseller/product-list-bestseller.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/homepage/product-list-bestseller/product-list-bestseller.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/report-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-choose-product-modal/list-choose-product-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-choose-product-modal/list-choose-product-modal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-choose-product-modal/list-choose-product-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-choose-product-modal/list-choose-product-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-customer-modal/list-customer-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-customer-modal/list-customer-modal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-customer-modal/list-customer-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-customer-modal/list-customer-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/success-modal/success-modal.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-supplier-modal/list-supplier-modal.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-supplier-modal/list-supplier-modal.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-supplier-modal/list-supplier-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-supplier-modal/list-supplier-modal.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/shared.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/storage/storage-create/storage-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/IProduct.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/IProduct.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/report/sale-report.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/report/sale-report.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/tslint.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
