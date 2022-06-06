@@ -12,11 +12,9 @@ import {ProductBestseller} from '../../../dto/product-bestseller';
 // Function: get list product bestseller from database
 export class ProductListBestsellerComponent implements OnInit {
   productBestsellers: ProductBestseller[] = [];
-
   topfiveproductBestsellers: ProductBestseller[] = [];
   toptenproductBestsellers: ProductBestseller[] = [];
 
-  // rateNumber: number = Math.round(Math.random() * 100);
   constructor(private homepageService: HomepageService) {
   }
 

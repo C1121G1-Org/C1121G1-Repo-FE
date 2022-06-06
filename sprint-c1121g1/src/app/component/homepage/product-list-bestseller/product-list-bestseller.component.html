@@ -193,40 +193,23 @@ Function: get list product bestseller from database
         </ul>
       </div>
       <div class="product-gallery-one-content-product">
-
-        <div *ngFor="let productBestseller of productBestsellers" class="product-gallery-one-content-product-item">
+        <div class="product-gallery-one-content-product-item" *ngFor="let productBestseller of productBestsellers">
           <img src="{{productBestseller.image}}" alt="">
           <div class="product-gallery-one-content-product-item-text">
             <li><img src="assets/img/icon-fire.png" alt="">
               <p>Bán siêu chạy</p></li>
             <li>{{productBestseller.name}}</li>
-            <li>{{productBestseller.price}} <sup>đ</sup></li>
-            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
-            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
-
-            <div class="product-gallery-one-content-product-item" *ngFor="let productBestseller of productBestsellers">
-              <img src="{{productBestseller.image}}" alt="">
-              <div class="product-gallery-one-content-product-item-text">
-                <li><img src="assets/img/icon-fire.png" alt="">
-                  <p>Sản phẩm bán siêu chạy</p></li>
-                <li>{{productBestseller.name}}</li>
-                <li>{{productBestseller.price | currency: "VND"}}</li>
-                <li>
-                  <a>{{productBestseller.price + productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span>
-                </li>
-                <li>Giảm 440.000<sup>đ</sup> khi thanh toán qua Moca</li>
-
-                <li>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  127 đánh giá
-                </li>
-                <!--            <li>{{productBestseller.id}}</li>-->
-              </div>
-            </div>
+            <li>{{productBestseller.price | currency: "VND"}}</li>
+            <li><a>{{productBestseller.price + productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
+            <li>Giảm 440.000<sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
           </div>
         </div>
       </div>
