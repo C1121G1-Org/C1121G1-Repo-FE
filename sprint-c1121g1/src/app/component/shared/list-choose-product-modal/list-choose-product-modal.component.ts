@@ -1,3 +1,4 @@
+
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {ProductService} from '../../../services/product/product.service';
@@ -80,7 +81,6 @@ export class ListChooseProductModalComponent implements OnInit {
 
   chooseProduct(close) {
     this.itemOutput.emit(this.currentProduct);
-    console.log(this.currentProduct);
     this.currentProduct = null;
     close.click();
   }

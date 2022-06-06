@@ -54,6 +54,7 @@ export class QrCodeComponent implements OnInit {
           this.product = data;
           this.sendProduct.emit(this.product);
           $('#btnCloseModal').click();
+
         }, err => {
           this.alertClass = 'alert alert-danger';
           this.message = 'Mã QR Không hợp lệ vui lòng kiểm tra lại !';

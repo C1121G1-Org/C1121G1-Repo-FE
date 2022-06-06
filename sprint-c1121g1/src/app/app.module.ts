@@ -19,9 +19,6 @@ import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
 
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +41,7 @@ import {ReportModule} from './component/report/report.module';
     ReportModule,
     SecurityModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    FormsModule
+    HttpClientModule
   ],
   providers: [],
   exports: [],
