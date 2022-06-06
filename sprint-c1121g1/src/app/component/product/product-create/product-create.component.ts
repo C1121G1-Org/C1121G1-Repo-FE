@@ -109,13 +109,14 @@ export class ProductCreateComponent implements OnInit {
             this.productService.createProduct(this.productForm.value).subscribe(() => {
                 this.productForm.reset();
                 successBtn.click();
-                this.router.navigateByUrl('/api/product/list');
+                this.router.navigateByUrl('/api/product/listProduct');
                 // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                 console.log('success');
               }, error => {
               console.log(error);
               console.log(error.error.errorMap.name);
               this.errorProductName = error.error.errorMap.name;
+
               }
             );
           });
