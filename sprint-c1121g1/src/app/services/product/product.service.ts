@@ -58,12 +58,6 @@ export class ProductService {
     return this.http.patch<any>(this.productApi + '/' + 'update/' + id, value);
   }
 
-
-  listAll(): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list`);
-  }
-
-
   /*
    Created by tamHT
    Time: 13:37 03/06/2022

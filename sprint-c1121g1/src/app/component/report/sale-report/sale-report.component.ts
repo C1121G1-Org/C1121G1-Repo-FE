@@ -20,7 +20,6 @@ Chart.register(...registerables);
 })
 export class SaleReportComponent implements OnInit {
   product: Product = {};
-
   chart1 = Chart.getChart('');
   chart2 = Chart.getChart('');
   notFound = '';
@@ -62,17 +61,17 @@ export class SaleReportComponent implements OnInit {
     if (this.formSearch.valid) {
       this.notValid = '';
       this.alertNotValid = '';
-      const xValues = [];
-      const sales = [];
-      const invoices = [];
-      const startDay = this.formSearch.get('startDay').value;
-      const endDay = this.formSearch.get('endDay').value;
-      const productId = this.formSearch.get('productId').value;
-      this.saleReportService.getAllSaleReports(startDay, endDay, productId).subscribe(data => {
-        this.notFound = '';
-        this.alertClass = '';
+      let xValues = [];
+      let sales = [];
+      let invoices = [];
+      let startDay = this.formSearch.get('startDay').value;
+      let endDay = this.formSearch.get('endDay').value;
+      let productId = this.formSearch.get('productId').value;
+      this.saleReportService.getAllSaleREports(startDay, endDay, productId).subscribe(data => {
+        this.notFound = "";
+        this.alertClass = "";
 
-        for (const dt of data) {
+        for (let dt of data) {
           xValues.push(dt.date);
           invoices.push(dt.invoiceQuantity);
           sales.push(dt.totalMoney);
@@ -120,7 +119,6 @@ export class SaleReportComponent implements OnInit {
         this.notFound = "KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !";
         this.totalInvoices = 0 ;
         this.totalSales = 0 ;
-
       });
 
     } else {
@@ -150,6 +148,7 @@ export class SaleReportComponent implements OnInit {
 
     const type = this.formSearch.get('typeReport').value;
 
+
     // tslint:disable-next-line:triple-equals
     if (type != 'ID') {
       this.formSearch.get('productId').setValue('');
@@ -165,8 +164,8 @@ export class SaleReportComponent implements OnInit {
   }
 
   checkDay() {
-    const date1 = new Date(this.formSearch.get('startDay')?.value);
-    const date2 = new Date(this.formSearch.get('endDay')?.value);
+    let date1 = new Date(this.formSearch.get('startDay')?.value);
+    let date2 = new Date(this.formSearch.get('endDay')?.value);
     if (date1?.getTime() > date2?.getTime()) {
       this.formSearch.get('endDay').setErrors({errDate: true});
     }

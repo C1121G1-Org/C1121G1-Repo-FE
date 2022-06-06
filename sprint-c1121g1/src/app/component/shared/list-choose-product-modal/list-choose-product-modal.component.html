@@ -147,7 +147,7 @@
                         <ul class="pagination">
                           <li *ngIf="!message &&!first " style="color: #333333" class="page-item"><a
                             (click)="previousPage()" class="page-link"
-                            style="width:70px ; height: 40px ;text-align: center ; line-height: 35px ; box-sizing: border-box ; background-color: #277CEA">Previous</a>
+                            style="width:70px ; height: 40px ;text-align: center ; line-height: 35px ; box-sizing: border-box ; background-color: #277CEA"><<</a>
                           </li>
                           <div *ngFor="let index of totalPages">
                             <li [class.select-index]="checkColorIndex(index)" *ngIf="!message" style="color: #333333"
@@ -160,7 +160,7 @@
                           <li *ngIf="!last && !message" style="color: #333333" class="page-item"><a (click)="nextPage()"
                                                                                                     class="page-link"
                                                                                                     style="width:50px ;text-align: center ; height: 40px ; line-height: 35px ; box-sizing: border-box;  background-color: #277CEA"
-                          >Next</a>
+                          >>></a>
                           </li>
                         </ul>
                       </nav>
