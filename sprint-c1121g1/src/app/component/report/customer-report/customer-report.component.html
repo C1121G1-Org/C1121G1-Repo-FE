@@ -158,19 +158,19 @@
       <!--      </ul>-->
       <!--    </nav>-->
       <!--    &lt;!&ndash;Pagination&ndash;&gt;-->
-
-      <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
-        <a type="button" class="btn btn-outline-info" (click)="previousPage()"
-           [hidden]="pageNumber == 0">Trang trước</a>
-        <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
-        <a type="button" class="btn btn-outline-info" (click)="nextPage()"
-           [hidden]="pageNumber == totalPages - 1">Trang sau</a>
-      </div>
-
-      <div style="text-align: center" class="container col-6 col-md-6">
-        <button type="button" style="display: inline-block" class="btn btn-primary">Quay lại</button>
-      </div>
     </div>
+  </div>
+
+  <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
+    <a type="button" class="btn btn-outline-info" (click)="previousPage()"
+       [hidden]="pageNumber == 0">Trang trước</a>
+    <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
+    <a type="button" class="btn btn-outline-info" (click)="nextPage()"
+       [hidden]="pageNumber == totalPages - 1">Trang sau</a>
+  </div>
+
+  <div style="text-align: center" class="container col-6 col-md-6">
+    <button type="button" style="display: inline-block" class="btn btn-primary" [routerLink]="['']">Quay lại</button>
   </div>
 
   <div [hidden]="checkReportCustomers == true" class="text-center">

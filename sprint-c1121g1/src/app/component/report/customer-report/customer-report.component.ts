@@ -50,7 +50,6 @@ export class CustomerReportComponent implements OnInit {
   }
 
   filterByGender() {
-    this.pageNumber = 0;
     this.reportService.filterByGender(this.pageNumber, this.genderSearch)
       .subscribe(customerReports => {
         if (customerReports == null) {
@@ -66,7 +65,6 @@ export class CustomerReportComponent implements OnInit {
   }
 
   filterByAge() {
-    this.pageNumber = 0;
     this.reportService.filterByAge(this.pageNumber, parseInt(this.ageSearch))
       .subscribe(customerReports => {
         if (customerReports == null) {
@@ -82,7 +80,6 @@ export class CustomerReportComponent implements OnInit {
   }
 
   filterByGenderAndAge() {
-    this.pageNumber = 0;
     this.reportService.filterByGenderAndAge(this.pageNumber, this.genderSearch, parseInt(this.ageSearch))
       .subscribe(customerReports => {
         if (customerReports == null) {
@@ -225,11 +222,12 @@ export class CustomerReportComponent implements OnInit {
   }
 
   searchAge(target: any) {
-      this.ageSearch = target.value;
+    this.ageSearch = target.value;
 
   }
 
   filter(errorBtn: HTMLButtonElement) {
+    this.pageNumber = 0;
     if (this.chooseFilter == 1) {
       this.filterAllCustomerReport();
     } else if (this.chooseFilter == 2) {
@@ -265,18 +263,18 @@ export class CustomerReportComponent implements OnInit {
           }
         }
       } else {
-         if (this.chooseAgeSearch == true) {
-           if (this.ageSearch == undefined || this.ageSearch == '') {
-             this.checkAgeValue = false;
-             errorBtn.click();
-           } else {
-             this.checkAgeValue = true;
-             this.filterByAge();
-           }
-         } else {
-           this.checkSelectiveValue = false;
-           errorBtn.click();
-         }
+        if (this.chooseAgeSearch == true) {
+          if (this.ageSearch == undefined || this.ageSearch == '') {
+            this.checkAgeValue = false;
+            errorBtn.click();
+          } else {
+            this.checkAgeValue = true;
+            this.filterByAge();
+          }
+        } else {
+          this.checkSelectiveValue = false;
+          errorBtn.click();
+        }
       }
     }
   }
