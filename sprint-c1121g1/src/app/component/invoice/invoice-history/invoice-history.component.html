@@ -1,19 +1,53 @@
-
 <!--  Created by CongNV-->
 <!--  Date : 04/06/2022-->
 <!--  Function: Search,Pageable-->
-<div class="container-fluid" style="width: 1000px">
-
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <form [formGroup]="formSearch" class="d-flex">
-        <input formControlName="keyword" class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit" style="width: 130px" (click)="getSearch('','',0)">Tìm
-          kiếm
-        </button>
-      </form>
+<div class="container-fluid" style="width:70%">
+  <div class="row" >
+    <div class="col-2">
+      <button *ngIf="checkDate == true" (click)="sortDate()" class="btn btn-outline-primary">
+        Sắp xếp ngày tăng dần
+      </button>
+      <button *ngIf="checkDate == false" (click)="sortDate()" class="btn btn-outline-primary">
+        Sắp xếp ngày giảm dần
+      </button>
     </div>
-  </nav>
+
+    <div class="col-2">
+      <button *ngIf="checkCustomer == true" (click)="sortCustomer()" class="btn btn-outline-primary">
+        Sắp xếp tên A - Z
+      </button>
+      <button *ngIf="checkCustomer == false" (click)="sortCustomer()" class="btn btn-outline-primary">
+        Sắp xếp tên Z - A
+      </button>
+    </div>
+
+    <div class="col-2">
+      <button *ngIf="checkTotalMoney == true" (click)="sortTotalMoney()" class="btn btn-outline-primary">
+        Sắp xếp giá tiền 0 -> 9
+      </button>
+      <button *ngIf="checkTotalMoney == false" (click)="sortTotalMoney()" class="btn btn-outline-primary">
+        Sắp xếp giá tiền 9 -> 0
+      </button>
+    </div>
+
+    <div class="col-2"></div>
+
+    <div class="col-4" >
+      <nav class="navbar navbar-light col-12">
+        <div >
+          <form [formGroup]="formSearch" class="d-flex">
+            <input (change)="changeKeyword()" formControlName="keyword" class="form-control me-2" type="search" placeholder="Tìm kiếm"
+                   aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit" style="width: 130px" (click)="getSearch('','',0)">Tìm
+              kiếm
+            </button>
+          </form>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+
 
   <table class="table">
     <thead>
@@ -32,7 +66,8 @@
       <td>{{invoice.createDate }}</td>
       <td>{{invoice.createTime}}</td>
       <td>{{invoice.customerName}}</td>
-      <td style="text-align: center"><a class="btn btn-warning" data-toggle="modal" data-target="#staticBackdrop"
+      <td style="text-align: center"><a class="btn btn-outline-warning" data-toggle="modal"
+                                        data-target="#staticBackdrop"
                                         (click)="getInvoiceDetailId(invoice.quantity,invoice.productName)">Chi tiết</a>
       </td>
       <td>{{invoice.totalMoney | currency : 'VND'}}</td>
@@ -44,16 +79,16 @@
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item">
-      <a class="page-link" (click)="previous()">Previous</a>
+      <button [disabled]="page < 1" class="page-link" (click)="previous()">Previous</button>
     </li>
-    <li class="page-item"><a class="page-link">{{page+1}}</a></li>
-<!--    <li class="page-item"><a class="page-link">{{+totalPages}}</a></li>-->
+    <li class="page-item"><a class="page-link">{{page + 1}}</a></li>
+    <!--        <li class="page-item"><a class="page-link">{{+totalPages}}</a></li>-->
     <li class="page-item">
-      <a class="page-link" (click)="next()">Next</a>
+      <button [disabled]="page >= totalPages - 1" class="page-link" (click)="next()">Next</button>
     </li>
   </ul>
 </nav>
-
+<!--page + 1 *-->
 
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
