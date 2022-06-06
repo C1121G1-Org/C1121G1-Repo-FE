@@ -82,10 +82,10 @@
 
           <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
             <a type="button" class="btn btn-outline-info" (click)="previousPage()"
-               [hidden]="pageNumber == 0">Previous</a>
+               [hidden]="pageNumber == 0">Trang trước</a>
             <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
             <a type="button" class="btn btn-outline-info" (click)="nextPage()"
-               [hidden]="pageNumber == totalPages - 1">Next</a>
+               [hidden]="pageNumber == totalPages - 1">Trang sau</a>
           </div>
         </div>
       </div>
@@ -138,17 +138,17 @@
 
           <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
             <a type="button" class="btn btn-outline-info" (click)="productPreviousPage()"
-               [hidden]="productPageNumber == 0">Previous</a>
+               [hidden]="productPageNumber == 0">Trang trước</a>
             <span>{{productPageNumber + 1}}</span>/<span>{{productTotalPages}}</span>
             <a type="button" class="btn btn-outline-info" (click)="productNextPage()"
-               [hidden]="productPageNumber == productTotalPages - 1">Next</a>
+               [hidden]="productPageNumber == productTotalPages - 1">Trang sau</a>
           </div>
 
         </div>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
       </div>
     </div>
   </div>

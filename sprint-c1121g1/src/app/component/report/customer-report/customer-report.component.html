@@ -161,10 +161,10 @@
 
       <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
         <a type="button" class="btn btn-outline-info" (click)="previousPage()"
-           [hidden]="pageNumber == 0">Previous</a>
+           [hidden]="pageNumber == 0">Trang trước</a>
         <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
         <a type="button" class="btn btn-outline-info" (click)="nextPage()"
-           [hidden]="pageNumber == totalPages - 1">Next</a>
+           [hidden]="pageNumber == totalPages - 1">Trang sau</a>
       </div>
 
       <div style="text-align: center" class="container col-6 col-md-6">
@@ -186,16 +186,16 @@
   <div class="modal-dialog modal-confirm modal-confirm-success">
     <div class="modal-content">
       <div class="modal-header modal-header-success justify-content-center">
-        <div class="icon-box">
-          <i class="material-icons">&#xE876;</i>
-        </div>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Lỗi.</h4>
-        <p *ngIf="checkGenderValue == false">Mời bạn chọn giới tính cần lọc.</p>
-        <p *ngIf="checkAgeValue == false">Mời bạn nhập số tuổi cần lọc.</p>
-        <p *ngIf="checkSelectiveValue == false">Chưa chọn cách chọn lọc.</p>
+        <h4 style="color: darkred">Lỗi.</h4>
+        <p *ngIf="checkGenderValue == false" style="color: red">Mời bạn chọn giới tính cần lọc.</p>
+        <p *ngIf="checkAgeValue == false" style="color: red">Mời bạn nhập số tuổi cần lọc.</p>
+        <p *ngIf="checkSelectiveValue == false" style="color: red">Chưa chọn cách chọn lọc.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
       </div>
     </div>
   </div>
