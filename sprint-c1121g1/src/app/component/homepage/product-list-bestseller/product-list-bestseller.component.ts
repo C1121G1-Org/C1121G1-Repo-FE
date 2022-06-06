@@ -15,11 +15,8 @@ export class ProductListBestsellerComponent implements OnInit {
 
   topfiveproductBestsellers: ProductBestseller[] = [];
   toptenproductBestsellers: ProductBestseller[] = [];
-<<<<<<< HEAD
-  // rateNumber: number = Math.round(Math.random() * 100);
-=======
 
->>>>>>> 028821d1c10b5bb89edd415f0aec656c40836f5d
+  // rateNumber: number = Math.round(Math.random() * 100);
   constructor(private homepageService: HomepageService) {
   }
 
