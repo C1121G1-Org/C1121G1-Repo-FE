@@ -26,9 +26,6 @@ export class SaleReportComponent implements OnInit {
   notFound = '';
   alertClass = '';
 
-  notValid = '';
-  alertNotValid = '';
-
   formSearch = new FormGroup({
     startDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
     endDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
@@ -56,12 +53,22 @@ export class SaleReportComponent implements OnInit {
 
 
   showSaleReport() {
+    if (this.getStartDay().value == '') {
+      this.getStartDay().setErrors({empty: true})
+    }
+
+    if (this.getEndDay().value == '') {
+      this.getEndDay().setErrors({empty: true})
+    }
+
+    if (this.getTypeReport().value == 'ID' && this.getProductId().value == '') {
+      this.getProductId().setErrors({empty: true});
+    }
+
     this.chart1?.destroy();
     this.chart2?.destroy();
 
     if (this.formSearch.valid) {
-      this.notValid = '';
-      this.alertNotValid = '';
       const xValues = [];
       const sales = [];
       const invoices = [];
@@ -120,9 +127,6 @@ export class SaleReportComponent implements OnInit {
         this.notFound = 'KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !';
       });
 
-    } else {
-      this.notValid = 'VUI LÒNG ĐIỀN ĐÚNG THÔNG TIN YÊU CẦU !';
-      this.alertNotValid = 'alert alert-warning';
     }
 
   }
@@ -169,8 +173,4 @@ export class SaleReportComponent implements OnInit {
     }
   }
 
-  closeNotValidAlert() {
-    this.notValid = '';
-    this.alertNotValid = '';
-  }
 }
