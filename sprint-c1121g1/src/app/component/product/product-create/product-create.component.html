@@ -34,8 +34,8 @@
                   <label for="price">Giá <span class="text-danger">(*):</span></label>
                   <input type="text" id=price formControlName="price" class="form-control" name="price">
                   <!--                  <input onChange="format_curency(this);" type="text" id=price formContronlName="price" class="form-control" name="price">-->
-                  <input [ngModel]="productForm.controls.price.value | currency"
-                  (ngModelChange)="productForm.controls.price =$event" name="inputField" type="text" />
+<!--                  <input [ngModel]="productForm.controls.price.value | currency"-->
+<!--                  (ngModelChange)="productForm.controls.price =$event" name="inputField" type="text" />-->
 
                   <span>VND</span>
 
@@ -249,7 +249,7 @@
         <p>Thêm mới thông tin hàng hóa thành công!</p>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/supplier/create']">OK
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/api/product/listProduct']">OK
         </button>
       </div>
     </div>
