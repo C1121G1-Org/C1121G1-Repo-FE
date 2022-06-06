@@ -105,7 +105,7 @@ export class SaleReportComponent implements OnInit {
             datasets: [{
               label: 'Đơn hàng ( Đơn )',
               fill: false,
-              data: invoices,
+              data: invoices.map(f => {return f.toFixed()}),
               pointRadius: 3,
               pointBackgroundColor: 'blue',
               backgroundColor: 'blue',
@@ -118,6 +118,8 @@ export class SaleReportComponent implements OnInit {
       }, error => {
         this.alertClass = "text-center alert alert-danger";
         this.notFound = "KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !";
+        this.totalInvoices = 0 ;
+        this.totalSales = 0 ;
       });
 
     } else {
