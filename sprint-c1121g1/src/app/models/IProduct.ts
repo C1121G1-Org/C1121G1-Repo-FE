@@ -11,4 +11,5 @@ export interface IProduct {
   qrScan?: string;
   screenSize?: string;
   selfie?: string;
+  quantity?: number;
 }

@@ -118,6 +118,7 @@ export class ListCustomerModalComponent implements OnInit {
   }
 
   getAll() {
+    this.currentCustomer = null;
     this.searchValue = '';
     this.searchByPhone = '';
     this.searchByName = '';
