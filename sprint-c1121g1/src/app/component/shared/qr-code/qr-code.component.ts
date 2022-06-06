@@ -1,12 +1,9 @@
-
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 
 import {SaleReportService} from '../../../services/report/sale-report.service';
 import {QrcodeService} from '../../../services/qrcode/qrcode.service';
 import {ProductService} from '../../../services/product/product.service';
 import {Product} from '../../../models/product';
-
-declare var $: any;
 
 /*
     Created by HauPV
@@ -47,19 +44,16 @@ export class QrCodeComponent implements OnInit {
 
     if (this.typeQRScan == '1') {
       if (file[0].files[0]) {
-        this.message = '';
-        this.alertClass = '';
         const formData = new FormData();
         formData.append('file', file[0].files[0]);
         this.qrCodeService.decode(formData).subscribe(data => {
           this.product = data;
           this.sendProduct.emit(this.product);
-          $("#btnCloseModal").click();
         }, err => {
-          this.alertClass = 'alert alert-danger';
-          this.message = 'Mã QR Không hợp lệ vui lòng kiểm tra lại !';
+          console.log(err);
         });
-
+        this.message = '';
+        this.alertClass = '';
       } else {
         this.alertClass = 'alert alert-danger';
         this.message = 'Vui lòng chọn ảnh !';
@@ -117,14 +111,13 @@ export class QrCodeComponent implements OnInit {
   readFile2(target: any) {
     const file: File = target.files[0];
     if (file) {
-      this.message = '';
-      this.alertClass = '';
       const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image2 = reader?.result as string;
       };
-
+      this.message = '';
+      this.alertClass = '';
     } else {
       this.alertClass = 'alert alert-danger';
       this.message = 'Vui lòng chọn ảnh !';

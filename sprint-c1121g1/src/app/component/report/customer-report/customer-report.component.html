@@ -168,8 +168,7 @@
       </div>
 
       <div style="text-align: center" class="container col-6 col-md-6">
-        <button type="button" style="display: inline-block" class="btn btn-primary"
-                [routerLink]="['']">Quay lại</button>
+        <button type="button" style="display: inline-block" class="btn btn-primary">Quay lại</button>
       </div>
     </div>
   </div>
@@ -186,16 +185,16 @@
   <div class="modal-dialog modal-confirm modal-confirm-success">
     <div class="modal-content">
       <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4 style="color: darkred">Lỗi.</h4>
-        <p *ngIf="checkGenderValue == false" style="color: red">Mời bạn chọn giới tính cần lọc.</p>
-        <p *ngIf="checkAgeValue == false" style="color: red">Mời bạn nhập số tuổi cần lọc.</p>
-        <p *ngIf="checkSelectiveValue == false" style="color: red">Chưa chọn cách chọn lọc.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Đóng</button>
+        <h4 style="color: red">Lỗi.</h4>
+        <p *ngIf="checkGenderValue == false" style="color: darkred">Mời bạn chọn giới tính cần lọc.</p>
+        <p *ngIf="checkAgeValue == false" style="color: darkred">Mời bạn nhập số tuổi cần lọc.</p>
+        <p *ngIf="checkSelectiveValue == false" style="color: darkred">Chưa chọn cách chọn lọc.</p>
       </div>
     </div>
   </div>

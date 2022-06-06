@@ -29,7 +29,6 @@ export class ReportAndHistoryService {
       'http://localhost:8080/api/customer/info-customer/' + id);
   }
 
-
   getPurchaseHistory(id: number, startDate: string, endDate: string, page: number):
     Observable<any> {
     return this.httpClient.get<any>(
@@ -38,11 +37,8 @@ export class ReportAndHistoryService {
   }
 
   getPurchaseProduct(id: number, page: number): Observable<any> {
-
-
-    return this.httpClient.get<any>('http://localhost:8080/api/customer/purchase-products/' + id + '?page=' + page);
-
-
+    return this.httpClient.get<any>(
+      'http://localhost:8080/api/customer/purchase-products/' + id + '?page=' + page);
   }
 
   filterByGender(page: number, genderSearch: boolean):

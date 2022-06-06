@@ -6,7 +6,7 @@
 export interface Product {
   id?: number;
   name?: string;
-  price?: string;
+  price?: number;
   image?: string;
   // qrScan: string;
   screenSize?: string;
@@ -17,4 +17,5 @@ export interface Product {
   otherDescription?: string;
   deleteFlag?: boolean;
 }
+
 

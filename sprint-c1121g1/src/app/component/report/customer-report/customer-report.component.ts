@@ -98,7 +98,7 @@ export class CustomerReportComponent implements OnInit {
   }
 
   previousPage() {
-    if (this.chooseFilter == 1) {
+    if (this.chooseFilter === 1) {
       this.reportService.filterAllCustomerReport(this.pageNumber - 1).subscribe(customerReports => {
         this.customerReports = customerReports.content;
         if (this.pageNumber - 1 <= 0) {
@@ -107,9 +107,9 @@ export class CustomerReportComponent implements OnInit {
           this.pageNumber = this.pageNumber - 1;
         }
       });
-    } else if (this.chooseFilter == 2) {
-      if (this.chooseGenderSearch == true) {
-        if (this.chooseAgeSearch == true) {
+    } else if (this.chooseFilter === 2) {
+      if (this.chooseGenderSearch === true) {
+        if (this.chooseAgeSearch === true) {
           this.reportService.filterByGenderAndAge(
             this.pageNumber - 1, this.genderSearch, parseInt(this.ageSearch))
             .subscribe(customerReports => {
@@ -133,7 +133,7 @@ export class CustomerReportComponent implements OnInit {
             });
         }
       } else {
-        if (this.chooseAgeSearch == true) {
+        if (this.chooseAgeSearch === true) {
           this.reportService.filterByAge(
             this.pageNumber - 1, parseInt(this.ageSearch))
             .subscribe(customerReports => {
@@ -144,6 +144,8 @@ export class CustomerReportComponent implements OnInit {
                 this.pageNumber = this.pageNumber - 1;
               }
             });
+        } else {
+          console.log('Chưa chọn lọc cách search');
         }
       }
     }
@@ -151,7 +153,7 @@ export class CustomerReportComponent implements OnInit {
 
   nextPage() {
 
-    if (this.chooseFilter == 1) {
+    if (this.chooseFilter === 1) {
       this.reportService.filterAllCustomerReport(this.pageNumber + 1).subscribe(customerReports => {
         this.customerReports = customerReports.content;
         if (this.pageNumber + 1 >= this.totalPages) {
@@ -160,10 +162,9 @@ export class CustomerReportComponent implements OnInit {
           this.pageNumber = this.pageNumber + 1;
         }
       });
-    } else if (this.chooseFilter == 2) {
-
-      if (this.chooseGenderSearch == true) {
-        if (this.chooseAgeSearch == true) {
+    } else if (this.chooseFilter === 2) {
+      if (this.chooseGenderSearch === true) {
+        if (this.chooseAgeSearch === true) {
           this.reportService.filterByGenderAndAge(
             this.pageNumber + 1, this.genderSearch, parseInt(this.ageSearch))
             .subscribe(customerReports => {
@@ -187,7 +188,7 @@ export class CustomerReportComponent implements OnInit {
             });
         }
       } else {
-        if (this.chooseAgeSearch == true) {
+        if (this.chooseAgeSearch === true) {
           this.reportService.filterByAge(
             this.pageNumber + 1, parseInt(this.ageSearch))
             .subscribe(customerReports => {
@@ -198,6 +199,8 @@ export class CustomerReportComponent implements OnInit {
                 this.pageNumber = this.pageNumber + 1;
               }
             });
+        } else {
+          console.log('Chưa chọn lọc cách search');
         }
       }
     }
