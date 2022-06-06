@@ -5,10 +5,12 @@ import {HomepageModule} from './component/homepage/homepage.module';
 import {ProductListBestsellerComponent} from './component/homepage/product-list-bestseller/product-list-bestseller.component';
 import {CustomerListComponent} from './component/customer/customer-list/customer-list.component';
 import {CustomerUpdateComponent} from './component/customer/customer-update/customer-update.component';
+import {ErrorComponent} from './error/error.component';
 
 
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
+  {path: 'error', component: ErrorComponent}
 ];
 
 @NgModule({

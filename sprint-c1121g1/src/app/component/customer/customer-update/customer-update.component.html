@@ -54,7 +54,7 @@
                   <input type="date" class="form-control" formControlName="dateOfBirth" name="email" id="email" >
                   <div *ngIf="editForm.get('dateOfBirth')?.touched ||editForm.get('dateOfBirth').dirty">
                     <small class="text-danger" *ngIf="editForm.get('dateOfBirth')?.hasError('required')">Ngày sinh không được để
-                      trống.</small>
+                      trống!</small>
                   </div>
                 </div>
 
@@ -66,7 +66,7 @@
                   </select>
                   <div *ngIf="editForm.get('gender')?.touched ||editForm.get('gender').dirty">
                     <small class="text-danger" *ngIf="editForm.get('gender')?.hasError('required')">Giới tính không được để
-                      trống.</small>
+                      trống!</small>
                   </div>
                 </div>
 
