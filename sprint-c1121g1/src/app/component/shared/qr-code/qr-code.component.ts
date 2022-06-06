@@ -1,11 +1,9 @@
-import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
-
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SaleReportService} from '../../../services/report/sale-report.service';
 import {QrcodeService} from '../../../services/qrcode/qrcode.service';
 import {ProductService} from '../../../services/product/product.service';
+import {SaleReport} from '../../report/model/sale-report';
 import {Product} from '../../../models/product';
-
-declare var $: any;
 
 /*
     Created by HauPV
@@ -18,7 +16,6 @@ declare var $: any;
   templateUrl: './qr-code.component.html',
   styleUrls: ['./qr-code.component.css']
 })
-
 export class QrCodeComponent implements OnInit {
 
   @Output()
@@ -27,7 +24,6 @@ export class QrCodeComponent implements OnInit {
   product: Product = {};
 
   message = '';
-  alertClass = '';
   typeQRScan = '1';
 
   image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
@@ -43,52 +39,35 @@ export class QrCodeComponent implements OnInit {
   scanQRCode() {
 
     const file: any = document.querySelectorAll('input[type=\'file\']');
-
+    // tslint:disable-next-line:triple-equals
     if (this.typeQRScan == '1') {
       if (file[0].files[0]) {
-        this.message = '';
-        this.alertClass = '';
         const formData = new FormData();
         formData.append('file', file[0].files[0]);
         this.qrCodeService.decode(formData).subscribe(data => {
           this.product = data;
           this.sendProduct.emit(this.product);
-          $("#btnCloseModal").click();
         }, err => {
-          this.alertClass = 'alert alert-danger';
-          this.message = 'Mã QR Không hợp lệ vui lòng kiểm tra lại !';
+          console.log(err);
         });
-
+        this.message = '';
       } else {
-        this.alertClass = 'alert alert-danger';
         this.message = 'Vui lòng chọn ảnh !';
         this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
       }
 
     } else {
       if (file[0].files[0] && file[1].files[0]) {
-        this.alertClass = '';
-        this.message = '';
         const formData = new FormData();
         formData.append('file1', file[0].files[0]);
         formData.append('file2', file[1].files[0]);
         this.qrCodeService.check(formData).subscribe(data => {
-          if (data) {
-            this.alertClass = 'alert alert-success';
-            this.message = 'Mã QR HỢP LỆ !';
-          } else {
-            this.alertClass = 'alert alert-danger';
-            this.message = 'Mã QR KHÔNG HỢP LỆ !';
-          }
-
+          console.log(data);
         }, err => {
-          this.alertClass = 'alert alert-danger';
-          this.message = 'Mã QR KHÔNG HỢP LỆ !';
+          console.log(err);
         });
-        this.alertClass = '';
         this.message = '';
       } else {
-        this.alertClass = 'alert alert-danger';
         this.message = 'Vui lòng chọn ảnh !';
       }
     }
@@ -97,16 +76,13 @@ export class QrCodeComponent implements OnInit {
   readFile1(target: any) {
     const file: File = target.files[0];
     if (file) {
-      this.alertClass = '';
-      this.message = '';
       const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image1 = reader?.result as string;
       };
-
+      this.message = '';
     } else {
-      this.alertClass = 'alert alert-danger';
       this.message = 'Vui lòng chọn ảnh !';
       this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
     }
@@ -116,16 +92,13 @@ export class QrCodeComponent implements OnInit {
   readFile2(target: any) {
     const file: File = target.files[0];
     if (file) {
-      this.message = '';
-      this.alertClass = '';
       const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image2 = reader?.result as string;
       };
-
+      this.message = '';
     } else {
-      this.alertClass = 'alert alert-danger';
       this.message = 'Vui lòng chọn ảnh !';
       this.image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
     }
