@@ -2,7 +2,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {EmployeeDto} from '../../dto/employeeDto';
+import {EmployeeDto} from '../../dto/employee/employeeDto';
+import {Positions} from '../../models/positions';
 
 export const environment = {
   production: false,
@@ -23,9 +24,13 @@ export class EmployeeService {
       return this.http.post<EmployeeDto>(API_URL + '/create', employeeDto);
     }
 
-  getAllPosition(): Observable<Position[]> {
-    return this.http.get<Position[]>(API_URL + '/position/list');
+  getAllPosition(): Observable<Positions[]> {
+    return this.http.get<Positions[]>(API_URL + '/position/list');
   }
-
-
+  findById(id: number): Observable<EmployeeDto> {
+    return this.http.get<EmployeeDto>(`${API_URL}/${id}`);
+  }
+    updateEmployee(id: number, employeeDto: EmployeeDto): Observable<EmployeeDto> {
+    return this.http.patch<EmployeeDto>(`${API_URL}/update/${id}`, employeeDto);
+  }
 }

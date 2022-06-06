@@ -7,10 +7,12 @@
           <h4 class="text-center font-weight-bold text-uppercase py-4">THÊM MỚI NHÂN VIÊN </h4>
           <div class="row">
 
-            <div style="display: flex ; justify-content: left" class="col-md-12">
-              <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
-              <input formControlName="img" name="img" id="img" type="file" class="file__input">
-              <label for="img" class="file__label">
+            <div style="display: flex ; justify-content: center" class="col-md-12">
+              <label for="image">Hình Ảnh <span class="text-danger">(*):</span></label>
+              <input name="image" id="image" type="file" class="file__input" (change)="showPreview($event)"
+                     required="required">
+              <img class="avatar rounded-circle" style="height: 160px; width: 160px;" src="{{imgVip}}">
+              <label for="image" class="file__label">
                 <i class="fa fa-upload"></i>
               </label>
             </div>
@@ -18,46 +20,136 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="employeeName">Họ và Tên <span class="text-danger">(*):</span></label>
-                <input type="text" formControlName="employeeName" name="employeeName" id="employeeName"
+                <input  type="text" formControlName="employeeName" name="employeeName" id="employeeName"
                        class="form-control">
               </div>
-
+              <div
+                *ngIf="createEmployeeForm.get('employeeName').errors?.required&&(employeeName?.dirty ||employeeName?.touched)"
+                style="color: red">
+                Không được bỏ trống.
+              </div>
+              <div
+                *ngIf="createEmployeeForm.get('employeeName').errors?.minlength&&(employeeName?.dirty ||employeeName?.touched)"
+                style="color: red">
+                Họ và Tên nhân viên phải trên 5 chữ .
+              </div>
+              <div
+                *ngIf="createEmployeeForm.get('employeeName').errors?.maxlength&&(employeeName?.dirty ||employeeName?.touched)"
+                style="color: red">
+                Họ và tên của bạn quá dài.
+              </div>
+              <div
+                *ngIf="createEmployeeForm.get('employeeName').errors?.pattern&&(employeeName?.dirty ||employeeName?.touched)"
+                style="color: red">
+                phải là chữ
+              </div>
               <div class="form-group">
                 <label for="dateOfBirth">Ngày Tháng Năm Sinh <span class="text-danger">(*):</span></label>
                 <input type="date" formControlName="dateOfBirth" name="dateOfBirth" id="dateOfBirth"
                        class="form-control">
+                <div
+                  *ngIf="createEmployeeForm.get('dateOfBirth').errors?.required&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
+                  style="color: red">
+                  Không được bỏ trống.
+                </div>
+                <div
+                  *ngIf="createEmployeeForm.get('dateOfBirth').errors?.pattern&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
+                  style="color: red">
+                  nhập đúng định dạng.
+                </div>
+
               </div>
 
               <div class="form-group">
                 <label for="address">Địa chỉ <span class="text-danger">(*):</span></label>
                 <input type="text" formControlName="address" name="address" id="address" class="form-control">
+
+                <div *ngIf="createEmployeeForm.get('address').errors?.required&&(address?.dirty ||address?.touched)"
+                     style="color: red">
+                  Không được bỏ trống.
+                </div>
+                <div *ngIf="createEmployeeForm.get('address').errors?.minlength&&(address?.dirty ||address?.touched)"
+                     style="color: red">
+                  Địa chỉ phải trên 5 chữ .
+                </div>
+                <div *ngIf="createEmployeeForm.get('address').errors?.maxlength&&(address?.dirty ||address?.touched)"
+                     style="color: red">
+                  Địa chỉ của bạn quá dài.
+                </div>
               </div>
               <div class="form-group">
                 <label for="phoneNumber">Số điện thoại<span class="text-danger">(*):</span></label>
                 <input type="text" formControlName="phoneNumber" name="phoneNumber" id="phoneNumber"
                        class="form-control">
+
+                <div
+                  *ngIf="createEmployeeForm.get('phoneNumber').errors?.required&&(phoneNumber?.dirty ||phoneNumber?.touched)"
+                  style="color: red">
+                  Không được bỏ trống.
+                </div>
+                <div
+                  *ngIf="createEmployeeForm.get('phoneNumber').errors?.pattern&&(phoneNumber?.dirty ||phoneNumber?.touched)"
+                  style="color: red">
+                  nhập đúng định dạng , VD: 0905139871.
+                </div>
+
               </div>
+
+
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
                 <label for="idCard">Số CMND/CCCD <span class="text-danger">(*):</span></label>
-                <input type="text" formControlName="idCard" name="idCard" id="idCard" class="form-control">
+                <input  [(ngModel)]="idCardFB" type="text" formControlName="idCard" name="idCard" id="idCard" class="form-control">
+                <div *ngIf="createEmployeeForm.get('idCard').errors?.required&&(idCard?.dirty ||idCard?.touched)"
+                     style="color: red">
+                  Không được bỏ trống.
+                </div>
+                <div *ngIf="createEmployeeForm.get('idCard').errors?.pattern&&(idCard?.dirty ||idCard?.touched)"
+                     style="color: red">
+                  nhập đúng định dạng số CMND/CCCD , VD: 048203000188.
+                </div>
+                <div>
+                  <p style="color: red" *ngIf=" errorIdCard!= ''">{{errorIdCard}}</p>
+                </div>
               </div>
 
               <div formGroupName="accountDto">
                 <div class="form-group">
                   <label for="email">Email <span class="text-danger">(*):</span></label>
                   <input type="text" formControlName="email" name="email" id="email" class="form-control">
+                                    <div *ngIf="createEmployeeForm.get('accountDto.email')?.errors?.required&&(email?.dirty ||email?.touched)" style="color: red">
+                                      Không được bỏ trống.
+                                    </div>
+                                    <div *ngIf="createEmployeeForm.get('accountDto.email')?.errors?.pattern&&(email?.dirty ||email?.touched)" style="color: red">
+                                      nhập đúng định dạng email, VD: abcxyz@codegym.com .
+                                    </div>
+                  <div>
+                    <p style="color: red" *ngIf=" errorEmailEmployee!= ''">{{errorEmailEmployee}}</p>
+                  </div>
+
+
                 </div>
+
                 <div class="form-group">
                   <label for="userName">Tên Đăng Nhập <span class="text-danger">(*):</span></label>
                   <input type="text" formControlName="userName" name="userName" id="userName" class="form-control">
+                                    <div *ngIf="createEmployeeForm.get('accountDto.userName')?.errors?.required&&(userName?.dirty ||userName?.touched)" style="color: red">
+                                      Không được bỏ trống.
+                                    </div>
+                  <div>
+                    <p style="color: red" *ngIf=" errorUserNameEmployee!= ''">{{errorUserNameEmployee}}</p>
+                  </div>
                 </div>
+
                 <div class="form-group">
                   <label for="encryptPassword">Mật Khẩu <span class="text-danger">(*):</span></label>
                   <input type="passWord" formControlName="encryptPassword" name="encryptPassword" id="encryptPassword"
                          class="form-control">
+                                    <div *ngIf="createEmployeeForm.get('accountDto.encryptPassword')?.errors?.required&&(encryptPassword?.dirty ||encryptPassword?.touched)" style="color: red">
+                                      Không được bỏ trống.
+                                    </div>
                 </div>
 
               </div>
@@ -66,14 +158,21 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label for="position">Chức vụ <span class="text-danger">(*):</span></label>
-                <select name="position" id="position" formControlName="positionDto" class="form-control">
+                <select [compareWith]="comparefn" name="position" id="position" formControlName="positionDto"
+                        class="form-control">
                   <option *ngFor="let p of positiones" [ngValue]="p">{{p.positionName}}</option>
                 </select>
+                                <div *ngIf="createEmployeeForm.get('positionDto').errors?.required&&(positionDto?.dirty ||positionDto?.touched)" style="color: red">
+                                  Không được bỏ trống.
+                                </div>
               </div>
             </div>
+            <p></p>
             <div class="text-center" style="margin: auto">
-              <button type="button" class="btn btn-danger" style="margin-right: 20px">huỷ</button>
-              <button type="submit" class="btn btn-primary">thêm mới <i class="fa fa-paper-plane"></i></button>
+              <button type="button" class="btn btn-danger" style="margin-right: 20px">Huỷ<i class="bi bi-file-x"></i>
+              </button>
+              <button type="submit" class="btn btn-primary" >Thêm mới <i
+                class="fa fa-paper-plane"></i></button>
 
             </div>
 

@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EmployeeService} from '../../../services/employee/employee.service';
 import {Positions} from '../../../models/positions';
+import {formatDate} from '@angular/common';
+import {finalize} from 'rxjs/operators';
+import {AngularFireStorage} from '@angular/fire/storage';
 
 
 @Component({
@@ -13,45 +16,123 @@ import {Positions} from '../../../models/positions';
 export class EmployeeCreateComponent implements OnInit {
 
   positiones: Positions[] = [];
+  imgVip = 'https://accounts.viblo.asia/assets/webpack/profile_default.0bca52a.png';
+  selectedImage: any;
+  errorIdCard: string;
+  errorEmailEmployee: string;
+  errorUserNameEmployee: string;
+  idCardFB: string;
 
+
+
+  get employeeName() {
+    return this.createEmployeeForm.get('employeeName');
+  }
+
+  get email() {
+    return this.createEmployeeForm.get('accountDto').get('email');
+  }
+
+  get encryptPassword() {
+    return this.createEmployeeForm.get('accountDto').get('encryptPassword');
+  }
+
+  get userName() {
+    return this.createEmployeeForm.get('accountDto').get('userName');
+  }
+
+  get positionDto() {
+    return this.createEmployeeForm.get('positionDto');
+  }
+
+  get image() {
+    return this.createEmployeeForm.get('image');
+  }
+
+  get phoneNumber() {
+    return this.createEmployeeForm.get('phoneNumber');
+  }
+
+  get idCard() {
+    return this.createEmployeeForm.get('idCard');
+  }
+
+  get address() {
+    return this.createEmployeeForm.get('address');
+  }
+
+  get dateOfBirth() {
+    return this.createEmployeeForm.get('dateOfBirth');
+  }
+
+  // @ts-ignore
   createEmployeeForm: FormGroup = new FormGroup({
-    id: new FormControl(),
-    employeeName: new FormControl(),
-    dateOfBirth: new FormControl(),
-    address: new FormControl(),
-    idCard: new FormControl(),
-    phoneNumber: new FormControl(),
-    image: new FormControl(),
-    positionDto: new FormControl(),
+    // tslint:disable-next-line:max-line-length
+    employeeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^([a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\\s{1}[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$')])),
+    dateOfBirth: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$')])),
+    address: new FormControl('', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100)])),
+    idCard: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[0-9_-]{9,12}$')])),
+    phoneNumber: new FormControl('', Validators.compose([Validators.required, Validators.pattern('((09|03|07|08|05)+([0-9]{8})\\b)')])),
+    image: new FormControl('', Validators.compose([Validators.required])),
+    positionDto: new FormControl('', Validators.compose([Validators.required])),
     accountDto: new FormGroup({
-      userName: new FormControl(),
-      encryptPassword: new FormControl(),
-      email: new FormControl(),
+      userName: new FormControl('', Validators.compose([Validators.required])),
+      encryptPassword: new FormControl('', Validators.compose([Validators.required])),
+      email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')])),
     }),
   });
 
+
   constructor(private router: Router,
-              private employeeService: EmployeeService) {
+              private employeeService: EmployeeService,
+              @Inject(AngularFireStorage) private storage: AngularFireStorage) {
+  }
+
+  comparefn(t1: Positions, t2: Positions): boolean {
+    return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
 
   ngOnInit(): void {
-   this.getPosition();
+    this.getPosition();
   }
-  getPosition(){
+
+  getPosition() {
     this.employeeService.getAllPosition().subscribe(
       next => {
         // @ts-ignore
         this.positiones = next.data;
       });
   }
+
+
   submit() {
-    const employeeDto = this.createEmployeeForm.value;
-    this.employeeService.saveEmployee(employeeDto).subscribe(() => {
-      this.createEmployeeForm.reset();
-      this.router.navigate(['list']);
-      alert('Tạo thành công');
-    }, e => {
+    console.log(this.createEmployeeForm.value);
+    const nameImg = '/EmP-' + this.createEmployeeForm.get('idCard').value + '.jpg';
+    const fileRef = this.storage.ref(nameImg);
+    this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
+      finalize(() => {
+        fileRef.getDownloadURL().subscribe((url) => {
+          this.createEmployeeForm.patchValue({image: url});
+          this.employeeService.saveEmployee(this.createEmployeeForm.value).subscribe(() => {
+            this.createEmployeeForm.reset();
+            alert('Thêm mới thành công !');
+            window.location.reload();
+          }, error => {
+            this.errorIdCard = error.error.errorMap.idCard;
+            this.errorEmailEmployee = error.error.errorMap.email;
+            this.errorUserNameEmployee = error.error.errorMap.userName;
+          });
+        });
+      })
+    ).subscribe();
+  }
+  showPreview(event: any) {
+    this.selectedImage = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(this.selectedImage);
+    reader.onload = e => {
       console.log(e);
-    });
+      this.imgVip = reader.result as string;
+    };
   }
 }
