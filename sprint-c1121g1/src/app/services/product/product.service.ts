@@ -1,3 +1,5 @@
+// @ts-ignore
+
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Product} from '../../models/product';
@@ -15,6 +17,12 @@ export class ProductService {
 
   constructor(private http: HttpClient) {
   }
+
+  /*
+        Created by tuanPA
+        Time:
+        Function:
+  */
 
   productApi = 'http://localhost:8080/api/product';
 
@@ -46,6 +54,5 @@ export class ProductService {
   }
 
   list(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiBaseUrl}/api/product/list`);
-  }
+    return this.http.get<Product[]>(`${this.apiBaseUrl}/api/product/list`);}
 }

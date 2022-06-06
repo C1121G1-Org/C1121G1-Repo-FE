@@ -3,10 +3,10 @@
   <div class="container">
     <div class="menu-bar-content">
       <ul>
-        <li class="logo"><a href="#">
+        <li class="logo"><a [routerLink]="['']">
           <img src="assets/img/LOGO5.png" alt="">
         </a></li>
-        <li><input style="width: 300px" class="header-search" readonly placeholder="Bạn cần tìm gì?" type="text"><i
+        <li><input class="header-search" readonly placeholder="Bạn cần tìm gì?" type="text"><i
           class="fa fa-search"></i></li>
         <li>
           <div class="header-item header-item-menu">
@@ -22,7 +22,14 @@
               <li><a href="#">Quản lý thông tin cá nhân</a></li>
               <li><a href="#">Quản lý nhân viên</a></li>
               <li><a href="#">Quản lý kinh doanh</a></li>
-              <li><a href="#">Quản lý báo cáo</a></li>
+              <li><a href="#">Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
+                <div class="sub-menu-2">
+                  <ul>
+                    <li><a [routerLink]="['/sale-report/list']">Quản lý báo cáo bán hàng</a></li>
+                    <li><a href="#">Quản lý báo cáo khách hàng</a></li>
+                  </ul>
+                </div>
+              </li>
               <li><a href="#">Xem thông tin hàng hóa</a></li>
               <li><a href="#">Quản lý bán hàng</a></li>
               <li><a [routerLink]="['/supplier']">Quản lý nhà cung cấp</a></li>
