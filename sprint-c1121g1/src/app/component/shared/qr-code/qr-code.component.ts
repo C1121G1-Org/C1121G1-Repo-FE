@@ -59,6 +59,8 @@ export class QrCodeComponent implements OnInit {
           $("#btnCloseModal").click();
           this.imageInput1.nativeElement.value = '';
           this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+          $('#btnCloseModal').click();
+
         }, err => {
           this.alertClass = 'alert alert-danger';
           this.message = 'Mã QR Không hợp lệ vui lòng kiểm tra lại !';

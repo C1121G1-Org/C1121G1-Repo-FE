@@ -3,7 +3,6 @@
 <!--Time: 13:37 03/06/2022-->
 <!--Method: pageProduct()-->
 <!--*/-->
-
 <div style="display: flex  ; justify-content: center ">
   <div class="modal fade" id="productModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
        aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -26,7 +25,7 @@
                     <div>
                       <select [(ngModel)]="checkSearch" class="search-select background-search">
                         <option value="name">Tên sản phẩm</option>
-                        <option value="price">Số giá</option>
+                        <option value="price">giá</option>
                       </select>
                     </div>
 
@@ -34,14 +33,13 @@
                       <input [(ngModel)]="searchValue" #element style="width: 300px"
                              class="header-search search-input background-search"
                              placeholder="Bạn cần tìm gì?"
-                             type="text"><i
+                             type="text"><i (click)="search(element.value)"
                       class="fa fa-search"
                       style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                     </div>
                     <div>
-                      <button (click)="search(element.value)" class="btn-search btn-rounded  btn-sm my-0"
-                              style="width: 100px">Tìm
-                        kiếm
+                      <button  (click)="getAll()" class="btn-search btn-rounded  btn-sm my-0"
+                              style="width: 100px">làm Mới
                       </button>
                     </div>
                   </div>
@@ -64,6 +62,7 @@
                         <th class="text-center">Giá(VND)</th>
                         <th class="text-center">CPU</th>
                         <th class="text-center">Lưu Trữ</th>
+                        <th class="text-center">số lượng</th>
                       </tr>
                       </thead>
                     </table>
@@ -99,6 +98,7 @@
                           <th class="text-center">Giá(VND)</th>
                           <th class="text-center">CPU</th>
                           <th class="text-center">Lưu Trữ</th>
+                          <th class="text-center">Số lượng</th>
                         </tr>
                         </thead>
                       </table>
@@ -110,11 +110,12 @@
                         <tr (click)="getProduct(product)" *ngFor="let product of productList; index as i"
                             [class.heightLight]="isSelectedProduct(product)">
                           <td class="text-center">{{(i + 1)}}</td>
-                          <td class="pt-3-half">{{product.name}}</td>
-                          <td class="pt-3-half">{{product.id}}</td>
+                          <td class="text-center">{{product.name}}</td>
+                          <td class="text-center">{{product.id}}</td>
                           <td class="text-center">{{product.price |currency :'VND':''}}</td>
-                          <td class="pt-3-half">{{product.cpu}}</td>
-                          <td class="pt-3-half">{{product.memory}}</td>
+                          <td class="text-center">{{product.cpu}}</td>
+                          <td class="text-center">{{product.memory}}</td>
+                          <td class="text-center">{{product.quantity}}</td>
                         </tr>
                         </tbody>
                       </table>
@@ -146,7 +147,7 @@
                         <ul class="pagination">
                           <li *ngIf="!message &&!first " style="color: #333333" class="page-item"><a
                             (click)="previousPage()" class="page-link"
-                            style="width:70px ; height: 40px ;text-align: center ; line-height: 35px ; box-sizing: border-box ; background-color: #277CEA">Previous</a>
+                            style="width:70px ; height: 40px ;text-align: center ; line-height: 35px ; box-sizing: border-box ; background-color: #277CEA"><<</a>
                           </li>
                           <div *ngFor="let index of totalPages">
                             <li [class.select-index]="checkColorIndex(index)" *ngIf="!message" style="color: #333333"
@@ -159,7 +160,7 @@
                           <li *ngIf="!last && !message" style="color: #333333" class="page-item"><a (click)="nextPage()"
                                                                                                     class="page-link"
                                                                                                     style="width:50px ;text-align: center ; height: 40px ; line-height: 35px ; box-sizing: border-box;  background-color: #277CEA"
-                          >Next</a>
+                          >>></a>
                           </li>
                         </ul>
                       </nav>

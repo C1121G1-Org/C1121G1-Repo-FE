@@ -11,7 +11,7 @@ const routes: Routes = [
   /*
       Created by HauPV
       Time: 09:00 03/06/2022
-      Function: routing for sale-report
+      Function : list sale report
       Role : Admin , Business Staff
   */
   {path: 'sale-report/list', component: SaleReportComponent},
