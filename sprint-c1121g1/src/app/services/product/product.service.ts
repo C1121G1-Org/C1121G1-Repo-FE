@@ -53,7 +53,7 @@ export class ProductService {
    Time: 13:37 03/06/2022
    Method: pageProduct()
  */
-  getAllProductPage(pageable, name, price,searchByQuantity): Observable<any> {
+  getAllProductPage(pageable, name, price, searchByQuantity): Observable<any> {
     return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}&keyQuantity=${searchByQuantity}`);
   }
 }
