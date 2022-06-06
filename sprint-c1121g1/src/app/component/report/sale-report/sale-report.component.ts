@@ -122,7 +122,7 @@ export class SaleReportComponent implements OnInit {
 
     } else {
       this.notValid = 'VUI LÒNG ĐIỀN ĐÚNG THÔNG TIN YÊU CẦU !';
-      this.alertNotValid = 'alert alert-danger';
+      this.alertNotValid = 'alert alert-warning';
     }
 
   }
