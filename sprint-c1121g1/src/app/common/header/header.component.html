@@ -3,10 +3,10 @@
   <div class="container">
     <div class="menu-bar-content">
       <ul>
-        <li class="logo"><a [routerLink]="['']">
+        <li class="logo"><a href="#">
           <img src="assets/img/LOGO5.png" alt="">
         </a></li>
-        <li><input class="header-search" readonly placeholder="Bạn cần tìm gì?" type="text"><i
+        <li><input style="width: 300px" class="header-search" readonly placeholder="Bạn cần tìm gì?" type="text"><i
           class="fa fa-search"></i></li>
         <li>
           <div class="header-item header-item-menu">
@@ -26,7 +26,7 @@
                 <div class="sub-menu-2">
                   <ul>
                     <li><a [routerLink]="['/sale-report/list']">Quản lý báo cáo bán hàng</a></li>
-                    <li><a href="#">Quản lý báo cáo khách hàng</a></li>
+                    <li><a [routerLink]="['/report/customer-report']">Quản lý báo cáo khách hàng</a></li>
                   </ul>
                 </div>
               </li>

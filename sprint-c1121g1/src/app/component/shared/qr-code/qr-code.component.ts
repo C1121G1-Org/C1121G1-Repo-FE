@@ -1,9 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+
 import {SaleReportService} from '../../../services/report/sale-report.service';
 import {QrcodeService} from '../../../services/qrcode/qrcode.service';
 import {ProductService} from '../../../services/product/product.service';
-import {SaleReport} from '../../report/model/sale-report';
 import {Product} from '../../../models/product';
+
+declare var $: any;
 
 /*
     Created by HauPV
@@ -16,6 +18,7 @@ import {Product} from '../../../models/product';
   templateUrl: './qr-code.component.html',
   styleUrls: ['./qr-code.component.css']
 })
+
 export class QrCodeComponent implements OnInit {
 
   @Output()
@@ -43,16 +46,19 @@ export class QrCodeComponent implements OnInit {
 
     if (this.typeQRScan == '1') {
       if (file[0].files[0]) {
+        this.message = '';
+        this.alertClass = '';
         const formData = new FormData();
         formData.append('file', file[0].files[0]);
         this.qrCodeService.decode(formData).subscribe(data => {
           this.product = data;
           this.sendProduct.emit(this.product);
+          $("#btnCloseModal").click();
         }, err => {
-          console.log(err);
+          this.alertClass = 'alert alert-danger';
+          this.message = 'Mã QR Không hợp lệ vui lòng kiểm tra lại !';
         });
-        this.message = '';
-        this.alertClass = '';
+
       } else {
         this.alertClass = 'alert alert-danger';
         this.message = 'Vui lòng chọn ảnh !';
