@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {ProductService} from '../../../services/product/product.service';
 import {Router} from '@angular/router';
@@ -14,7 +14,7 @@ import {Router} from '@angular/router';
   Time: 13:37 03/06/2022
   Method: pageProduct()
 */
-export class ListChooseProductModalComponent implements OnInit {
+export class ListChooseProductModalComponent implements OnInit, OnChanges {
   @Output() itemOutput = new EventEmitter();
   productList: IProduct[] = [];
   pageNumber: number;
@@ -31,18 +31,27 @@ export class ListChooseProductModalComponent implements OnInit {
   searchValue = '';
   selectedIndex: number;
   indexCurrent: number;
+  searchByQuantity = '';
 
   constructor(private productService: ProductService, private router: Router) {
   }
 
-  ngOnInit(): void {
-    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
+  ngOnChanges(changes: SimpleChanges): void {
+    this.searchValue = '';
+    this.searchByPrice = '';
+    this.searchByName = '';
+    this.ngOnInit();
   }
 
-  getModalProduct(pageNumber, searchByName, searchByPrice) {
+  ngOnInit(): void {
+    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+  }
+
+  getModalProduct(pageNumber, searchByName, searchByPrice, searchByQuantity) {
     this.message = false;
-    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice).subscribe((res: any) => {
+    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice, searchByQuantity).subscribe((res: any) => {
       this.productList = res.content;
+      console.log(this.productList);
       this.pageNumber = res.pageable.pageNumber;
       this.totalPages = res.totalPages;
       this.first = res.first;
@@ -55,11 +64,11 @@ export class ListChooseProductModalComponent implements OnInit {
   }
 
   nextPage() {
-    this.getModalProduct(this.pageNumber + 1, this.searchByName, this.searchByPrice);
+    this.getModalProduct(this.pageNumber + 1, this.searchByName, this.searchByPrice, this.searchByQuantity);
   }
 
   previousPage() {
-    this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice);
+    this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice, this.searchByQuantity);
   }
 
   getProduct(product: IProduct): void {
@@ -84,7 +93,7 @@ export class ListChooseProductModalComponent implements OnInit {
   getAllProductPage(index: any) {
     this.indexCurrent = index;
     this.pageNumber = index - 1;
-    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
+    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice , this.searchByQuantity);
   }
 
   search(value: any) {
@@ -93,11 +102,11 @@ export class ListChooseProductModalComponent implements OnInit {
     if (this.checkSearch === 'price') {
       this.searchByPrice = value;
       this.searchByName = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice , this.searchByQuantity);
     } else {
       this.searchByName = value;
       this.searchByPrice = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice , this.searchByQuantity);
     }
   }
 
@@ -114,10 +123,10 @@ export class ListChooseProductModalComponent implements OnInit {
     container.appendChild(button);
     // this.check = true;
     button.click();
-
   }
 
-  getAll(a) {
+  getAll() {
+    this.currentProduct = null;
     this.searchValue = '';
     this.searchByPrice = '';
     this.searchByName = '';
