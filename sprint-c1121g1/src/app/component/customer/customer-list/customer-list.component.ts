@@ -34,7 +34,7 @@ export class CustomerListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.customerService.getAllCustomer(this.nameCustomer, this.phoneNumber, this.page).subscribe(
+    this.customerService.getAllCustomer1(this.nameCustomer, this.phoneNumber, this.page).subscribe(
       (data: any) => {
         this.customerList = data.content;
         this.page = data.number;
@@ -59,7 +59,7 @@ export class CustomerListComponent implements OnInit {
   */
   next() {
     if (this.page < this.totalPage - 1) {
-      this.customerService.getAllCustomer(this.nameCustomer, this.phoneNumber, this.page + 1).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer, this.phoneNumber, this.page + 1).subscribe(
         (data: any) => {
           this.customerList = data.content;
           this.page = data.number;
@@ -78,7 +78,7 @@ export class CustomerListComponent implements OnInit {
 
   previous() {
     if (this.page > 0) {
-      this.customerService.getAllCustomer(this.nameCustomer, this.phoneNumber, this.page - 1).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer, this.phoneNumber, this.page - 1).subscribe(
         (data: any) => {
           this.customerList = data.content;
           this.page = data.number;
@@ -100,7 +100,7 @@ export class CustomerListComponent implements OnInit {
     /*const pattern = /^([^0-9]*)$/;
     const pattern2 = /^(090\d{7})|(091\d{7})|(\(\+84\)90\d{7})|(\(\+84\)91\d{7})$/;*/
     if (type === 'nameCustomer' && input !== '') {
-      this.customerService.getAllCustomer(this.nameCustomer = input, this.phoneNumber, this.page).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer = input, this.phoneNumber, this.page).subscribe(
         (data: any) => {
           this.customerList = data.content;
           this.page = data.number;
@@ -110,16 +110,11 @@ export class CustomerListComponent implements OnInit {
         }
       );
     } else if (type === 'phoneNumber' && input !== '') {
-      this.customerService.getAllCustomer(this.nameCustomer, this.phoneNumber = input, this.page).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer, this.phoneNumber = input, this.page).subscribe(
         (data: any) => {
-          this.totalElement = data.totalElements;
-          if (this.totalElement === 0) {
-            this.message = 'Không tìm thấy kết quả trả về';
-            alert('Không tìm thấy kết quả trả về');
-          } else {
           this.customerList = data.content;
           this.page = data.number;
-          this.totalPage = data.totalPages; }
+          this.totalPage = data.totalPages;
         }, err => {
           console.log(err);
         }

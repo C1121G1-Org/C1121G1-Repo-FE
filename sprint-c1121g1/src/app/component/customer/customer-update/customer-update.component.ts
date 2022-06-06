@@ -5,7 +5,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../../models/customer';
 import {CustomerDto} from '../../../dto/customer-dto';
 import {DatePipe} from '@angular/common';
-import {log} from 'util';
 
 
 @Component({
@@ -39,7 +38,7 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customerService.getAllCustomer(this.name, this.phone, this.page).subscribe(
+    this.customerService.getAllCustomer1(this.name, this.phone, this.page).subscribe(
       (data: any) => {
         this.totalElement = data.totalElements;
         this.activeRoute.paramMap.subscribe((paramMap: ParamMap) => {

@@ -1,16 +1,19 @@
-import {Injectable} from '@angular/core';
+import {Customer} from '../../models/customer';
+import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Customer} from '../../models/customer';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  URL_LIST = 'http://localhost:8080/api/customer';
 
   constructor(private http: HttpClient) {
   }
+  URL_LIST = 'http://localhost:8080/api/customer';
+
+  private url = environment.apiBaseUrl;
 
   /*
     Created By hoangDH,
@@ -36,7 +39,10 @@ export class CustomerService {
     Function: list and search all customer from database
     */
 
-  getAllCustomer(name: string, phone: string, page: number): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.URL_LIST + '/list' + '/?page=' + page + '&keyName=' + name + '&keyPhone=' + phone);
+  getAllCustomer1(name: string, phone: string, page: number): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.URL_LIST + '/list' + '/?page=' + page + '&keyName=' + name + '&keyPhone=' + phone);}
+
+  getAllCustomer(pageable, name, phone): Observable<any> {
+    return this.http.get<any>(`${this.url}/api/customer/list?page=${pageable}&keyName=${name}&keyPhone=${phone}`);
   }
 }

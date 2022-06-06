@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './common/header/header.component';
-import { FooterComponent } from './common/footer/footer.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './common/header/header.component';
+import {FooterComponent} from './common/footer/footer.component';
 import {EmployeeModule} from './component/employee/employee.module';
 import {ProductModule} from './component/product/product.module';
 import {CustomerModule} from './component/customer/customer.module';
@@ -13,7 +13,14 @@ import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
 import {ReportModule} from './component/report/report.module';
-import { ErrorComponent } from './error/error.component';
+import {ErrorComponent} from './error/error.component';
+// @ts-ignore
+import {AngularFireModule} from '@angular/fire';
+import {environment} from '../environments/environment';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {SecurityModule} from './component/security/security.module';
+import {HttpClientModule} from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +32,9 @@ import { ErrorComponent } from './error/error.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     EmployeeModule,
     ProductModule,
     CustomerModule,
@@ -32,9 +42,13 @@ import { ErrorComponent } from './error/error.component';
     SupplierModule,
     StorageModule,
     HomepageModule,
-    ReportModule
+    ReportModule,
+    SecurityModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    FormsModule
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
