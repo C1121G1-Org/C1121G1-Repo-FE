@@ -47,6 +47,7 @@ export class QrCodeComponent implements OnInit {
         this.qrCodeService.decode(formData).subscribe(data => {
           this.product = data;
           this.sendProduct.emit(this.product);
+          $('#btnCloseModal').click();
         }, err => {
           console.log(err);
         });
