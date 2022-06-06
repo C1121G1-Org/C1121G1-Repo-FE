@@ -66,7 +66,9 @@ export class ListSupplierModalComponent implements OnInit {
         this.last = (response.pageable.offset + response.pageable.pageSize) >= response.totalElements;
         this.suppliers = response.content;
       },
-      (error) => { this.errorFlag = true; });
+      (error) => {
+        console.log(this.errorFlag);
+        this.errorFlag = true; });
   }
 
   search() {

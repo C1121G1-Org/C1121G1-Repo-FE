@@ -35,16 +35,21 @@ export class ProductService {
     return this.http.patch<any>(this.productApi + '/' + id, value);
   }
 
-  listAll(): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list`);
-  }
-
   /*
   Created by khoaVC
   Time: 10:00 03/06/2022
   Method: list()
 */
-  list(): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}/api/product/listAll`);
+  // list(): Observable<any> {
+  //   return this.http.get<any>(`${this.apiBaseUrl}/product/listAll`);
+  // }
+
+  /*
+   Created by tamHT
+   Time: 13:37 03/06/2022
+   Method: pageProduct()
+ */
+  getAllProductPage(pageable, name, price): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}`);
   }
 }
