@@ -102,14 +102,9 @@ export class CustomerListComponent implements OnInit {
     if (type === 'nameCustomer' && input !== '') {
       this.customerService.getAllCustomer(this.nameCustomer = input, this.phoneNumber, this.page).subscribe(
         (data: any) => {
-          this.totalElement = data.totalElements;
-          if (this.totalElement === 0) {
-            this.message = 'Không tìm thấy kết quả trả về';
-            alert('Không tìm thấy kết quả trả về');
-          } else {
           this.customerList = data.content;
           this.page = data.number;
-          this.totalPage = data.totalPages; }
+          this.totalPage = data.totalPages;
         }, err => {
           console.log(err);
         }
