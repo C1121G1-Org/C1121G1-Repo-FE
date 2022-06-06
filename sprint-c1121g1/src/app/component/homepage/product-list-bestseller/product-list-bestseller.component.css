@@ -682,6 +682,10 @@ header {
     width: 50%;
   }
 
+  .slider-product-one-content-item-text li:first-child {
+    width: 100%;
+  }
+
   .product-gallery-one-content-product-item-text li:first-child {
     width: 85%;
   }
