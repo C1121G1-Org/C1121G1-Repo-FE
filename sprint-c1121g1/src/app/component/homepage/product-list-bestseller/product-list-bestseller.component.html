@@ -1,3 +1,9 @@
+<!--
+Create by chienLV
+Time: 16h00 03/06/2022
+Function: get list product bestseller from database
+-->
+
 <!--Slider-->
 <section class="slider">
   <div class="container">
@@ -36,7 +42,6 @@
           <img src="assets/img/category-dien-thoai.webp" alt="">
         </div>
         <p class="category-item-title">Điện thoại</p>
-
       </div>
       <div class="category-item">
         <div class="category-item-picture">
@@ -125,10 +130,10 @@
               <img src="{{productBestseller.image}}" alt="">
               <div class="slider-product-one-content-item-text">
                 <li><img src="assets/img/icon-fire.png" alt="">
-                  <p>Sản phẩm siêu hot</p></li>
+                  <p>Siêu hot</p></li>
                 <li>{{productBestseller.name}}</li>
                 <li>{{productBestseller.price | currency: "VND"}}</li>
-                <li><a>{{productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
+                <li><a>{{productBestseller.price + productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
                 <li>Giảm 440.000<sup>đ</sup> khi thanh toán qua Moca</li>
                 <li>
                   <i class="fas fa-star"></i>
@@ -147,10 +152,10 @@
               <img src="{{productBestseller.image}}" alt="">
               <div class="slider-product-one-content-item-text">
                 <li><img src="assets/img/icon-fire.png" alt="">
-                  <p>Sản phẩm siêu hot</p></li>
+                  <p>Siêu hot</p></li>
                 <li>{{productBestseller.name}}</li>
                 <li>{{productBestseller.price | currency: "VND"}}</li>
-                <li><a>{{productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
+                <li><a>{{productBestseller.price + productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
                 <li>Giảm 440.000<sup>đ</sup> khi thanh toán qua Moca</li>
                 <li>
                   <i class="fas fa-star"></i>
@@ -192,7 +197,7 @@
           <img src="{{productBestseller.image}}" alt="">
           <div class="product-gallery-one-content-product-item-text">
             <li><img src="assets/img/icon-fire.png" alt="">
-              <p>Sản phẩm bán siêu chạy</p></li>
+              <p>Bán siêu chạy</p></li>
             <li>{{productBestseller.name}}</li>
             <li>{{productBestseller.price | currency: "VND"}}</li>
             <li><a>{{productBestseller.price + productBestseller.price * 0.1 | currency: "VND"}}</a><span> -10%</span></li>
