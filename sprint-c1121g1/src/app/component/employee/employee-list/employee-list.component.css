@@ -1,3 +1,4 @@
+/*button*/
 button {
   border: none;
   border-radius: 2px;
@@ -15,14 +16,11 @@ button {
 }
 
 .btn-edit {
-  /*background-position: center;*/
+  background-position: center;
   transition: background 0.8s;
   background-color: #277CEA;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;
   width: 30%;
-  height: 40px;
-  vertical-align: middle;
-  margin-right: 5px;
 }
 
 .btn-edit:hover {
@@ -41,8 +39,6 @@ button {
   background-color: #D70018;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;
   width: 30%;
-  height: 40px;
-  vertical-align: middle;
 }
 
 .btn-delete:hover {
