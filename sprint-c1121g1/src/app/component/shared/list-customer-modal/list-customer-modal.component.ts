@@ -1,15 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {ICustomer} from '../../../models/ICustomer';
+import {CustomerService} from '../../../services/customer/customer.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-list-customer-modal',
   templateUrl: './list-customer-modal.component.html',
   styleUrls: ['./list-customer-modal.component.css']
 })
+/*
+  Created by tamHT
+  Time: 13:37 03/06/2022
+  Method: pageProduct()
+*/
 export class ListCustomerModalComponent implements OnInit {
+  @Output() itemOutput = new EventEmitter();
+  pageNumber: number;
+  customerList: ICustomer[] = [];
+  totalPages = [];
+  searchByName = '';
+  searchByPhone = '';
+  selectedCustomer: ICustomer;
+  currentCustomer: ICustomer;
+  flag = false;
+  last: boolean;
+  first: boolean;
+  checkSearch = 'name';
+  message: boolean;
+  searchValue = '';
+  indexCurrent: number;
+  selectedIndex: number;
 
-  constructor() { }
+  constructor(private customerService: CustomerService, private router: Router) {
+  }
 
   ngOnInit(): void {
+    this.message = false;
+    this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
   }
 
   chooseCustomer(exit) {
@@ -105,5 +132,4 @@ export class ListCustomerModalComponent implements OnInit {
     }
     return this.indexCurrent === this.selectedIndex ? true : false;
   }
->>>>>>> e4837ffe24d5547f69d85a6bc4e0fac7f0ba52d8
 }
