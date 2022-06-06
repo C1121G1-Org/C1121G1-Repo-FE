@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Product} from "../../../models/product";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+
 import {ProductService} from "../../../services/product/product.service";
 import {ProductInvoice} from "../../../dto/productInvoice";
 import {InvoiceDetail} from "../../../dto/InvoiceDetail";
 import {InvoiceService} from "../../../services/invoice/invoice.service";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
-import {error} from "@angular/compiler/src/util";
+import {ICustomer} from "../../../models/ICustomer";
+import {IProduct} from "../../../models/iProduct";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -22,18 +23,21 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./invoice-create.component.css']
 })
 export class InvoiceCreateComponent implements OnInit {
-
+  checkOnChange = false;
 
   invoiceForm: FormGroup;
 
 
-  currentProduct: Product;
-
-  productList: Product[] = [];
-  selectedProduct: Product;
+  currentProduct: IProduct;
+  customer: ICustomer = {};
+  productList: IProduct[] = [];
   invoiceDetail: InvoiceDetail;
   printInvoice: string;
   money: string;
+  disableFlag: boolean = false;
+  errorMap: any = {};
+  public dict: { key, value }[];
+
 
   constructor(private fb: FormBuilder,
               private productService: ProductService,
@@ -48,7 +52,7 @@ export class InvoiceCreateComponent implements OnInit {
         dateOfBirth: this.fb.control('', [Validators.required]),
         address: this.fb.control('', [Validators.required]),
         email: this.fb.control('', [Validators.required]),
-        gender: this.fb.control('', [Validators.required]),
+        gender: this.fb.control(true, [Validators.required]),
       }),
       products: this.fb.array(this.productList.map(product => this.createProducts(product))
       ),
@@ -56,19 +60,26 @@ export class InvoiceCreateComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
     this.getAllProduct();
   }
 
-  private createProducts(product: any) {
+  private createProducts(product: ProductInvoice) {
     return this.fb.group({
       id: [product.id],
       name: [product.name],
       price: [product.price],
-      quantity: ['', [Validators.required]]
+      quantity: ['', [Validators.required, Validators.pattern(/^\d+\.?\d*$/)]]
     });
   }
+
+
+  chooseProduct() {
+    let productForm = this.createProducts(this.currentProduct)
+    this.products.push(productForm);
+    this.errorMap["productList"] = null;
+  }
+
 
   get products() {
     return <FormArray>this.invoiceForm.get('products')
@@ -79,76 +90,119 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
 
-  deleteProduct(i: number) {
+  deleteProduct(i: number, length: number) {
     this.products.removeAt(i);
+    if (length <= 1) {
+      this.money = null;
+    }else {
+      this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
+    }
   }
 
-  getProduct(product: Product) {
-    this.currentProduct = product;
-  }
 
   getTotalMoney() {
     this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
+    if (isNaN(parseInt(this.money)) || parseInt(this.money) <= 0){
+      this.money = null;
+    }
+
   }
 
   getAllProduct() {
     this.productService.getAll().subscribe(data => {
       this.productList = data;
+    }, error => {
+      console.log(error())
     });
-  }
-
-  isSelectedProduct(product: Product) {
-    this.selectedProduct = product;
-    // console.log(this.selectedProduct);
-    // tslint:disable-next-line:triple-equals
-    if (!this.currentProduct) {
-      return false;
-    }
-    return this.currentProduct.name === this.selectedProduct.name ? true : false;
-  }
-
-  //
-  chooseProduct() {
-    let productForm = this.createProducts(this.currentProduct)
-    console.log(productForm);
-    this.products.push(productForm);
-    console.log(this.products.getRawValue());
   }
 
 
   createInvoice() {
-    if (this.printInvoice == 'yes') {
-      this.generatePDF('yes');
-    }
     this.invoiceDetail = this.invoiceForm.value;
     this.invoiceDetail.totalMoney = this.money;
     console.log(this.invoiceDetail);
     console.log(this.print);
-    this.invoiceService.updateQuantity(this.invoiceDetail).subscribe(() => {
+    this.invoiceService.updateQuantity(this.invoiceDetail).subscribe((message) => {
       this.invoiceService.createInvoice(this.invoiceDetail).subscribe(() => {
-        this.invoiceForm.reset();
+        this.money = null;
         alert("thêm mới thành công")
-        if (this.printInvoice == 'yes') {
-          this.generatePDF('yes');
+        if (this.printInvoice === 'yes') {
+          console.log("in")
+          this.generatePDF('yes',);
         }
+        this.invoiceForm.reset();
       }, error => {
         console.log(error);
       })
     }, error => {
-      console.log(error)
+      // console.log(error)
+      this.errorMap = error.error.errorMap;
+
+      // console.log(this.errorMap);
+      console.log(this.errorMap["products.quantity"]);
+      // this.dict = Object.entries(error.error.errorMap).map(([k, v]) => {
+      //   return {key: k, value: v};
+      // });
+      // console.log(this.dict)
     });
+  }
+
+  print(yes: string) {
+    this.printInvoice = yes;
+  }
+
+
+  getProductQR(productQR: any) {
+    this.currentProduct = productQR;
+    this.chooseProduct();
+  }
+
+  getProductModal(productModal: any) {
+    this.currentProduct = productModal
+    this.chooseProduct();
 
   }
 
+  getCustomerModal(customerModal: any) {
+    this.customer = customerModal;
+    if (this.customer != null) {
+      this.disableFlag = true;
+    }
+    this.chooseCustomer();
+  }
+
+
+  private chooseCustomer() {
+    let customerForm = this.createCustomer(this.customer)
+    console.log(customerForm)
+    this.invoiceForm.controls.customerDto.patchValue(customerForm.value);
+    console.log(this.products.getRawValue());
+  }
+
+  private createCustomer(customer: ICustomer) {
+    return this.fb.group({
+      id: [customer.id],
+      customerName: [customer.customerName, Validators.required],
+      address: [customer.address],
+      email: [customer.email],
+      phoneNumber: [customer.phoneNumber],
+      dateOfBirth: [customer.dateOfBirth],
+      gender: [customer.gender]
+    });
+  }
+
+  disableForm() {
+    this.disableFlag = true;
+  }
 
   /*
    Created by LongNHL
    Time: 9:30 2/06/2022
    Function: prince PDF
    */
-  docDefinition: any;
+
   generatePDF(action) {
-    this.docDefinition = {
+    let docDefinition = {
       content: [
         {
           text: 'C1121G1 SHOP',
@@ -172,11 +226,11 @@ export class InvoiceCreateComponent implements OnInit {
           columns: [
             [
               {
-                text: this.invoiceForm.getRawValue().customerName,
+                text: this.invoiceDetail.customerDto.customerName,
                 bold: true
               },
-              {text: this.invoiceForm.getRawValue().address},
-              {text: this.invoiceForm.getRawValue().email},
+              {text: this.invoiceDetail.customerDto.address},
+              {text: this.invoiceDetail.customerDto.email},
             ],
             [
               {
@@ -199,8 +253,8 @@ export class InvoiceCreateComponent implements OnInit {
             headerRows: 1,
             widths: ['*', 'auto', 'auto', 'auto'],
             body: [
-              ['Product', 'Price', 'Quantity', 'Amount'],
-              ...this.products.getRawValue().map(p => ([p.name, p.price, p.qty, (p.price * p.quantity).toFixed(2)])),
+              ['Sản phẩm', 'Giá tiền', 'Số lượng', 'Tổng tiền'],
+              ...this.products.getRawValue().map(p => ([p.name, p.price, p.quantity, (p.price * p.quantity).toFixed(2)])),
               [{
                 text: 'Total Amount',
                 colSpan: 3
@@ -218,7 +272,7 @@ export class InvoiceCreateComponent implements OnInit {
         },
         {
           columns: [
-            [{qr: `${this.invoiceForm.getRawValue().customerName}`, fit: '50'}],
+            [{qr: `${this.invoiceDetail.customerDto.customerName}`, fit: '50'}],
             [{text: 'Signature', alignment: 'right', italics: true}],
           ]
         },
@@ -244,13 +298,11 @@ export class InvoiceCreateComponent implements OnInit {
       }
     };
     if (action === 'yes') {
-      pdfMake.createPdf(this.docDefinition).download();
+      pdfMake.createPdf(docDefinition).download();
     }
   }
 
-  print(yes: string) {
-    this.printInvoice = yes;
+  checkOnchanges() {
+    this.checkOnChange = !this.checkOnChange;
   }
-
-
 }
