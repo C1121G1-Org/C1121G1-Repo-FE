@@ -45,6 +45,15 @@ export class ProductService {
   Method: list()
 */
   list(): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}/api/product/listAll`);
+    return this.http.get<any>(`${this.apiBaseUrl}/product/listAll`);
+  }
+
+  /*
+   Created by tamHT
+   Time: 13:37 03/06/2022
+   Method: pageProduct()
+ */
+  getAllProductPage(pageable, name, price): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}`);
   }
 }
