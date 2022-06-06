@@ -116,6 +116,7 @@ export class ProductCreateComponent implements OnInit {
               console.log(error);
               console.log(error.error.errorMap.name);
               this.errorProductName = error.error.errorMap.name;
+
               }
             );
           });
@@ -128,6 +129,7 @@ export class ProductCreateComponent implements OnInit {
     Created by TuanPA
     Date: 9:08 3/6/2022
 */
+
 
 
   get name() {
@@ -165,4 +167,5 @@ export class ProductCreateComponent implements OnInit {
   get otherDescription() {
     return this.productForm.get('otherDescription');
   }
+
 }
