@@ -642,6 +642,11 @@ header {
   text-decoration: none;
 }
 
+.error-messsage {
+  color: white;
+  text-align: center;
+}
+
 @media screen and (max-width: 768px) {
   .slider-content-right {
     display: none;
