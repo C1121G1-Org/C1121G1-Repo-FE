@@ -79,4 +79,21 @@ window.onload = function () {
   function format_curency(a) {
     a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
   }
+
+  //button change color
+  function setColor(btn, color){
+    var count=1;
+    var property = document.getElementById(btn);
+    if (count == 0){
+      property.style.backgroundColor = "#FFFFFF"
+      property.style.color = "black"
+      count=1;
+    }
+    else{
+      property.style.backgroundColor = "#D70018"
+      property.style.color = "white"
+      count=0;
+    }
+
+  }
 }

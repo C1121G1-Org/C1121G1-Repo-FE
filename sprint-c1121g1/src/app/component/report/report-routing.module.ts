@@ -6,14 +6,15 @@ import {CustomerReportComponent} from './customer-report/customer-report.compone
 import {PurchaseHistoryComponent} from './purchase-history/purchase-history.component';
 
 
+/*
+    Created by HauPV
+    Time: 09:00 03/06/2022
+    Function: routing for sale-report
+*/
+
 const routes: Routes = [
 
-  /*
-      Created by HauPV
-      Time: 09:00 03/06/2022
-      Function: routing for sale-report
-      Role : Admin , Business Staff
-  */
+  // Role : Admin , Business Staff
   {path: 'sale-report/list', component: SaleReportComponent},
   /*
     Created by TuanNQ
