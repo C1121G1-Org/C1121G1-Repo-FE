@@ -65,31 +65,31 @@ export class PurchaseHistoryComponent implements OnInit {
           this.pageNumber = purchaseHitories.pageabel.pageNumber;
         }
 
-      });
+    });
   }
 
   previousPage() {
     this.reportService.getPurchaseHistory(this.id, this.startDate, this.endDate, this.pageNumber - 1)
       .subscribe(purchaseHitories => {
-        this.purchaseHistories = purchaseHitories.content;
-        if (this.pageNumber - 1 <= 0) {
-          this.pageNumber = 0;
-        } else {
-          this.pageNumber = this.pageNumber - 1;
-        }
-      });
+      this.purchaseHistories = purchaseHitories.content;
+      if (this.pageNumber - 1 <= 0) {
+        this.pageNumber = 0;
+      } else {
+        this.pageNumber = this.pageNumber - 1;
+      }
+    });
   }
 
   nextPage() {
     this.reportService.getPurchaseHistory(this.id, this.startDate, this.endDate, this.pageNumber + 1)
       .subscribe(purchaseHitories => {
-        this.purchaseHistories = purchaseHitories.content;
-        if (this.pageNumber + 1 >= this.totalPages) {
-          this.pageNumber = this.totalPages - 1;
-        } else {
-          this.pageNumber = this.pageNumber + 1;
-        }
-      });
+      this.purchaseHistories = purchaseHitories.content;
+      if (this.pageNumber + 1 >= this.totalPages) {
+        this.pageNumber = this.totalPages - 1;
+      } else {
+        this.pageNumber = this.pageNumber + 1;
+      }
+    });
   }
 
   getInfoCustomer() {

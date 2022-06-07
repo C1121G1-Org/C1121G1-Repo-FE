@@ -6,16 +6,12 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class HomepageService {
-  homepageApi = 'http://localhost:8080/api/invoiceDetail/';
+  homepageApi = 'http://localhost:8080/api/invoiceDetail/listProductBestseller';
 
   constructor(private http: HttpClient) {
   }
 
   getProductBestseller(): Observable<any> {
-    return this.http.get<any>(this.homepageApi + "listProductBestseller");
-  }
-
-  getProductNewest(): Observable<any> {
-    return this.http.get<any>(this.homepageApi + "listProductNewest");
+    return this.http.get<any>(this.homepageApi);
   }
 }

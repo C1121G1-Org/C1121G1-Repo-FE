@@ -10,7 +10,7 @@ describe('ListCustomerModalComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ListCustomerModalComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {

@@ -9,4 +9,6 @@ export interface Supplier{
   address?: string;
   phone?: string;
   email?: string;
+  deleteFlag?: boolean;
+
 }
