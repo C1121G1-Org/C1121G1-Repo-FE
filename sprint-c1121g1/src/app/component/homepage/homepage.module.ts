@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { HomepageRoutingModule } from './homepage-routing.module';
 import { ProductListBestsellerComponent } from './product-list-bestseller/product-list-bestseller.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ProductListBestsellerComponent } from './product-list-bestseller/produc
   ],
   imports: [
     CommonModule,
-    HomepageRoutingModule
+    HomepageRoutingModule,
+    HttpClientModule
   ]
 })
 export class HomepageModule { }

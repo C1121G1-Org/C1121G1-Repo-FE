@@ -1,10 +1,15 @@
+/*
+  Created by khoaVC
+  Time: 10:00 03/06/2022
+  Interface: Product
+*/
 export interface Product {
   id?: number;
   name?: string;
-  price?: number;
+  price?: string;
   image?: string;
   // qrScan: string;
-  screenSize: string;
+  screenSize?: string;
   camera?: string;
   selfie?: string;
   cpu?: string;
@@ -12,3 +17,4 @@ export interface Product {
   otherDescription?: string;
   deleteFlag?: boolean;
 }
+
