@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import {SharedRoutingModule} from './shared-routing.module';
 import {QrCodeComponent} from './qr-code/qr-code.component';
@@ -30,3 +30,4 @@ import {SuccessModalComponent} from './success-modal/success-modal.component';
 
 export class SharedModule {
 }
+
