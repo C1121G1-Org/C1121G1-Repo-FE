@@ -16,7 +16,7 @@ export class ChangePersonalPasswordComponent implements OnInit {
   changePasswordForm: FormGroup = new FormGroup({
     currentPassword: new FormControl('', [Validators.required]),
     newPassword: new FormControl('', [Validators.required, Validators.pattern('^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$')]),
-    confirmNewPassword: new FormControl()
+    confirmNewPassword: new FormControl('', [Validators.required])
   });
   constructor(private securityService: SecurityService) { }
 
@@ -61,7 +61,7 @@ export class ChangePersonalPasswordComponent implements OnInit {
           closeServerErrorModalBtn.click();
         }, 3000);
       }
-      if (error.status === 403) {
+      if (error.status === 403 || error.status === 400) {
         errorModalBtn.click();
         // tslint:disable-next-line:only-arrow-functions
         setTimeout(function(){

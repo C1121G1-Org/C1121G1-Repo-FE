@@ -3,9 +3,9 @@
   <div class="col-6">
     <div class="row">
       <div class="col-md-12">
-        <div class="card border border-light" style="background-color: #f6f6f8; border-radius: 5px">
+        <div class="card border border-light change-pass-form">
           <div class="card-body">
-            <h4 class="card-title" style="font-size: 40px">Đổi mật khẩu</h4>
+            <h4 class="card-title" style="font-size: 35px">ĐỔI MẬT KHẨU</h4>
             <p>Thay đổi mật khẩu cho tài khoản của bạn. Bạn nên đặt mật khẩu mạnh để chặn những truy cập
               trái phép vào tài khoản của mình</p>
             <form [formGroup]="changePasswordForm" (ngSubmit)="updatePassword(openSuccessModalBtn, closeModalBtn, errorModalBtn, closeErrorModalBtn)">
@@ -13,34 +13,28 @@
                 <div class="col-md-12">
 
                   <div class="form-group">
-                    <label for="new-password">Mật khẩu mới</label>
+                    <label for="new-password">Mật khẩu mới <span class="text-danger">(*)</span>:</label>
                     <input type="password" class="form-control" name="new-password" id="new-password" formControlName="newPassword">
                     <div *ngIf="newPassword?.touched">
                       <small class="text-danger" *ngIf="newPassword?.errors?.required">Vui lòng nhập mật khẩu mới.</small>
                       <small class="text-danger" *ngIf="newPassword?.errors?.pattern">Mật khẩu phải có ít nhất 8 ký tự, 1 chữ viết hoa, 1 chữ viết thường, 1 ký tự đặt biệt, 1 chữ số và không được chứa khoảng trắng, tab, v.v...</small>
                     </div>
-                    <div *ngIf="newPassword.valid && newPassword?.touched">
-                      <small class="text-success">Hợp lệ.</small>
-                    </div>
                   </div>
                   <div class="form-group">
-                    <label for="comfirm-password">Xác nhận mật khẩu mới</label>
+                    <label for="comfirm-password">Xác nhận mật khẩu mới <span class="text-danger">(*)</span>:</label>
                     <input (change)="checkConfirmNewPassword()" type="password" class="form-control" name="comfirm-password"
                            id="comfirm-password" formControlName="confirmNewPassword">
                     <div *ngIf="confirmNewPassword?.touched">
                       <small class="text-danger" *ngIf="confirmNewPassword?.errors?.required">Vui lòng nhập xác nhận mật khẩu mới.</small>
                       <small class="text-danger" *ngIf="confirmNewPassword?.errors?.passwordNoMatch">Xác nhận mật khẩu không khớp với mật khẩu mới.</small>
                     </div>
-                    <div *ngIf="confirmNewPassword.valid && confirmNewPassword?.touched">
-                      <small class="text-success">Hợp lệ.</small>
-                    </div>
                   </div>
                 </div>
               </div>
               <div class="text-center">
-                <button [routerLink]="['']" type="button" class="btn btn-danger mx-1">Hủy bỏ</button>
-                <button [disabled]="!changePasswordForm.valid" type="submit" class="btn btn-primary mx-1"><i class="fa fa-paper-plane"></i> Xác nhận
+                <button [disabled]="!changePasswordForm.valid" type="submit" class="btn btn-grad-blue mx-1"><i class="fa fa-paper-plane"></i> XÁC NHẬN
                 </button>
+                <button [routerLink]="['']" type="button" class="btn btn-grad-red mx-1"><i class="fa-solid fa-right-from-bracket"></i> HỦY BỎ</button>
               </div>
             </form>
           </div>
@@ -60,12 +54,11 @@
         <div class="icon-box">
           <i class="material-icons">&#xE876;</i>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
         <h4>Tuyệt!</h4>
         <p>Thay đổi mật khẩu thành công.</p>
-        <button #closeModalBtn [routerLink]="['/login']" type="button" class="btn btn-danger" id="delete_btn" data-dismiss="modal" >Đồng ý</button>
+        <button #closeModalBtn [routerLink]="['/login']" type="button" class="btn btn-grad-blue" id="delete_btn" data-dismiss="modal" >ĐỒNG Ý</button>
       </div>
     </div>
   </div>
@@ -80,12 +73,11 @@
         <div class="icon-box">
           <i class="material-icons">&#xE5CD;</i>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
         <h4>Ooops!</h4>
         <p>Đã có lỗi xảy ra !!!</p>
-        <button #closeErrorModalBtn class="btn btn-success" data-dismiss="modal">Thử lại</button>
+        <button #closeErrorModalBtn class="btn btn-grad-red" data-dismiss="modal">THỬ LẠI</button>
       </div>
     </div>
   </div>

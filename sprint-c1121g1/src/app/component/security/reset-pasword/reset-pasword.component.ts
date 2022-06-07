@@ -50,9 +50,6 @@ export class ResetPaswordComponent implements OnInit {
   getEmailOfAccount() {
     this.dataService.data.subscribe(res => {
       this.emailResetPassword = res;
-      // if (this.emailResetPassword) {
-      //   this.router.navigate(['']);
-      // }
     });
   }
 

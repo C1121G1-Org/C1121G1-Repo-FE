@@ -2,13 +2,13 @@
 <div class="row" style="width:100%">
   <div class="col-6" style="margin-left: 200px">
 <!--    <h1>Chào mừng đến với C1121G1 Store - Mua được thì mua</h1>-->
-    <img id="login-image" src="../assets/img/login-image.jpeg" alt="hihi">
+    <img id="login-image" src="../assets/img/login-image.png" alt="hihi">
   </div>
 
-  <div class="col-3 p-5 mt-5 mb-5" style="background-color: #f6f6f8; border-radius: 10px">
+  <div class="col-3 p-5 mt-5 mb-5 login-form" style="background-color: #f6f6f8; border-radius: 10px">
   <form  [formGroup]="loginForm" (ngSubmit)="login(errorModalBtn, closeErrorModal)">
     <div class="form-group ">
-      <label for="username"><h4>Tài khoản</h4></label>
+      <label for="username"><h4>Tài khoản: </h4></label>
       <input type="email" class="form-control form-control-lg" id="username" aria-describedby="emailHelp" formControlName="username">
       <div *ngIf="usernameForm?.touched">
         <p class="text-danger" *ngIf="usernameForm?.errors?.required">Vui lòng nhập tên tài khoản.</p>
@@ -17,8 +17,12 @@
     </div>
 
     <div class="form-group ">
-      <label for="password"><h4>Mật khẩu</h4></label>
+      <label for="password"><h4>Mật khẩu: </h4></label>
       <input type="password" class="form-control form-control-lg" id="password" formControlName="password">
+<!--      <span *ngIf="params.password"-->
+<!--            (click)="toggleShowPassword()"-->
+<!--            class="glyphicon glyphicon-eye-open form-control-feedback"-->
+<!--            style="cursor: pointer; pointer-events: all;"></span>-->
       <div *ngIf="password?.touched">
         <p class="text-danger" *ngIf="password?.errors?.required">Vui lòng nhập mật khẩu.</p>
         <p class="text-danger" *ngIf="password?.errors?.maxlength">Vui lòng đúng định dạng.</p>
@@ -43,7 +47,7 @@
     </div>
 
     <!-- Submit button -->
-    <input [disabled]="!loginForm.valid" type="submit" class="btn btn-outline-danger btn-block mb-4 btn-lg" value="Đăng nhập">
+    <input [disabled]="!loginForm.valid" type="submit" class="btn btn-grad-red btn-block mb-4 btn-lg" value="Đăng nhập">
   </form>
   </div>
 </div>
@@ -59,12 +63,11 @@
         <div class="icon-box">
           <i class="material-icons">&#xE5CD;</i>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
         <h4>Thông báo</h4>
         <p>Hệ thống đang bảo trì, vui lòng thử lại sau vài phút nữa.</p>
-        <button #closeErrorModal class="btn btn-success" data-dismiss="modal">Thử lại</button>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">THỬ LẠI</button>
       </div>
     </div>
   </div>

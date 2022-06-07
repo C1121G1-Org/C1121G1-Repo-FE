@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
   errorMessage = '';
   username: string;
+  showPassword: any;
 
   constructor(private securityService: SecurityService,
               private tokenStorageService: TokenStorageService,
@@ -68,6 +69,9 @@ export class LoginComponent implements OnInit {
     }, error => {
       if (error.status === 403) {
         this.errorMessage = 'Sai tên đăng nhập hoặc mật khẩu.';
+        // if (this.password?.valueChanges) {
+        //   this.errorMessage = '';
+        // }
         this.securityService.isLoggedIn = false;
       } else if (error.status === 0) {
         errorModalBtn.click();
