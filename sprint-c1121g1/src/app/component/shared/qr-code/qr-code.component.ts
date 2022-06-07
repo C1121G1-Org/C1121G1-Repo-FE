@@ -3,7 +3,7 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
 import {SaleReportService} from '../../../services/report/sale-report.service';
 import {QrcodeService} from '../../../services/qrcode/qrcode.service';
 import {ProductService} from '../../../services/product/product.service';
-import {IProduct} from "../../../models/iProduct";
+import {Product} from '../../../models/product';
 
 declare var $: any;
 
@@ -21,10 +21,14 @@ declare var $: any;
 
 export class QrCodeComponent implements OnInit {
 
+  @ViewChild("imageInput1") imageInput1: ElementRef;
+  @ViewChild("imageInput2") imageInput2: ElementRef;
+  @ViewChild("selectQR") selectQR: ElementRef;
+
   @Output()
   sendProduct = new EventEmitter();
 
-  product: IProduct = {};
+  product: Product = {};
 
   message = '';
   alertClass = '';
@@ -46,18 +50,20 @@ export class QrCodeComponent implements OnInit {
 
     if (this.typeQRScan == '1') {
       if (file[0].files[0]) {
+        this.message = '';
+        this.alertClass = '';
         const formData = new FormData();
         formData.append('file', file[0].files[0]);
         this.qrCodeService.decode(formData).subscribe(data => {
           this.product = data;
-          console.log(data);
           this.sendProduct.emit(this.product);
           $("#btnCloseModal").click();
+          this.imageInput1.nativeElement.value = '';
+          this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
         }, err => {
-          console.log(err);
+          this.alertClass = 'alert alert-danger';
+          this.message = 'Mã QR Không hợp lệ vui lòng kiểm tra lại !';
         });
-        this.message = '';
-        this.alertClass = '';
       } else {
         this.alertClass = 'alert alert-danger';
         this.message = 'Vui lòng chọn ảnh !';
@@ -75,6 +81,7 @@ export class QrCodeComponent implements OnInit {
           if (data) {
             this.alertClass = 'alert alert-success';
             this.message = 'Mã QR HỢP LỆ !';
+
           } else {
             this.alertClass = 'alert alert-danger';
             this.message = 'Mã QR KHÔNG HỢP LỆ !';
@@ -96,12 +103,14 @@ export class QrCodeComponent implements OnInit {
   readFile1(target: any) {
     const file: File = target.files[0];
     if (file) {
+      this.alertClass = '';
+      this.message = '';
       const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image1 = reader?.result as string;
       };
-      this.message = '';
+
     } else {
       this.alertClass = 'alert alert-danger';
       this.message = 'Vui lòng chọn ảnh !';
@@ -113,13 +122,14 @@ export class QrCodeComponent implements OnInit {
   readFile2(target: any) {
     const file: File = target.files[0];
     if (file) {
+      this.message = '';
+      this.alertClass = '';
       const reader = new FileReader();
       reader?.readAsDataURL(file);
       reader.onload = e => {
         this.image2 = reader?.result as string;
       };
-      this.message = '';
-      this.alertClass = '';
+
     } else {
       this.alertClass = 'alert alert-danger';
       this.message = 'Vui lòng chọn ảnh !';
@@ -128,4 +138,26 @@ export class QrCodeComponent implements OnInit {
 
   }
 
+  resetValueInputs() {
+    this.selectQR.nativeElement.value = '1';
+    this.typeQRScan = '1';
+    this.alertClass = '';
+    this.message = '';
+
+    this.imageInput1.nativeElement.value = '';
+    this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+    this.imageInput2.nativeElement.value = '';
+    this.image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+  }
+
+  changeFunction(target: any) {
+    this.alertClass = '';
+    this.message = '';
+    this.typeQRScan = target.value;
+
+    this.imageInput1.nativeElement.value = '';
+    this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+    this.imageInput2.nativeElement.value = '';
+    this.image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+  }
 }

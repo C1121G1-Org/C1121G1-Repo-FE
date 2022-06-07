@@ -4,8 +4,11 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {IProduct} from "../../models/iProduct";
 
-
-
+/*
+    Created by HauPV
+    Time: 09:00 03/06/2022
+    Function: qr-code scan
+*/
 @Injectable({
   providedIn: 'root'
 })

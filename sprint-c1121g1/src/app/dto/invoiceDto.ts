@@ -1,6 +1,9 @@
-import {CustomerDto} from './customerDto';
-import {ProductDto} from './productDto';
 
+/*
+Created by CongNV
+Date : 04/06/2022
+Function: Search,Pageable
+*/
 export interface InvoiceDto {
   id?: number;
   createDate?: string;
@@ -11,10 +14,4 @@ export interface InvoiceDto {
   totalMoney?: number;
   quantity?: number;
   invoiceDetailId?: string;
-
-  /*
-Created by CongNV
-Date : 04/06/2022
-Function: Search,Pageable
-*/
 }

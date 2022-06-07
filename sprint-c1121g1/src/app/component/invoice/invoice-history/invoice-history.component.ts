@@ -1,16 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {FormGroup, Validators, FormControl} from '@angular/forms';
 import {InvoiceService} from '../../../services/invoice/invoice.service';
 import {InvoiceDto} from '../../../dto/invoiceDto';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {applySourceSpanToExpressionIfNeeded} from '@angular/compiler/src/output/output_ast';
 
 
+/*
+Created by CongNV
+Date : 04/06/2022
+Function: Search,Pageable
+*/
 @Component({
   selector: 'app-invoice-history',
   templateUrl: './invoice-history.component.html',
   styleUrls: ['./invoice-history.component.css']
 })
 export class InvoiceHistoryComponent implements OnInit {
+
   invoiceList: InvoiceDto[] = [];
 
   productName = '';
@@ -51,20 +56,20 @@ export class InvoiceHistoryComponent implements OnInit {
     this.massage = '';
     this.keyword = this.formSearch.get('keyword').value;
     this.invoiceService.getAll(this.keyword.trim(), this.sort, this.page).subscribe(data => {
-          console.log(data);
-          this.page = data.number;
-          this.totalPages = data.totalPages;
-          this.invoiceList = data.content;
-          console.log(data.content);
-        },
-        error => {
-          console.log(error);
-          this.massage = 'Không thể tìm thấy kết quả ';
-          this.page = 0;
-          this.totalPages = 0;
-          this.invoiceList = null;
-        }
-      );
+        console.log(data);
+        this.page = data.number;
+        this.totalPages = data.totalPages;
+        this.invoiceList = data.content;
+        console.log(data.content);
+      },
+      error => {
+        console.log(error);
+        this.massage = 'Không thể tìm thấy kết quả ';
+        this.page = 0;
+        this.totalPages = 0;
+        this.invoiceList = null;
+      }
+    );
 
 
   }

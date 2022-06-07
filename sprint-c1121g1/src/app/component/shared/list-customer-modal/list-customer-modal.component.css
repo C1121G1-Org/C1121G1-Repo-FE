@@ -6,6 +6,7 @@
 * {
   padding: 0;
   box-sizing: border-box;
+  font-size: 14px;
 }
 
 html {
@@ -139,6 +140,7 @@ button {
   text-transform: uppercase;
   cursor: pointer;
   color: white;
+  background-color: blue;
   /*box-shadow: 0 0 4px #999;*/
   outline: none;
 }
@@ -402,13 +404,13 @@ th {
 /*  background: #eda645 !important;*/
 /*  outline: none;*/
 /*}*/
-.trigger-btn {
-  display: inline-block;
-  margin: 100px auto;
-}
+/*.trigger-btn {*/
+/*  display: inline-block;*/
+/*  margin: 100px auto;*/
+/*}*/
 
-/*modal:*/
-/*css chung cho cả 2:*/
+/*modal thông báo chưa chọn*/
+
 .modal-confirm {
   color: #434e65;
   width: 525px;
@@ -483,17 +485,22 @@ th {
   min-width: 150px;
   border: none;
 }
-/*button*/
-button{
-  width: 15%;
-  /*height: 38px;*/
-}
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
 .btn-grad-red {
   background-image: linear-gradient(to right, #EB3349 0%, #F45C43  51%, #EB3349  100%);
+  /*margin: 10px;*/
+  /*padding: 15px 45px;*/
   text-align: center;
+  text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
+  /*box-shadow: 0 0 5px #eee;*/
+  /*border-radius: 10px;*/
+  display: block;
+  width: 100px;
+  height: 40px;
 }
 .btn-grad-red:active {
   transform: scale(1.1);
@@ -504,11 +511,19 @@ button{
   text-decoration: none;
 }
 .btn-grad-blue {
+  /*margin: 10px;*/
+  /*padding: 15px 45px;*/
   background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
   text-align: center;
+  text-transform: uppercase;
   transition: 0.5s;
   background-size: 200% auto;
   color: white;
+  /*box-shadow: 0 0 5px #eee;*/
+  /*border-radius: 10px;*/
+  display: block;
+  width: 100px;
+  height: 40px;
 }
 .btn-grad-blue:hover {
   background-position: right center; /* change the direction of the change here */
@@ -518,4 +533,9 @@ button{
 .btn-grad-blue:active {
   transform: scale(1.1);
 }
-
+.desc {
+  white-space: nowrap;
+  max-width: 15rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

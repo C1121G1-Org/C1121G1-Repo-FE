@@ -21,7 +21,7 @@
                 <div class="form-group">
                   <label for="name">Họ và tên <span class="text-danger">(*)</span>:</label>
                   <input type="text" class="form-control" name="name" id="name" formControlName="customerName"
-                         [value]="customer.customerName" [readOnly]="disableFlag" >
+                         [value]="customer.customerName" [readOnly]="disableFlag">
                   <div *ngIf="invoiceForm.get('customerDto.customerName').invalid
                        && (invoiceForm.get('customerDto.customerName')?.touched||invoiceForm.get('customerDto.customerName')?.dirty)">
                     <small *ngIf="invoiceForm.get('customerDto.customerName')?.errors?.required" class="messageError">
@@ -32,12 +32,13 @@
                     </small>
                   </div>
                   <small class="messageError"
-                         *ngIf="invoiceForm.get('customerDto.customerName').errors?.empty" >Không được để trống.
+                         *ngIf="invoiceForm.get('customerDto.customerName').errors?.empty">Không được để trống.
                   </small>
                 </div>
                 <div class="form-group">
                   <label for="address">Địa chỉ <span class="text-danger">(*)</span>:</label>
-                  <textarea class="form-control" name="address" id="address" row="3" maxlength="100" formControlName="address"
+                  <textarea class="form-control" name="address" id="address" row="3" maxlength="100"
+                            formControlName="address"
                             [value]="customer.address" [readOnly]="disableFlag"
                   ></textarea>
                   <div *ngIf="invoiceForm.get('customerDto.address').invalid
@@ -50,11 +51,11 @@
                     </small>
                   </div>
                   <small class="messageError"
-                         *ngIf="invoiceForm.get('customerDto.address').errors?.empty" >Không được để trống.
+                         *ngIf="invoiceForm.get('customerDto.address').errors?.empty">Không được để trống.
                   </small>
-<!--                  <small class="messageError"-->
-<!--                       *ngIf="errorMap['customerDto.address'] != null">{{errorMap['customerDto.address']}}-->
-<!--                  </small>-->
+                  <!--                  <small class="messageError"-->
+                  <!--                       *ngIf="errorMap['customerDto.address'] != null">{{errorMap['customerDto.address']}}-->
+                  <!--                  </small>-->
                 </div>
               </div>
               <div class="col-md-4">
@@ -72,11 +73,11 @@
                     </small>
                   </div>
                   <small class="messageError"
-                         *ngIf="invoiceForm.get('customerDto.email').errors?.empty" >Không được để trống.
+                         *ngIf="invoiceForm.get('customerDto.email').errors?.empty">Không được để trống.
                   </small>
-<!--                  <div class="col alert alert-danger" role="alert"-->
-<!--                       *ngIf="errorMap['customerDto.email'] != null">{{errorMap['customerDto.email']}}-->
-<!--                  </div>-->
+                  <!--                  <div class="col alert alert-danger" role="alert"-->
+                  <!--                       *ngIf="errorMap['customerDto.email'] != null">{{errorMap['customerDto.email']}}-->
+                  <!--                  </div>-->
                 </div>
                 <div class="form-group">
                   <label for="contactNo">Số điện thoại <span class="text-danger">(*)</span>:</label>
@@ -92,14 +93,14 @@
                     </small>
                   </div>
                   <small class="messageError"
-                         *ngIf="invoiceForm.get('customerDto.phoneNumber').errors?.empty" >Không được để trống.
+                         *ngIf="invoiceForm.get('customerDto.phoneNumber').errors?.empty">Không được để trống.
                   </small>
-<!--                  <small class="messageError"-->
-<!--                       *ngIf="errorMap['customerDto.phoneNumber'] != null">{{errorMap['customerDto.phoneNumber']}}-->
-<!--                  </small>-->
+                  <!--                  <small class="messageError"-->
+                  <!--                       *ngIf="errorMap['customerDto.phoneNumber'] != null">{{errorMap['customerDto.phoneNumber']}}-->
+                  <!--                  </small>-->
                 </div>
                 <div class="form-group">
-                  <label for="contactNo">Ngày sinh  <span class="text-danger">(*)</span>:</label>
+                  <label for="contactNo">Ngày sinh <span class="text-danger">(*)</span>:</label>
                   <input type="date" class="form-control" name="contactNo" id="Age" formControlName="dateOfBirth"
                          [value]="customer.dateOfBirth" [readOnly]="disableFlag">
                   <div *ngIf="invoiceForm.get('customerDto.dateOfBirth').invalid
@@ -112,11 +113,11 @@
                     </small>
                   </div>
                   <small class="messageError"
-                         *ngIf="invoiceForm.get('customerDto.dateOfBirth').errors?.empty" >Không được để trống.
+                         *ngIf="invoiceForm.get('customerDto.dateOfBirth').errors?.empty">Không được để trống.
                   </small>
-<!--                  <small class="messageError"-->
-<!--                         *ngIf="errorMap['customerDto.dateOfBirth'] != null">{{errorMap['customerDto.dateOfBirth']}}-->
-<!--                  </small>-->
+                  <!--                  <small class="messageError"-->
+                  <!--                         *ngIf="errorMap['customerDto.dateOfBirth'] != null">{{errorMap['customerDto.dateOfBirth']}}-->
+                  <!--                  </small>-->
                 </div>
                 <div class="form-group">
                   <label for="rdo1" style="margin-right: 10px">
@@ -134,9 +135,6 @@
                   <div class="col alert alert-danger" role="alert"
                        *ngIf="invoiceForm.get('customerDto.gender')?.errors?.required&& invoiceForm.get('customerDto.gender')?.touched">
                     Vui lòng nhập gới tính!
-                  </div>
-                  <div class="col alert alert-danger" role="alert"
-                       *ngIf="errorMap['customerDto.gender'] != null">{{errorMap['customerDto.gender']}}>
                   </div>
                 </div>
               </div>
@@ -172,7 +170,7 @@
                   </td>
                   <td>
                     <input type="text" class="form-control" name="price" id="price" formControlName="price"
-                      readonly >
+                           readonly>
                   </td>
                   <td>
                     <input type="text" class="form-control" name="quantity" id="quantity" formControlName="quantity"
@@ -182,9 +180,6 @@
                     </div>
                     <div *ngIf="product.get('quantity')?.errors?.pattern&&product.get('quantity')?.touched">
                       <span class="messageError">Vui lòng nhập số lượng > 0 và đúng định dạng</span>
-                    </div>
-                    <div role="alert"
-                         *ngIf="errorMap['products.quantity'] != null">{{errorMap['customerDto.quantity']}}>
                     </div>
                   </td>
                   <td>
@@ -196,62 +191,80 @@
                 </tr>
                 </tbody>
               </table>
-              <div class="col alert alert-danger" role="alert"
-                   *ngIf="errorMap['productList']!=null" class="messageError">{{errorMap['productList']}}
+              <div *ngIf="flagProductNull">
+                <span class="messageError"
+                      *ngIf="errorMap['productList']!=null" class="messageError">{{errorMap['productList']}}
+                </span>
               </div>
-              <div class="col alert alert-danger" role="alert"
-                   *ngIf="errorMap['quantity']!=null" class="messageError">{{errorMap['quantity']}}
+              <div >
+                      <div class="messageError" *ngFor ="let errorMessage of errorMap;let i = index" >
+<!--                        <li>{{errorMessage.get}}</li>-->
+                      </div>
+                <!--              <div *ngIf="!flagProduct">-->
+                <!--                <span class="col alert alert-danger" role="alert"-->
+                <!--                       *ngIf="errorMap['quantity']!=null" class="messageError">{{errorMap['quantity']}}-->
+                <!--                </span>-->
+                <!--                <span class="col alert alert-danger" role="alert"-->
+                <!--                       *ngIf="errorMap['productNull']!=null" class="messageError">{{errorMap['productNull']}}-->
+                <!--                </span>-->
+                <!--              </div>-->
               </div>
             </div>
           </div>
-        </div>
-        <div class="card border-secondary mt-2 mb-4 shadow">
-          <div class="mt-5 mb-2 ml-5 mr-5">
-            <div class="form-group row">
-              <label for="inputEmail3" class="col-sm-2 col-form-label">Thành tiền</label>
-              <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputEmail3" formControlName="totalMoney"
-                       value="{{money|currency :'VND':''}}" readonly>
-              </div>
-            </div>
-            <fieldset class="form-group row">
-              <legend class="col-form-label col-sm-2 float-sm-left pt-0">Hình thức thanh toán</legend>
-              <div class="col-sm-10">
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="payments" id="gridRadios1"
-                         value="Tiền mặt" formControlName="payments" checked>
-                  <label class="form-check-label" for="gridRadios1">
-                    Tiền mặt
-                  </label>
+          <div class="card border-secondary mt-2 mb-4 shadow">
+            <div class="mt-5 mb-2 ml-5 mr-5">
+              <div class="form-group row">
+                <label for="inputEmail3" class="col-sm-2 col-form-label">Thành tiền</label>
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" id="inputEmail3" formControlName="totalMoney"
+                         value="{{money|currency :'VND':''}}" readonly>
                 </div>
-                <div class="form-check">
-                  <input class="form-check-input" type="radio" name="payments" id="gridRadios2"
-                         value="Dùng thẻ" formControlName="payments">
-                  <label class="form-check-label" for="gridRadios2">
-                    Quét thẻ / chuyển khoản.
-                  </label>
-                  <div *ngIf="invoiceForm.get('payments')?.errors?.required">
-                    <span class="messageError">Vui lòng chọn hình thức thanh toán!</span>
+              </div>
+              <fieldset class="form-group row">
+                <legend class="col-form-label col-sm-2 float-sm-left pt-0">Hình thức thanh toán</legend>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payments" id="gridRadios1"
+                           value="Tiền mặt" formControlName="payments" checked>
+                    <label class="form-check-label" for="gridRadios1">
+                      Tiền mặt
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="payments" id="gridRadios2"
+                           value="Dùng thẻ" formControlName="payments">
+                    <label class="form-check-label" for="gridRadios2">
+                      Quét thẻ / chuyển khoản.
+                    </label>
+                    <div *ngIf="invoiceForm.get('payments')?.errors?.required">
+                      <span class="messageError">Vui lòng chọn hình thức thanh toán!</span>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
+              <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck1" name="price"
+                           (click)="print('yes')">
+                    <label class="form-check-label" for="gridCheck1">
+                      In hóa đơn
+                    </label>
                   </div>
                 </div>
               </div>
-            </fieldset>
-            <div class="form-group row">
-              <div class="col-sm-10 offset-sm-2">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="gridCheck1" name="price" (click)="print('yes')">
-                  <label class="form-check-label" for="gridCheck1">
-                    In hóa đơn
-                  </label>
+              <div class="form-group row ">
+                <div class="col-sm-12 text-center">
+                  <!--                <button type="submit" class="btn btn-danger">Tiến hành thanh toán-->
+                  <!--                </button>-->
+                  <div *ngIf="!flagProduct">
+                    <p class="col alert alert-danger" role="alert"
+                       *ngIf="errorMap['validProduct']!=null" class="messageError">{{errorMap['validProduct']}}
+                    </p>
+                  </div>
+                  <button type="submit" class="btn btn-grad-red">Tiến hành thanh toán
+                  </button>
                 </div>
-              </div>
-            </div>
-            <div class="form-group row ">
-              <div class="col-sm-12 text-center" >
-<!--                <button type="submit" class="btn btn-danger">Tiến hành thanh toán-->
-<!--                </button>-->
-                <button type="submit" class="btn btn-grad-red">Tiến hành thanh toán
-                </button>
               </div>
             </div>
           </div>
@@ -261,7 +274,7 @@
   </div>
 </form>
 <!--modal success-->
-<button [hidden]="true" #success data-toggle="modal" data-target="#modal-success"  ></button>
+<button [hidden]="true" #success data-toggle="modal" data-target="#modal-success"></button>
 <!--<button [hidden]="true" #success data-toggle="modal" data-target="#modal-error"  ></button>-->
 <!--success modal-->
 <div id="modal-success" class="modal fade">
@@ -276,7 +289,7 @@
       <div class="modal-body text-center">
         <h4>Tuyệt!</h4>
         <p>Tạo đơn bán hàng thành công.</p>
-        <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal" >Đồng ý</button>
+        <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</button>
       </div>
     </div>
   </div>
@@ -307,5 +320,6 @@
 
 <!--modal QRcode product-->
 <app-qr-code (sendProduct)="getProductQR($event)"></app-qr-code>
-<app-list-choose-product-modal (itemOutput)="getProductModal($event)"[item]="checkOnchange"></app-list-choose-product-modal>
+<app-list-choose-product-modal (itemOutput)="getProductModal($event)"
+                               [item]="checkOnchange"></app-list-choose-product-modal>
 <app-list-customer-modal (itemOutput)="getCustomerModal($event)" [item]="checkOnchange"></app-list-customer-modal>
