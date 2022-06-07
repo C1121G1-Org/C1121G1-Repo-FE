@@ -1,180 +1,156 @@
+
 <!--form tao moi-->
-<form [formGroup]="productForm" (ngSubmit)="save(errorBtn,successBtn)">
+
+<form>
   <div class="container-fluid">
     <div class="row" style="justify-content: center;display: flex">
       <div class="col-md-10">
         <div class="card ">
           <div class="card card-body">
             <h3 class="text-center font-weight-bold text-uppercase py-4">
-              SỬA THÔNG TIN HÀNG HÓA
+              CHỈNH SỬA THÔNG TIN HÀNG HÓA
             </h3>
             <div class="row" style="justify-content: center;display: flex">
               <div class="col-md-8 row">
                 <input type="hidden" formControlName="id">
 
                 <div class="form-group col-md-6">
-                  <label for="name">Tên Hàng <span class="text-danger">(*):</span></label>
-                  <input formControlName="name"  readonly type="text" class="form-control"
-                         name="name" id="name">
-                  <small class="form-text text-danger" *ngIf="errorProductName!=''">{{errorProductName}}</small>
+                  <label for="productName">Tên Hàng <span class="text-danger">(*):</span></label>
+                  <input value="Iphone 13" formControlName="productName" type="text"
+                         class="form-control"
+                         name="productName" id="productName">
+                  <!--                                    <div-->
+                  <!--                                            *ngIf="productForm.controls.productName.invalid && (productForm.controls.productName.dirty || productForm.controls.productName.touched|| productForm.controls.category.errors?.empty)">-->
 
-                  <div
-                    *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched|| productForm.controls.name.errors?.empty)">
-                    <!--                    <small *ngIf="productForm.controls.name.errors?.maxlength" class="form-text text-danger">Tên phải ít hơn 255 ký tự </small>-->
-                    <small *ngIf="name.errors?.maxlength" class="text-form text-danger">Tên phải ngắn hơn 250 kí
-                      tự</small>
-                    <small
-                      *ngIf="productForm.controls.name.hasError('required') || productForm.controls.name.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                  </div>
-
+                  <!--                                        <small-->
+                  <!--                                                *ngIf="productForm.controls.productName.hasError('required') || productForm.controls.productName.errors.empty"-->
+                  <!--                                                class="form-text text-danger">Require not empty.</small>-->
+                  <!--                                    </div>-->
                 </div>
-
                 <div class="form-group col-md-6">
                   <label for="price">Giá <span class="text-danger">(*):</span></label>
-                  <input type="text" id=price formControlName="price" class="form-control" name="price">
-                  <!--                  <input onChange="format_curency(this);" type="text" id=price formContronlName="price" class="form-control" name="price">-->
-                  <span>VND</span>
+                  <input value="10.000.000" formControlName="price" type="text" class="form-control"
+                         name="price"
+                         id="price"><span>VND</span>
 
-                  <div
-                    *ngIf="productForm.controls.price.invalid && (productForm.controls.price.dirty || productForm.controls.price.touched|| productForm.controls.price.errors?.empty)">
-                    <small
-                      *ngIf="productForm.controls.price.hasError('required') || productForm.controls.price.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                    <small *ngIf="price.errors?.pattern" class="tex-form text-danger">Giá phải là số và lớn hơn
-                      0 </small>
-                  </div>
+                  <!--                                    <div-->
+                  <!--                                            *ngIf="productForm.controls.price.invalid && (productForm.controls.price.dirty || productForm.controls.price.touched|| productForm.controls.category.errors?.empty)">-->
+
+                  <!--                                        <small-->
+                  <!--                                                *ngIf="productForm.controls.price.hasError('required') || productForm.controls.productName.errors.empty"-->
+                  <!--                                                class="form-text text-danger">Require not empty.</small>-->
+                  <!--                                    </div>-->
                 </div>
 
-                <div class="form-group col-md-12">
-                  <div class="file">
-                    <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
-                    <input name="img" id="img" type="file" class="file__input" (change)="showPreview($event)">
-                    <img style="width: 180px; height: 200px" src="{{imgVip}}">
-                    <label for="img" class="file__label">
-                      <i class="fa fa-upload"></i>
-                    </label>
-                  </div>
 
-                  <!--    hien thi loi-->
-                  <div
-                    *ngIf="productForm.controls.image.invalid && (productForm.controls.image.dirty || productForm.controls.image.touched || productForm.controls.image.errors?.empty)">
-                    <small
-                      *ngIf="productForm.controls.image.hasError('required') || productForm.controls.image.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                  </div>
+                <div class=" form-group col-md-12">
+                  <label for="productName">Hình Ảnh <span class="text-danger">(*):</span></label>
+                  <img style="width: 120px; height: 150px"
+                       src="https://ecdn.game4v.com/g4v-content/uploads/2021/09/15122647/game4V-iPhone13-2-1631683607-83.jpg">
+                  <input formControlName="img" type="file" name="img" id="img">
+
+
                 </div>
 
                 <div class="form-group col-md-6">
                   <label for="screenSize">Kích Thước Màn Hình <span
                     class="text-danger">(*):</span></label>
-                  <input formControlName="screenSize" type="text" class="form-control"
-                         name="screenSize" id="screenSize">
+                  <input value="5.6 inch" formControlName="screenSize" type="text"
+                         class="form-control" name="screenSize" id="screenSize">
 
                   <!--    hien thi loi-->
-                  <div
-                    *ngIf="productForm.controls.screenSize.invalid && (productForm.controls.screenSize.dirty || productForm.controls.screenSize.touched || productForm.controls.screenSize.errors?.empty)">
-                    <small
-                      *ngIf="productForm.controls.screenSize.hasError('required') || productForm.controls.screenSize.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                    <small *ngIf="screenSize.errors?.maxlength" class="text-form text-danger">Trường kích thước màn hình
-                      phải ngắn hơn 50 kí tự</small>
-                  </div>
+                  <!--                                    <div-->
+                  <!--                                            *ngIf="productForm.controls.screenSize.invalid && (productForm.controls.screenSize.dirty || productForm.controls.screenSize.touched || productForm.controls.screenSize.errors?.empty)">-->
+
+                  <!--                                        <small-->
+                  <!--                                                *ngIf="productForm.controls.screenSize.hasError('required') || productForm.controls.screenSize.errors.empty"-->
+                  <!--                                                class="form-text text-danger">Require not empty.</small>-->
+                  <!--                                    </div>-->
                 </div>
 
 
                 <div class="form-group col-md-6">
                   <label for="camera">Camera<span
                     class="text-danger">(*):</span></label>
-                  <input formControlName="camera" type="text" class="form-control"
+                  <input value="20MP" formControlName="camera" type="text" class="form-control"
                          name="camera" id="camera">
 
                   <!--    hien thi loi-->
-                  <div
-                    *ngIf="productForm.controls.camera.invalid && (productForm.controls.camera.dirty || productForm.controls.camera.touched || productForm.controls.camera.errors?.empty)">
+                  <!--                                    <div-->
+                  <!--                                            *ngIf="productForm.controls.camera.invalid && (productForm.controls.camera.dirty || productForm.controls.camera.touched || productForm.controls.camera.errors?.empty)">-->
 
-                    <small
-                      *ngIf="productForm.controls.camera.hasError('required') || productForm.controls.camera.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                    <small *ngIf="camera.errors?.maxlength" class="text-form text-danger">Trường camera phải ngắn hơn 50
-                      kí tự</small>
-
-                  </div>
+                  <!--                                        <small-->
+                  <!--                                                *ngIf="productForm.controls.camera.hasError('required') || productForm.controls.camera.errors.empty"-->
+                  <!--                                                class="form-text text-danger">Require not empty.</small>-->
+                  <!--                                    </div>-->
                 </div>
 
                 <div class="form-group col-md-6">
                   <label for="selfie">Selfie<span class="text-danger">(*):</span></label>
-                  <input formControlName="selfie" type="text" class="form-control" name="selfie"
-                         id="selfie">
+                  <input value="12MP" formControlName="selfie" type="text" class="form-control"
+                         name="selfie" id="selfie">
 
                   <!--    hien thi loi-->
-                  <div
-                    *ngIf="productForm.controls.selfie.invalid && (productForm.controls.selfie.dirty || productForm.controls.selfie.touched || productForm.controls.selfie.errors?.empty)">
+                  <!--                                    <div-->
+                  <!--                                            *ngIf="productForm.controls.selfie.invalid && (productForm.controls.selfie.dirty || productForm.controls.selfie.touched || productForm.controls.selfie.errors?.empty)">-->
 
-                    <small
-                      *ngIf="productForm.controls.selfie.hasError('required') || productForm.controls.selfie.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                    <small *ngIf="selfie.errors?.maxlength" class="text-form text-danger">Trường selfie phải ngắn hơn 50
-                      kí tự</small>
-
-                  </div>
+                  <!--                                        <small-->
+                  <!--                                                *ngIf="productForm.controls.selfie.hasError('required') || productForm.controls.selfie.errors.empty"-->
+                  <!--                                                class="form-text text-danger">Require not empty.</small>-->
+                  <!--                                    </div>-->
                 </div>
 
                 <div class="form-group col-md-6">
                   <label for="memory">Lưu trữ<span class="text-danger">(*):</span></label>
-                  <input formControlName="memory" type="text" class="form-control" name="memory"
-                         id="memory">
+                  <input value="128gb" formControlName="memory" type="text" class="form-control"
+                         name="memory" id="memory">
 
                   <!--    hien thi loi-->
-                  <div
-                    *ngIf="productForm.controls.memory.invalid && (productForm.controls.memory.dirty || productForm.controls.memory.touched || productForm.controls.memory.errors?.empty)">
-                    <!--      <small *ngIf="productForm.controls.price.hasError('pattern')" class="form-text text-danger">Wrong format, ex:-->
-                    <!--        KH-0123</small>-->
-                    <small
-                      *ngIf="productForm.controls.memory.hasError('required') || productForm.controls.memory.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                    <small *ngIf="memory.errors?.maxlength" class="text-form text-danger">Trường lưu trữ phải ngắn hơn
-                      50 kí tự</small>
-
-                  </div>
+                  <!--                                    <div-->
+                  <!--                                            *ngIf="productForm.controls.memory.invalid && (productForm.controls.memory.dirty || productForm.controls.memory.touched || productForm.controls.memory.errors?.empty)">-->
+                  <!--                                        &lt;!&ndash;      <small *ngIf="productForm.controls.price.hasError('pattern')" class="form-text text-danger">Wrong format, ex:&ndash;&gt;-->
+                  <!--                                        &lt;!&ndash;        KH-0123</small>&ndash;&gt;-->
+                  <!--                                        <small-->
+                  <!--                                                *ngIf="productForm.controls.memory.hasError('required') || productForm.controls.memory.errors.empty"-->
+                  <!--                                                class="form-text text-danger">Require not empty.</small>-->
+                  <!--                                    </div>-->
                 </div>
 
                 <div class="form-group col-md-12">
                   <label for="cpu">CPU<span class="text-danger">(*)</span> </label>
-                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="cpu">
+                  <input value="250MDX" formControlName="cpu" type="text" class="form-control"
+                         name="cpu" id="cpu">
 
                   <!--    hien thi loi-->
-                  <div
-                    *ngIf="productForm.controls.cpu.invalid && (productForm.controls.cpu.dirty || productForm.controls.cpu.touched || productForm.controls.cpu.errors?.empty)">
+                  <!--                                    <div-->
+                  <!--                                            *ngIf="productForm.controls.cpu.invalid && (productForm.controls.cpu.dirty || productForm.controls.cpu.touched || productForm.controls.cpu.errors?.empty)">-->
 
-                    <small
-                      *ngIf="productForm.controls.cpu.hasError('required') || productForm.controls.cpu.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                    <small *ngIf="cpu.errors?.maxlength" class="text-form text-danger">Trường cpu phải ngắn hơn 50 kí
-                      tự</small>
-
-                  </div>
+                  <!--                                        <small-->
+                  <!--                                                *ngIf="productForm.controls.cpu.hasError('required') || productForm.controls.cpu.errors.empty"-->
+                  <!--                                                class="form-text text-danger">Require not empty.</small>-->
+                  <!--                                    </div>-->
                 </div>
 
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-12 ">
                   <label for="otherDescription">Mô tả thêm </label>
 
                   <textarea id="otherDescription" formControlName="otherDescription"
-                            class="form-control">    </textarea>
+                            class="form-control">IPhone 13 sở hữu hệ thống camera kép xuất sắc nhất từ trước đến nay,bộ vi xử lý Apple A15 nhanh nhất thế giới smartphone cùng thời lượng pin cực khủng,sẵn sàng đồng hành cùng bạn suốt cả ngày.  </textarea>
 
                 </div>
 
                 <div class=" col-md-12 text-center mx-auto mt-4">
-                  <button style="width: 200px;" type="submit" class="btn btn-primary "
-                  ><i class="fa fa-paper-plane"></i>Xác nhận
+                  <button style="width: 200px;" type="button" class="btn btn-primary "
+                          data-toggle="modal"
+                          data-target="#editModal"><i class="fa fa-paper-plane"></i>Xác nhận
                   </button>
 
-                  <a type="button" class="btn btn-danger"
-                     style="margin-left: 10px; width: 200px"
+                  <a type="button" class="btn btn-danger" style="margin-left: 10px; width: 200px"
                      data-toggle="modal"
-                     data-target="#cancelModal">
-                    Hủy</a>
+                     data-target="#cancelEdit"> Hủy</a>
+
                 </div>
+
               </div>
             </div>
           </div>
@@ -184,70 +160,53 @@
   </div>
 </form>
 
-<!--<script>-->
-<!--  function format_curency(a) {-->
-<!--    a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");-->
-<!--  }-->
-<!--</script>-->
-
 
 <!-- Modal -->
-<div class="modal fade " id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn hủy chỉnh sửa?</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn chỉnh sửa</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Tên hàng: Iphone 13</p>
+        <p>Giá: 10.000.000</p>
+        <p>Kích thước màn hình: 5.6 inch</p>
+        <p>Camera: 20.0 MP</p>
+        <p>Selfie: 12.0 MP</p>
+        <p>Lưu trữ: 128 GB</p>
+        <p>CPU: 250MDX</p>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Chỉnh sửa</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade " id="cancelEdit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn hủy chỉnh sửa</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
 
+
       </div>
       <div class="modal-footer">
-        <a type="button" [routerLink]="['/api/product/listProduct']" class="btn btn-primary">Có</a>
+        <button type="button" class="btn btn-primary">Có</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Không</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!--notification modal-->
-<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>
-<!--error modal-->
-<div class="modal fade " tabindex="-1" id="errorModal">
-  <div class="modal-dialog" style="text-align: center">
-    <div class="modal-content" style="text-align: center">
-      <div class="modal-header">
-        <h5 class="modal-title">Thông báo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Dữ liệu đã tồn tại, vui lòng kiểm tra lại!</p>
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>
-<!--success modal-->
-<div class="modal fade" tabindex="-1" id="successModal">
-  <div class="modal-dialog" style="text-align: center">
-    <div class="modal-content" style="text-align: center">
-      <div class="modal-header">
-        <h5 class="modal-title">Thông báo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Chỉnh sửa thông tin hàng hóa thành công !</p>
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/api/product/listProduct']">OK
-        </button>
       </div>
     </div>
   </div>

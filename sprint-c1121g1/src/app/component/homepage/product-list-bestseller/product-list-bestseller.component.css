@@ -355,6 +355,11 @@ header {
   margin-bottom: 10px;
 }
 
+.category-item-picture img {
+  width: 60px;
+  height: 60px;
+}
+
 .category-item-title {
   margin: 0;
 }
@@ -613,6 +618,7 @@ header {
 .product-gallery-one-content-title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
 }
 
@@ -627,6 +633,7 @@ header {
 
 .product-gallery-one-content-title ul {
   display: flex;
+  /*margin-bottom: 0;*/
 }
 
 .product-gallery-one-content-title ul li {

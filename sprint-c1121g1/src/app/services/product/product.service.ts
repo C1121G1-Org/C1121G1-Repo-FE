@@ -1,5 +1,3 @@
-// @ts-ignore
-
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Product} from '../../models/product';
@@ -11,7 +9,6 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  // @ts-ignore
   private apiBaseUrl = environment.apiBaseUrl;
   private products: Product[];
 
@@ -26,11 +23,6 @@ export class ProductService {
 
   productApi = 'http://localhost:8080/api/product';
 
-  /*
-      Created by TuanPA
-      Date: 9:08 3/6/2022
-      Function: createProduct
-  */
   createProduct(product: any): Observable<any> {
     return this.http.post<any>(this.productApi + '/create', product);
   }
@@ -57,8 +49,23 @@ export class ProductService {
     Function: edit product
 */
 
+
   updateProduct(id: number, value: any): Observable<any> {
-    return this.http.patch<any>(this.productApi + '/' + 'update/' + id, value);
+    return this.http.patch<any>(this.productApi + '/' + id, value);
+  }
+
+
+  listAll(): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list`);
+  }
+
+  /*
+  Created by khoaVC
+  Time: 10:00 03/06/2022
+  Method: list()
+*/
+  list(): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/api/product/listAll`);
   }
 
 
@@ -75,7 +82,13 @@ export class ProductService {
    Time: 13:37 03/06/2022
    Method: pageProduct()
  */
+<<<<<<< HEAD
   getAllProductPage(pageable, name, price): Observable<any> {
     return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}`);
+=======
+  getAllProductPage(pageable, name, price, searchByQuantity): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}&keyQuantity=${searchByQuantity}`);
+
+>>>>>>> bfaae86ffa5e865441afe2eaabf416bc742aff31
   }
 }

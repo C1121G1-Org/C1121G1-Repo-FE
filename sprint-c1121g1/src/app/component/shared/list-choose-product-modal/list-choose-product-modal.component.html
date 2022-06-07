@@ -34,6 +34,7 @@
                       <input [(ngModel)]="searchValue" #element style="width: 300px"
                              class="header-search search-input background-search"
                              placeholder="Bạn cần tìm gì?"
+<<<<<<< HEAD
                              type="text"><i
                       class="fa fa-search"
                       style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
@@ -42,6 +43,15 @@
                       <button (click)="search(element.value)" class="btn-search btn-rounded  btn-sm my-0"
                               style="width: 100px">Tìm
                         kiếm
+=======
+                             type="text"><i (click)="search(element.value)"
+                                            class="fa fa-search"
+                                            style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
+                    </div>
+                    <div>
+                      <button (click)="getAll()" class="btn-search btn-rounded  btn-sm my-0"
+                              style="width: 100px">làm Mới
+>>>>>>> bfaae86ffa5e865441afe2eaabf416bc742aff31
                       </button>
                     </div>
                   </div>
