@@ -27,6 +27,7 @@ export class CustomerReportComponent implements OnInit {
   checkGenderValue = true;
   checkAgeValue = true;
   checkSelectiveValue = true;
+  customerQuantity: number;
 
   constructor(private reportService: ReportAndHistoryService) {
   }
@@ -42,10 +43,12 @@ export class CustomerReportComponent implements OnInit {
     this.reportService.filterAllCustomerReport(this.pageNumber).subscribe(customerReports => {
 
       this.checkReportCustomers = true;
+      this.customerQuantity = customerReports.totalElements;
 
       this.customerReports = customerReports.content;
       this.totalPages = customerReports.totalPages;
       this.pageNumber = customerReports.pageabel.pageNumber;
+
     });
   }
 

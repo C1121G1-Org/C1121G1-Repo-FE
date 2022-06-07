@@ -10,7 +10,7 @@ describe('ProductListBestsellerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ ProductListBestsellerComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -79,116 +79,135 @@
 
   <div>
     <div style="text-align: center">
-      <button type="button" class="btn btn-primary" (click)="filter(errorBtn)">Lọc</button>
+      <button type="button" style="display: inline-block"
+              class="btn btn-grad-blue mx-1" (click)="filter(errorBtn)">Lọc
+      </button>
     </div>
   </div>
 </div>
 
 <div class="card card-body">
-  <h5>Số lượng khách hàng: </h5>
+  <h5>Số lượng khách hàng: {{customerQuantity}}</h5>
 
-  <div [hidden]="checkReportCustomers == false">
-    <div class="tbl-header">
-      <table class="table table-bordered table-responsive-md">
-        <thead class="text-center">
-        <tr>
-          <th class="text-center">STT</th>
-          <th class="text-center">Họ và tên</th>
-          <th class="text-center">Giới tính</th>
-          <th class="text-center">Ngày sinh</th>
-          <th class="text-center">Địa chỉ email</th>
-          <th class="text-center">Số điện thoại</th>
-          <th class="text-center">Số lần mua</th>
-          <th class="text-center">Lịch sử mua hàng</th>
-        </tr>
-        </thead>
-      </table>
+  <!--  <div [hidden]="checkReportCustomers == false">-->
+  <!--    <div class="tbl-header">-->
+  <!--      <table class="table table-bordered table-responsive-md">-->
+  <!--        <thead class="text-center">-->
+  <!--        <tr>-->
+  <!--          <th class="text-center">STT</th>-->
+  <!--          <th class="text-center">Họ và tên</th>-->
+  <!--          <th class="text-center">Giới tính</th>-->
+  <!--          <th class="text-center">Ngày sinh</th>-->
+  <!--          <th class="text-center">Địa chỉ email</th>-->
+  <!--          <th class="text-center">Số điện thoại</th>-->
+  <!--          <th class="text-center">Số lần mua</th>-->
+  <!--          <th class="text-center">Lịch sử mua hàng</th>-->
+  <!--        </tr>-->
+  <!--        </thead>-->
+  <!--      </table>-->
+  <!--    </div>-->
+
+  <!--    <div class="tbl-content">-->
+  <!--      <table class="table table-bordered table-responsive-md">-->
+  <!--        <tbody class="text-center">-->
+
+  <!--        <tr *ngFor="let customerReport of customerReports, index as i">-->
+  <!--          <td class="text-center">{{i + 1}}</td>-->
+  <!--          <td class="text-center">{{customerReport.name}}</td>-->
+  <!--          <td class="text-center">-->
+  <!--            <p *ngIf="customerReport.gender == false">Nữ</p>-->
+  <!--            <p *ngIf="customerReport.gender == true">Nam</p>-->
+  <!--          </td>-->
+  <!--          <td class="text-center">{{customerReport.dateOfBirth}}</td>-->
+  <!--          <td class="text-center">{{customerReport.email}}</td>-->
+  <!--          <td class="text-center">{{customerReport.phoneNumber}}</td>-->
+  <!--          <td class="text-center">{{customerReport.purchaseTimes}}</td>-->
+  <!--          <td class="text-center">-->
+  <!--            <button type="button" class="btn btn-grad-blue mx-1"-->
+  <!--                    [routerLink]="['/report/purchase-hitory/', customerReport.id]">Xem-->
+  <!--            </button>-->
+  <!--          </td>-->
+  <!--        </tr>-->
+
+  <!--        </tbody>-->
+  <!--      </table>-->
+
+  <div>
+    <div [hidden]="checkReportCustomers == false">
+      <div class="tbl-header">
+        <table class="table table-bordered table-responsive-md ">
+          <thead>
+          <tr>
+            <th class="text-center">STT</th>
+            <th class="text-center">Họ và tên</th>
+            <th class="text-center">Giới tính</th>
+            <th class="text-center">Ngày sinh</th>
+            <th class="text-center">Địa chỉ email</th>
+            <th class="text-center">Số điện thoại</th>
+            <th class="text-center">Số lần mua</th>
+            <th class="text-center">Lịch sử mua hàng</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+
+      <div class="tbl-content">
+        <table class=" table table-bordered table-responsive-md">
+          <tbody>
+          <tr *ngFor="let customerReport of customerReports, index as i">
+            <td class="text-center">{{i + 1}}</td>
+            <td class="text-center">{{customerReport.name}}</td>
+            <td class="text-center">
+              <p *ngIf="customerReport.gender == false">Nữ</p>
+              <p *ngIf="customerReport.gender == true">Nam</p>
+            </td>
+            <td class="text-center">{{customerReport.dateOfBirth}}</td>
+            <td class="text-center">{{customerReport.email}}</td>
+            <td class="text-center">{{customerReport.phoneNumber}}</td>
+            <td class="text-center">{{customerReport.purchaseTimes}}</td>
+            <td class="text-center">
+                <button type="button"
+                        class="btn btn-view-blue"
+                        [routerLink]="['/report/purchase-hitory/', customerReport.id]">Xem
+                </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--    </div>-->
+      <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
+        <a type="button" class="btn btn-outline-info" (click)="previousPage()"
+           [hidden]="pageNumber == 0">Trang trước</a>
+        <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
+        <a type="button" class="btn btn-outline-info" (click)="nextPage()"
+           [hidden]="pageNumber == totalPages - 1">Trang sau</a>
+      </div>
     </div>
-
-    <div class="tbl-content">
-      <table class="table table-bordered table-responsive-md">
-        <tbody class="text-center">
-
-        <tr *ngFor="let customerReport of customerReports, index as i">
-          <td class="text-center">{{i + 1}}</td>
-          <td class="text-center">{{customerReport.name}}</td>
-          <td class="text-center">
-            <p *ngIf="customerReport.gender == false">Nữ</p>
-            <p *ngIf="customerReport.gender == true">Nam</p>
-          </td>
-          <td class="text-center">{{customerReport.dateOfBirth}}</td>
-          <td class="text-center">{{customerReport.email}}</td>
-          <td class="text-center">{{customerReport.phoneNumber}}</td>
-          <td class="text-center">{{customerReport.purchaseTimes}}</td>
-          <td class="text-center">
-            <button type="button" class="btn btn-primary"
-                    [routerLink]="['/report/purchase-hitory/', customerReport.id]">Xem
-            </button>
-          </td>
-        </tr>
-
-        </tbody>
-      </table>
-
-      <!--    &lt;!&ndash;Pagination&ndash;&gt;-->
-      <!--    <nav class="d-flex justify-content-center wow fadeIn" style="float: right">-->
-      <!--      <ul class="pagination pg-blue">-->
-
-      <!--        &lt;!&ndash;Arrow left&ndash;&gt;-->
-      <!--        <li class="page-item">-->
-      <!--          <a class="page-link" (click)="previousPage()" aria-label="Previous">-->
-      <!--            <span aria-hidden="true">&laquo;</span>-->
-      <!--            <span class="sr-only">Previous</span>-->
-      <!--          </a>-->
-      <!--        </li>-->
-
-
-      <!--        <li class="page-item active" *ngFor="let page of pageNumber">-->
-      <!--          <a class="page-link" href="#">{{page}}-->
-      <!--            <span class="sr-only">(current)</span>-->
-      <!--          </a>-->
-      <!--        </li>-->
-
-      <!--        <li class="page-item">-->
-      <!--          <a class="page-link" (click)="nextPage()" aria-label="Next">-->
-      <!--            <span aria-hidden="true">&raquo;</span>-->
-      <!--            <span class="sr-only">Next</span>-->
-      <!--          </a>-->
-      <!--        </li>-->
-      <!--      </ul>-->
-      <!--    </nav>-->
-      <!--    &lt;!&ndash;Pagination&ndash;&gt;-->
-    </div>
   </div>
 
-  <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
-    <a type="button" class="btn btn-outline-info" (click)="previousPage()"
-       [hidden]="pageNumber == 0">Trang trước</a>
-    <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
-    <a type="button" class="btn btn-outline-info" (click)="nextPage()"
-       [hidden]="pageNumber == totalPages - 1">Trang sau</a>
-  </div>
-
-  <div style="text-align: center" class="container col-6 col-md-6">
-    <button type="button" style="display: inline-block" class="btn btn-primary" [routerLink]="['']">Quay lại</button>
-  </div>
 
   <div [hidden]="checkReportCustomers == true" class="text-center">
-    <p>Không tìm thấy khách hàng nào.</p>
+    <h2>Không tìm thấy khách hàng nào.</h2>
   </div>
 
+</div>
+
+<div style="text-align: center">
+  <button type="button" style="display: inline-block"
+          class="btn btn-grad-blue mx-1" [routerLink]="['']">Quay lại
+  </button>
 </div>
 
 <button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>
 <!--success modal-->
 <div id="errorModal" class="modal fade">
-  <div class="modal-dialog modal-confirm modal-confirm-success">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
-      <div class="modal-header modal-header-success justify-content-center">
+      <div class="modal-header modal-header-danger justify-content-center">
         <div class="icon-box">
-          <i class="material-icons">&#xE876;</i>
+          <i class="material-icons">&#xE5CD;</i>
         </div>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
         <h4 style="color: red">Lỗi.</h4>
@@ -199,3 +218,24 @@
     </div>
   </div>
 </div>
+
+<!--<button [hidden]="false" #errorBtn data-toggle="modal" data-target="#errorModal"></button>-->
+<!--&lt;!&ndash;error modal&ndash;&gt;-->
+<!--<div id="errorModal" class="modal fade">-->
+<!--  <div class="modal-dialog modal-confirm modal-confirm-danger">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header modal-header-danger justify-content-center">-->
+<!--        <div class="icon-box">-->
+<!--          <i class="material-icons">&#xE5CD;</i>-->
+<!--        </div>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--      </div>-->
+<!--      <div class="modal-body text-center">-->
+<!--        <h4 style="color: red">Lỗi.</h4>-->
+<!--        <p *ngIf="checkGenderValue == false" style="color: darkred">Mời bạn chọn giới tính cần lọc.</p>-->
+<!--        <p *ngIf="checkAgeValue == false" style="color: darkred">Mời bạn nhập số tuổi cần lọc.</p>-->
+<!--        <p *ngIf="checkSelectiveValue == false" style="color: darkred">Chưa chọn cách chọn lọc.</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

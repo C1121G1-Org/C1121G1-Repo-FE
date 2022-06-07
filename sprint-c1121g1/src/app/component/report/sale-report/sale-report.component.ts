@@ -21,10 +21,11 @@ Chart.register(...registerables);
 export class SaleReportComponent implements OnInit {
   product: Product = {};
 
-  chart1 = Chart.getChart("");
-  chart2 = Chart.getChart("");
-  notFound = "";
-  alertClass = "";
+  chart1 = Chart.getChart('');
+  chart2 = Chart.getChart('');
+  notFound = '';
+  alertClass = '';
+
 
   notValid = '';
   alertNotValid = '';
@@ -118,6 +119,10 @@ export class SaleReportComponent implements OnInit {
       }, error => {
         this.alertClass = "text-center alert alert-danger";
         this.notFound = "KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !";
+
+        this.totalInvoices = 0 ;
+        this.totalSales = 0 ;
+
       });
 
     } else {
@@ -147,6 +152,9 @@ export class SaleReportComponent implements OnInit {
 
     const type = this.formSearch.get('typeReport').value;
 
+
+
+    // tslint:disable-next-line:triple-equals
     if (type != 'ID') {
       this.formSearch.get('productId').setValue('');
       this.formSearch.get('productId').disable();
