@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
-import {Product} from '../../../models/product';
 
 @Component({
   selector: 'app-product-create',
