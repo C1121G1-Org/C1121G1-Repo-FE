@@ -7,16 +7,22 @@ import {PurchaseHistoryComponent} from './purchase-history/purchase-history.comp
 
 
 
+
 /*
     Created by HauPV
     Time: 09:00 03/06/2022
     Function: routing for sale-report
 */
 
+
 const routes: Routes = [
 
-
-  // Role : Admin , Business Staff
+  /*
+      Created by HauPV
+      Time: 09:00 03/06/2022
+      Function : list sale report
+      Role : Admin , Business Staff
+  */
 
   {path: 'sale-report/list', component: SaleReportComponent},
   /*

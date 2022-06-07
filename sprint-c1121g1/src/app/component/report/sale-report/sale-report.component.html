@@ -10,8 +10,10 @@
           <div class="form-group">
             <label><strong>Từ Ngày :</strong></label>
             <input formControlName="startDay" (change)="checkDay()" type="date" class="form-control">
-            <div *ngIf="!getStartDay().valid && (getStartDay().touched || getStartDay().dirty) ">
+            <div
+              *ngIf="!getStartDay().valid && (getStartDay().touched || getStartDay().dirty || getStartDay().errors?.empty) ">
               <p *ngIf="getStartDay().errors?.required" class="alert alert-danger">Không được để trống .</p>
+              <p *ngIf="getStartDay().errors?.empty" class="alert alert-danger">Không được để trống .</p>
               <p *ngIf="getStartDay().errors?.pattern" class="alert alert-danger">Sai định dạng .</p>
             </div>
           </div>
@@ -20,8 +22,9 @@
           <div class="form-group">
             <label><strong>Đến Ngày :</strong></label>
             <input formControlName="endDay" (change)="checkDay()" type="date" class="form-control">
-            <div *ngIf="!getEndDay().valid && (getEndDay().touched || getEndDay().dirty)">
+            <div *ngIf="!getEndDay().valid && (getEndDay().touched || getEndDay().dirty || getEndDay().errors?.empty)">
               <p class="alert alert-danger" *ngIf="getEndDay().errors?.required">Không được để trống .</p>
+              <p class="alert alert-danger" *ngIf="getEndDay().errors?.empty">Không được để trống .</p>
               <p class="alert alert-danger" *ngIf="getEndDay().errors?.pattern">Sai định dạng .</p>
               <p class="alert alert-danger" *ngIf="getEndDay().errors?.errDate">Ngày kết thúc phải lớn hơn hoặc bằng
                 ngày bắt đầu .</p>
@@ -42,17 +45,15 @@
           <div class="form-group">
             <label><strong>Nhập mã sản phẩm :</strong></label>
             <input formControlName="productId" type="text" class="form-control" placeholder="VD : 1111">
-            <div *ngIf="!getProductId().valid && (getProductId().touched || getProductId().dirty)">
+            <div *ngIf="!getProductId().valid && (getProductId().touched || getProductId().dirty || getProductId().errors?.empty)">
               <p class="alert alert-danger" *ngIf="getProductId().errors?.required">Không được để trống .</p>
+              <p class="alert alert-danger" *ngIf="getProductId().errors?.empty">Không được để trống .</p>
             </div>
           </div>
         </div>
       </div>
       <div class="row d-flex justify-content-center">
-        <p (click)="closeNotValidAlert()" class="{{'text-center '+alertNotValid}}">{{notValid}}</p>
-      </div>
-      <div class="row d-flex justify-content-center">
-        <button [routerLink]="['/']" class="btn btn-primary col-1 mr-1 mt-2 ms-1">Quay Lại</button>
+        <button [routerLink]="['/']" class="btn btn-primary col-1 mr-1 mt-2 ms-1">QUAY LẠI</button>
         <button type="submit" class="btn btn-danger btn-block mr-1 col-1 mt-2">XEM
         </button>
       </div>
@@ -62,7 +63,7 @@
   <div class="row mt-3">
     <div class="col-4"></div>
     <div>
-      <p  style="font-size: 30px"><strong>Tổng số đơn hàng : {{totalInvoices}}</strong></p>
+      <p style="font-size: 30px"><strong>Tổng số đơn hàng : {{totalInvoices}}</strong></p>
       <p class="text-danger text-center" style="font-size: 30px"><strong>Tổng Doanh Thu
         : {{totalSales}}</strong></p>
     </div>

@@ -21,6 +21,9 @@ declare var $: any;
 
 export class QrCodeComponent implements OnInit {
 
+  @ViewChild("imageInput1") imageInput1: ElementRef;
+  @ViewChild("imageInput2") imageInput2: ElementRef;
+
   @Output()
   sendProduct = new EventEmitter();
 
@@ -53,13 +56,15 @@ export class QrCodeComponent implements OnInit {
         this.qrCodeService.decode(formData).subscribe(data => {
           this.product = data;
           this.sendProduct.emit(this.product);
+          $("#btnCloseModal").click();
+          this.imageInput1.nativeElement.value = '';
+          this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
           $('#btnCloseModal').click();
 
         }, err => {
           this.alertClass = 'alert alert-danger';
           this.message = 'Mã QR Không hợp lệ vui lòng kiểm tra lại !';
         });
-
       } else {
         this.alertClass = 'alert alert-danger';
         this.message = 'Vui lòng chọn ảnh !';
@@ -77,6 +82,7 @@ export class QrCodeComponent implements OnInit {
           if (data) {
             this.alertClass = 'alert alert-success';
             this.message = 'Mã QR HỢP LỆ !';
+
           } else {
             this.alertClass = 'alert alert-danger';
             this.message = 'Mã QR KHÔNG HỢP LỆ !';
@@ -131,6 +137,17 @@ export class QrCodeComponent implements OnInit {
       this.image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
     }
 
+  }
+
+  resetValueInputs() {
+    this.typeQRScan = '1';
+    this.alertClass = '';
+    this.message = '';
+
+    this.imageInput1.nativeElement.value = '';
+    this.image1 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+    this.imageInput2.nativeElement.value = '';
+    this.image2 = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   }
 
 }

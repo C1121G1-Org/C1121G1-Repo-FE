@@ -11,7 +11,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title text-center" id="exampleModalLabel">QUÉT MÃ QR</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+        <button (click)="resetValueInputs()" id="btnCloseModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -30,7 +32,7 @@
                   <div class="row d-flex justify-content-center">
                     <div class="file">
                       <label for="img1">Hình Ảnh <span class="text-danger">(*):</span></label>
-                      <input (change)="readFile1($event.target)" accept="image/png"  name="img" id="img1" type="file" class="file__input">
+                      <input #imageInput1 (change)="readFile1($event.target)" accept="image/png"  name="img" id="img1" type="file" class="file__input">
                       <label for="img1" class="file__label">
                         <i class="fa fa-upload"></i>
                       </label>
@@ -43,7 +45,7 @@
                   <div class="row d-flex justify-content-center">
                     <div class="file">
                       <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
-                      <input (change)="readFile2($event.target)" accept="image/png" name="img" id="img" type="file" class="file__input">
+                      <input #imageInput2 (change)="readFile2($event.target)" accept="image/png" name="img" id="img" type="file" class="file__input">
                       <label for="img" class="file__label">
                         <i class="fa fa-upload"></i>
                       </label>
@@ -63,3 +65,4 @@
     </div>
   </div>
 </div>
+
