@@ -1,58 +1,61 @@
 <!--  Created by CongNV-->
 <!--  Date : 04/06/2022-->
 <!--  Function: Search,Pageable-->
-<div class="container-fluid" style="width:70%">
-  <div class="row" >
+<div class="container-fluid" style="width:70%; box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+background-color: #d9e4f5;
+background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%); ">
+  <h1 style="text-align: center" class="mb-3"> Lịch sử mua bán</h1>
+  <div class="row">
     <div class="col-2">
-      <button *ngIf="checkDate == true" (click)="sortDate()" class="btn btn-outline-primary">
-        Sắp xếp ngày tăng dần
+      <button *ngIf="checkDate == true" (click)="sortDate()" class="btn btn-grad-blue mx-1">
+        <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sắp xếp ngày
       </button>
-      <button *ngIf="checkDate == false" (click)="sortDate()" class="btn btn-outline-primary">
-        Sắp xếp ngày giảm dần
+      <button *ngIf="checkDate == false" (click)="sortDate()" class="btn btn-grad-blue mx-1">
+        <i class="fa fa-sort-amount-desc" aria-hidden="false"></i> Sắp xếp ngày
       </button>
     </div>
 
     <div class="col-2">
-      <button *ngIf="checkCustomer == true" (click)="sortCustomer()" class="btn btn-outline-primary">
-        Sắp xếp tên A - Z
+      <button *ngIf="checkCustomer == true" (click)="sortCustomer()" class="btn btn-grad-blue mx-1">
+        <i class="fa fa-sort-alpha-desc" aria-hidden="true"></i>Sắp xếp tên
       </button>
-      <button *ngIf="checkCustomer == false" (click)="sortCustomer()" class="btn btn-outline-primary">
-        Sắp xếp tên Z - A
+      <button *ngIf="checkCustomer == false" (click)="sortCustomer()" class="btn btn-grad-blue mx-1">
+        <i class="fa fa-sort-alpha-asc" aria-hidden="false"></i>Sắp xếp tên
       </button>
     </div>
 
     <div class="col-2">
-      <button *ngIf="checkTotalMoney == true" (click)="sortTotalMoney()" class="btn btn-outline-primary">
-        Sắp xếp giá tiền 0 -> 9
+      <button *ngIf="checkTotalMoney == true" (click)="sortTotalMoney()" class="btn btn-grad-blue mx-1">
+        <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i> Sắp xếp giá tiền
       </button>
-      <button *ngIf="checkTotalMoney == false" (click)="sortTotalMoney()" class="btn btn-outline-primary">
-        Sắp xếp giá tiền 9 -> 0
+      <button *ngIf="checkTotalMoney == false" (click)="sortTotalMoney()" class="btn btn-grad-blue mx-1">
+        <i class="fa fa-sort-numeric-asc" aria-hidden="false"></i> Sắp xếp giá tiền
       </button>
     </div>
 
     <div class="col-2"></div>
 
-    <div class="col-4" >
+    <div class="col-4">
       <nav class="navbar navbar-light col-12">
-        <div >
+        <div>
           <form [formGroup]="formSearch" class="d-flex">
-            <input (change)="changeKeyword()" formControlName="keyword" class="form-control me-2" type="search" placeholder="Tìm kiếm"
+            <input (change)="changeKeyword()" formControlName="keyword" class="form-control me-2" type="search"
+                   placeholder="Tìm..."
                    aria-label="Search">
-            <button class="btn btn-outline-primary" type="submit" style="width: 130px" (click)="getSearch('','',0)">Tìm
-              kiếm
+            <button class="btn btn-grad-blue mx-1" type="submit" style="width: 130px" (click)="getSearch('','',0)">
+              <i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm
             </button>
           </form>
         </div>
       </nav>
     </div>
-
   </div>
 
 
   <table class="table">
     <thead>
     <tr>
-      <th>id</th>
+      <th>Stt</th>
       <th>Ngày</th>
       <th>Thời gian</th>
       <th>Họ và tên khách hàng</th>
@@ -60,13 +63,14 @@
       <th>Tổng tiền</th>
     </tr>
     </thead>
+    <div *ngIf="massage !=''" style="text-align: center">Không thể tìm thấy</div>
     <tbody>
-    <tr *ngFor="let invoice of invoiceList ;index as i">
-      <td>{{i + 1}}</td>
+    <tr *ngFor="let invoice of invoiceList ">
+      <td>{{invoice.invoiceId}}</td>
       <td>{{invoice.createDate }}</td>
       <td>{{invoice.createTime}}</td>
       <td>{{invoice.customerName}}</td>
-      <td style="text-align: center"><a class="btn btn-outline-warning" data-toggle="modal"
+      <td style="text-align: center"><a class="btn btn-grad-red mx-1" data-toggle="modal"
                                         data-target="#staticBackdrop"
                                         (click)="getInvoiceDetailId(invoice.quantity,invoice.productName)">Chi tiết</a>
       </td>
@@ -76,15 +80,20 @@
   </table>
 </div>
 
+
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
     <li class="page-item">
-      <button [disabled]="page < 1" class="page-link" (click)="previous()">Previous</button>
+      <button [disabled]="page < 1" class="page-link" (click)="previous()">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+      </button>
     </li>
     <li class="page-item"><a class="page-link">{{page + 1}}</a></li>
     <!--        <li class="page-item"><a class="page-link">{{+totalPages}}</a></li>-->
     <li class="page-item">
-      <button [disabled]="page >= totalPages - 1" class="page-link" (click)="next()">Next</button>
+      <button [disabled]="page >= totalPages - 1" class="page-link" (click)="next()">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+      </button>
     </li>
   </ul>
 </nav>
@@ -119,7 +128,7 @@
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="button" class="btn btn-grad-red" data-dismiss="modal">Đóng</button>
       </div>
     </div>
   </div>

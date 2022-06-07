@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {InvoiceService} from '../../../services/invoice/invoice.service';
 import {InvoiceDto} from '../../../dto/invoiceDto';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {applySourceSpanToExpressionIfNeeded} from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -16,13 +17,14 @@ export class InvoiceHistoryComponent implements OnInit {
   productQuantity = 0;
 
   formSearch = new FormGroup({
-    keyword: new FormControl('', Validators.pattern('^[a-zA-Z0-9]*$'))
+    keyword: new FormControl('',   Validators.pattern('^[a-zA-Z0-9]*$'))
   });
 
   keyword = '';
   sort = '';
   page = 0;
   totalPages = 0;
+  massage = '';
 
   checkDate = true;
   checkCustomer = true;
@@ -46,21 +48,24 @@ export class InvoiceHistoryComponent implements OnInit {
   }
 
   getSearch(keyword: string, sort: string, page: number) {
+    this.massage = '';
     this.keyword = this.formSearch.get('keyword').value;
-    if (this.formSearch.get('keyword').valid) {
-      this.invoiceService.getAll(this.keyword, this.sort, this.page).subscribe(data => {
+    this.invoiceService.getAll(this.keyword.trim(), this.sort, this.page).subscribe(data => {
           console.log(data);
           this.page = data.number;
           this.totalPages = data.totalPages;
           this.invoiceList = data.content;
+          console.log(data.content);
         },
         error => {
           console.log(error);
+          this.massage = 'Không thể tìm thấy kết quả ';
+          this.page = 0;
+          this.totalPages = 0;
+          this.invoiceList = null;
         }
       );
-    } else {
-      this.invoiceList = [];
-    }
+
 
   }
 
