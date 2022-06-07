@@ -21,11 +21,10 @@ export class CustomerListComponent implements OnInit {
   totalElement = 0;
   collection: any[] = this.customerList;
   searchForm: FormGroup;
-
+  flag = false;
 
   constructor(private customerService: CustomerService,
               private router: Router) {
-
     this.searchForm = new FormGroup({
       typeSearch: new FormControl(''),
       inputSearch: new FormControl(''),
@@ -40,11 +39,13 @@ export class CustomerListComponent implements OnInit {
         this.page = data.number;
         this.totalPage = data.totalPages;
       });
+    this.flag = false;
   }
 
   /*
   Created By hoangDH,
   Time: 12:38 PM 2022-06-06
+  Role: admin, business
   Function: take id and flag from html
   */
   public activeProject(index: number, id: number): void {
@@ -99,23 +100,33 @@ export class CustomerListComponent implements OnInit {
     const type = this.searchForm.get('typeSearch').value;
     /*const pattern = /^([^0-9]*)$/;
     const pattern2 = /^(090\d{7})|(091\d{7})|(\(\+84\)90\d{7})|(\(\+84\)91\d{7})$/;*/
-    if (type === 'nameCustomer' && input !== '') {
-      this.customerService.getAllCustomer1(this.nameCustomer = input, this.phoneNumber, this.page).subscribe(
+    if (type === 'nameCustomer' && input.trim() !== '') {
+      this.customerService.getAllCustomer1(this.nameCustomer = input.trim(), this.phoneNumber, this.page).subscribe(
         (data: any) => {
+          alert(input);
           this.customerList = data.content;
           this.page = data.number;
           this.totalPage = data.totalPages;
         }, err => {
+          this.message = 'Không tìm thấy kết quả trả về';
+          this.customerList = null;
+          this.page = 0;
+          this.totalPage = 0;
           console.log(err);
         }
       );
-    } else if (type === 'phoneNumber' && input !== '') {
-      this.customerService.getAllCustomer1(this.nameCustomer, this.phoneNumber = input, this.page).subscribe(
+    } else if (type === 'phoneNumber' && input.trim() !== '') {
+      this.customerService.getAllCustomer1(this.nameCustomer, this.phoneNumber = input.trim(), this.page).subscribe(
         (data: any) => {
+          alert(input);
           this.customerList = data.content;
           this.page = data.number;
           this.totalPage = data.totalPages;
         }, err => {
+          this.message = 'Không tìm thấy kết quả trả về';
+          this.customerList = null;
+          this.page = 0;
+          this.totalPage = 0;
           console.log(err);
         }
       );
