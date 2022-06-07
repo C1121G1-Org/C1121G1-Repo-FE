@@ -35,21 +35,15 @@ export class ProductService {
     return this.http.post<any>(this.productApi + '/create', product);
   }
 
-
-
-
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
     Function: find by id
 */
 
-
   findById(id: number): Observable<Product> {
     return this.http.get<Product>(this.productApi + '/' + id);
   }
-
-
 
   /*
     Created by TuanPA
@@ -62,6 +56,7 @@ export class ProductService {
   }
 
 
+
   listAll(): Observable<any> {
     return this.http.get<any>(`${this.apiBaseUrl}/api/product/list`);
   }
@@ -71,8 +66,8 @@ export class ProductService {
    Time: 13:37 03/06/2022
    Method: pageProduct()
  */
-  getAllProductPage(pageable, name, price): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}`);
+  getAllProductPage(pageable, name, price, searchByQuantity): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}&keyQuantity=${searchByQuantity}`);
   }
 
 }
