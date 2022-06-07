@@ -106,10 +106,6 @@
               </table>
             </div>
           </div>
-
-          <div [hidden]="checkPurchaseHistories == true" class="text-center">
-            <h2>Không tìm thấy lịch sử mua hàng nào phù hợp.</h2>
-          </div>
         </div>
       </div>
     </div>
@@ -117,7 +113,7 @@
     <div class="row my-3">
       <div class="row col-4 ml-0">
         <button type="button" data-toggle="modal" data-target="#myModal1"
-                class="btn btn-grad-blue">
+                class="btn btn-grad-blue" [routerLink]="['/report/customer-report']">
           <i class="fa fa-paper-plane"></i> Quay lại
         </button>
       </div>
