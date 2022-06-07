@@ -10,27 +10,20 @@ import {ListChooseProductModalComponent} from './list-choose-product-modal/list-
 import {SuccessModalComponent} from "./success-modal/success-modal.component";
 import {QrCodeComponent} from "./qr-code/qr-code.component";
 
-
 @NgModule({
-
-  declarations: [QrCodeComponent, ListSupplierModalComponent, ListCustomerModalComponent,
-    ListChooseProductModalComponent, SuccessModalComponent,ListProductModalComponent],
-  imports: [
-    CommonModule,
-    SharedRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-  ],
-  exports: [
-    QrCodeComponent,
-    ListSupplierModalComponent,
-    ListChooseProductModalComponent,
-    SuccessModalComponent,
-    ListProductModalComponent
-  ]
-})
-
-export class SharedModule {
-}
-
+  declarations: [ListProductModalComponent, QrCodeComponent, ListSupplierModalComponent, ListCustomerModalComponent, ListChooseProductModalComponent],
+    imports: [
+      CommonModule,
+      SharedRoutingModule,
+      FormsModule,
+      ReactiveFormsModule
+    ],
+    exports: [
+      ListProductModalComponent,
+      QrCodeComponent,
+      ListSupplierModalComponent
+    ]
+  })
+  export class SharedModule {
+  }
 

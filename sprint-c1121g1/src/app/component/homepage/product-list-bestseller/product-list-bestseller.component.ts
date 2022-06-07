@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {HomepageService} from '../../../services/homepage/homepage.service';
 import {ProductBestseller} from '../../../dto/product-bestseller';
 import {Category} from "../../../models/category";
-import {CategoryService} from "../../../services/category/category.service";
 
 @Component({
   selector: 'app-product-list-bestseller',
@@ -16,60 +15,32 @@ export class ProductListBestsellerComponent implements OnInit {
   productBestsellers: ProductBestseller[] = [];
   topfiveproductBestsellers: ProductBestseller[] = [];
   toptenproductBestsellers: ProductBestseller[] = [];
-  productNewests: ProductBestseller[] = [];
-  topfiveproductNewests: ProductBestseller[] = [];
-  toptenproductNewests: ProductBestseller[] = [];
+
   categorires: Category[] = [];
   topFiveCategories: Category[] = [];
   flagProductBestseller = false;
   flagProductNewest = false;
   flagCategory = false;
 
-  constructor(private homepageService: HomepageService, private categoryService: CategoryService) {
+
+  constructor(private homepageService: HomepageService) {
   }
 
   ngOnInit(): void {
-    this.getAllProductBestSeller();
-    this.getAllProductNewest();
-    this.getAllCategory();
+    this.getAll();
   }
 
-  getAllProductBestSeller() {
+  getAll() {
     this.homepageService.getProductBestseller().subscribe((productBestsellers) => {
       this.productBestsellers = productBestsellers;
-      if (this.productBestsellers.length === 0) {
-        this.flagProductBestseller = true;
+      for (let i = 0; i < 5; i++) {
+        this.topfiveproductBestsellers.push(this.productBestsellers[i]);
       }
-    }, error => {
-      this.flagProductBestseller = true;
-      console.log(error);
-    });
-  }
-
-  getAllProductNewest() {
-    this.homepageService.getProductNewest().subscribe((productNewests) => {
-      this.productNewests = productNewests;
-      this.topfiveproductNewests = this.productNewests.filter((item, index) => index < 5);
-      this.toptenproductNewests = this.productNewests.filter((item, index) => index >= 5);
-      if (this.productBestsellers.length === 0) {
-        this.flagProductNewest = true;
-      }
-    }, error => {
-      this.flagProductNewest = true;
-      console.log(error);
-    });
-  }
-
-  getAllCategory() {
-    this.categoryService.getAll().subscribe((categories) => {
-      this.categorires = categories;
-      this.topFiveCategories = this.categorires.filter((item, index) => index < 5);
-      if (categories.length === 0) {
-        this.flagCategory = true;
+      for (let i = 5; i < 10; i++) {
+        this.toptenproductBestsellers.push(this.productBestsellers[i]);
       }
     }, error => {
       console.log(error);
-      this.flagCategory = true;
     });
   }
 

@@ -174,7 +174,6 @@ export class SaleReportComponent implements OnInit {
 
     const type = this.formSearch.get('typeReport').value;
 
-
     // tslint:disable-next-line:triple-equals
     if (type != 'ID') {
       this.formSearch.get('productId').setValue('');

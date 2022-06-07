@@ -6,6 +6,7 @@ import {ProductUpdateComponent} from './product-update/product-update.component'
 
 const routes: Routes = [
 
+
   {path: 'api/product/create', component: ProductCreateComponent},
 
 {path: 'api/product/edit/:id', component: ProductUpdateComponent}

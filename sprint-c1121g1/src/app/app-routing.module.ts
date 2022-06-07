@@ -12,6 +12,7 @@ import {SharedModule} from "./component/shared/shared.module";
 
 
 
+
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
 
