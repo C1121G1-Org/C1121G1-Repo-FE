@@ -12,15 +12,13 @@ import {InvoiceModule} from './component/invoice/invoice.module';
 import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
-import {ReportModule} from './component/report/report.module';
-import {ErrorComponent} from './error/error.component';
-// @ts-ignore
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
-
+import {ReportModule} from './component/report/report.module';
+import {ErrorComponent} from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +43,7 @@ import {HttpClientModule} from '@angular/common/http';
     ReportModule,
     SecurityModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    FormsModule
+    HttpClientModule
   ],
   providers: [],
   exports: [],
