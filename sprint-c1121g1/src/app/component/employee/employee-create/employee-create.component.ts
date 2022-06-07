@@ -21,7 +21,10 @@ export class EmployeeCreateComponent implements OnInit {
   errorIdCard: string;
   errorEmailEmployee: string;
   errorUserNameEmployee: string;
+  errorImage: string;
   idCardFB: string;
+  age: number;
+
 
 
 
@@ -68,7 +71,7 @@ export class EmployeeCreateComponent implements OnInit {
   // @ts-ignore
   createEmployeeForm: FormGroup = new FormGroup({
     // tslint:disable-next-line:max-line-length
-    employeeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^([a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\\s{1}[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$')])),
+    employeeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern('^([a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\\s{1}[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$')])),
     dateOfBirth: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$')])),
     address: new FormControl('', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100)])),
     idCard: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[0-9_-]{9,12}$')])),
@@ -76,12 +79,21 @@ export class EmployeeCreateComponent implements OnInit {
     image: new FormControl('', Validators.compose([Validators.required])),
     positionDto: new FormControl('', Validators.compose([Validators.required])),
     accountDto: new FormGroup({
-      userName: new FormControl('', Validators.compose([Validators.required])),
-      encryptPassword: new FormControl('', Validators.compose([Validators.required])),
+      userName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(15)])),
+      encryptPassword: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])),
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')])),
     }),
   });
 
+  check() {
+    const birthDay = new Date(this.createEmployeeForm.get('dateOfBirth').value) ;
+    // @ts-ignore
+    const checkDay = Math.abs(Date.now() - birthDay);
+    this.age = Math.floor((checkDay / (1000 * 3600 * 24)) / 365);
+    if (this.age < 18) {
+      this.createEmployeeForm.get('dateOfBirth').setErrors({check: true});
+    }
+  }
 
   constructor(private router: Router,
               private employeeService: EmployeeService,
@@ -105,22 +117,24 @@ export class EmployeeCreateComponent implements OnInit {
   }
 
 
-  submit() {
+  submit( successBtn: HTMLButtonElement) {
     console.log(this.createEmployeeForm.value);
     const nameImg = '/EmP-' + this.createEmployeeForm.get('idCard').value + '.jpg';
     const fileRef = this.storage.ref(nameImg);
     this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
-      finalize(() => {
+      finalize
+      (() => {
         fileRef.getDownloadURL().subscribe((url) => {
           this.createEmployeeForm.patchValue({image: url});
           this.employeeService.saveEmployee(this.createEmployeeForm.value).subscribe(() => {
-            this.createEmployeeForm.reset();
-            alert('Thêm mới thành công !');
-            window.location.reload();
+            successBtn.click();
+            this.createEmployeeForm.reset(window.location.reload());
           }, error => {
+
             this.errorIdCard = error.error.errorMap.idCard;
             this.errorEmailEmployee = error.error.errorMap.email;
             this.errorUserNameEmployee = error.error.errorMap.userName;
+            this.errorImage = error.error.errorMap.image;
           });
         });
       })

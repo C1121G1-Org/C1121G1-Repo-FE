@@ -1,10 +1,10 @@
 <form [formGroup]="editEmployeeForm" (ngSubmit)="updateEmployee(id)" >
   <div class="container-fluid pt-lg-2">
-    <div class="col-8" style="margin: auto">
-      <div class="card border-secondary">
+    <div class="col-9" style="margin: auto">
+      <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;">
         <div class="card-body">
           <h4 class="text-center font-weight-bold text-uppercase py-4">Thay Đổi Thông Tin Nhân Viên </h4>
-          <div class="row">
+          <div class="row" style="padding: 10px 50px">
 
             <div style="display: flex ; justify-content: center" class="col-md-12">
               <label for="image">Hình Ảnh <span class="text-danger">(*):</span></label>
@@ -43,7 +43,7 @@
               </div>
               <div class="form-group">
                 <label for="dateOfBirth">Ngày Tháng Năm Sinh <span class="text-danger">(*):</span></label>
-                <input type="date" formControlName="dateOfBirth" name="dateOfBirth" id="dateOfBirth"
+                <input type="date" (change)="check()" formControlName="dateOfBirth" name="dateOfBirth" id="dateOfBirth"
                        class="form-control">
                 <div
                   *ngIf="editEmployeeForm.get('dateOfBirth').errors?.required&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
@@ -55,6 +55,11 @@
                   style="color: red">
                   nhập đúng định dạng.
                 </div>
+                <div
+                *ngIf="editEmployeeForm.get('dateOfBirth').errors?.check&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
+                style="color: red">
+                nhân viên phải trên 18 tuổi ;
+              </div>
 
               </div>
 
@@ -165,10 +170,12 @@
               </div>
             </div>
             <p></p>
-            <div class="text-center" style="margin: auto">
-              <button type="button" class="btn btn-danger" style="margin-right: 20px">Huỷ</button>
-              <button type="submit" class="btn btn-primary">Thay Đổi <i class="fa fa-paper-plane"></i></button>
 
+            <div class="text-center" style="margin: auto">
+              <button type="submit" class="btn btn-grad-blue mx-1" style="margin-right: 20px">THAY ĐỔI <i
+                class="fa fa-paper-plane"></i></button>
+              <button type="button" class="btn btn-grad-red mx-1" > <i class="fa-solid fa-right-from-bracket"></i>HUỶ
+              </button>
             </div>
 
           </div>

@@ -24,6 +24,7 @@ export class EmployeeUpdateComponent implements OnInit {
   errorIdCard: string ;
   errorEmailEmployee: string;
   errorUserNameEmployee: string;
+  age: number;
 
   constructor(private employeeService: EmployeeService,
               private activetedRoute: ActivatedRoute,
@@ -35,6 +36,15 @@ export class EmployeeUpdateComponent implements OnInit {
       this.getEmployeeDto(this.id);
 
     });
+  }
+  check() {
+    const birthDay = new Date(this.editEmployeeForm.get('dateOfBirth').value) ;
+    // @ts-ignore
+    const checkDay = Math.abs(Date.now() - birthDay);
+    this.age = Math.floor((checkDay / (1000 * 3600 * 24)) / 365);
+    if (this.age < 18) {
+      this.editEmployeeForm.get('dateOfBirth').setErrors({check: true});
+    }
   }
 
   ngOnInit(): void {
@@ -69,8 +79,10 @@ export class EmployeeUpdateComponent implements OnInit {
         }),
         accountDto: new FormGroup({
           id : new FormControl(next.accountDto.id),
-          userName: new FormControl(next.accountDto.userName, Validators.compose([Validators.required])),
-          encryptPassword: new FormControl(next.accountDto.encryptPassword, Validators.compose([Validators.required])),
+          // tslint:disable-next-line:max-line-length
+          userName: new FormControl(next.accountDto.userName, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(15)])),
+          // tslint:disable-next-line:max-line-length
+          encryptPassword: new FormControl(next.accountDto.encryptPassword, Validators.compose([Validators.required ,Validators.minLength(6), Validators.maxLength(15)])),
           email: new FormControl(next.accountDto.email, Validators.compose([Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')])),
         }),
 
@@ -96,8 +108,7 @@ export class EmployeeUpdateComponent implements OnInit {
               this.router.navigate(['/list']);
               alert('Cập nhật thành công');
             }, error => {
-              this.errorIdCard = error.error.errorMap.idCard;
-              console.log(error.error.errorMap1.email);
+              // this.errorIdCard = error.error.errorMap.idCard;
               // this.errorEmailEmployee = error.error.errorMap1.email;
               // this.errorUserNameEmployee = error.error.errorMap1.userName;
             });
