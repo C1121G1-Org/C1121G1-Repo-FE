@@ -14,10 +14,8 @@ import {CategoryService} from "../../../services/category/category.service";
 // Function: get list product bestseller from database
 export class ProductListBestsellerComponent implements OnInit {
   productBestsellers: ProductBestseller[] = [];
-<<<<<<< HEAD
   topfiveproductBestsellers: ProductBestseller[] = [];
   toptenproductBestsellers: ProductBestseller[] = [];
-=======
   productNewests: ProductBestseller[] = [];
   topfiveproductNewests: ProductBestseller[] = [];
   toptenproductNewests: ProductBestseller[] = [];
@@ -26,7 +24,6 @@ export class ProductListBestsellerComponent implements OnInit {
   flagProductBestseller = false;
   flagProductNewest = false;
   flagCategory = false;
->>>>>>> bfaae86ffa5e865441afe2eaabf416bc742aff31
 
   constructor(private homepageService: HomepageService, private categoryService: CategoryService) {
   }
@@ -40,21 +37,11 @@ export class ProductListBestsellerComponent implements OnInit {
   getAllProductBestSeller() {
     this.homepageService.getProductBestseller().subscribe((productBestsellers) => {
       this.productBestsellers = productBestsellers;
-<<<<<<< HEAD
-      for (let i = 0; i < 5; i++) {
-        this.topfiveproductBestsellers.push(this.productBestsellers[i]);
-      }
-      for (let i = 5; i < 10; i++) {
-        this.toptenproductBestsellers.push(this.productBestsellers[i]);
-      }
-    }, error => {
-=======
       if (this.productBestsellers.length === 0) {
         this.flagProductBestseller = true;
       }
     }, error => {
       this.flagProductBestseller = true;
->>>>>>> bfaae86ffa5e865441afe2eaabf416bc742aff31
       console.log(error);
     });
   }
