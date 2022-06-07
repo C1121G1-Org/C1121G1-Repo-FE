@@ -34,11 +34,7 @@ export class ProductService {
   createProduct(product: any): Observable<any> {
     return this.http.post<any>(this.productApi + '/create', product);
   }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> db1c0698b680e2cba8779dc9a03ad2f116470fe6
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
@@ -48,11 +44,7 @@ export class ProductService {
   findById(id: number): Observable<Product> {
     return this.http.get<Product>(this.productApi + '/' + id);
   }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> db1c0698b680e2cba8779dc9a03ad2f116470fe6
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
@@ -63,13 +55,12 @@ export class ProductService {
     return this.http.patch<any>(this.productApi + '/' + 'update/' + id, value);
   }
 
-<<<<<<< HEAD
-=======
+
 
   listAll(): Observable<any> {
     return this.http.get<any>(`${this.apiBaseUrl}/api/product/list`);
   }
->>>>>>> db1c0698b680e2cba8779dc9a03ad2f116470fe6
+
   /*
    Created by tamHT
    Time: 13:37 03/06/2022
