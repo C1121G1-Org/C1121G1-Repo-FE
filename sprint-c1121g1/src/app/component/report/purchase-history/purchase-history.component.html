@@ -1,6 +1,9 @@
 <!--  Created by TuanNQ-->
 <!--  Time: 11:00 02/06/2022-->
 <!--  Function: Show detail purchase history-->
+<!--  Modal -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="purchase-history.component.css">
 <div class="d-flex justify-content-center">
   <section class="make-color container">
@@ -105,6 +108,10 @@
                 </tbody>
               </table>
             </div>
+          </div>
+
+          <div [hidden]="checkPurchaseHistories == true" class="text-center">
+            <h2>Không tìm thấy lịch sử mua hàng nào phù hợp.</h2>
           </div>
         </div>
       </div>
