@@ -11,7 +11,8 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 })
 export class CustomerListComponent implements OnInit {
   customerList: Customer[];
-  public idClick: number;
+  idClick = 0;
+  flagEdit=true;
   public activeProjectIndex: number;
   totalPage = 0;
   page = 0;
@@ -130,6 +131,22 @@ export class CustomerListComponent implements OnInit {
           console.log(err);
         }
       );
+    } else if (input.trim() === '') {
+      this.ngOnInit();
+    }
+  }
+
+  clearAll() {
+    this.searchForm.reset();
+  }
+
+  toEditForm(sucessButton: HTMLButtonElement) {
+    if (this.idClick == 0) {
+      this.flagEdit=false;
+      sucessButton.click();
+    }
+    else{
+      this.router.navigate(['/customer/edit/',this.idClick]);
     }
   }
 }

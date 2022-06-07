@@ -1,53 +1,51 @@
-<div class="card card-body">
-  <h3 class="text-center font-weight-bold  py-4">
-    Quản Lý Danh Sách Khách Hàng
-  </h3>
-</div>
-
-<div class="card card-body">
-  <div id="table" class="table-editable">
-    <div class="row">
-      <div class="col-6">
-
-        <form [formGroup]="searchForm" (ngSubmit)="search()">
-        <div class="mb-3" style="display: flex; justify-content: space-evenly">
+<div class="d-flex justify-content-center">
+  <section class="make-color container">
+    <!--for demo wrap-->
+    <h1 class="my-5">Quản lý khách hàng</h1>
+    <form [formGroup]="searchForm" (ngSubmit)="search()">
+      <div class="mb-3 row">
+        <div class="row col-12 ml-1">
           <div>
-            <p style="margin-top: 10px">Tìm kiếm theo: </p>
+            <h5 style="margin-top: 10px;">Tìm kiếm theo</h5>
           </div>
-          <!--typeSearch: new FormControl(''),
-          inputSearch: new FormControl('', /*[this.ValidCustom]*/),-->
-          <div>
-            <select name="" id="" class="search-select background-search" formControlName="typeSearch">
+          <div class="mx-1">
+            <select name="" id="" class="search-select" formControlName="typeSearch">
               <option value="nameCustomer">Tên khách hàng</option>
               <option value="phoneNumber">Số điện thoại</option>
             </select>
           </div>
-
-          <div style="position: relative">
-            <input style="width: 300px" class="header-search search-input background-search" formControlName="inputSearch"
-                   placeholder="Bạn cần tìm gì?"
-                   type="text"><i
-            class="fa fa-search"
-            style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
-            <div *ngIf="searchForm.get('inputSearch')?.touched ||searchForm.get('inputSearch').dirty">
-              <small class="text-danger" *ngIf="searchForm.get('inputSearch')?.hasError('patternName')">Tìm kiếm tên không hợp lệ</small>
-              <small class="text-danger" *ngIf="searchForm.get('inputSearch')?.hasError('patternPhone')">Tìm kiếm số điện thoại không hợp lệ</small>
-            </div>
-          </div>
           <div>
-            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#test">Tìm Kiếm</button>
+            <input (change)="search()" style="width: 250px"
+                   class="header-search search-input" placeholder="Bạn cần tìm gì?"
+                   type="text" formControlName="inputSearch"><i (click)="clearAll()"
+                                                                class="fa fa-repeat"
+                                                                style="position: relative; right: 26px; top: 3px; font-size: 18px"></i>
+          </div>
+          <div *ngIf="searchForm.get('inputSearch')?.touched ||searchForm.get('inputSearch').dirty">
+            <small class="text-danger" *ngIf="searchForm.get('inputSearch')?.hasError('patternName')">Tìm kiếm tên không
+              hợp lệ!</small>
+            <small class="text-danger" *ngIf="searchForm.get('inputSearch')?.hasError('patternPhone')">Tìm kiếm số điện
+              thoại không hợp lệ!</small>
+            <small class="text-danger" *ngIf="searchForm.get('inputSearch')?.hasError('searchShit')">Không nhập ký tự
+              linh tinh!</small>
           </div>
         </div>
-        </form>
-
-        <!--                search-->
-
       </div>
-
+    </form>
+    <div *ngIf="message">
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0.5">
+          <tbody>
+          <tr>
+            <td class="d-flex justify-content-center font-weight-bold text-uppercase"> Không tìm thấy dữ liệu</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div>
+    <div *ngIf="!message">
       <div class="tbl-header">
-        <table class="table table-bordered table-responsive-md ">
+        <table cellpadding="0" cellspacing="0" border="0">
           <thead>
           <tr>
             <th class="text-center">STT</th>
@@ -61,57 +59,128 @@
           </thead>
         </table>
       </div>
-      <div *ngIf="message!=''" style="text-align: center">Không tìm thấy kết quả trả về!</div>
-      <div class="tbl-content   ">
-        <table class=" table table-bordered table-responsive-md">
+
+
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
           <tbody>
           <tr *ngFor="let cus of customerList,let j=index" routerLinkActive="active" (click)="activeProject(j,cus.id)"
               [ngStyle]="{'background-color': activeProjectIndex === j ? '#9ddceb' : 'white' }">
-            <td class="text-center">{{cus.id }}</td>
+            <td class="text-center">{{(cus.id)}}</td>
             <td class="text-center">{{cus.customerName}}</td>
-            <td class="pt-3-half">{{cus.phoneNumber}}</td>
-            <!--<div *ngIf="message!=''">{{message}}</div>-->
+            <td class="text-center">{{cus.phoneNumber}}</td>
             <td class="text-center">{{cus.dateOfBirth}}</td>
-            <td class="pt-3-half">{{cus.address}}</td>
-            <td class="pt-3-half">{{cus.email}}</td>
-            <td>
+            <td class="text-center">{{cus.address}}</td>
+            <td class="text-center">{{cus.email}}</td>
+            <td class="text-center">
               <span *ngIf="cus.gender==true">Nam</span>
               <span *ngIf="cus.gender==false">Nữ</span>
             </td>
-
           </tr>
-
           </tbody>
         </table>
       </div>
-      <br>
-      <!--Pagination-->
-      <nav class="d-flex justify-content-center wow fadeIn">
-        <ul class="pagination pg-blue">
+    </div>
 
-          <!--Arrow left-->
-          <li class="page-item">
-              <button [disabled]="page<=0" class="page-link" (click)="previous()"><<</button>
-          </li>
+    <div class="row my-3">
+      <div class="row col-6 ml-0">
+        <button type="button" data-toggle="modal" (click)="toEditForm(sucessButton)"
+                class="btn btn-grad-blue">
+          <i class="fa fa-paper-plane"></i> Sửa
+        </button>
+      </div>
+      <div class="col-6">
+        <!--Pagination-->
+        <nav class="d-flex justify-content-center wow fadeIn float-right">
+          <ul class="pagination pg-blue">
 
-          <li class="page-item active" aria-current="page">
-            <button class="page-link">{{page+1}}</button>
-          </li>
-          <li class="page-item">
-            <button class="page-link">{{totalPage}}</button>
-          </li>
-          <li class="page-item">
-          <button [disabled]="page>=(totalPage-1)" class="page-link" (click)="next()">>></button>
-          </li>
-        </ul>
-      </nav>
-      <div class="text-center mt-5">
-        <a routerLink="/customer/edit/{{idClick}}">
-          <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#test"><i
-            class="fa fa-paper-plane"></i>Chỉnh sửa
-          </button>
-        </a>
-        <button type="button" class="btn btn-danger"> Hủy</button>
+            <!--Arrow left-->
+            <li class="page-item disabled">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+
+            <li class="page-item active">
+              <a class="page-link" href="#">1
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">4</a>
+            </li>
+            <li class="page-item">
+              <a class="page-link" href="#">5</a>
+            </li>
+
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <!--        &lt;!&ndash;Pagination&ndash;&gt;-->
+    <!--    <div class="row my-3">-->
+    <!--      <button type="button" data-toggle="modal" data-target="#myModal1" class="btn btn-grad-blue">Sửa</button>-->
+    <!--      <button type="button" class="btn btn-grad-red" data-toggle="modal" data-target="#myModal">Xóa</button>-->
+    <!--    </div>-->
+    <!--                    <div>-->
+    <!--                            <a href="#" class="btn-choose btn-rounded">&laquo; Previous</a>-->
+    <!--                            <a href="#" class="btn-choose btn-rounded">Next &raquo;</a>-->
+    <!--                    </div>-->
+  </section>
+</div>
+
+<!-- Modal Delete -->
+<!--<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="card-img">
+          <img class="img-fluid" src="https://icon-library.com/images/icon-delete/icon-delete-16.jpg">
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Do you really want to delete these records? This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+       &lt;!&ndash; <button (click)="deleteProduct(sucessButton)" type="button" class="btn btn-danger">Xóa</button>&ndash;&gt;
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<button [hidden]="true" #sucessButton data-toggle="modal" data-target="#myModal1"></button>
+<div id="myModal1" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="card-img">
+          <img [src]="'src/assets/img/problem.png'" class="img-fluid" alt='image'>
+          <!--          <img class="img-fluid" src="src/assets/img/problem.png">-->
+        </div>
+        <h4 class="modal-title w-100">Hãy chọn ID</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Yay! It's a nice order! <br>It will arrive soon.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-grad-blue" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>
