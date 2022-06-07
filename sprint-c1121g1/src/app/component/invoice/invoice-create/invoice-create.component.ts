@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import {ProductService} from "../../../services/product/product.service";
-import {ProductInvoice} from "../../../dto/productInvoice";
-import {InvoiceDetail} from "../../../dto/InvoiceDetail";
-import {InvoiceService} from "../../../services/invoice/invoice.service";
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-import {ICustomer} from "../../../models/ICustomer";
-import {IProduct} from "../../../models/iProduct";
+import {ProductService} from '../../../services/product/product.service';
+import {ProductInvoice} from '../../../dto/productInvoice';
+import {InvoiceDetail} from '../../../dto/InvoiceDetail';
+import {InvoiceService} from '../../../services/invoice/invoice.service';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import {ICustomer} from '../../../models/ICustomer';
+import {IProduct} from '../../../models/iProduct';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -23,7 +23,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./invoice-create.component.css']
 })
 export class InvoiceCreateComponent implements OnInit {
-  checkOnChange = false;
 
   invoiceForm: FormGroup;
 
@@ -36,7 +35,8 @@ export class InvoiceCreateComponent implements OnInit {
   money: string;
   disableFlag: boolean = false;
   errorMap: any = {};
-  public dict: { key, value }[];
+  error: any = {};
+  checkOnchange: boolean;
 
 
   constructor(private fb: FormBuilder,
@@ -44,14 +44,14 @@ export class InvoiceCreateComponent implements OnInit {
               private invoiceService: InvoiceService) {
     this.invoiceForm = this.fb.group({
       payments: this.fb.control('', [Validators.required]),
-      totalMoney: this.fb.control('', [Validators.required]),
+      totalMoney: this.fb.control('', [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
       customerDto: this.fb.group({
         id: this.fb.control(''),
-        customerName: this.fb.control('', [Validators.required]),
-        phoneNumber: this.fb.control('', [Validators.required]),
-        dateOfBirth: this.fb.control('', [Validators.required]),
-        address: this.fb.control('', [Validators.required]),
-        email: this.fb.control('', [Validators.required]),
+        customerName: this.fb.control('', [Validators.required, Validators.pattern('^([A-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\\s{1}[A-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$')]),
+        phoneNumber: this.fb.control('', [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
+        dateOfBirth: this.fb.control('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+        address: this.fb.control('', [Validators.required, Validators.maxLength(100)]),
+        email: this.fb.control('', [Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')]),
         gender: this.fb.control(true, [Validators.required]),
       }),
       products: this.fb.array(this.productList.map(product => this.createProducts(product))
@@ -60,107 +60,15 @@ export class InvoiceCreateComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
-    this.getAllProduct();
-  }
-
-  private createProducts(product: ProductInvoice) {
-    return this.fb.group({
-      id: [product.id],
-      name: [product.name],
-      price: [product.price],
-      quantity: ['', [Validators.required, Validators.pattern(/^\d+\.?\d*$/)]]
-    });
-  }
-
-
-  chooseProduct() {
-    let productForm = this.createProducts(this.currentProduct)
-    this.products.push(productForm);
-    this.errorMap["productList"] = null;
-  }
-
-
   get products() {
-    return <FormArray>this.invoiceForm.get('products')
+    return <FormArray> this.invoiceForm.get('products');
   }
 
   get customerDto() {
-    return <FormGroup>this.invoiceForm.get('customerForm')
+    return <FormGroup> this.invoiceForm.get('customerForm');
   }
 
-
-  deleteProduct(i: number, length: number) {
-    this.products.removeAt(i);
-    if (length <= 1) {
-      this.money = null;
-    }else {
-      this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
-    }
-  }
-
-
-  getTotalMoney() {
-    this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
-    if (isNaN(parseInt(this.money)) || parseInt(this.money) <= 0){
-      this.money = null;
-    }
-
-  }
-
-  getAllProduct() {
-    this.productService.getAll().subscribe(data => {
-      this.productList = data;
-    }, error => {
-      console.log(error())
-    });
-  }
-
-
-  createInvoice() {
-    this.invoiceDetail = this.invoiceForm.value;
-    this.invoiceDetail.totalMoney = this.money;
-    console.log(this.invoiceDetail);
-    console.log(this.print);
-    this.invoiceService.updateQuantity(this.invoiceDetail).subscribe((message) => {
-      this.invoiceService.createInvoice(this.invoiceDetail).subscribe(() => {
-        this.money = null;
-        alert("thêm mới thành công")
-        if (this.printInvoice === 'yes') {
-          console.log("in")
-          this.generatePDF('yes',);
-        }
-        this.invoiceForm.reset();
-      }, error => {
-        console.log(error);
-      })
-    }, error => {
-      // console.log(error)
-      this.errorMap = error.error.errorMap;
-
-      // console.log(this.errorMap);
-      console.log(this.errorMap["products.quantity"]);
-      // this.dict = Object.entries(error.error.errorMap).map(([k, v]) => {
-      //   return {key: k, value: v};
-      // });
-      // console.log(this.dict)
-    });
-  }
-
-  print(yes: string) {
-    this.printInvoice = yes;
-  }
-
-
-  getProductQR(productQR: any) {
-    this.currentProduct = productQR;
-    this.chooseProduct();
-  }
-
-  getProductModal(productModal: any) {
-    this.currentProduct = productModal
-    this.chooseProduct();
-
+  ngOnInit(): void {
   }
 
   getCustomerModal(customerModal: any) {
@@ -171,18 +79,15 @@ export class InvoiceCreateComponent implements OnInit {
     this.chooseCustomer();
   }
 
-
-  private chooseCustomer() {
-    let customerForm = this.createCustomer(this.customer)
-    console.log(customerForm)
+  chooseCustomer() {
+    let customerForm = this.createCustomer(this.customer);
     this.invoiceForm.controls.customerDto.patchValue(customerForm.value);
-    console.log(this.products.getRawValue());
   }
 
-  private createCustomer(customer: ICustomer) {
+  createCustomer(customer: ICustomer) {
     return this.fb.group({
       id: [customer.id],
-      customerName: [customer.customerName, Validators.required],
+      customerName: [customer.customerName],
       address: [customer.address],
       email: [customer.email],
       phoneNumber: [customer.phoneNumber],
@@ -191,8 +96,127 @@ export class InvoiceCreateComponent implements OnInit {
     });
   }
 
-  disableForm() {
-    this.disableFlag = true;
+  getProductQR(productQR: any) {
+    this.currentProduct = productQR;
+    this.chooseProduct();
+  }
+
+  getProductModal(productModal: any) {
+    this.currentProduct = productModal;
+    this.chooseProduct();
+
+  }
+
+  createProducts(product: ProductInvoice) {
+    return this.fb.group({
+      id: [product.id],
+      name: [product.name],
+      price: [product.price],
+      quantity: [1, [Validators.required, Validators.min(0), Validators.pattern('^[0]?[1-9]+[0-9]*$')]]
+    });
+  }
+
+  getProducts(form): Array<any> {
+    return form.controls.products.controls;
+  }
+
+  chooseProduct() {
+    let productForm = this.createProducts(this.currentProduct);
+    let flag: boolean = false;
+    // for (let product of this.products.controls){
+    //   if (productNew == product.get("id")){
+    //     flag = true;
+    //     product.get("quantity").patchValue(product.get("quantity").value +1);
+    //   }
+    // }
+    // if (!flag){}
+    let myArray = this.getProducts(this.invoiceForm);
+
+    let test = myArray.filter(data => data.controls.id.value == this.currentProduct.id && this.currentProduct.id != null);
+    if (test.length > 0) {
+      flag = true;
+    } else {
+      flag = false;
+    }
+    if (!flag) {
+      this.products.push(productForm);
+    } else {
+      const container = document.getElementById('main-container');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.style.display = 'none';
+      button.setAttribute('data-toggle', 'modal');
+      button.setAttribute('data-target', '#modal-error');
+      container.appendChild(button);
+      // this.check = true;
+      button.click();
+    }
+    this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
+
+    // this.errorMap["productList"] = null;
+  }
+
+  deleteProduct(i: number, length: number) {
+    this.products.removeAt(i);
+    if (length <= 1) {
+      this.money = null;
+    } else {
+      this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
+    }
+  }
+
+  getTotalMoney() {
+    this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
+    if (isNaN(parseInt(this.money)) || parseInt(this.money) <= 0) {
+      this.money = null;
+    }
+
+  }
+
+  createInvoice(success: HTMLButtonElement) {
+    if (this.invoiceForm.get('customerDto.customerName').value == '') {
+      this.invoiceForm.get('customerDto.customerName').setErrors({empty: true});
+    }
+    if (this.invoiceForm.get('customerDto.phoneNumber').value == '') {
+      this.invoiceForm.get('customerDto.phoneNumber').setErrors({empty: true});
+    }
+    if (this.invoiceForm.get('customerDto.dateOfBirth').value == '') {
+      this.invoiceForm.get('customerDto.dateOfBirth').setErrors({empty: true});
+    }
+    if (this.invoiceForm.get('customerDto.address').value == '') {
+      this.invoiceForm.get('customerDto.address').setErrors({empty: true});
+    }
+    if (this.invoiceForm.get('customerDto.email').value == '') {
+      this.invoiceForm.get('customerDto.email').setErrors({empty: true});
+    }
+    this.invoiceDetail = this.invoiceForm.value;
+    this.invoiceDetail.totalMoney = this.money;
+    console.log(this.invoiceForm.getRawValue());
+    this.invoiceService.updateQuantity(this.invoiceDetail).subscribe((message) => {
+      this.invoiceService.createInvoice(this.invoiceDetail).subscribe(() => {
+        console.log(this.invoiceDetail);
+        this.money = null;
+        success.click();
+        if (this.printInvoice === 'yes') {
+          this.generatePDF('yes',);
+        }
+        this.invoiceForm.reset();
+        // window.location.reload();
+      });
+    }, error => {
+      this.errorMap = error.error.errorMap;
+
+      // console.log(this.errorMap);
+      // console.log(this.errorMap["products.quantity"]);
+      // this.dict = Object.entries(error.error.errorMap).map(([k, v]) => {
+      //   return {key: k, value: v};
+      // });
+      // console.log(this.dict)
+    });
+  }
+
+  onchanges() {
+    this.checkOnchange = !this.checkOnchange;
   }
 
   /*
@@ -200,6 +224,9 @@ export class InvoiceCreateComponent implements OnInit {
    Time: 9:30 2/06/2022
    Function: prince PDF
    */
+  print(yes: string) {
+    this.printInvoice = yes;
+  }
 
   generatePDF(action) {
     let docDefinition = {
@@ -302,7 +329,5 @@ export class InvoiceCreateComponent implements OnInit {
     }
   }
 
-  checkOnchanges() {
-    this.checkOnChange = !this.checkOnChange;
-  }
+
 }

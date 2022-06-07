@@ -16,6 +16,7 @@ import {Router} from '@angular/router';
 */
 export class ListChooseProductModalComponent implements OnInit, OnChanges {
   @Output() itemOutput = new EventEmitter();
+  @Input() item : boolean;
   productList: IProduct[] = [];
   pageNumber: number;
   totalPages = [];

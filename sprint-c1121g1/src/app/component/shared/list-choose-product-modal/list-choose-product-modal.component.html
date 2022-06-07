@@ -33,7 +33,7 @@
                       <input [(ngModel)]="searchValue" #element style="width: 300px"
                              class="header-search search-input background-search"
                              placeholder="Bạn cần tìm gì?"
-                             type="text"><i (click)="search(element.value)"
+                             type="text" (change)="search(element.value)"><i (click)="search(element.value)"
                       class="fa fa-search"
                       style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                     </div>
