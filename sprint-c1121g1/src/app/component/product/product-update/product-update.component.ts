@@ -159,8 +159,7 @@ export class ProductUpdateComponent implements OnInit {
           }, error => {
             console.log(error.error.errorMap.name);
             this.errorProductName = error.error.errorMap.name;
-          }
-        );
+          });
       }
     }
   }
