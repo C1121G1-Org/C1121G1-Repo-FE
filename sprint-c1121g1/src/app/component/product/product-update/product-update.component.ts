@@ -151,15 +151,15 @@ export class ProductUpdateComponent implements OnInit {
         ).subscribe();
       } else {
         this.productService.updateProduct(this.id, this.productForm.value).subscribe(() => {
-            // alert('edited successfully');
-            successBtn.click();
-            this.router.navigateByUrl('/api/product/listProduct');
-            // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
-            console.log('success');
-          }, error => {
-            console.log(error.error.errorMap.name);
-            this.errorProductName = error.error.errorMap.name;
-          });
+          // alert('edited successfully');
+          successBtn.click();
+          this.router.navigateByUrl('/api/product/listProduct');
+          // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
+          console.log('success');
+        }, error => {
+          console.log(error.error.errorMap.name);
+          this.errorProductName = error.error.errorMap.name;
+        });
       }
     }
   }

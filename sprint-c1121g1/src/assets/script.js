@@ -76,6 +76,8 @@ window.onload = function () {
     document.querySelector(".slider-product-one-content-items-content").style.right = index * 100 + "%";
   })
 
+<<<<<<< HEAD
+=======
   function format_curency(a) {
     a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
   }
@@ -96,4 +98,5 @@ window.onload = function () {
     }
 
   }
+>>>>>>> origin/manager-report
 }

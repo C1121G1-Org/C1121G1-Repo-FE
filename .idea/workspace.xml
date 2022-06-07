@@ -20,11 +20,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="">
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.css" afterDir="false" />
+=======
+>>>>>>> origin/manager-report
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/qr-code/qr-code.component.ts" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report/sale-report/sale-report.component.ts" afterDir="false" />
+>>>>>>> origin/manager-report
+=======
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" afterDir="false" />
+>>>>>>> origin/manager-report
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,8 +97,13 @@
       <workItem from="1654260460348" duration="5013000" />
       <workItem from="1654323268452" duration="5927000" />
       <workItem from="1654347466756" duration="3176000" />
+<<<<<<< HEAD
+      <workItem from="1654522635985" duration="315000" />
+      <workItem from="1654569345566" duration="12020000" />
+=======
       <workItem from="1654594083155" duration="980000" />
       <workItem from="1654595091454" duration="2278000" />
+>>>>>>> origin/manager-report
     </task>
     <servers />
   </component>

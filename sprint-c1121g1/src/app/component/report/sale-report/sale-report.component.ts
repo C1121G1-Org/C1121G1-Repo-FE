@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from 'chart.js';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
-import {SaleReportService} from '../../../services/report/sale-report.service';
+import {SaleReportService} from "../../../services/report/sale-report.service";
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 Chart.register(...registerables);
@@ -26,9 +26,15 @@ export class SaleReportComponent implements OnInit {
   notFound = '';
   alertClass = '';
 
+
+
+  notValid = '';
+  alertNotValid = '';
+
+
   formSearch = new FormGroup({
-    startDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
-    endDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+    startDay: new FormControl('', [Validators.required, Validators.pattern("^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$")]),
+    endDay: new FormControl('', [Validators.required, Validators.pattern("^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$")]),
     typeReport: new FormControl('ALL', Validators.required),
     productId: new FormControl('', Validators.required)
   });
@@ -133,9 +139,16 @@ export class SaleReportComponent implements OnInit {
           this.alertClass = 'text-center alert alert-danger';
           this.notFound = 'KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !';
         }
-        this.totalInvoices = 0;
-        this.totalSales = 0;
+
+        this.totalInvoices = 0 ;
+        this.totalSales = 0 ;
+
       });
+
+
+    } else {
+      this.notValid = 'VUI LÒNG ĐIỀN ĐÚNG THÔNG TIN YÊU CẦU !';
+      this.alertNotValid = 'alert alert-danger';
 
     }
 
