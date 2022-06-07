@@ -50,17 +50,17 @@
     <property name="ts.external.directory.path" value="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\shared" />
-      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component" />
-      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\models" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\report" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\shared" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\report\report" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\shared" />
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component" />
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\models" />
     </key>
   </component>
   <component name="SvnConfiguration">
