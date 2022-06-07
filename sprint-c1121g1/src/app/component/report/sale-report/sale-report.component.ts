@@ -76,10 +76,11 @@ export class SaleReportComponent implements OnInit {
       const endDay = this.formSearch.get('endDay').value;
       const productId = this.formSearch.get('productId').value;
       this.saleReportService.getAllSaleReports(startDay, endDay, productId).subscribe(data => {
+
         this.notFound = '';
         this.alertClass = '';
 
-        for (const dt of data) {
+        for (const dt of data.data) {
           xValues.push(dt.date);
           invoices.push(dt.invoiceQuantity);
           sales.push(dt.totalMoney);
@@ -112,7 +113,9 @@ export class SaleReportComponent implements OnInit {
             datasets: [{
               label: 'Đơn hàng ( Đơn )',
               fill: false,
-              data: invoices,
+              data: invoices.map(value => {
+                return value.toFixed(0)
+              }),
               pointRadius: 3,
               pointBackgroundColor: 'blue',
               backgroundColor: 'blue',
@@ -123,8 +126,15 @@ export class SaleReportComponent implements OnInit {
           options: {}
         });
       }, error => {
-        this.alertClass = 'text-center alert alert-danger';
-        this.notFound = 'KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !';
+
+        if (error.error.errorMap?.productId) {
+          this.getProductId().setErrors({productId: true});
+        } else {
+          this.alertClass = 'text-center alert alert-danger';
+          this.notFound = 'KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !';
+        }
+        this.totalInvoices = 0;
+        this.totalSales = 0;
       });
 
     }

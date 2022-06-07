@@ -1,16 +1,16 @@
 
 <!-- Button trigger modal-->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Quét mã QR
-</button>
+<!--<button type="button" class="btn btn-grad-blue" data-toggle="modal" data-target="#exampleModal">-->
+<!--  <i class="fa fa-paper-plane"></i> Quét mã QR-->
+<!--</button>-->
 
 <!-- Modal -->
 <div #basicModal class="modal fade" id="exampleModal" tabindex="-1"
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">QUÉT MÃ QR</h5>
+      <div class="modal-header" style="background-color: #D70018">
+        <h5 class="modal-title text-center text-white" id="exampleModalLabel">QUÉT MÃ QR</h5>
         <button (click)="resetValueInputs()" id="btnCloseModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -21,7 +21,7 @@
             <div class="col-6">
               <p class="{{alertClass}}">{{message}}</p>
               <label for="select"><strong>Chọn Chức năng :</strong></label>
-              <select [(ngModel)]="typeQRScan" id="select" class="form-control mb-2">
+              <select #selectQR (change)="changeFunction($event.target)" id="select" class="form-control mb-2">
                 <option value="1">Quét mã</option>
                 <option value="2">Kiểm tra mã</option>
               </select>
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button (click)="scanQRCode()" type="button" class="btn btn-danger col-3">Xác nhận</button>
+        <button (click)="scanQRCode()" type="button" class="btn btn-grad-blue col-3"><i class="fa fa-paper-plane"></i> Xác nhận</button>
       </div>
     </div>
   </div>
