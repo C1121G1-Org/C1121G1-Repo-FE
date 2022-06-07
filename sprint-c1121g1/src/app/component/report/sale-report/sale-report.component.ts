@@ -140,9 +140,6 @@ export class SaleReportComponent implements OnInit {
           this.notFound = 'KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !';
         }
 
-        this.alertClass = "text-center alert alert-danger";
-        this.notFound = "KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !";
-
         this.totalInvoices = 0 ;
         this.totalSales = 0 ;
 
