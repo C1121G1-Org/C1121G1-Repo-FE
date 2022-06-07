@@ -33,7 +33,7 @@
                       <input [(ngModel)]="searchValue" #element style="width: 300px"
                              class="header-search search-input background-search"
                              placeholder="Bạn cần tìm gì?"
-                             type="text"><i (click)="search(element.value)"
+                             type="text" (change)="search(element.value)"><i (click)="search(element.value)"
                       class="fa fa-search"
                       style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                     </div>
@@ -147,7 +147,7 @@
                         <ul class="pagination">
                           <li *ngIf="!message &&!first " style="color: #333333" class="page-item"><a
                             (click)="previousPage()" class="page-link"
-                            style="width:70px ; height: 40px ;text-align: center ; line-height: 35px ; box-sizing: border-box ; background-color: #277CEA"><<</a>
+                            style="width:70px ; height: 40px ;text-align: center ; line-height: 35px ; box-sizing: border-box ; background-color: #277CEA">Previous</a>
                           </li>
                           <div *ngFor="let index of totalPages">
                             <li [class.select-index]="checkColorIndex(index)" *ngIf="!message" style="color: #333333"
@@ -160,7 +160,7 @@
                           <li *ngIf="!last && !message" style="color: #333333" class="page-item"><a (click)="nextPage()"
                                                                                                     class="page-link"
                                                                                                     style="width:50px ;text-align: center ; height: 40px ; line-height: 35px ; box-sizing: border-box;  background-color: #277CEA"
-                          >>></a>
+                          >Next</a>
                           </li>
                         </ul>
                       </nav>

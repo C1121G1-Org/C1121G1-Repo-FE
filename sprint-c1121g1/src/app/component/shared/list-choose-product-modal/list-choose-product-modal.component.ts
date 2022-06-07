@@ -1,5 +1,4 @@
-
-import {Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {ProductService} from '../../../services/product/product.service';
 import {Router} from '@angular/router';
@@ -17,6 +16,7 @@ import {Router} from '@angular/router';
 */
 export class ListChooseProductModalComponent implements OnInit, OnChanges {
   @Output() itemOutput = new EventEmitter();
+  @Input() item : boolean;
   productList: IProduct[] = [];
   pageNumber: number;
   totalPages = [];
@@ -82,7 +82,7 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
     if (!this.currentProduct) {
       return false;
     }
-    return this.currentProduct.name === this.selectedProduct.name ? true : false;
+    return this.currentProduct.id === this.selectedProduct.id ? true : false;
   }
 
   chooseProduct(close) {

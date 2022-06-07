@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ICustomer} from '../../../models/ICustomer';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {Router} from '@angular/router';
@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
 */
 export class ListCustomerModalComponent implements OnInit {
   @Output() itemOutput = new EventEmitter();
+  @Input() item : boolean;
   pageNumber: number;
   customerList: ICustomer[] = [];
   totalPages = [];
@@ -111,7 +112,7 @@ export class ListCustomerModalComponent implements OnInit {
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#successModal');
+    button.setAttribute('data-target', '#customerModals');
     container.appendChild(button);
     button.click();
 
@@ -131,5 +132,12 @@ export class ListCustomerModalComponent implements OnInit {
       return false;
     }
     return this.indexCurrent === this.selectedIndex ? true : false;
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.searchValue = '';
+    this.searchByPhone = '';
+    this.searchByName = '';
+    this.ngOnInit();
   }
 }

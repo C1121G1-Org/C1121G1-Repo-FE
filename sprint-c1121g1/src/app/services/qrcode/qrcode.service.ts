@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {Product} from '../../models/product';
+import {IProduct} from "../../models/iProduct";
+
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class QrcodeService {
   constructor(private http: HttpClient) {
   }
 
-  encode(product: Product): Observable<any> {
+  encode(product: IProduct): Observable<any> {
     return this.http.post(`${this.URL}/encode`, product, {responseType: 'blob'});
   }
 

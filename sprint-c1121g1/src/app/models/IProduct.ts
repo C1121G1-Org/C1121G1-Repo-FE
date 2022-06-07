@@ -1,15 +1,14 @@
 export interface IProduct {
   id?: number;
-  camera?: string;
-  cpu?: string;
-  deleteFlag?: boolean;
-  image?: string;
-  memory?: string;
   name?: string;
-  otherDescription?: string;
   price?: number;
-  qrScan?: string;
+  image?: string;
   screenSize?: string;
+  camera?: string;
   selfie?: string;
+  cpu?: string;
+  memory?: string;
+  otherDescription?: string;
+  deleteFlag?: boolean;
   quantity?: number;
 }

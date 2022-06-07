@@ -1,11 +1,3 @@
-<!--
-Create by chienLV
-Time: 16h00 03/06/2022
-Function: get list product bestseller from database
--->
-<div class="body">
-
-
 <!--Slider-->
 <section class="slider">
   <div class="container">
@@ -39,15 +31,75 @@ Function: get list product bestseller from database
 <section class="category">
   <div class="container">
     <div class="category-items">
-      <h3 *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</h3>
-
-      <div (click)="findProductBestsellerByCategory(category)" class="category-item" *ngFor="let category of categorires">
-        <div class="category-item-picture" >
-          <a href="#list-product-bestseller">
-            <img src="{{category.image}}" >
-          </a>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-dien-thoai.webp" alt="">
         </div>
-          <p class="category-item-title">{{category.name}}</p>
+        <p class="category-item-title">Điện thoại</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-lap-top.webp" alt="">
+        </div>
+        <p class="category-item-title">Laptop</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-pc.webp" alt="">
+        </div>
+        <p class="category-item-title">PC - Lắp ráp</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-tablet.webp" alt="">
+        </div>
+        <p class="category-item-title">Máy tính bảng</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-thiet-bi-thong-minh.webp" alt="">
+        </div>
+        <p class="category-item-title">Thiết bị thông minh</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-apple.webp" alt="">
+        </div>
+        <p class="category-item-title">Apple</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-samsung.webp" alt="">
+        </div>
+        <p class="category-item-title">Samsung</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-smartwatch.webp" alt="">
+        </div>
+        <p class="category-item-title">Đồng hồ thông minh</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-watch.webp" alt="">
+        </div>
+        <p class="category-item-title">Đồng hồ thời trang</p>
+
+      </div>
+      <div class="category-item">
+        <div class="category-item-picture">
+          <img src="assets/img/category-houseware.webp" alt="">
+        </div>
+        <p class="category-item-title">Gia dụng</p>
+
       </div>
     </div>
   </div>
@@ -68,46 +120,292 @@ Function: get list product bestseller from database
       <div class="slider-product-one-content-container">
         <div class="slider-product-one-content-items-content">
           <div class="slider-product-one-content-items">
-            <h3 class="error-messsage" *ngIf="flagProductNewest">Điện thoại nổi bật nhất chưa được cập nhật!</h3>
-            <div class="slider-product-one-content-item"
-                 *ngFor="let productNewest of topfiveproductNewests; index as i">
-              <img src="{{productNewest.image}}" alt="">
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
               <div class="slider-product-one-content-item-text">
                 <li><img src="assets/img/icon-fire.png" alt="">
-                  <p>Siêu hot</p></li>
-                <li>{{productNewest.name}}</li>
-                <li>{{productNewest.price - productNewest.price * productNewest.discount / 100 | currency: "VND"}}</li>
-                <li><a>{{productNewest.price | currency: "VND"}}</a><span> -{{productNewest.discount}}%</span></li>
-                <li>{{productNewest.promotions}}</li>
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
                 <li>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
-                  {{productNewest.fiveStarRating}} đánh giá
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
                 </li>
               </div>
             </div>
           </div>
           <div class="slider-product-one-content-items">
-            <div class="slider-product-one-content-item"
-                 *ngFor="let productNewest of toptenproductNewests; index as i">
-              <img src="{{productNewest.image}}" alt="">
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
               <div class="slider-product-one-content-item-text">
                 <li><img src="assets/img/icon-fire.png" alt="">
-                  <p>Siêu hot</p></li>
-                <li>{{productNewest.name}}</li>
-                <li>{{productNewest.price - productNewest.price * productNewest.discount / 100 | currency: "VND"}}</li>
-                <li><a>{{productNewest.price | currency: "VND"}}</a><span> -{{productNewest.discount}}%</span></li>
-                <li>{{productNewest.promotions}}</li>
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
                 <li>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
                   <i class="fas fa-star"></i>
-                  {{productNewest.fiveStarRating}} đánh giá
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+          </div>
+          <div class="slider-product-one-content-items">
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
+                </li>
+              </div>
+            </div>
+            <div class="slider-product-one-content-item">
+              <img src="assets/img/phone-ip13.jpg" alt="">
+              <div class="slider-product-one-content-item-text">
+                <li><img src="assets/img/icon-fire.png" alt="">
+                  <p>Trợ giá mùa dịch</p></li>
+                <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+                <li>28.590.000 <sup>đ</sup></li>
+                <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+                <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+                <li>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  127 đánh giá
                 </li>
               </div>
             </div>
@@ -130,37 +428,205 @@ Function: get list product bestseller from database
       <div class="product-gallery-one-content-title">
         <h2>ĐIỆN THOẠI BÁN CHẠY</h2>
         <ul>
-          <li *ngFor="let category of topFiveCategories; index as i">
-            <a (click)="findProductBestsellerByCategory(category)">{{category.name}}</a>
-          </li>
-          <li><a (click)="getAllProductBestSeller()">Xem tất cả</a></li>
-          <li *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</li>
+          <li><a href="#">Samsung</a></li>
+          <li><a href="#">Iphone</a></li>
+          <li><a href="#">Oppo</a></li>
+          <li><a href="#">Xem tất cả</a></li>
         </ul>
       </div>
-      <div class="product-gallery-one-content-product" id="list-product-bestseller">
-        <h3 *ngIf="flagProductBestseller">Điện thoại bán chạy chưa được cập nhật!</h3>
-        <h3 *ngIf="flagProductBestsellerByCategory">Không tìm thấy sản phẩm nào!</h3>
-        <div class="product-gallery-one-content-product-item" *ngFor="let productBestseller of productBestsellers">
-          <img src="{{productBestseller.image}}" alt="">
+      <div class="product-gallery-one-content-product">
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
           <div class="product-gallery-one-content-product-item-text">
             <li><img src="assets/img/icon-fire.png" alt="">
-              <p>Bán siêu chạy</p></li>
-            <li>{{productBestseller.name}}</li>
-            <li>{{productBestseller.price - productBestseller.price * productBestseller.discount / 100 | currency: "VND"}}</li>
-            <li><a>{{productBestseller.price | currency: "VND"}}</a><span> -{{productBestseller.discount}}%</span></li>
-            <li>{{productBestseller.promotions}}</li>
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
             <li>
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
               <i class="fas fa-star"></i>
-              {{productBestseller.fiveStarRating}} đánh giá
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
+            </li>
+          </div>
+        </div>
+        <div class="product-gallery-one-content-product-item">
+          <img src="assets/img/phone1.jpg" alt="">
+          <div class="product-gallery-one-content-product-item-text">
+            <li><img src="assets/img/icon-fire.png" alt="">
+              <p>Trợ giá mùa dịch</p></li>
+            <li>iPhone 13 Pro 128GB Chính hãng (VN/A)</li>
+            <li>28.590.000 <sup>đ</sup></li>
+            <li><a>33.990.000 <sup>đ</sup></a><span> -6%</span></li>
+            <li>Giảm 440.000 <sup>đ</sup> khi thanh toán qua Moca</li>
+            <li>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              127 đánh giá
             </li>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <!--  </div>-->
 </section>
-</div>

@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {environment} from '../../../environments/environment';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  private url = environment.apiBaseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http :HttpClient) {
 
+  }
   getAllCustomer(pageable, name, phone): Observable<any> {
-    return this.http.get<any>(`${this.url}/api/customer/list?page=${pageable}&keyName=${name}&keyPhone=${phone}`);
+    return this.http.get<any>(`http://localhost:8080/api/customer/list?page=${pageable}&keyName=${name}&keyPhone=${phone}`);
   }
 }

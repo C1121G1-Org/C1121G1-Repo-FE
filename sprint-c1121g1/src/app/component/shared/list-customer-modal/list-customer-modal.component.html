@@ -179,25 +179,25 @@
     </div>
   </div>
 </div>
-<!--modall-->
-<div id="successModal" class="modal fade">
-  <div class="modal-dialog modal-confirm modal-confirm-success">
+<!--error modal-->
+<div id="customerModals" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
-      <div class="modal-header modal-header-success justify-content-center">
+      <div class="modal-header modal-header-danger justify-content-center">
         <div class="icon-box">
-          <i class="material-icons">&#xE876;</i>
+          <i class="material-icons">&#xE5CD;</i>
         </div>
-        <button type="button" class="close" data-mdb-dismiss="modal" aria-hidden="true">&times;</button>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Thông Báo!</h4>
+        <h4>Thông báo</h4>
         <p>Không có khách hàng nào được chọn.</p>
-        <button type="button" class="btn btn-danger" id="delete_btn" data-dismiss="modal">Đồng ý
-        </button>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
       </div>
     </div>
   </div>
 </div>
+
 <div [hidden]="true" id="main-container">
 
 </div>
