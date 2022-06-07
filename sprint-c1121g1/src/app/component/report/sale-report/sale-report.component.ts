@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {Chart, LineController, LineElement, PointElement, registerables, LinearScale, Title} from 'chart.js';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
-import {SaleReportService} from '../../../services/report/sale-report.service';
+import {SaleReportService} from "../../../services/report/sale-report.service";
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 Chart.register(...registerables);
@@ -26,9 +26,15 @@ export class SaleReportComponent implements OnInit {
   notFound = '';
   alertClass = '';
 
+
+
+  notValid = '';
+  alertNotValid = '';
+
+
   formSearch = new FormGroup({
-    startDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
-    endDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+    startDay: new FormControl('', [Validators.required, Validators.pattern("^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$")]),
+    endDay: new FormControl('', [Validators.required, Validators.pattern("^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$")]),
     typeReport: new FormControl('ALL', Validators.required),
     productId: new FormControl('', Validators.required)
   });
@@ -69,18 +75,17 @@ export class SaleReportComponent implements OnInit {
     this.chart2?.destroy();
 
     if (this.formSearch.valid) {
-      const xValues = [];
-      const sales = [];
-      const invoices = [];
-      const startDay = this.formSearch.get('startDay').value;
-      const endDay = this.formSearch.get('endDay').value;
-      const productId = this.formSearch.get('productId').value;
-      this.saleReportService.getAllSaleReports(startDay, endDay, productId).subscribe(data => {
+      let xValues = [];
+      let sales = [];
+      let invoices = [];
+      let startDay = this.formSearch.get('startDay').value;
+      let endDay = this.formSearch.get('endDay').value;
+      let productId = this.formSearch.get('productId').value;
+      this.saleReportService.getAllSaleREports(startDay, endDay, productId).subscribe(data => {
+        this.notFound = "";
+        this.alertClass = "";
 
-        this.notFound = '';
-        this.alertClass = '';
-
-        for (const dt of data.data) {
+        for (let dt of data) {
           xValues.push(dt.date);
           invoices.push(dt.invoiceQuantity);
           sales.push(dt.totalMoney);
@@ -113,9 +118,7 @@ export class SaleReportComponent implements OnInit {
             datasets: [{
               label: 'Đơn hàng ( Đơn )',
               fill: false,
-              data: invoices.map(value => {
-                return value.toFixed(0)
-              }),
+              data: invoices,
               pointRadius: 3,
               pointBackgroundColor: 'blue',
               backgroundColor: 'blue',
@@ -126,16 +129,18 @@ export class SaleReportComponent implements OnInit {
           options: {}
         });
       }, error => {
+        this.alertClass = "text-center alert alert-danger";
+        this.notFound = "KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !";
 
-        if (error.error.errorMap?.productId) {
-          this.getProductId().setErrors({productId: true});
-        } else {
-          this.alertClass = 'text-center alert alert-danger';
-          this.notFound = 'KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !';
-        }
-        this.totalInvoices = 0;
-        this.totalSales = 0;
+        this.totalInvoices = 0 ;
+        this.totalSales = 0 ;
+
       });
+
+
+    } else {
+      this.notValid = 'VUI LÒNG ĐIỀN ĐÚNG THÔNG TIN YÊU CẦU !';
+      this.alertNotValid = 'alert alert-danger';
 
     }
 
@@ -161,6 +166,8 @@ export class SaleReportComponent implements OnInit {
 
     const type = this.formSearch.get('typeReport').value;
 
+
+
     // tslint:disable-next-line:triple-equals
     if (type != 'ID') {
       this.formSearch.get('productId').setValue('');
@@ -176,8 +183,8 @@ export class SaleReportComponent implements OnInit {
   }
 
   checkDay() {
-    const date1 = new Date(this.formSearch.get('startDay')?.value);
-    const date2 = new Date(this.formSearch.get('endDay')?.value);
+    let date1 = new Date(this.formSearch.get('startDay')?.value);
+    let date2 = new Date(this.formSearch.get('endDay')?.value);
     if (date1?.getTime() > date2?.getTime()) {
       this.formSearch.get('endDay').setErrors({errDate: true});
     }

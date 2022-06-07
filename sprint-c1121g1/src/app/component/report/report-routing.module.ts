@@ -1,9 +1,18 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import {SaleReportComponent} from './sale-report/sale-report.component';
 
 import {CustomerReportComponent} from './customer-report/customer-report.component';
 import {PurchaseHistoryComponent} from './purchase-history/purchase-history.component';
+
+
+
+
+/*
+    Created by HauPV
+    Time: 09:00 03/06/2022
+    Function: routing for sale-report
+*/
 
 
 const routes: Routes = [
@@ -11,9 +20,10 @@ const routes: Routes = [
   /*
       Created by HauPV
       Time: 09:00 03/06/2022
-      Function: routing for sale-report
+      Function : list sale report
       Role : Admin , Business Staff
   */
+
   {path: 'sale-report/list', component: SaleReportComponent},
   /*
     Created by TuanNQ
@@ -27,11 +37,11 @@ const routes: Routes = [
     Function: Show detail purchase history
   */
   {path: 'report/purchase-hitory/:id', component: PurchaseHistoryComponent},
+
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ReportRoutingModule {
-}
+export class ReportRoutingModule { }
