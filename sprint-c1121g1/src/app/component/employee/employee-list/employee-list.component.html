@@ -24,7 +24,12 @@
       </div>
 
       <div style="margin-bottom: 10px">
-        <a routerLink="/employee/create"><button type="button" style="width: 150px; height: 35px;display: flex; justify-content: center; align-items: center" class="btn-edit btn-rounded">Thêm mới</button></a>
+        <a style="text-decoration: none" routerLink="/employee/create">
+          <button style="display: flex; justify-content: center; align-items: center" type="button" data-toggle="modal" data-target="#myModal1"
+                  class="btn btn-grad-blue">
+            THÊM MỚI
+          </button>
+        </a>
       </div>
     </div>
 
@@ -94,13 +99,15 @@
 
       <div style="display: flex; justify-content: space-between">
         <div style="display: flex; justify-content: space-between; margin-top: 10px">
-          <a routerLink="/employee/edit/{{idClick}}">
-            <button type="button" class=" btn-edit btn-rounded" style="width: 120px; height: 35px; display: flex; justify-content: center; align-items: center">Cập nhập</button>
+          <a style="text-decoration: none" routerLink="/employee/edit/{{idClick}}">
+          <button style="display: flex; justify-content: center; align-items: center" type="button" data-toggle="modal" data-target="#myModal1"
+                  class="btn btn-grad-blue">
+            <i class="fa fa-paper-plane"></i> Sửa
+          </button>
           </a>
 
-          <button type="button" (click)="idClick" class="btn-delete btn-rounded" style="width: 70px; height: 35px;display: flex; justify-content: center; align-items: center"
-                  data-toggle="modal"
-                  data-target="#exampleModal">Xóa
+          <button style="display: flex; justify-content: center; align-items: center" type="button" (click)="idClick" class="btn btn-grad-red mx-2" data-toggle="modal" data-target="#exampleModal">
+            <i class="fa fa-trash"></i> Xoá
           </button>
         </div>
 
