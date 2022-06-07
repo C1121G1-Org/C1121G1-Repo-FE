@@ -38,7 +38,11 @@ export class ListProductModalComponent implements OnInit {
   ngOnInit(): void {
     this.errorFlag = false;
     this.flag = false;
+<<<<<<< HEAD
     this.getAllProducts();
+=======
+    // this.getAllProducts();
+>>>>>>> 5600243cd49acbcc30c85209c0c60917d21c03c6
     // this.getAllProducts('', '', '', '');
     // this.searchForm = this.fb.group({
     //   field: ['supplier'],
@@ -59,6 +63,7 @@ export class ListProductModalComponent implements OnInit {
     }
   }
 
+<<<<<<< HEAD
   getAllProducts(){
     // this.productService.list().subscribe(
     //   (response) => {
@@ -67,6 +72,16 @@ export class ListProductModalComponent implements OnInit {
     //   (error) => {}
     // );
   }
+=======
+  // getAllProducts(){
+  //   this.productService.list().subscribe(
+  //     (response) => {
+  //       console.log(response);
+  //       this.products = response; },
+  //     (error) => {}
+  //   );
+  // }
+>>>>>>> 5600243cd49acbcc30c85209c0c60917d21c03c6
 
   // getAllProducts(supplier: string, address: string, phone: string, email: string){
   //   console.log('in getAll');
