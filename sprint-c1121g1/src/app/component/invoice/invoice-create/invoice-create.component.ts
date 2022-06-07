@@ -34,9 +34,12 @@ export class InvoiceCreateComponent implements OnInit {
   printInvoice: string;
   money: string;
   disableFlag: boolean = false;
-  errorMap: any = {};
+  // errorMap: any = {};
+  errorMap: string[] = [];
   error: any = {};
   checkOnchange: boolean;
+  flagProduct: boolean = false;
+  flagProductNull: boolean = true;
 
 
   constructor(private fb: FormBuilder,
@@ -104,7 +107,6 @@ export class InvoiceCreateComponent implements OnInit {
   getProductModal(productModal: any) {
     this.currentProduct = productModal;
     this.chooseProduct();
-
   }
 
   createProducts(product: ProductInvoice) {
@@ -121,7 +123,11 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
   chooseProduct() {
+
     let productForm = this.createProducts(this.currentProduct);
+    if(this.products.controls.length != 0){
+      this.flagProductNull = true;
+    }
     let flag: boolean = false;
     // for (let product of this.products.controls){
     //   if (productNew == product.get("id")){
@@ -158,6 +164,10 @@ export class InvoiceCreateComponent implements OnInit {
 
   deleteProduct(i: number, length: number) {
     this.products.removeAt(i);
+    console.log(this.products.controls.length);
+    if(this.products.controls.length != 0){
+      this.flagProduct = true;
+    }
     if (length <= 1) {
       this.money = null;
     } else {
