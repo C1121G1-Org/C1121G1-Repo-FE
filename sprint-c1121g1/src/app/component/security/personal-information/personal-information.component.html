@@ -1,0 +1,124 @@
+<div class="d-flex justify-content-center">
+  <div class="col-9">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card border border-light infor-form">
+          <div class="card-body">
+            <h4 class="card-title" style="font-size: 35px">THÔNG TIN CÁ NHÂN</h4>
+            <p>Quản lý thông tin cá nhân của bạn</p>
+            <form [formGroup]="personalInformationForm" (ngSubmit)="update(openSuccessModalBtn, closeModalBtn)">
+              <div class="row" style="padding: 10px 50px">
+                <div style="display: flex ; justify-content: center" class="col-md-12 pb-4">
+                  <input name="image" id="image" type="file" class="file__input" (change)="showReview($event)" accept="image/jpeg, image/jpg">
+                  <img class="avatar rounded-circle" style="height: 128px; width: 128px;" src="{{imageLink}}" alt="personal-ava">
+                  <label for="image" class="file__label">
+                    <i class="fa fa-upload"></i>
+                  </label>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="name">Họ tên <span class="text-danger">(*)</span>:</label>
+                    <input type="text" class="form-control" name="name" id="name" formControlName="employeeName">
+                    <div *ngIf="employeeName?.touched">
+                      <small class="text-danger" *ngIf="employeeName?.errors?.required">Vui lòng nhập tên.</small>
+                      <small class="text-danger" *ngIf="employeeName?.errors?.pattern">Vui lòng nhập đúng định dạng tên.</small>
+                      <small class="text-danger" *ngIf="employeeName?.errors?.minlength">Tên có tối thiểu 3 ký tự.</small>
+                      <small class="text-danger" *ngIf="employeeName?.errors?.maxlength">Tên không được vượt quá 50 ký tự.</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="birthday">Ngày sinh <span class="text-danger">(*)</span>:</label>
+                    <input type="date" class="form-control" name="birthday" id="birthday" formControlName="dateOfBirth">
+                    <div *ngIf="dateOfBirth?.touched">
+                      <small class="text-danger" *ngIf="dateOfBirth?.errors?.required">Vui lòng nhập ngày sinh.</small>
+                      <small class="text-danger" *ngIf="dateOfBirth?.errors?.pattern">Vui lòng nhập đúng định dạng ngày sinh.</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="address">Địa chỉ <span class="text-danger">(*)</span>:</label>
+                    <input type="text" name="address" id="address" class="form-control" formControlName="address">
+                    <div *ngIf="address?.touched">
+                      <small class="text-danger" *ngIf="address?.errors?.required">Vui lòng nhập địa chỉ.</small>
+                      <small class="text-danger" *ngIf="address?.errors?.pattern">Vui lòng nhập đúng định dạng.</small>
+                      <small class="text-danger" *ngIf="address?.errors?.minlength">Địa chỉ có tối thiểu 5 ký tự.</small>
+                      <small class="text-danger" *ngIf="address?.errors?.maxlength">Địa chỉ không được vượt quá 100 ký tự.</small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="idCard">CMND/CCCD <span class="text-danger">(*)</span>:</label>
+                    <input type="text" name="idCard" id="idCard" class="form-control" formControlName="idCard">
+                    <div *ngIf="idCard?.touched">
+                      <small class="text-danger" *ngIf="idCard?.errors?.required">Vui lòng nhập CMND/CCCD.</small>
+                      <small class="text-danger" *ngIf="idCard?.errors?.pattern">Vui lòng nhập đúng định dạng CMND/CCCD, CMND/CCCD phải là số và có 9 hoặc 12 chữ số.</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email <span class="text-danger">(*)</span>:</label>
+                    <input type="email" name="email" id="email" class="form-control" formControlName="email">
+                    <div *ngIf="email?.touched">
+                      <small class="text-danger" *ngIf="email?.errors?.required">Vui lòng nhập email.</small>
+                      <small class="text-danger" *ngIf="email?.errors?.pattern">Vui lòng nhập đúng định dạng email.</small>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="phone">Số điện thoại <span class="text-danger">(*)</span>:</label>
+                    <input type="text" name="phone" id="phone" class="form-control" formControlName="phoneNumber">
+                    <div *ngIf="phoneNumber?.touched">
+                      <small class="text-danger" *ngIf="phoneNumber?.errors?.required">Vui lòng nhập số điện thoại.</small>
+                      <small class="text-danger" *ngIf="phoneNumber?.errors?.pattern">Vui lòng nhập đúng định dạng số điện thoại.</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <button (click)="changeSpinFlag()" [disabled]="!personalInformationForm.valid" type="submit" class="btn btn-grad-blue mx-1"><i *ngIf="!spinFlag" class="fa fa-paper-plane"></i> <span *ngIf="spinFlag" class="spinner-border spinner-border-sm" role="status"></span> Cập nhật
+                </button>
+                <button [routerLink]="['']" type="button" class="btn btn-grad-red mx-1"><i class="fa-solid fa-right-from-bracket"></i> Hủy bỏ</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button [hidden]="true" #openSuccessModalBtn data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Tuyệt!</h4>
+        <p>Cập nhật thông tin cá nhân thành công.</p>
+        <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal" >Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
+<!--error modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Hệ thống đang bảo trì, vui lòng thử lại sau vài phút nữa.</p>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
+      </div>
+    </div>
+  </div>
+</div>
