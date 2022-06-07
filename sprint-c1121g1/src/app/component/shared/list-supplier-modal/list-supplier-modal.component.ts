@@ -48,16 +48,10 @@ export class ListSupplierModalComponent implements OnInit {
     this.flag = !this.flag;
   }
 
-  closeModal() {
-    this.btnClose.nativeElement.click();
-    this.ngOnInit();
-  }
-
   sendItem() {
     if (this.flag) {
       this.itemOutput.emit(this.chosenItem);
-      this.closeModal();
-      this.ngOnInit();
+      this.btnClose.nativeElement.click();
       this.flagCreate.emit(true);
     }
   }
@@ -72,24 +66,22 @@ export class ListSupplierModalComponent implements OnInit {
         this.last = (response.pageable.offset + response.pageable.pageSize) >= response.totalElements;
         this.suppliers = response.content;
       },
-      (error) => {
-        console.log(this.errorFlag);
-        this.errorFlag = true; });
+      (error) => { this.errorFlag = true; });
   }
 
   search() {
     switch (this.searchForm.value.field) {
       case 'supplier':
-        this.getAllSuppliers(this.searchForm.value.value.trim(), '', '', '');
+        this.getAllSuppliers(this.searchForm.value.value, '', '', '');
         break;
       case 'address':
-        this.getAllSuppliers('', this.searchForm.value.value.trim(), '', '');
+        this.getAllSuppliers('', this.searchForm.value.value, '', '');
         break;
       case 'phone':
-        this.getAllSuppliers('', '', this.searchForm.value.value.trim(), '');
+        this.getAllSuppliers('', '', this.searchForm.value.value, '');
         break;
       case 'email':
-        this.getAllSuppliers('', '', '', this.searchForm.value.value.trim());
+        this.getAllSuppliers('', '', '', this.searchForm.value.value);
         break;
     }
   }

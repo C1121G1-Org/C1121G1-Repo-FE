@@ -3,6 +3,11 @@
 <!--Time: 13:37 03/06/2022-->
 <!--Method: pageProduct()-->
 <!--*/-->
+<button (click)="getAll()" type="button" class="btn btn-primary" data-toggle="modal"
+        data-target="#customerModal">
+  Launch demo modal
+</button>
+
 <div style="display: flex  ; justify-content: center ">
   <div class="modal fade" id="customerModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
        aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -38,8 +43,9 @@
                                             style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                     </div>
                     <div>
-                      <button (click)="getAll()" class="btn-search btn-rounded  btn-sm my-0"
-                              style="width: 100px">Làm Mới
+                      <button (click)="search(element.value)" class="btn-search btn-rounded  btn-sm my-0"
+                              style="width: 100px">Tìm
+                        kiếm
                       </button>
                     </div>
                   </div>
@@ -116,7 +122,7 @@
                         <td class="text-center">{{customer.dateOfBirth| date : "dd/MM/yyyy"}}  </td>
                         <td class="text-center"><i data-toggle="tooltip" data-placement="top"
                                                    title="{{customer.email}}">
-                          {{customer.email}}</i>
+                          {{customer.email |slice:0:8}}... </i>
                         </td>
                       </tr>
                       </tbody>

@@ -14,6 +14,8 @@ import {CategoryService} from "../../../services/category/category.service";
 // Function: get list product bestseller from database
 export class ProductListBestsellerComponent implements OnInit {
   productBestsellers: ProductBestseller[] = [];
+  topfiveproductBestsellers: ProductBestseller[] = [];
+  toptenproductBestsellers: ProductBestseller[] = [];
   productNewests: ProductBestseller[] = [];
   topfiveproductNewests: ProductBestseller[] = [];
   toptenproductNewests: ProductBestseller[] = [];

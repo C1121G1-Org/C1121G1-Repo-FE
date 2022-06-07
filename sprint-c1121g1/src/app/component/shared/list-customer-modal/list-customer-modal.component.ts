@@ -79,7 +79,7 @@ export class ListCustomerModalComponent implements OnInit {
     if (!this.currentCustomer) {
       return false;
     }
-    return this.currentCustomer.id === this.selectedCustomer.id ? true : false;
+    return this.currentCustomer.customerName === this.selectedCustomer.customerName ? true : false;
   }
 
   getAllCustomerPage(index: any) {
@@ -118,7 +118,6 @@ export class ListCustomerModalComponent implements OnInit {
   }
 
   getAll() {
-    this.currentCustomer = null;
     this.searchValue = '';
     this.searchByPhone = '';
     this.searchByName = '';

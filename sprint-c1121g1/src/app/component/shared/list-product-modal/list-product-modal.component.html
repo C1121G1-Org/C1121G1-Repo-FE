@@ -1,10 +1,11 @@
+
 <!--
   Created by khoaVC
   Time: 10:00 03/06/2022
-  Template: modal list all Suppliers
+  Template: modal list all Products
 -->
 
-<div class="modal fade" id="supplierModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+<div class="modal fade" id="listProducts" data-backdrop="static" data-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered">
     <div class="modal-content">
@@ -19,32 +20,32 @@
             <div class="row">
               <div class="col-12">
                 <div class="mb-3" style="display: flex; justify-content: space-evenly">
-                  <form [formGroup]="searchForm" (ngSubmit)="search()">
-                    <div>
-                      <p style="margin-top: 10px">Tìm kiếm theo: </p>
-                    </div>
-                    <div>
-                      <select formControlName="field" id="" class="search-select background-search">
-                        <option value="supplier">Tên nhà cung cấp</option>
-                        <option value="address">Địa chỉ</option>
-                        <option value="phone">Số điện thoại</option>
-                        <option value="email">Email</option>
-                      </select>
-                    </div>
+<!--                  <form [formGroup]="searchForm" (ngSubmit)="search()">-->
+<!--                    <div>-->
+<!--                      <p style="margin-top: 10px">Tìm kiếm theo: </p>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                      <select formControlName="field" id="" class="search-select background-search">-->
+<!--                        <option value="supplier">Tên nhà cung cấp</option>-->
+<!--                        <option value="address">Địa chỉ</option>-->
+<!--                        <option value="phone">Số điện thoại</option>-->
+<!--                        <option value="email">Email</option>-->
+<!--                      </select>-->
+<!--                    </div>-->
 
-                    <div style="position: relative">
-                      <input style="width: 300px" class="header-search search-input background-search"
-                             placeholder="Bạn cần tìm gì?"
-                             type="text" formControlName="value"><i
-                      class="fa fa-search"
-                      style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
-                    </div>
-                    <div>
-                      <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm
-                        kiếm
-                      </button>
-                    </div>
-                  </form>
+<!--                    <div style="position: relative">-->
+<!--                      <input style="width: 300px" class="header-search search-input background-search"-->
+<!--                             placeholder="Bạn cần tìm gì?"-->
+<!--                             type="text" formControlName="value"><i-->
+<!--                      class="fa fa-search"-->
+<!--                      style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                      <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm-->
+<!--                        kiếm-->
+<!--                      </button>-->
+<!--                    </div>-->
+<!--                  </form>-->
                   <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px" (click)="refresh()">Làm mới
                   </button>
                 </div>
@@ -58,10 +59,10 @@
                   <thead>
                   <tr>
                     <th class="text-center bg-primary">STT</th>
-                    <th class="text-center bg-primary">Tên nhà cung cấp</th>
-                    <th class="text-center bg-primary">Địa chỉ</th>
-                    <th class="text-center bg-primary">Số điện thoại</th>
-                    <th class="text-center bg-primary">Email</th>
+                    <th class="text-center bg-primary">Tên</th>
+                    <th class="text-center bg-primary">Giá</th>
+                    <th class="text-center bg-primary">CPU</th>
+                    <th class="text-center bg-primary">Lưu trữ</th>
                   </tr>
                   </thead>
                 </table>
@@ -69,13 +70,13 @@
               <div class="tbl-content" *ngIf="!errorFlag">
                 <table class=" table table-bordered table-responsive-md">
                   <tbody>
-                  <tr *ngFor="let item of suppliers" (click)="getItem(item)"
+                  <tr *ngFor="let item of products" (click)="getItem(item)"
                       [class.highlight]="item === chosenItem && flag">
                     <td class="text-center">{{item.id}}</td>
-                    <td class="pt-3-half">{{item.supplierName}}</td>
-                    <td class="pt-3-half">{{item.address}}</td>
-                    <td class="text-center">{{item.phone}}</td>
-                    <td>{{item.email}}</td>
+                    <td class="pt-3-half">{{item.name}}</td>
+                    <td class="pt-3-half">{{item.price}}</td>
+                    <td class="text-center">{{item.cpu}}</td>
+                    <td>{{item.memory}}</td>
                   </tr>
                   </tbody>
                 </table>
@@ -91,7 +92,7 @@
                     Chọn
                   </button>
                   <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
-                          data-dismiss="modal" #btnClose><i class="fa-solid fa-right-from-bracket"></i> Thoát
+                          data-dismiss="modal" #btnProductClose><i class="fa-solid fa-right-from-bracket"></i> Thoát
                   </button>
                 </div>
 
@@ -119,5 +120,6 @@
     </div>
   </div>
 </div>
+
 
 
