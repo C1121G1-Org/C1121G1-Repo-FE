@@ -14,13 +14,13 @@ import {ListChooseProductModalComponent} from './component/shared/list-choose-pr
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
 
-  {path: 'api/product/create', component: ProductCreateComponent},
+  {path: 'product/create', component: ProductCreateComponent},
 
-  {path: 'api/product/edit/:id', component: ProductUpdateComponent},
+  {path: 'product/edit/:id', component: ProductUpdateComponent},
   {path: 'storage/create', component: StorageCreateComponent},
 
 
-  {path: 'api/product/edit/:id', component: ProductUpdateComponent},
+  // {path: 'api/product/edit/:id', component: ProductUpdateComponent},
   {path: 'storage/create', component: StorageCreateComponent},
 
   {path: 'chooseCustomer', component: ListCustomerModalComponent},

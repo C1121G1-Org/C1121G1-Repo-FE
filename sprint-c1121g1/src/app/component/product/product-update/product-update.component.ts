@@ -59,6 +59,8 @@ export class ProductUpdateComponent implements OnInit {
           memory: new FormControl(product.memory, [Validators.required, Validators.maxLength(50)]),
           otherDescription: new FormControl(product.otherDescription),
         });
+      }, error => {
+        console.log(error.error);
       });
     });
   }
@@ -96,6 +98,7 @@ export class ProductUpdateComponent implements OnInit {
       Date: 9:08 3/6/2022
   */
   save(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
+
     console.log(this.productForm.value);
     if (this.productForm.invalid) {
       console.log(this.productForm.value);
@@ -142,6 +145,7 @@ export class ProductUpdateComponent implements OnInit {
                   // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                   console.log('success');
                 }, error => {
+
                   console.log(error.error.errorMap.name);
                   this.errorProductName = error.error.errorMap.name;
                 }
@@ -151,15 +155,15 @@ export class ProductUpdateComponent implements OnInit {
         ).subscribe();
       } else {
         this.productService.updateProduct(this.id, this.productForm.value).subscribe(() => {
-            // alert('edited successfully');
-            successBtn.click();
-            this.router.navigateByUrl('/api/product/listProduct');
-            // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
-            console.log('success');
-          }, error => {
-            console.log(error.error.errorMap.name);
-            this.errorProductName = error.error.errorMap.name;
-          });
+          // alert('edited successfully');
+          successBtn.click();
+          this.router.navigateByUrl('/api/product/listProduct');
+          // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
+          console.log('success');
+        }, error => {
+          console.log(error.error.errorMap.name);
+          this.errorProductName = error.error.errorMap.name;
+        });
       }
     }
   }

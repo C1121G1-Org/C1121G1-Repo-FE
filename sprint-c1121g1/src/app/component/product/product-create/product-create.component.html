@@ -21,11 +21,10 @@
                   <div
                     *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched|| productForm.controls.name.errors?.empty)">
                     <!--                    <small *ngIf="productForm.controls.name.errors?.maxlength" class="form-text text-danger">Tên phải ít hơn 255 ký tự </small>-->
-                    <small *ngIf="name.errors?.maxlength" class="text-form text-danger">Tên phải ngắn hơn 250 kí
-                      tự</small>
+                    <small *ngIf="name.errors?.maxlength" class="text-form text-danger">Tên phải ngắn hơn 250 kí tự</small>
                     <small
                       *ngIf="productForm.controls.name.hasError('required') || productForm.controls.name.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
+                      class="form-text text-danger">Vui lòng nhập tên hàng hóa.</small>
                   </div>
 
                 </div>
@@ -43,9 +42,8 @@
                     *ngIf="productForm.controls.price.invalid && (productForm.controls.price.dirty || productForm.controls.price.touched|| productForm.controls.price.errors?.empty)">
                     <small
                       *ngIf="productForm.controls.price.hasError('required') || productForm.controls.price.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                    <small *ngIf="price.errors?.pattern" class="tex-form text-danger">Giá phải là số và lớn hơn
-                      0 </small>
+                      class="form-text text-danger">Vui lòng nhập giá sản phẩm.</small>
+                    <small *ngIf="price.errors?.pattern" class="tex-form text-danger">Giá phải là số và lớn hơn 0. </small>
                   </div>
                 </div>
 
@@ -64,7 +62,7 @@
                     *ngIf="productForm.controls.image.invalid && (productForm.controls.image.dirty || productForm.controls.image.touched || productForm.controls.image.errors?.empty)">
                     <small
                       *ngIf="productForm.controls.image.hasError('required') || productForm.controls.image.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
+                      class="form-text text-danger">Vui lòng chọn hình ảnh.</small>
                   </div>
                 </div>
 
@@ -79,7 +77,7 @@
                     *ngIf="productForm.controls.screenSize.invalid && (productForm.controls.screenSize.dirty || productForm.controls.screenSize.touched || productForm.controls.screenSize.errors?.empty)">
                     <small
                       *ngIf="productForm.controls.screenSize.hasError('required') || productForm.controls.screenSize.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
+                      class="form-text text-danger">Vui lòng nhập kích thước màn hình.</small>
                     <small *ngIf="screenSize.errors?.maxlength" class="text-form text-danger">Trường kích thước màn hình
                       phải ngắn hơn 50 kí tự</small>
                   </div>
@@ -98,9 +96,8 @@
 
                     <small
                       *ngIf="productForm.controls.camera.hasError('required') || productForm.controls.camera.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
-                    <small *ngIf="camera.errors?.maxlength" class="text-form text-danger">Trường camera phải ngắn hơn 50
-                      kí tự</small>
+                      class="form-text text-danger">Vui lòng nhập thông số camera.</small>
+                    <small *ngIf="camera.errors?.maxlength" class="text-form text-danger">Trường camera phải ngắn hơn 50 kí tự</small>
 
                   </div>
                 </div>
@@ -116,7 +113,7 @@
 
                     <small
                       *ngIf="productForm.controls.selfie.hasError('required') || productForm.controls.selfie.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
+                      class="form-text text-danger">Vui lòng nhập thông số camera trước.</small>
                     <small *ngIf="selfie.errors?.maxlength" class="text-form text-danger">Trường selfie phải ngắn hơn 50
                       kí tự</small>
 
@@ -135,7 +132,7 @@
                     <!--        KH-0123</small>-->
                     <small
                       *ngIf="productForm.controls.memory.hasError('required') || productForm.controls.memory.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
+                      class="form-text text-danger">Vui lòng nhập thông số bộ nhớ.</small>
                     <small *ngIf="memory.errors?.maxlength" class="text-form text-danger">Trường lưu trữ phải ngắn hơn
                       50 kí tự</small>
 
@@ -152,7 +149,7 @@
 
                     <small
                       *ngIf="productForm.controls.cpu.hasError('required') || productForm.controls.cpu.errors.empty"
-                      class="form-text text-danger">Require not empty.</small>
+                      class="form-text text-danger">Vui lòng nhập thông số cpu.</small>
                     <small *ngIf="cpu.errors?.maxlength" class="text-form text-danger">Trường cpu phải ngắn hơn 50 kí
                       tự</small>
 
