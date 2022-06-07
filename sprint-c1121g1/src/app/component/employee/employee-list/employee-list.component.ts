@@ -13,7 +13,8 @@ export class EmployeeListComponent implements OnInit {
 
   employees: EmployeeDto[] = [];
   name: any = '';
-  message: string ='';
+  nameDelete: string ;
+  message: boolean;
   page: any;
   totalPages = 0;
   activeProjectIndex: number;
@@ -31,16 +32,15 @@ export class EmployeeListComponent implements OnInit {
       Function: get all employee
    */
 
-  private getAll() {
+  getAll() {
+    this.message = false;
     this.employeeService.getAll('', this.page).subscribe(data => {
-      if (this.employees == null) {
-        this.message = 'Trang web đang bảo trì';
-      } else {
-        // @ts-ignore
-        this.employees = data.content;
-        this.page = data.number;
-        this.totalPages = data.totalPages;
-      }
+      // @ts-ignore
+      this.employees = data.content;
+      this.page = data.number;
+      this.totalPages = data.totalPages;
+    }, error => {
+      this.message = true;
     });
   }
 
@@ -56,7 +56,7 @@ export class EmployeeListComponent implements OnInit {
       this.totalPages = data.totalPages;
       this.page = data.number;
       if (this.employees.length < 1) {
-        this.message = 'KHÔNG TÌM THẤY !';
+        this.message = true;
       }
     }, err => {
       console.log(err);
@@ -102,8 +102,9 @@ export class EmployeeListComponent implements OnInit {
    */
 
   public activeProject(index: number, id: number, nameEmployee : string) : void {
+
     this.activeProjectIndex = index;
-    this.name = nameEmployee;
+    this.nameDelete = nameEmployee;
     this.idClick = id;
   }
 
@@ -112,6 +113,7 @@ export class EmployeeListComponent implements OnInit {
       Time: 19:00 4/06/2022
       Function: delete employee
    */
+
 
   delete(closeModal: HTMLButtonElement) {
 
