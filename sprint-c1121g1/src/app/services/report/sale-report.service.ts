@@ -12,7 +12,7 @@ export class SaleReportService {
   constructor(private http: HttpClient) {
   }
 
-  getAllSaleReports(startDay: string, endDay: string, productId: string): Observable<any> {
+  getAllSaleREports(startDay: string, endDay: string, productId: string): Observable<any> {
     return this.http.get<any>(`${this.URL_SALE_REPORT}?startDay=${startDay}&endDay=${endDay}&productId=${productId}`);
   }
 }

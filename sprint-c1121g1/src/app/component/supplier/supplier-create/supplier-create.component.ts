@@ -19,6 +19,7 @@ export class SupplierCreateComponent implements OnInit {
   supplierSave: Supplier;
   supplierDtoSave: SupplierDto;
   errorSupplierName: string;
+  errorEmail: string;
 
   supplierForm: FormGroup = new FormGroup({
     supplierName: new FormControl('', [Validators.required]),
@@ -26,9 +27,6 @@ export class SupplierCreateComponent implements OnInit {
     phone: new FormControl('', [Validators.required, Validators.pattern('^(090\\d{7})|(091\\d{7})|(\\(\\+84\\)90\\d{7})|(\\(\\+84\\)91\\d{7})$')]),
     email: new FormControl('', [Validators.required , Validators.email]),
   });
-
-
-
   constructor(private supplierService: SupplierService,
               private router: Router) { }
 
@@ -46,9 +44,8 @@ export class SupplierCreateComponent implements OnInit {
         successBtn.click();
         this.supplierForm.reset();
       }, error => {
-        console.log(error);
-        console.log(error.error.errorMap.supplierName);
         this.errorSupplierName = error.error.errorMap.supplierName;
+        this.errorEmail = error.error.errorMap.email;
       });
     }else {
       errorBtn.click();

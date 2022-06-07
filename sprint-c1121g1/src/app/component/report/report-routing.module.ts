@@ -14,7 +14,7 @@ import {PurchaseHistoryComponent} from './purchase-history/purchase-history.comp
 
 const routes: Routes = [
 
-
+  // Role : Admin , Business Staff
   {path: 'sale-report/list', component: SaleReportComponent},
   /*
     Created by TuanNQ

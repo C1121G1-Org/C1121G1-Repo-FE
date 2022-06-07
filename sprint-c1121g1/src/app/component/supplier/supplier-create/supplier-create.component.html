@@ -229,7 +229,7 @@
             </h3>
             <div class="row" style="justify-content: center;display: flex">
               <div class="form-group col-md-8">
-                <label for="supplierName" class="mb-3">Tên nhà cung cấp<span class="text-danger">(*):</span></label>
+                <label for="supplierName" class="mb-3">Tên nhà cung cấp<span class="text-danger">(*)</span>:</label>
                 <input type="text" class="form-control" name="supplierName" id="supplierName"
                        formControlName="supplierName">
                 <p style="color: red" *ngIf="( supplierForm.controls.supplierName.hasError( 'required')&&
@@ -238,14 +238,14 @@
               </div>
 
               <div class="form-group col-md-8">
-                <label for="address" class="mb-3">Địa chỉ<span class="text-danger">(*):</span></label>
+                <label for="address" class="mb-3">Địa chỉ<span class="text-danger">(*)</span>:</label>
                 <input type="text" class="form-control" name="address" id="address" formControlName="address">
                 <p style="color: red" *ngIf="( supplierForm.controls.address.hasError( 'required')&&
 (supplierForm.controls.address.touched|| supplierForm.controls.address.dirty))">Địa chỉ không được để trống</p>
               </div>
 
               <div class="form-group col-md-8">
-                <label for="phone" class="mb-3">Số điện thoại<span class="text-danger">(*):</span></label>
+                <label for="phone" class="mb-3">Số điện thoại<span class="text-danger">(*)</span>:</label>
                 <input type="text" class="form-control" name="phone" id="phone" formControlName="phone">
                 <p style="color: red" *ngIf="( supplierForm.controls.phone.hasError( 'required')&&
 (supplierForm.controls.phone.touched|| supplierForm.controls.phone.dirty))">SĐT không được để trống</p>
@@ -258,16 +258,19 @@
                 <input type="email" class="form-control" name="email" id="email" formControlName="email">
                 <p style="color: red" *ngIf="( supplierForm.controls.email.hasError( 'required')&&
 (supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))">Email không được để trống</p>
-                <p style="color: red" *ngIf="( supplierForm.controls.email.hasError( 'pattern')&&
+
+                <p style="color: red" *ngIf="( supplierForm.controls.email.hasError( 'email')&&
 (supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))">không đúng định dạng, vd:haivan@gmail.com</p>
+                <p style="color: red" *ngIf="errorEmail != ''">{{errorEmail}}</p>
               </div>
 
               <div class=" col-md-12 text-center mx-auto mt-4">
                 <div class="text-center " style="margin-bottom: 40px" >
-                  <button type="button" class="btn btn-danger " style="margin-right: 20px" [routerLink]="['']" > Hủy</button>
-                  <button  type="submit" class="btn btn-primary ">
+                  <button  type="submit" class="btn btn-primary " style="margin-right: 20px">
                     <i class="fa fa-paper-plane"></i>Thêm mới
                   </button>
+                  <button type="button" class="btn btn-danger "  [routerLink]="['']" ><i class="fa-solid fa-right-from-bracket"></i> Hủy</button>
+
                 </div>
               </div>
             </div>
@@ -278,41 +281,80 @@
   </form>
 </div>
 
-<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>
-<!--error modal-->
-<div class="modal fade " tabindex="-1" id="errorModal">
-  <div class="modal-dialog" style="text-align: center">
-    <div class="modal-content" style="text-align: center">
-      <div class="modal-header">
-        <h5 class="modal-title">Thông báo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <p>Dữ liệu đã tồn tại hoặc không đúng định dạng, vui lòng kiểm tra lại!</p>
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-      </div>
-    </div>
-  </div>
-</div>
+<!--<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>-->
+<!--&lt;!&ndash;error modal&ndash;&gt;-->
+<!--<div class="modal fade " tabindex="-1" id="errorModal">-->
+<!--  <div class="modal-dialog" style="text-align: center">-->
+<!--    <div class="modal-content" style="text-align: center">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title">Thông báo</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <p>Dữ liệu đã tồn tại hoặc không đúng định dạng, vui lòng kiểm tra lại!</p>-->
+<!--      </div>-->
+<!--      <div class="modal-footer d-flex justify-content-center">-->
+<!--        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>-->
+<!--&lt;!&ndash;success modal&ndash;&gt;-->
+<!--<div class="modal fade" tabindex="-1" id="successModal">-->
+<!--  <div class="modal-dialog" style="text-align: center">-->
+<!--    <div class="modal-content" style="text-align: center">-->
+<!--      <div class="modal-header">-->
+<!--        <h5 class="modal-title">Thông báo</h5>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ></button>-->
+<!--      </div>-->
+<!--      <div class="modal-body">-->
+<!--        <p>Thêm mới nhà cung cấp thành công!</p>-->
+<!--      </div>-->
+<!--      <div class="modal-footer d-flex justify-content-center">-->
+<!--        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/supplier/create']">OK</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
 
 <button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>
 <!--success modal-->
-<div class="modal fade" tabindex="-1" id="successModal">
-  <div class="modal-dialog" style="text-align: center">
-    <div class="modal-content" style="text-align: center">
-      <div class="modal-header">
-        <h5 class="modal-title">Thông báo</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ></button>
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body text-center">
+        <h4>Tuyệt!</h4>
         <p>Thêm mới nhà cung cấp thành công!</p>
-      </div>
-      <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/supplier/create']">OK</button>
+        <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal" >Đồng ý</button>
       </div>
     </div>
   </div>
 </div>
 
+<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>
+<!--error modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Dữ liệu đã tồn tại hoặc không đúng định dạng, vui lòng kiểm tra lại!</p>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
+      </div>
+    </div>
+  </div>
+</div>
