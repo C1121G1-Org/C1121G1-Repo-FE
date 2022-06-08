@@ -5,11 +5,13 @@ import {EmployeeInterface} from '../../dto/employee/employee-interface';
 import {Positions} from '../../models/employee/positions';
 import {EmployeeDto} from '../../dto/employee/employeeDto';
 
+
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:8080/api/employee'
 };
 const API_URL = `${environment.apiUrl}`;
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,7 @@ export class EmployeeService {
   saveEmployee(employeeDto): Observable<EmployeeDto> {
     return this.http.post<EmployeeDto>(API_URL + '/create', employeeDto);
   }
+
   getAllPosition(): Observable<Positions[]> {
     return this.http.get<Positions[]>(API_URL + '/position/list');
   }
@@ -41,4 +44,5 @@ export class EmployeeService {
     // @ts-ignore
     return this.http.patch<EmployeeInterface>(API_URL + `/delete/` + id);
   }
+
 }

@@ -12,8 +12,11 @@ export const environment = {
     storageBucket: 'sprint1-c2e64.appspot.com',
     messagingSenderId: '715730046220',
     appId: '1:715730046220:web:e4e0e868fca6888dc2cd29',
-    measurementId: 'G-2DDMRCPRQW', }
-};
+    measurementId: 'G-2DDMRCPRQW'
+  },
+  apiBaseUrl: 'http://localhost:8080'
+  };
+
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
