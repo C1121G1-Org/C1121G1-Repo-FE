@@ -4,9 +4,8 @@ import {ProductService} from '../../../services/product/product.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
-
-import {Category} from "../../../models/category";
-import {CategoryService} from "../../../services/category/category.service";
+import {Category} from '../../../models/category';
+import {CategoryService} from '../../../services/category/category.service';
 
 @Component({
   selector: 'app-product-update',

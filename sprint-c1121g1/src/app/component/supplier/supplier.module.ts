@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+// @ts-ignore
 import { CommonModule } from '@angular/common';
 
 import { SupplierRoutingModule } from './supplier-routing.module';
@@ -9,14 +10,14 @@ import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
-    declarations: [SupplierCreateComponent, SupplierListComponent, SupplierUpdateComponent],
-    exports: [
-        SupplierCreateComponent
-    ],
-    imports: [
-        CommonModule,
-        SupplierRoutingModule,
-        ReactiveFormsModule
-    ]
+  declarations: [SupplierCreateComponent, SupplierListComponent, SupplierUpdateComponent],
+  exports: [
+    SupplierCreateComponent
+  ],
+  imports: [
+    CommonModule,
+    SupplierRoutingModule,
+    ReactiveFormsModule
+  ]
 })
 export class SupplierModule { }

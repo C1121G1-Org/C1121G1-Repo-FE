@@ -1,0 +1,47 @@
+input {
+  /*box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;*/
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;
+}
+button {
+  width: 200px;
+}
+/*css up anh*/
+.file__label {
+  cursor: pointer;
+  margin-left: 10px;
+  color: #D70018;
+}
+.file__input {
+  display: none;
+
+}
+.btn-grad-red {
+  background-image: linear-gradient(to right, #EB3349 0%, #F45C43  51%, #EB3349  100%);
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+}
+.btn-grad-red:active {
+  transform: scale(1.1);
+}
+.btn-grad-red:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad-blue {
+  background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+}
+.btn-grad-blue:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad-blue:active {
+  transform: scale(1.1);
+}
