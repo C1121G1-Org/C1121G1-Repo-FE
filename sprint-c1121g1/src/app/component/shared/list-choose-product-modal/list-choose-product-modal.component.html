@@ -109,7 +109,7 @@
                         <tbody>
                         <tr (click)="getProduct(product)" *ngFor="let product of productList; index as i"
                             [class.heightLight]="isSelectedProduct(product)">
-                          <td class="text-center">{{(i + 1)}}</td>
+                          <td class="text-center">{{(pageNumber)*pageSize+(i+1)}}</td>
                           <td class="text-center">{{product.name}}</td>
                           <td class="text-center">{{product.id}}</td>
                           <td class="text-center">{{product.price |currency :'VND':''}}</td>
@@ -127,8 +127,7 @@
                       <div style="margin-left: 19px">
                         <button *ngIf="currentProduct" (click)="chooseProduct(exit)" type="button"
                                 class="btn-edit btn-rounded  btn-lg my-0">
-                          <i class="fa fa-paper-plane"></i>
-                          Chọn
+                          <i class="fa fa-paper-plane"></i> Chọn
                         </button>
                         <button (click)="close()" type="button" class="btn-delete btn-rounded  btn-lg my-0"
                                 data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
@@ -168,8 +167,6 @@
                     </div>
                   </div>
                 </div>
-
-
               </div>
             </div>
           </div>
