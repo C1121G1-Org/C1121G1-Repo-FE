@@ -75,17 +75,18 @@ export class SaleReportComponent implements OnInit {
     this.chart2?.destroy();
 
     if (this.formSearch.valid) {
-      let xValues = [];
-      let sales = [];
-      let invoices = [];
-      let startDay = this.formSearch.get('startDay').value;
-      let endDay = this.formSearch.get('endDay').value;
-      let productId = this.formSearch.get('productId').value;
-      this.saleReportService.getAllSaleREports(startDay, endDay, productId).subscribe(data => {
-        this.notFound = "";
-        this.alertClass = "";
+      const xValues = [];
+      const sales = [];
+      const invoices = [];
+      const startDay = this.formSearch.get('startDay').value;
+      const endDay = this.formSearch.get('endDay').value;
+      const productId = this.formSearch.get('productId').value;
+      this.saleReportService.getAllSaleReports(startDay, endDay, productId).subscribe(data => {
 
-        for (let dt of data) {
+        this.notFound = '';
+        this.alertClass = '';
+
+        for (const dt of data.data) {
           xValues.push(dt.date);
           invoices.push(dt.invoiceQuantity);
           sales.push(dt.totalMoney);
@@ -118,7 +119,9 @@ export class SaleReportComponent implements OnInit {
             datasets: [{
               label: 'Đơn hàng ( Đơn )',
               fill: false,
-              data: invoices,
+              data: invoices.map(value => {
+                return value.toFixed(0)
+              }),
               pointRadius: 3,
               pointBackgroundColor: 'blue',
               backgroundColor: 'blue',
@@ -129,8 +132,13 @@ export class SaleReportComponent implements OnInit {
           options: {}
         });
       }, error => {
-        this.alertClass = "text-center alert alert-danger";
-        this.notFound = "KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !";
+
+        if (error.error.errorMap?.productId) {
+          this.getProductId().setErrors({productId: true});
+        } else {
+          this.alertClass = 'text-center alert alert-danger';
+          this.notFound = 'KHÔNG TÌM THẤY DỮ LIỆU THÍCH HỢP !';
+        }
 
         this.totalInvoices = 0 ;
         this.totalSales = 0 ;
@@ -166,8 +174,6 @@ export class SaleReportComponent implements OnInit {
 
     const type = this.formSearch.get('typeReport').value;
 
-
-
     // tslint:disable-next-line:triple-equals
     if (type != 'ID') {
       this.formSearch.get('productId').setValue('');
@@ -183,8 +189,8 @@ export class SaleReportComponent implements OnInit {
   }
 
   checkDay() {
-    let date1 = new Date(this.formSearch.get('startDay')?.value);
-    let date2 = new Date(this.formSearch.get('endDay')?.value);
+    const date1 = new Date(this.formSearch.get('startDay')?.value);
+    const date2 = new Date(this.formSearch.get('endDay')?.value);
     if (date1?.getTime() > date2?.getTime()) {
       this.formSearch.get('endDay').setErrors({errDate: true});
     }

@@ -22,6 +22,7 @@ export class ProductListBestsellerComponent implements OnInit {
   flagProductBestseller = false;
   flagProductNewest = false;
   flagCategory = false;
+  flagProductBestsellerByCategory = false;
 
   constructor(private homepageService: HomepageService, private categoryService: CategoryService) {
   }
@@ -34,6 +35,7 @@ export class ProductListBestsellerComponent implements OnInit {
 
   getAllProductBestSeller() {
     this.homepageService.getProductBestseller().subscribe((productBestsellers) => {
+      this.flagProductBestseller = false;
       this.productBestsellers = productBestsellers;
       if (this.productBestsellers.length === 0) {
         this.flagProductBestseller = true;
@@ -46,6 +48,7 @@ export class ProductListBestsellerComponent implements OnInit {
 
   getAllProductNewest() {
     this.homepageService.getProductNewest().subscribe((productNewests) => {
+      this.flagProductNewest = false;
       this.productNewests = productNewests;
       this.topfiveproductNewests = this.productNewests.filter((item, index) => index < 5);
       this.toptenproductNewests = this.productNewests.filter((item, index) => index >= 5);
@@ -60,6 +63,7 @@ export class ProductListBestsellerComponent implements OnInit {
 
   getAllCategory() {
     this.categoryService.getAll().subscribe((categories) => {
+      this.flagCategory = false;
       this.categorires = categories;
       this.topFiveCategories = this.categorires.filter((item, index) => index < 5);
       if (categories.length === 0) {
@@ -70,5 +74,17 @@ export class ProductListBestsellerComponent implements OnInit {
       this.flagCategory = true;
     });
   }
-
+  findProductBestsellerByCategory(category: Category) {
+    this.homepageService.getProductBestsellerByCategory(category).subscribe((productBestsellerByCategories) => {
+      this.flagProductBestsellerByCategory = false;
+      this.productBestsellers = productBestsellerByCategories;
+      if (this.productBestsellers.length == 0) {
+        this.flagProductBestsellerByCategory = true;
+      }
+    }, error => {
+      console.log(error);
+      this.productBestsellers = null;
+      this.flagProductBestsellerByCategory = true;
+    });
+  }
 }
