@@ -22,7 +22,7 @@ export class InvoiceHistoryComponent implements OnInit {
   productQuantity = 0;
 
   formSearch = new FormGroup({
-    keyword: new FormControl('',   Validators.pattern('^[a-zA-Z0-9]*$'))
+    keyword: new FormControl('', Validators.pattern('[0-9a-zA-Z\\\\s]*'))
   });
 
   keyword = '';
@@ -70,8 +70,6 @@ export class InvoiceHistoryComponent implements OnInit {
         this.invoiceList = null;
       }
     );
-
-
   }
 
   previous() {
