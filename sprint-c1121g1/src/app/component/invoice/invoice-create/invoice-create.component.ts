@@ -214,13 +214,12 @@ export class InvoiceCreateComponent implements OnInit {
           this.generatePDF('yes',);
         }
         this.invoiceForm.reset();
-        // window.location.reload();
+        window.location.reload();
       });
     }, error => {
       this.dict = Object.entries(error.error.errorMap).map(([k, v]) => {
         return {key: k, value: v};
       });
-      // console.log(this.dict);
     });
   }
 

@@ -14,6 +14,4 @@ export interface InvoiceDto {
   totalMoney?: number;
   quantity?: number;
   invoiceDetailId?: string;
-
-
 }
