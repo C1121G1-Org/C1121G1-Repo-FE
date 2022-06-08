@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-<<<<<<< HEAD
 
-
-const routes: Routes = [];
-=======
 import {ProductCreateComponent} from './product-create/product-create.component';
 import {ProductUpdateComponent} from './product-update/product-update.component';
 import {ListCustomerModalComponent} from '../shared/list-customer-modal/list-customer-modal.component';
 import {ListChooseProductModalComponent} from '../shared/list-choose-product-modal/list-choose-product-modal.component';
-
 
 const routes: Routes = [
   {path: 'api/product/create', component: ProductCreateComponent},
@@ -17,7 +12,7 @@ const routes: Routes = [
 {path: 'chooseCustomer', component: ListCustomerModalComponent},
 {path: 'chooseProduct', component: ListChooseProductModalComponent},
 ];
->>>>>>> db053737183a798aca8632778de6126dbfe6b40f
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

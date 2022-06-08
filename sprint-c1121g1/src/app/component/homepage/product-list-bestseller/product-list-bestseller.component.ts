@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import {ProductBestseller} from '../../../dto/product-bestseller';
+import {Category} from '../../../models/category';
+import {HomepageService} from '../../../services/homepage/homepage.service';
+import {CategoryService} from '../../../services/category/category.service';
 
 @Component({
   selector: 'app-product-list-bestseller',
   templateUrl: './product-list-bestseller.component.html',
   styleUrls: ['./product-list-bestseller.component.css']
 })
+// Create by chienLV
+// Time: 16h00 03/06/2022
+// Function: get list product bestseller from database
 export class ProductListBestsellerComponent implements OnInit {
   productBestsellers: ProductBestseller[] = [];
   productNewests: ProductBestseller[] = [];
@@ -17,7 +24,8 @@ export class ProductListBestsellerComponent implements OnInit {
   flagCategory = false;
   flagProductBestsellerByCategory = false;
 
-  constructor() { }
+  constructor(private homepageService: HomepageService, private categoryService: CategoryService) {
+  }
 
   ngOnInit(): void {
     this.getAllProductBestSeller();
@@ -81,3 +89,4 @@ export class ProductListBestsellerComponent implements OnInit {
     });
   }
 }
+
