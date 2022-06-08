@@ -20,11 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,17 +46,17 @@
     <property name="ts.external.directory.path" value="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\shared" />
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component" />
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\models" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\report" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\shared" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\report\report" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\shared" />
-      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component" />
-      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\models" />
     </key>
   </component>
   <component name="SvnConfiguration">
