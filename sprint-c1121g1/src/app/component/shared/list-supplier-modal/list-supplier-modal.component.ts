@@ -55,6 +55,7 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
   }
 
   getItem(item: any) {
+    // tslint:disable-next-line:triple-equals
     if (item.id == this.chosenItem.id || this.chosenItem.id == undefined || !this.flag) {
       this.flag = !this.flag;
     }
@@ -70,6 +71,7 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
   }
 
   checkSelected() {
+    // tslint:disable-next-line:triple-equals
     if (!this.flag && this.chosenItem.id == undefined) {
       this.btnNoneSelectedModal.nativeElement.click();
     }

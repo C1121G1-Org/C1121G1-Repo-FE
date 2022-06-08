@@ -20,7 +20,6 @@ import {SuccessModalComponent} from './success-modal/success-modal.component';
     ReactiveFormsModule
   ],
   exports: [
-
     QrCodeComponent,
     ListSupplierModalComponent,
     ListChooseProductModalComponent,

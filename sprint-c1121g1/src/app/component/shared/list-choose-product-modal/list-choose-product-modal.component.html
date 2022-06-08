@@ -108,7 +108,7 @@
                     </div>
                     <div class="col-4">
                       <!--Pagination-->
-                      <nav class="d-flex justify-content-end wow fadeIn">
+                      <nav *ngIf="!message" class="d-flex justify-content-end wow fadeIn">
                         <ul class="pagination">
                           <li *ngIf="!message &&!first " style="color: #333333" class="page-item"><a
                             (click)="previousPage()" class="page-link"

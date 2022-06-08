@@ -1,3 +1,4 @@
+
 import {CategoryDto} from "./categoryDto";
 
 export interface Product {

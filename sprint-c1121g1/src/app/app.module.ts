@@ -17,11 +17,9 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
-// @ts-ignore
 import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
-// @ts-ignore
-import {CKEditorModule} from "ckeditor4-angular";
+import {CKEditorModule} from 'ckeditor4-angular';
 import {ErrorComponent} from './error/error.component';
 
 
