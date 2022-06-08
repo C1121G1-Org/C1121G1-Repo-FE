@@ -1,115 +1,131 @@
 <!--
   Created by khoaVC
+  Role: Admin, Storekeeper
   Time: 10:00 03/06/2022
   Template: modal list all Suppliers
 -->
 
-<div class="modal fade" id="supplierModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
-     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body">
-        <div class="card card-body">
-          <h3 class="text-center font-weight-bold text-uppercase  py-4">
-            Quản Lý Danh Sách Nhà Cung Cấp
-          </h3>
-        </div>
-        <div class="card card-body">
-          <div id="table" class="table-editable">
-            <div class="row">
-              <div class="col-12">
-                <div class="mb-3" style="display: flex; justify-content: space-evenly">
+<div style="display: flex  ; justify-content: center ">
+  <div class="modal fade" id="supplierModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="card card-body">
+            <h1 style="font-size: 36px" class="text-center font-weight-bold text-uppercase  py-4">
+              CHỌN NHÀ CUNG CẤP
+            </h1>
+          </div>
+          <div class="card card-body">
+            <div class="table-editable">
+              <div class="">
+                <div class="">
                   <form [formGroup]="searchForm" (ngSubmit)="search()">
-                    <div>
-                      <p style="margin-top: 10px">Tìm kiếm theo: </p>
-                    </div>
-                    <div>
-                      <select formControlName="field" id="" class="search-select background-search">
-                        <option value="supplier">Tên nhà cung cấp</option>
-                        <option value="address">Địa chỉ</option>
-                        <option value="phone">Số điện thoại</option>
-                        <option value="email">Email</option>
-                      </select>
-                    </div>
-
-                    <div style="position: relative">
-                      <input style="width: 300px" class="header-search search-input background-search"
-                             placeholder="Bạn cần tìm gì?"
-                             type="text" formControlName="value"><i
-                      class="fa fa-search"
-                      style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
-                    </div>
-                    <div>
-                      <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px">Tìm
-                        kiếm
-                      </button>
+                    <div class="form-row d-flex justify-content-around">
+                      <div class="form-row">
+                        <div class="">
+                          <p style="margin-top: 10px">Tìm kiếm theo: </p>
+                        </div>
+                        <div class="mx-2">
+                          <select class="search-select background-search" formControlName="field">
+                            <option value="supplier">Tên nhà cung cấp</option>
+                            <option value="address">Địa chỉ</option>
+                            <option value="phone">Số điện thoại</option>
+                            <option value="email">Email</option>
+                          </select>
+                        </div>
+                        <div class="">
+                          <input style="width: 250px" class="header-search search-input" placeholder="Bạn cần tìm gì?"
+                                 type="text" formControlName="value"><i (click)="refresh()" class="fa fa-repeat"
+                                                                        style="position: relative; right: 26px; top: 3px; font-size: 18px; cursor: pointer"></i>
+                        </div>
+                      </div>
+                      <div class="">
+                        <button class="btn btn-grad-blue w-100"><i class="fa fa-search"></i> Tìm kiếm</button>
+                      </div>
                     </div>
                   </form>
-                  <button class="btn-search btn-rounded  btn-sm my-0" style="width: 100px" (click)="refresh()">Làm mới
-                  </button>
+                  <!--                search-->
                 </div>
-                <!--                search-->
+              </div>
+              <div>
 
-              </div>
-            </div>
-            <div>
-              <div class="tbl-header">
-                <table class="table table-bordered table-responsive-md ">
-                  <thead>
-                  <tr>
-                    <th class="text-center bg-primary">STT</th>
-                    <th class="text-center bg-primary">Tên nhà cung cấp</th>
-                    <th class="text-center bg-primary">Địa chỉ</th>
-                    <th class="text-center bg-primary">Số điện thoại</th>
-                    <th class="text-center bg-primary">Email</th>
-                  </tr>
-                  </thead>
-                </table>
-              </div>
-              <div class="tbl-content" *ngIf="!errorFlag">
-                <table class=" table table-bordered table-responsive-md">
-                  <tbody>
-                  <tr *ngFor="let item of suppliers" (click)="getItem(item)"
-                      [class.highlight]="item === chosenItem && flag">
-                    <td class="text-center">{{item.id}}</td>
-                    <td class="pt-3-half">{{item.supplierName}}</td>
-                    <td class="pt-3-half">{{item.address}}</td>
-                    <td class="text-center">{{item.phone}}</td>
-                    <td>{{item.email}}</td>
-                  </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="tbl-content" *ngIf="errorFlag">
-                <h1 style="text-align: center; margin: 50px">Không tìm thấy nhà cung cấp</h1>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-6">
-                  <button type="button" class="btn-edit btn-rounded  btn-lg my-0" (click)="sendItem()">
-                    <i class="fa fa-paper-plane"></i>
-                    Chọn
-                  </button>
-                  <button type="button" class="btn-delete btn-rounded  btn-lg my-0"
-                          data-dismiss="modal" #btnClose><i class="fa-solid fa-right-from-bracket"></i> Thoát
-                  </button>
-                </div>
-
-                <div class="col-6"  *ngIf="!errorFlag">
-                  <!--Pagination-->
-                  <ul class="nav nav-pills">
-                    <div *ngIf="!first">
-                      <a type="button" class="page-link" (click)="previous()" style="color: black">«</a>
+                <!--              phần hiên thị lỗi-->
+                <h2 class="text-danger d-flex justify-content-center" style="padding: 150px ; font-size: 35px"
+                    *ngIf="errorFlag">không tìm thấy dữ liệu .</h2>
+                <!--end hiển thị llox-->
+                <div>
+                  <div *ngIf="!errorFlag">
+                    <div class="tbl-header">
+                      <table class="table table-bordered table-responsive-md ">
+                        <thead>
+                        <tr>
+                          <th class="text-center w-8">STT</th>
+                          <th class="text-center">Tên nhà cung cấp</th>
+                          <th class="text-center">Địa chỉ</th>
+                          <th class="text-center w-13">Số điện thoại</th>
+                          <th class="text-center">Email</th>
+                        </tr>
+                        </thead>
+                      </table>
                     </div>
-                    <li class="nav-item" *ngFor="let index of totalPages">
-                      <a type="button" class="nav-link" [ngClass]="index == pageNumber+1 ? 'active' : ''"
-                         (click)="getItemPaging(index)" style="color: black">
-                        <span>{{index}}</span>
-                      </a>
-                    </li>
-                    <a *ngIf="!last" type="button" class="page-link" (click)="next()" style="color: black">»</a>
-                  </ul>
-                  <!--Pagination-->
+                    <div class="tbl-content">
+                      <table class=" table table-bordered table-responsive-md">
+                        <tbody>
+                        <tr *ngFor="let item of suppliers; index as i" (click)="getItem(item)"
+                            [class.highlight]="item === chosenItem && flag" style="cursor: pointer">
+                          <td class="text-center w-8">{{(pageNumber) * pageSize + (i + 1)}}</td>
+                          <td class="text-center desc"><i data-toggle="tooltip" data-placement="top"
+                                                          title="{{item.supplierName}}">
+                            {{item.supplierName}}</i></td>
+                          <td class="text-center desc"><i data-toggle="tooltip" data-placement="top"
+                                                          title="{{item.address}}">
+                            {{item.address}}</i></td>
+                          <td class="text-center w-13">{{item.phone}}</td>
+                          <td class="text-center">{{item.email}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <br>
+
+                  <div class="row my-3 ml-3">
+                    <div class="row col-6 mx-10">
+                      <button (click)="sendItem()" type="button"
+                              class="btn btn-grad-blue  btn-lg my-0 mx-0">
+                        <i class="fa fa-paper-plane"></i>
+                        Chọn
+                      </button>
+                      <button type="button"
+                              class="btn btn-grad-red  btn-lg mx-2"
+                              data-dismiss="modal" #btnClose (click)="checkSelected()"><i
+                        class="fa-solid fa-right-from-bracket"></i> Thoát
+                      </button>
+                    </div>
+
+                    <div class="col-6 ml-0" *ngIf="!errorFlag">
+                      <!--Pagination-->
+
+                      <nav class="d-flex justify-content-end wow fadeIn">
+                        <ul class="pagination">
+                          <li *ngIf="!first " style="color: #333333" class="page-item"><a
+                            (click)="previous()" class="page-link"
+                            style="width:90px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">Trang
+                            trước</a>
+                          </li>
+                          <li style="color: #333333" class="page-item"><a class="page-link"
+                                                                          style="width:40px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">{{pageNumber + 1}}</a>
+                          </li>
+                          <li *ngIf="!last" style="color: #333333" class="page-item"><a (click)="next()"
+                                                                                        class="page-link"
+                                                                                        style="width:70px ;text-align: center ; height: 40px ;color: blue; line-height: 35px ; box-sizing: border-box;  background-color: white; cursor: pointer"
+                          >Trang kế</a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -120,4 +136,25 @@
   </div>
 </div>
 
-
+<button #btnNoneSelectedModal type="button" class="btn btn-primary" data-toggle="modal" data-target="#noneSelectedModal"
+        [hidden]="true">
+</button>
+<!--modall-->
+<div id="noneSelectedModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-mdb-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo!</h4>
+        <p>Không có nhà cung cấp nào được chọn.</p>
+        <button type="button" class="btn btn-danger" id="delete_btn" data-dismiss="modal">Đồng ý
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
