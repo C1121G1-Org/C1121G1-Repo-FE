@@ -20,7 +20,6 @@ import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
 import {CKEditorModule} from 'ckeditor4-angular';
-import {ErrorComponent} from './error/error.component';
 
 
 // @ts-ignore
@@ -29,8 +28,6 @@ import {ErrorComponent} from './error/error.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ErrorComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -50,7 +47,6 @@ import {ErrorComponent} from './error/error.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     CKEditorModule
-
   ],
   providers: [],
   exports: [],

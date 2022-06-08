@@ -136,8 +136,7 @@
                     <small
                       *ngIf="productForm.controls.memory.hasError('required') || productForm.controls.memory.errors.empty"
                       class="form-text text-danger">Vui lòng nhập thông số bộ nhớ.</small>
-                    <small *ngIf="memory.errors?.maxlength" class="text-form text-danger">Trường lưu trữ phải ngắn hơn
-                      50 kí tự</small>
+                    <small *ngIf="memory.errors?.maxlength" class="text-form text-danger">Trường lưu trữ phải ngắn hơn 50 kí tự</small>
 
                   </div>
                 </div>
@@ -204,7 +203,7 @@
                     class="fa fa-paper-plane"></i>THÊM MỚI
                   </button>
                   <a data-toggle="modal"
-                     data-target="#deleteModal"
+                     data-target="#cancelModal"
                      style="width: 200px" type="submit" class="btn btn-grad-red mx-1">
                     <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
                 </div>
@@ -224,72 +223,6 @@
 <!--</script>-->
 
 
-<!-- Modal -->
-<!--<div class="modal fade " id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn hủy thêm mới</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--          <span aria-hidden="true">&times;</span>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <a type="button" [routerLink]="['/product/listProduct']" class="btn btn-primary">Có</a>-->
-<!--        <button type="button" class="btn btn-danger" data-dismiss="modal">Không</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-<!--notification modal-->
-<!--<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>-->
-<!--&lt;!&ndash;error modal&ndash;&gt;-->
-<!--<div class="modal fade " tabindex="-1" id="errorModal">-->
-<!--  <div class="modal-dialog" style="text-align: center">-->
-<!--    <div class="modal-content" style="text-align: center">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title">Thông báo</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <p>Dữ liệu đã tồn tại, vui lòng kiểm tra lại!</p>-->
-<!--      </div>-->
-<!--      <div class="modal-footer d-flex justify-content-center">-->
-<!--        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>-->
-<!--&lt;!&ndash;success modal&ndash;&gt;-->
-<!--<div class="modal fade" tabindex="-1" id="successModal">-->
-<!--  <div class="modal-dialog" style="text-align: center">-->
-<!--    <div class="modal-content" style="text-align: center">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title">Thông báo</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <p>Thêm mới thông tin hàng hóa thành công!</p>-->
-<!--      </div>-->
-<!--      <div class="modal-footer d-flex justify-content-center">-->
-<!--        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/api/product/listProduct']">-->
-<!--          OK-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-
-
 <button [hidden]="true" #successButton data-toggle="modal" data-target="#successModal"></button>
 <!--success modal-->
 <div id="successModal" class="modal fade">
@@ -304,18 +237,18 @@
       <div class="modal-body text-center">
         <h4>Tuyệt!</h4>
         <br>
-        <p>Sản phẩm đã được xóa</p>
+        <p>Tạo mới sản phẩm thành công</p>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</button>
+          <a [routerLink]="['/listProduct']"  type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</a>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!--delete modal-->
+<!--warning modal-->
 <!--<button [hidden]="true" #deleteModal data-toggle="modal" data-target="#deleteModal"></button>-->
-<div id="deleteModal" class="modal fade">
+<div id="cancelModal" class="modal fade">
   <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
       <div class="modal-header modal-header-danger justify-content-center">
@@ -326,11 +259,12 @@
       </div>
       <div class="modal-body text-center">
         <h4>Thông báo</h4>
-        <!--        <p>Bạn có muốn xóa sản phẩm <span style="color: red">{{getName}}</span> không ?</p>-->
-        <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>
+        <p>Bạn có muốn hủy thêm mới hàng hóa không ?</p>
+<!--        <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>-->
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-grad-blue mx-3" #cancel data-dismiss="modal">Hủy</button>
-          <button  type="button" class="btn btn-grad-red">Xóa</button>
+
+          <a [routerLink]="['/listProduct']" type="button" class="btn btn-grad-blue mx-3" data-dismiss="modal" >Có</a>
+          <button  type="button" class="btn btn-grad-red" #cancel data-dismiss="modal" >Không</button>
         </div>
       </div>
     </div>
