@@ -1,7 +1,7 @@
 import {PositionDto} from "./position-dto";
 import {AccountDto} from "./account-dto";
 
-export interface EmployeeDto {
+export interface EmployeeInterface {
   id?: number;
   name?: string;
   dateOfBirth?: string;

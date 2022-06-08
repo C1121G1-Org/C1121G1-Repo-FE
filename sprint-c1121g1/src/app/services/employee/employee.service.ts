@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Employee} from "../../models/employee/employee";
-import {EmployeeDto} from "../../dto/employee/employee-dto";
+import {EmployeeInterface} from "../../dto/employee/employee-interface";
 import {Positions} from "../../models/employee/positions";
 
 export const environment = {
@@ -24,24 +24,24 @@ export class EmployeeService {
     return this.http.get<any>(API_URL + `/list?page=${page}&keyName=${name}`);
   }
 
-  saveEmployee(employeeDto): Observable<EmployeeDto> {
-    return this.http.post<EmployeeDto>(API_URL + '/create', employeeDto);
+  saveEmployee(employeeDto): Observable<EmployeeInterface> {
+    return this.http.post<EmployeeInterface>(API_URL + '/create', employeeDto);
   }
 
   getAllPosition(): Observable<Positions[]> {
     return this.http.get<Positions[]>(API_URL + '/position/list');
   }
 
-  findById(id: number): Observable<EmployeeDto> {
-    return this.http.get<EmployeeDto>(API_URL + `/${id}`);
+  findById(id: number): Observable<EmployeeInterface> {
+    return this.http.get<EmployeeInterface>(`${API_URL}/${id}`);
   }
 
-  updateEmployee(id: number, employeeDto: EmployeeDto): Observable<EmployeeDto> {
-    return this.http.patch<EmployeeDto>(`${API_URL}/update/${id}`, employeeDto);
+  updateEmployee(id: number, employeeDto: EmployeeInterface): Observable<EmployeeInterface> {
+    return this.http.patch<EmployeeInterface>(`${API_URL}/update/${id}`, employeeDto);
   }
 
-  deleteEmployee(id: number): Observable<EmployeeDto> {
+  deleteEmployee(id: number): Observable<EmployeeInterface> {
     // @ts-ignore
-    return this.http.patch<EmployeeDto>(API_URL + `/delete/` + id);
+    return this.http.patch<EmployeeInterface>(API_URL + `/delete/` + id);
   }
 }
