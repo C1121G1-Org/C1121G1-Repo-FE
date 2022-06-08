@@ -19,7 +19,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
-import {ListProductModalComponent} from "./component/shared/list-product-modal/list-product-modal.component";
 
 
 

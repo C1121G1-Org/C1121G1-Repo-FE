@@ -10,7 +10,7 @@ describe('QrCodeComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ QrCodeComponent ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
