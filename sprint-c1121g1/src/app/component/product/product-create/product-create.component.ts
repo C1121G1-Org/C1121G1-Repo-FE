@@ -6,8 +6,8 @@ import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
 // @ts-ignore
 import {formatDate} from '@angular/common';
-import {CategoryService} from "../../../services/category/category.service";
-import {Category} from "../../../models/category";
+import {CategoryService} from '../../../services/category/category.service';
+import {Category} from '../../../models/category';
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
@@ -73,7 +73,7 @@ export class ProductCreateComponent implements OnInit {
       Created by TuanPA
       Date: 9:08 3/6/2022
   */
-  save(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
+  save(errorModalBtn: HTMLButtonElement, successButton: HTMLButtonElement) {
     if (this.productForm.invalid) {
       console.log(this.productForm.value);
       if (this.productForm.controls.name.value == '') {
@@ -100,6 +100,9 @@ export class ProductCreateComponent implements OnInit {
       if (this.productForm.controls.memory.value == '') {
         this.productForm.controls.memory.setErrors({empty: 'Empty! Please input!'});
       }
+      if (this.productForm.controls.categoryDto.value == '') {
+        this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
+      }
     } else {
       console.log(this.productForm.value);
       // const nameImg = this.getCurrentDateTime();
@@ -112,13 +115,14 @@ export class ProductCreateComponent implements OnInit {
             this.productService.createProduct(this.productForm.value).subscribe(() => {
                 console.log(this.productForm.value);
                 this.productForm.reset();
-                successBtn.click();
+                successButton.click();
                 this.router.navigateByUrl('/api/product/listProduct');
                 // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                 console.log('success');
               }, error => {
                 console.log(error);
                 console.log(error.error.errorMap.name);
+                errorModalBtn.click();
                 this.errorProductName = error.error.errorMap.name;
               }
             );

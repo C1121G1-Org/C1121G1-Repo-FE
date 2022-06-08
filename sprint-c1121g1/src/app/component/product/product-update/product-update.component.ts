@@ -108,7 +108,7 @@ export class ProductUpdateComponent implements OnInit {
       Created by TuanPA
       Date: 9:08 3/6/2022
   */
-  save(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
+  save(errorModalBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
 
     console.log(this.productForm.value);
     if (this.productForm.invalid) {
@@ -138,6 +138,9 @@ export class ProductUpdateComponent implements OnInit {
       if (this.productForm.controls.memory.value == '') {
         this.productForm.controls.memory.setErrors({empty: 'Empty! Please input!'});
       }
+      if (this.productForm.controls.categoryDto.value == '') {
+        this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
+      }
     } else {
       if (this.selectedImage != null) {
         // const nameImg = this.getCurrentDateTime();
@@ -159,6 +162,7 @@ export class ProductUpdateComponent implements OnInit {
 
                   console.log(error.error.errorMap.name);
                   this.errorProductName = error.error.errorMap.name;
+                  errorModalBtn.click();
                 }
               );
             });
@@ -174,6 +178,8 @@ export class ProductUpdateComponent implements OnInit {
         }, error => {
           console.log(error.error.errorMap.name);
           this.errorProductName = error.error.errorMap.name;
+          errorModalBtn.click();
+
         });
       }
     }
