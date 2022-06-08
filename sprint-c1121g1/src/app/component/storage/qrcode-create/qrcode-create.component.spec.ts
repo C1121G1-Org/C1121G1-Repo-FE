@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListProductModalComponent } from './list-product-modal.component';
+import { QrcodeCreateComponent } from './qrcode-create.component';
 
-describe('ListProductModalComponent', () => {
-  let component: ListProductModalComponent;
-  let fixture: ComponentFixture<ListProductModalComponent>;
+describe('QrcodeCreateComponent', () => {
+  let component: QrcodeCreateComponent;
+  let fixture: ComponentFixture<QrcodeCreateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListProductModalComponent ]
+      declarations: [ QrcodeCreateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListProductModalComponent);
+    fixture = TestBed.createComponent(QrcodeCreateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

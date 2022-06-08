@@ -3,9 +3,6 @@ Create by chienLV
 Time: 16h00 03/06/2022
 Function: get list product bestseller from database
 -->
-<div class="body">
-
-
 <!--Slider-->
 <section class="slider">
   <div class="container">
@@ -47,7 +44,7 @@ Function: get list product bestseller from database
             <img src="{{category.image}}" >
           </a>
         </div>
-          <p class="category-item-title">{{category.name}}</p>
+        <p class="category-item-title">{{category.name}}</p>
       </div>
     </div>
   </div>
@@ -124,7 +121,7 @@ Function: get list product bestseller from database
   </div>
 </section>
 <!--Product Gallery-->
-<section class="product-gallery-one">
+<section class="product-gallery-one" id="list-product-bestseller">
   <div class="container">
     <div class="product-gallery-one-content">
       <div class="product-gallery-one-content-title">
@@ -137,7 +134,7 @@ Function: get list product bestseller from database
           <li *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</li>
         </ul>
       </div>
-      <div class="product-gallery-one-content-product" id="list-product-bestseller">
+      <div class="product-gallery-one-content-product">
         <h3 *ngIf="flagProductBestseller">Điện thoại bán chạy chưa được cập nhật!</h3>
         <h3 *ngIf="flagProductBestsellerByCategory">Không tìm thấy sản phẩm nào!</h3>
         <div class="product-gallery-one-content-product-item" *ngFor="let productBestseller of productBestsellers">
@@ -163,4 +160,3 @@ Function: get list product bestseller from database
     </div>
   </div>
 </section>
-</div>

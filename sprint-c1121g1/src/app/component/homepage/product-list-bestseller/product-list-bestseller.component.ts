@@ -17,7 +17,6 @@ export class ProductListBestsellerComponent implements OnInit {
   productNewests: ProductBestseller[] = [];
   topfiveproductNewests: ProductBestseller[] = [];
   toptenproductNewests: ProductBestseller[] = [];
-  // productBestsellerByCategories: ProductBestseller[] = [];
   categorires: Category[] = [];
   topFiveCategories: Category[] = [];
   flagProductBestseller = false;
@@ -53,7 +52,7 @@ export class ProductListBestsellerComponent implements OnInit {
       this.productNewests = productNewests;
       this.topfiveproductNewests = this.productNewests.filter((item, index) => index < 5);
       this.toptenproductNewests = this.productNewests.filter((item, index) => index >= 5);
-      if (this.productBestsellers.length === 0) {
+      if (this.productNewests.length === 0) {
         this.flagProductNewest = true;
       }
     }, error => {
@@ -89,5 +88,4 @@ export class ProductListBestsellerComponent implements OnInit {
       this.flagProductBestsellerByCategory = true;
     });
   }
-
 }
