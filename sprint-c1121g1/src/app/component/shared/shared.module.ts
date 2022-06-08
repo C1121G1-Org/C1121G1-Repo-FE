@@ -1,6 +1,5 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-
 import {SharedRoutingModule} from './shared-routing.module';
 import {QrCodeComponent} from './qr-code/qr-code.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -20,7 +19,8 @@ import {ListChooseProductModalComponent} from './list-choose-product-modal/list-
   exports: [
     QrCodeComponent,
     ListSupplierModalComponent,
-    ListChooseProductModalComponent
+    ListChooseProductModalComponent,
+    ListCustomerModalComponent
   ]
 })
   export class SharedModule {

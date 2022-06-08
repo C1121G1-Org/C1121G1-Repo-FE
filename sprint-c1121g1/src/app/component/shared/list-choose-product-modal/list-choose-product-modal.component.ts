@@ -35,6 +35,7 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
   indexCurrent: number;
   searchByQuantity = '';
   formSearch: FormGroup;
+  pageSize: number;
 
   constructor(private productService: ProductService, private router: Router) {
     this.formSearch = new FormGroup({
@@ -63,6 +64,7 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
       this.totalPages = res.totalPages;
       this.first = res.first;
       this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
+      this.pageSize = res.pageable.pageSize;
       // // @ts-ignore
       // this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
     }, error => {

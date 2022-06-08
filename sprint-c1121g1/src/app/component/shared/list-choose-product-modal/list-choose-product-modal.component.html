@@ -3,9 +3,6 @@
 <!--Time: 13:37 03/06/2022-->
 <!--Method: pageProduct()-->
 <!--*/-->
-<button (click)="getAll()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal">
-  Launch demo modal
-</button>
 <div style="display: flex  ; justify-content: center ">
   <div class="modal fade" id="productModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
        aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -76,7 +73,7 @@
                         <tr style="cursor: pointer" (click)="getProduct(product)"
                             *ngFor="let product of productList; index as i"
                             [class.heightLight]="isSelectedProduct(product)">
-                          <td width="60px" class="text-center">{{(pageNumber) * productList.length + (i + 1)}}</td>
+                          <td width="60px" class="text-center">{{(pageNumber) * pageSize + (i + 1)}}</td>
                           <td class="text-center desc">{{product.name}}</td>
                           <td width="150px" class="text-center">{{product.id}}</td>
                           <td class="text-center">{{product.price |currency :'VND':''}}</td>
