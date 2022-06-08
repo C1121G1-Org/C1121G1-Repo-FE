@@ -19,16 +19,14 @@ const API_URL = `${environment.apiUrl}`;
 
 export class EmployeeService {
 
-
-
   constructor(private http: HttpClient) { }
-
-  saveEmployee(employeeDtos): Observable<EmployeeDto> {
-      return this.http.post<EmployeeDto>(API_URL + '/create', employeeDtos);
-    }
 
   getAll(name: string, page: number): Observable<any> {
     return this.http.get<any>(API_URL + `/list?page=${page}&keyName=${name}`);
+  }
+
+  saveEmployee(employeeDto): Observable<EmployeeDto> {
+    return this.http.post<EmployeeDto>(API_URL + '/create', employeeDto);
   }
 
   getAllPosition(): Observable<Positions[]> {

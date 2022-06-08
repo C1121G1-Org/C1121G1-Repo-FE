@@ -9,6 +9,7 @@ import {ProductUpdateComponent} from './component/product/product-update/product
 
 
 
+
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
 

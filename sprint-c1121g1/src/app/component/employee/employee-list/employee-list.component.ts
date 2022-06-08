@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import {EmployeeService} from '../../../services/employee/employee.service';
 import {EmployeeInterface} from '../../../dto/employee/employee-interface';
 import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-employee-list',
@@ -109,7 +111,6 @@ export class EmployeeListComponent implements OnInit {
    */
 
   public activeProject(index: number, id: number, nameEmployee: string): void {
-
     this.activeProjectIndex = index;
     this.nameDelete = nameEmployee;
     this.idClick = id;
