@@ -1,4 +1,3 @@
-
 .card-body {
   flex: 1 1 auto;
   padding: 1.5rem;
@@ -6,21 +5,17 @@
   border: none;
   position: relative;
 }
-
 body {
   padding: 0 1rem;
   background: #f3f3f3;
   font-family: 'Roboto', sans-serif;
 }
-
 input {
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
-
 .btn-rounded {
   border-radius: 0px;
 }
-
 .btn-create {
   border: none;
   background-position: center;
@@ -31,17 +26,14 @@ input {
   color: white;
   /*margin: 10px;*/
 }
-
 .btn-create:hover {
   background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
-
 .btn-create:active {
   background-color: #6eb9f7;
   background-size: 100%;
   transition: background 0s;
 }
-
 .btn-confirm {
   border: none;
   background-position: center;
@@ -52,17 +44,14 @@ input {
   color: white;
   /*margin: 10px;*/
 }
-
 .btn-confirm:hover {
   background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
 }
-
 .btn-confirm:active {
   background-color: #6eb9f7;
   background-size: 100%;
   transition: background 0s;
 }
-
 .btn-cancel {
   border: none;
   background-position: center;
@@ -73,58 +62,45 @@ input {
   color: white;
   /*margin: 10px;*/
 }
-
 .btn-cancel:hover {
   background: #fa4665 radial-gradient(circle, transparent 1%, #fa4665 1%) center/15000%;
 }
-
 .btn-cancel:active {
   background-color: #D70018;;
   background-size: 100%;
   transition: background 0s;
 }
-
 label {
   margin-top: 15px;
 }
-
 .input-icons i {
   position: absolute;
   cursor: pointer;
   right: 0;
 }
-
 .input-icons {
   width: 100%;
   margin-bottom: 10px;
 }
-
 .icon {
   padding: 10px;
   color: red;
   min-width: 50px;
   text-align: center;
 }
-
 .input-field {
   width: 100%;
   padding: 10px;
   /*text-align: center;*/
 }
-
 .container {
   max-width: 1500px;
   margin: auto;
 }
-
 .image {
   width: 50%;
 }
-
-
 /*MODAL*/
-
-
 .modal-confirm {
   color: #636363;
   width: 400px;
@@ -207,7 +183,6 @@ label {
   display: inline-block;
   margin: 100px auto;
 }
-
 /*button*/
 button{
   /*width: 30%;*/
@@ -246,7 +221,6 @@ button{
 .btn-w50 {
   width: 50%;
 }
-
 /*MODAL*/
 .modal-confirm {
   color: #434e65;
@@ -322,4 +296,3 @@ button{
   min-width: 150px;
   border: none;
 }
-

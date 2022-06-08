@@ -5,7 +5,9 @@
   Template: modal list all Suppliers
 -->
 
+
   <div class="container">
+
     <div class="row" style="justify-content: center;display: flex">
       <div class="col-md-8">
         <div class="card ">
@@ -154,7 +156,10 @@
   </div>
 
 <app-list-supplier-modal (itemOutput)="receiveSupplier($event)" (flagCreate)="receiveSupplierFlag($event)" [item]="check"></app-list-supplier-modal>
+<<<<<<< HEAD
+=======
 
+>>>>>>> ab5ef27be0e6dd574aa57568c617c60ca1721d16
 <app-qr-code (sendProduct)="receiveProduct($event)"></app-qr-code>
 <app-list-choose-product-modal (itemOutput)="receiveProduct($event)" [item]="check"></app-list-choose-product-modal>
 
