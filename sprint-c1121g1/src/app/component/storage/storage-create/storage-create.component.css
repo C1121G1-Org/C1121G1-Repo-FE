@@ -1,127 +1,3 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-}
-
-ul {
-  list-style: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-.menu-bar-content a:hover {
-  text-decoration: none;
-  color: white;
-}
-
-.container {
-  max-width: 1200px;
-  margin: auto;
-}
-
-header {
-  background-color: #D70018;
-}
-
-.menu-bar-content > ul {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 65px;
-}
-
-header ul li, a {
-  color: white;
-}
-
-.logo {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.header-search {
-  width: 500px;
-}
-
-header ul li:nth-child(2) {
-  position: relative;
-}
-
-header ul li:nth-child(2) input {
-  height: 30px;
-  width: 100%;
-  border-radius: 5px;
-  border: none;
-  padding-left: 6px;
-  outline: none;
-}
-
-header ul li:nth-child(2) i {
-  position: absolute;
-  font-size: 16px;
-  right: 12px;
-  color: #707070;
-  line-height: 30px;
-  cursor: pointer;
-
-}
-
-.menu-bar-content > ul > li:last-child {
-  font-weight: bold;
-}
-
-.fa-sort-down {
-  margin-left: 4px;
-}
-
-header ul li {
-  position: relative;
-}
-
-.sub-menu {
-  position: absolute;
-  background-color: white;
-  min-width: 230px;
-  height: auto;
-  left: 0;
-  top: 100%;
-  padding: 10px;
-  display: none;
-  border-radius: 5px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-
-}
-
-.sub-menu ul li a {
-  color: black;
-}
-
-.sub-menu ul {
-  display: flex;
-  flex-direction: column;
-}
-
-.sub-menu ul li {
-  padding: 6px 0;
-  transition: all 0.25s linear;
-}
-
-.sub-menu ul li:hover a {
-  color: #D70018;
-  font-weight: bold;
-}
-
-.menu-bar-content ul li:hover .sub-menu {
-  display: block;
-}
 
 .card-body {
   flex: 1 1 auto;
@@ -331,3 +207,119 @@ label {
   display: inline-block;
   margin: 100px auto;
 }
+
+/*button*/
+button{
+  /*width: 30%;*/
+  /*!*height: 38px;*!*/
+}
+.btn-grad-red {
+  background-image: linear-gradient(to right, #EB3349 0%, #F45C43  51%, #EB3349  100%);
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+}
+.btn-grad-red:active {
+  transform: scale(1.1);
+}
+.btn-grad-red:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad-blue {
+  background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
+  text-align: center;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;
+}
+.btn-grad-blue:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad-blue:active {
+  transform: scale(1.1);
+}
+.btn-w50 {
+  width: 50%;
+}
+
+/*MODAL*/
+.modal-confirm {
+  color: #434e65;
+  width: 525px;
+}
+.modal-confirm .modal-content {
+  padding: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+}
+.modal-confirm-danger .modal-header-danger {
+  background: #EB3349;
+  border-bottom: none;
+  position: relative;
+  text-align: center;
+  margin: -20px -20px 0;
+  border-radius: 5px 5px 0 0;
+  padding: 35px;
+}
+.modal-confirm-success .modal-header-success {
+  background: #1FA2FF;
+  border-bottom: none;
+  position: relative;
+  text-align: center;
+  margin: -20px -20px 0;
+  border-radius: 5px 5px 0 0;
+  padding: 35px;
+}
+.modal-confirm h4 {
+  text-align: center;
+  font-size: 36px;
+  margin: 10px 0;
+}
+.modal-confirm .form-control, .modal-confirm .btn {
+  min-height: 40px;
+  border-radius: 3px;
+}
+.modal-confirm .close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: #fff;
+  text-shadow: none;
+  opacity: 0.5;
+}
+.modal-confirm .close:hover {
+  opacity: 0.8;
+}
+.modal-confirm .icon-box {
+  color: #fff;
+  width: 95px;
+  height: 95px;
+  display: inline-block;
+  border-radius: 50%;
+  z-index: 9;
+  border: 5px solid #fff;
+  padding: 15px;
+  text-align: center;
+}
+.modal-confirm .icon-box i {
+  font-size: 58px;
+  margin: -2px 0 0 -2px;
+}
+.modal-confirm.modal-dialog {
+  margin-top: 80px;
+}
+.modal-confirm .btn-modal, .modal-confirm .btn-modal:active {
+  text-decoration: none;
+  border-radius: 3px;
+  margin-top: 10px;
+  padding: 6px 20px;
+  min-width: 150px;
+  border: none;
+}
+

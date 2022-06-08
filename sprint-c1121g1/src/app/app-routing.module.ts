@@ -20,12 +20,10 @@ const routes: Routes = [
 
 
   // {path: 'api/product/edit/:id', component: ProductUpdateComponent},
-
+  
   {path: 'storage/create', component: StorageCreateComponent},
   {path: 'storage/create', component: StorageCreateComponent},
-  {path: 'api/product/edit/:id', component: ProductUpdateComponent},
   {path: 'storage/create', component: StorageCreateComponent}
-
 ];
 
 @NgModule({
