@@ -17,7 +17,7 @@ export class InvoiceHistoryComponent implements OnInit {
   productQuantity = 0;
 
   formSearch = new FormGroup({
-    keyword: new FormControl('',   Validators.pattern('^[a-zA-Z0-9]*$'))
+    keyword: new FormControl('', Validators.pattern('[0-9a-zA-Z\\\\s]*'))
   });
 
   keyword = '';
@@ -51,22 +51,20 @@ export class InvoiceHistoryComponent implements OnInit {
     this.massage = '';
     this.keyword = this.formSearch.get('keyword').value;
     this.invoiceService.getAll(this.keyword.trim(), this.sort, this.page).subscribe(data => {
-          console.log(data);
-          this.page = data.number;
-          this.totalPages = data.totalPages;
-          this.invoiceList = data.content;
-          console.log(data.content);
-        },
-        error => {
+        console.log(data);
+        this.page = data.number;
+        this.totalPages = data.totalPages;
+        this.invoiceList = data.content;
+        console.log(data.content);
+      },
+      error => {
           console.log(error);
-          this.massage = 'Không thể tìm thấy kết quả ';
+          this.massage = 'Không thể tìm thấy';
           this.page = 0;
           this.totalPages = 0;
           this.invoiceList = null;
         }
-      );
-
-
+    );
   }
 
   previous() {

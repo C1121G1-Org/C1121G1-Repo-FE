@@ -63,7 +63,6 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%); ">
       <th>Tổng tiền</th>
     </tr>
     </thead>
-    <div *ngIf="massage !=''" style="text-align: center">Không thể tìm thấy</div>
     <tbody>
     <tr *ngFor="let invoice of invoiceList ">
       <td>{{invoice.invoiceId}}</td>
@@ -78,6 +77,8 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%); ">
     </tr>
     </tbody>
   </table>
+  <div *ngIf="massage !=''" style="text-align: center" ><h1>Không thể tìm thấy kết quả</h1></div>
+
 </div>
 
 
