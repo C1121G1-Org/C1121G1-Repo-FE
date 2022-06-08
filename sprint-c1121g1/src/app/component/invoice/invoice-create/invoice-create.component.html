@@ -5,6 +5,9 @@
 <!--*/-->
 <form [formGroup]="invoiceForm" (ngSubmit)="createInvoice(success)">
   <div class="container pt-2">
+    <h1 style="font-size: 36px" class="text-center font-weight-bold text-uppercase  py-4">
+      Quản lý bán hàng
+    </h1>
     <div class="row">
       <div class="col-md-12 ">
         <div class="card border-secondary shadow">
@@ -197,8 +200,8 @@
                 </span>
               </div>
               <div >
-                      <div class="messageError" *ngFor ="let errorMessage of errorMap;let i = index" >
-<!--                        <li>{{errorMessage.get}}</li>-->
+                      <div class="messageError" *ngFor ="let err of dict;let i = index" >
+                        <p>{{dict[i].value}}</p>
                       </div>
                 <!--              <div *ngIf="!flagProduct">-->
                 <!--                <span class="col alert alert-danger" role="alert"-->
@@ -211,7 +214,7 @@
               </div>
             </div>
           </div>
-          <div class="card border-secondary mt-2 mb-4 shadow">
+          <div class="card border-secondary mt-2  shadow">
             <div class="mt-5 mb-2 ml-5 mr-5">
               <div class="form-group row">
                 <label for="inputEmail3" class="col-sm-2 col-form-label">Thành tiền</label>
