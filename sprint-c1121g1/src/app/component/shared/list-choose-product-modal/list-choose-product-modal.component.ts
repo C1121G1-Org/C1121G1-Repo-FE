@@ -1,8 +1,9 @@
 
-import {Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {ProductService} from '../../../services/product/product.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -17,6 +18,7 @@ import {Router} from '@angular/router';
 */
 export class ListChooseProductModalComponent implements OnInit, OnChanges {
   @Output() itemOutput = new EventEmitter();
+  @Input() item: boolean;
   productList: IProduct[] = [];
   pageNumber: number;
   totalPages = [];
@@ -33,8 +35,14 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
   selectedIndex: number;
   indexCurrent: number;
   searchByQuantity = '';
+  formSearch: FormGroup;
+  pageSize: number;
 
   constructor(private productService: ProductService, private router: Router) {
+    this.formSearch = new FormGroup({
+      keySearch: new FormControl('', [Validators.pattern('^[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\s]*$')])
+    })
+    ;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -57,8 +65,9 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
       this.totalPages = res.totalPages;
       this.first = res.first;
       this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
-      // @ts-ignore
-      this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
+      this.pageSize = res.pageable.pageSize;
+      // // @ts-ignore
+      // this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
     }, error => {
       this.message = true;
     });
@@ -94,21 +103,29 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
   getAllProductPage(index: any) {
     this.indexCurrent = index;
     this.pageNumber = index - 1;
-    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice , this.searchByQuantity);
+    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
   }
 
   search(value: any) {
-    this.currentProduct = null;
-    this.pageNumber = 0;
-    if (this.checkSearch === 'price') {
-      this.searchByPrice = value;
-      this.searchByName = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice , this.searchByQuantity);
+    value = value.trim();
+    if (!this.formSearch.controls['keySearch'].valid) {
+      this.searchByPrice = 'sadsad8sa0d89as';
+      this.searchByName = '34543fddcsd';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
     } else {
-      this.searchByName = value;
-      this.searchByPrice = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice , this.searchByQuantity);
+      this.currentProduct = null;
+      this.pageNumber = 0;
+      if (this.checkSearch === 'price') {
+        this.searchByPrice = value;
+        this.searchByName = '';
+        this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      } else {
+        this.searchByName = value;
+        this.searchByPrice = '';
+        this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      }
     }
+
   }
 
   close() {
@@ -141,4 +158,5 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
     }
     return this.indexCurrent === this.selectedIndex ? true : false;
   }
+
 }

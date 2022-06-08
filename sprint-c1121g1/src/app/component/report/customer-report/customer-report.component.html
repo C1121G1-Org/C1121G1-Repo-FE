@@ -1,180 +1,200 @@
 <!--Created by TuanNQ-->
 <!--Time: 18:00 31/05/2022-->
 <!--Function: Show all list report customer-->
-
+<!--  Modal -->
 <link rel="stylesheet" href="customer-report.component.css">
-<div class="card card-body">
-  <h3 style="text-align: center">Quản lý khách hàng</h3>
-</div>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div>
-  <div class="row"
-       style="margin-right: -10px;margin-right: -10px;margin-left: -10px;margin-right: 0px;margin-left: 0px">
+<div class="d-flex justify-content-center">
+  <section class="make-color container-fluid">
+    <!--for demo wrap-->
+    <h1 class="my-5">Quản lý khách hàng</h1>
 
-    <div class="col-2 col-md-2">
-      <h5>Tùy chọn lọc: </h5>
-    </div>
+    <div>
+      <div class="row"
+           style="margin-right: -10px;margin-right: -10px;margin-left: -10px;margin-right: 0px;margin-left: 0px">
 
-    <div class="col-4 col-md-4">
-      <div class="form-check">
-        <input #element1 class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
-               value="1" (change)="filterVariable(element1)"
-               checked>
-        <label class="form-check-label" for="exampleRadios1">
-          Tất cả
-        </label>
-      </div>
-    </div>
-
-    <div class="col-4 col-md-4">
-
-      <div class="row">
-        <div class="form-check col-4 col-md-4">
-          <input #element2 class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
-                 value="2" (change)="filterVariable(element2)">
-          <label class="form-check-label" for="exampleRadios2">
-            Chọn lọc:
-          </label>
+        <div class="col-2 col-md-2">
+          <h5>Tùy chọn lọc: </h5>
         </div>
 
-        <div class="col-7 col-md-7">
+        <div class="col-4 col-md-4">
+          <div class="form-check">
+            <input #element1 class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
+                   value="1" (change)="filterVariable(element1)"
+                   checked>
+            <label class="form-check-label" for="exampleRadios1">
+              Tất cả
+            </label>
+          </div>
+        </div>
+
+        <div class="col-4 col-md-4">
+
           <div class="row">
             <div class="form-check col-4 col-md-4">
-              <input class="form-check-input" type="checkbox" value="false" id="defaultCheck1"
-                     [disabled]="chooseFilter != 2"
-                     (click)="chooseSearchGender()">
-              <label class="form-check-label" for="defaultCheck1">
-                Giới tính
+              <input #element2 class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2"
+                     value="2" (change)="filterVariable(element2)">
+              <label class="form-check-label" for="exampleRadios2">
+                Chọn lọc:
               </label>
             </div>
 
             <div class="col-7 col-md-7">
-              <select class="custom-select custom-select-sm"
-                      [disabled]="chooseGenderSearch != true"
-                      (change)="searchGender($event.target)">
-                <option hidden>Gender selection</option>
-                <option value="true">Nam</option>
-                <option value="false">Nữ</option>
-              </select>
-            </div>
+              <div class="row">
+                <div class="form-check col-4 col-md-4">
+                  <input class="form-check-input" type="checkbox" value="false" id="defaultCheck1"
+                         [disabled]="chooseFilter != 2"
+                         (click)="chooseSearchGender()">
+                  <label class="form-check-label" for="defaultCheck1">
+                    Giới tính
+                  </label>
+                </div>
 
-            <div class="form-check col-4 col-md-4">
-              <input class="form-check-input" type="checkbox" value="2" id="defaultCheck2"
-                     [disabled]="chooseFilter != 2"
-                     (click)="chooseSearchAge()">
-              <label class="form-check-label" for="defaultCheck2">
-                Tuổi
-              </label>
-            </div>
+                <div class="col-7 col-md-7">
+                  <select class="custom-select custom-select-sm"
+                          [disabled]="chooseGenderSearch != true"
+                          (change)="searchGender($event.target)">
+                    <option hidden>Gender selection</option>
+                    <option value="true">Nam</option>
+                    <option value="false">Nữ</option>
+                  </select>
+                </div>
 
-            <div class="col-7 col-md-7" (change)="searchAge($event.target)">
-              <input class="form-control" type="number" [disabled]="chooseAgeSearch != true">
+                <div class="form-check col-4 col-md-4">
+                  <input class="form-check-input" type="checkbox" value="2" id="defaultCheck2"
+                         [disabled]="chooseFilter != 2"
+                         (click)="chooseSearchAge()">
+                  <label class="form-check-label" for="defaultCheck2">
+                    Tuổi
+                  </label>
+                </div>
+
+                <div class="col-7 col-md-7" (change)="searchAge($event.target)">
+                  <input class="form-control" type="number" [disabled]="chooseAgeSearch != true">
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-  </div>
-
-  <div>
-    <div style="text-align: center">
-      <button type="button" class="btn btn-primary" (click)="filter()">Lọc</button>
+    <div>
+      <div style="text-align: center">
+        <button type="button" style="display: inline-block"
+                class="btn btn-grad-blue mx-1" (click)="filter(errorBtn)">Lọc
+        </button>
+      </div>
     </div>
-  </div>
+
+    <div style="float: left">
+      <h5>Số lượng khách hàng: {{customerQuantity}}</h5>
+    </div>
+
+    <div *ngIf="checkReportCustomers == false">
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0.5">
+          <tbody>
+          <tr>
+            <td class="d-flex justify-content-center font-weight-bold text-uppercase">
+              Không tìm thấy khách hàng nào.
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="checkReportCustomers == true">
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+          <tr>
+            <th>STT</th>
+            <th>Họ và tên</th>
+            <th>Giới tính</th>
+            <th>Ngày sinh</th>
+            <th>Địa chỉ email</th>
+            <th>Số điện thoại</th>
+            <th>Số lần mua</th>
+            <th>Lịch sử mua hàng</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table class=" table table-bordered table-responsive-md">
+          <tbody>
+          <tr *ngFor="let customerReport of customerReports, index as i">
+            <td>{{i + 1}}</td>
+            <td class="desc">{{customerReport.name}}</td>
+            <td>
+              <p *ngIf="customerReport.gender == false">Nữ</p>
+              <p *ngIf="customerReport.gender == true">Nam</p>
+            </td>
+            <td>{{customerReport.dateOfBirth}}</td>
+            <td class="desc">{{customerReport.email}}</td>
+            <td>{{customerReport.phoneNumber}}</td>
+            <td>{{customerReport.purchaseTimes}}</td>
+            <td>
+              <button type="button"
+                      class="btn btn-grad-blue"
+                      [routerLink]="['/report/purchase-hitory/', customerReport.id]">Xem
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row my-3">
+      <div class="row col-4 ml-0">
+        <button type="button" data-toggle="modal" data-target="#myModal1"
+                class="btn btn-grad-blue" [routerLink]="['']">
+          <i class="fa fa-paper-plane"></i> Quay lại
+        </button>
+      </div>
+
+      <div class="col-4 d-flex justify-content-center">
+        <p class="page-link">{{(pageNumber + 1) + '/' + totalPages}}</p>
+      </div>
+      <div class="col-4">
+        <!--Pagination-->
+        <nav class="d-flex justify-content-end wow fadeIn">
+          <ul class="pagination">
+            <li class="page-item">
+              <button [disabled]="pageNumber<=0" class="page-link" (click)="previousPage()">Trước</button>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <button class="page-link">{{pageNumber + 1}}</button>
+            </li>
+            <li class="page-item">
+              <button [disabled]="pageNumber>=(totalPages-1)" class="page-link" (click)="nextPage()">Sau</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
 </div>
 
-<div class="card card-body">
-  <h5>Số lượng khách hàng: </h5>
-
-  <div [hidden]="checkReportCustomers == false">
-    <div class="tbl-header">
-      <table class="table table-bordered table-responsive-md">
-        <thead class="text-center">
-        <tr>
-          <th class="text-center">STT</th>
-          <th class="text-center">Họ và tên</th>
-          <th class="text-center">Giới tính</th>
-          <th class="text-center">Ngày sinh</th>
-          <th class="text-center">Địa chỉ email</th>
-          <th class="text-center">Số điện thoại</th>
-          <th class="text-center">Số lần mua</th>
-          <th class="text-center">Lịch sử mua hàng</th>
-        </tr>
-        </thead>
-      </table>
-    </div>
-
-    <div class="tbl-content">
-      <table class="table table-bordered table-responsive-md">
-        <tbody class="text-center">
-
-        <tr *ngFor="let customerReport of customerReports, index as i">
-          <td class="text-center">{{i + 1}}</td>
-          <td class="text-center">{{customerReport.name}}</td>
-          <td class="text-center">
-            <p *ngIf="customerReport.gender == false">Nữ</p>
-            <p *ngIf="customerReport.gender == true">Nam</p>
-          </td>
-          <td class="text-center">{{customerReport.dateOfBirth}}</td>
-          <td class="text-center">{{customerReport.email}}</td>
-          <td class="text-center">{{customerReport.phoneNumber}}</td>
-          <td class="text-center">{{customerReport.purchaseTimes}}</td>
-          <td class="text-center">
-            <button type="button" class="btn btn-primary"
-                    [routerLink]="['/report/purchase-hitory/', customerReport.id]">Xem
-            </button>
-          </td>
-        </tr>
-
-        </tbody>
-      </table>
-
-      <!--    &lt;!&ndash;Pagination&ndash;&gt;-->
-      <!--    <nav class="d-flex justify-content-center wow fadeIn" style="float: right">-->
-      <!--      <ul class="pagination pg-blue">-->
-
-      <!--        &lt;!&ndash;Arrow left&ndash;&gt;-->
-      <!--        <li class="page-item">-->
-      <!--          <a class="page-link" (click)="previousPage()" aria-label="Previous">-->
-      <!--            <span aria-hidden="true">&laquo;</span>-->
-      <!--            <span class="sr-only">Previous</span>-->
-      <!--          </a>-->
-      <!--        </li>-->
-
-
-      <!--        <li class="page-item active" *ngFor="let page of pageNumber">-->
-      <!--          <a class="page-link" href="#">{{page}}-->
-      <!--            <span class="sr-only">(current)</span>-->
-      <!--          </a>-->
-      <!--        </li>-->
-
-      <!--        <li class="page-item">-->
-      <!--          <a class="page-link" (click)="nextPage()" aria-label="Next">-->
-      <!--            <span aria-hidden="true">&raquo;</span>-->
-      <!--            <span class="sr-only">Next</span>-->
-      <!--          </a>-->
-      <!--        </li>-->
-      <!--      </ul>-->
-      <!--    </nav>-->
-      <!--    &lt;!&ndash;Pagination&ndash;&gt;-->
-
-      <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
-        <a type="button" class="btn btn-outline-info" (click)="previousPage()"
-           [hidden]="pageNumber == 0">Previous</a>
-        <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
-        <a type="button" class="btn btn-outline-info" (click)="nextPage()"
-           [hidden]="pageNumber == totalPages - 1">Next</a>
+<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>
+<!--success modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
       </div>
-
-      <div style="text-align: center" class="container col-6 col-md-6">
-        <button type="button" style="display: inline-block" class="btn btn-primary">Quay lại</button>
+      <div class="modal-body text-center">
+        <h4 style="color: red">Lỗi.</h4>
+        <p *ngIf="checkGenderValue == false" style="color: darkred">Mời bạn chọn giới tính cần lọc.</p>
+        <p *ngIf="checkAgeValue == false" style="color: darkred">Mời bạn nhập số tuổi cần lọc.</p>
+        <p *ngIf="checkSelectiveValue == false" style="color: darkred">Chưa chọn cách chọn lọc.</p>
       </div>
     </div>
   </div>
-
-  <div [hidden]="checkReportCustomers == true" class="text-center">
-    <p>Không tìm thấy khách hàng nào.</p>
-  </div>
-
 </div>

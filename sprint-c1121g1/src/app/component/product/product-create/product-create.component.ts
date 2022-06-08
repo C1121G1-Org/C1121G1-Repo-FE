@@ -131,6 +131,7 @@ export class ProductCreateComponent implements OnInit {
 */
 
 
+
   get name() {
     return this.productForm.get('name');
   }
@@ -166,4 +167,5 @@ export class ProductCreateComponent implements OnInit {
   get otherDescription() {
     return this.productForm.get('otherDescription');
   }
+
 }
