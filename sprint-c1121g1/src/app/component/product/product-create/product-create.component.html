@@ -21,7 +21,8 @@
                   <div
                     *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched|| productForm.controls.name.errors?.empty)">
                     <!--                    <small *ngIf="productForm.controls.name.errors?.maxlength" class="form-text text-danger">Tên phải ít hơn 255 ký tự </small>-->
-                    <small *ngIf="name.errors?.maxlength" class="text-form text-danger">Tên phải ngắn hơn 250 kí tự</small>
+                    <small *ngIf="name.errors?.maxlength" class="text-form text-danger">Tên phải ngắn hơn 250 kí
+                      tự</small>
                     <small
                       *ngIf="productForm.controls.name.hasError('required') || productForm.controls.name.errors.empty"
                       class="form-text text-danger">Vui lòng nhập tên hàng hóa.</small>
@@ -33,8 +34,8 @@
                   <label for="price">Giá <span class="text-danger">(*):</span></label>
                   <input type="text" id=price formControlName="price" class="form-control" name="price">
                   <!--                  <input onChange="format_curency(this);" type="text" id=price formContronlName="price" class="form-control" name="price">-->
-<!--                  <input [ngModel]="productForm.controls.price.value | currency"-->
-<!--                  (ngModelChange)="productForm.controls.price =$event" name="inputField" type="text" />-->
+                  <!--                  <input [ngModel]="productForm.controls.price.value | currency"-->
+                  <!--                  (ngModelChange)="productForm.controls.price =$event" name="inputField" type="text" />-->
 
                   <span>VND</span>
 
@@ -43,7 +44,8 @@
                     <small
                       *ngIf="productForm.controls.price.hasError('required') || productForm.controls.price.errors.empty"
                       class="form-text text-danger">Vui lòng nhập giá sản phẩm.</small>
-                    <small *ngIf="price.errors?.pattern" class="tex-form text-danger">Giá phải là số và lớn hơn 0. </small>
+                    <small *ngIf="price.errors?.pattern" class="tex-form text-danger">Giá phải là số và lớn hơn
+                      0. </small>
                   </div>
                 </div>
 
@@ -97,7 +99,8 @@
                     <small
                       *ngIf="productForm.controls.camera.hasError('required') || productForm.controls.camera.errors.empty"
                       class="form-text text-danger">Vui lòng nhập thông số camera.</small>
-                    <small *ngIf="camera.errors?.maxlength" class="text-form text-danger">Trường camera phải ngắn hơn 50 kí tự</small>
+                    <small *ngIf="camera.errors?.maxlength" class="text-form text-danger">Trường camera phải ngắn hơn 50
+                      kí tự</small>
 
                   </div>
                 </div>
@@ -139,6 +142,27 @@
                   </div>
                 </div>
 
+
+                <div class="form-group col-md-12">
+                  <label for="category">Danh Mục<span class="text-danger">(*)</span> </label>
+                  <!--                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="category">-->
+                  <select [compareWith]="comparefn" name="category" id="category" formControlName="categoryDto"
+                          class="form-control">
+                    <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+                  </select>
+
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.categoryDto.invalid && (productForm.controls.categoryDto.dirty || productForm.controls.categoryDto.touched || productForm.controls.categoryDto.errors?.empty)">
+
+                    <small
+                      *ngIf="productForm.controls.categoryDto.hasError('required') || productForm.controls.categoryDto.errors.empty"
+                      class="form-text text-danger">Vui lòng chọn danh mục.</small>
+
+                  </div>
+                </div>
+
+
                 <div class="form-group col-md-12">
                   <label for="cpu">CPU<span class="text-danger">(*)</span> </label>
                   <input formControlName="cpu" type="text" class="form-control" name="cpu" id="cpu">
@@ -158,22 +182,31 @@
 
                 <div class="form-group col-md-12">
                   <label for="otherDescription">Mô tả thêm </label>
+                  <ckeditor id="otherDescription" formControlName="otherDescription"></ckeditor>
 
-                  <textarea id="otherDescription" formControlName="otherDescription"
-                            class="form-control">    </textarea>
+                  <!--                  <textarea id="otherDescription" formControlName="otherDescription"-->
+                  <!--                            class="form-control">    </textarea>-->
 
                 </div>
 
                 <div class=" col-md-12 text-center mx-auto mt-4">
-                  <button style="width: 200px;" type="submit" class="btn btn-primary "
-                  ><i class="fa fa-paper-plane"></i>Xác nhận
-                  </button>
+                  <!--                  <button style="width: 200px;" type="submit" class="btn btn-primary "-->
+                  <!--                  ><i class="fa fa-paper-plane"></i>Xác nhận-->
+                  <!--                  </button>-->
 
-                  <a type="button" class="btn btn-danger"
-                     style="margin-left: 10px; width: 200px"
-                     data-toggle="modal"
-                     data-target="#cancelModal">
-                    Hủy</a>
+                  <!--                  <a type="button" class="btn btn-danger"-->
+                  <!--                     style="margin-left: 10px; width: 200px"-->
+                  <!--                     data-toggle="modal"-->
+                  <!--                     data-target="#cancelModal">-->
+                  <!--                    Hủy</a>-->
+
+                  <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
+                    class="fa fa-paper-plane"></i>THÊM MỚI
+                  </button>
+                  <a data-toggle="modal"
+                     data-target="#cancelModal"
+                     style="width: 200px" type="submit" class="btn btn-grad-red mx-1">
+                    <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
                 </div>
               </div>
             </div>
@@ -205,7 +238,7 @@
 
       </div>
       <div class="modal-footer">
-        <a type="button" [routerLink]="['/api/product/listProduct']" class="btn btn-primary">Có</a>
+        <a type="button" [routerLink]="['/product/listProduct']" class="btn btn-primary">Có</a>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Không</button>
       </div>
     </div>
@@ -246,7 +279,8 @@
         <p>Thêm mới thông tin hàng hóa thành công!</p>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/api/product/listProduct']">OK
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/api/product/listProduct']">
+          OK
         </button>
       </div>
     </div>

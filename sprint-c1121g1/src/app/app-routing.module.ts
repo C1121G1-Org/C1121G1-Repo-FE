@@ -12,9 +12,9 @@ import {ProductUpdateComponent} from './component/product/product-update/product
 
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
-
+  // role admin, bussiness staff
   {path: 'product/create', component: ProductCreateComponent},
-
+  // role admin, bussiness staff
   {path: 'product/edit/:id', component: ProductUpdateComponent},
   {path: 'storage/create', component: StorageCreateComponent},
 

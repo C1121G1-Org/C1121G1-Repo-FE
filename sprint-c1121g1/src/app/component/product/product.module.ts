@@ -7,16 +7,18 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { ProductUpdateComponent } from './product-update/product-update.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {CKEditorModule} from "ckeditor4-angular";
 
 
 @NgModule({
   declarations: [ProductListComponent, ProductCreateComponent, ProductUpdateComponent],
-  imports: [
-    HttpClientModule,
-    CommonModule,
-    ProductRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
-  ]
+    imports: [
+        HttpClientModule,
+        CommonModule,
+        ProductRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        CKEditorModule
+    ]
 })
 export class ProductModule { }

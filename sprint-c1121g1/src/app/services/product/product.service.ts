@@ -41,8 +41,8 @@ export class ProductService {
     Function: find by id
 */
 
-  findById(id: number): Observable<Product> {
-    return this.http.get<Product>(this.productApi + '/' + id);
+  findById(id: number): Observable<any> {
+    return this.http.get<any>(this.productApi + '/' + id);
   }
 
   /*

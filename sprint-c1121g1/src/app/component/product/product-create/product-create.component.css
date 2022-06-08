@@ -1,66 +1,39 @@
 
-.btn-create:hover {
-  background: #fa4665 radial-gradient(circle, transparent 1%, #fa4665 1%) center/15000%;
-  text-decoration: none;
-  color: white;
-}
-.btn-create:active {
-  background-color: #277CEA;
-  background-size: 100%;
-  transition: background 0s;
-}
 
-.btn-rounded {
-  /*border: none;*/
-  border-radius: 0.5rem;
-}
-.btn-create {
-  display: inline-block;
-  font-weight: 400;
+.btn-grad-red {
+  background-image: linear-gradient(to right, #EB3349 0%, #F45C43  51%, #EB3349  100%);
   text-align: center;
-  vertical-align: middle;
-  border: 1px solid transparent;
-  padding: 0.5rem 0.5rem;
-  font-size: 1.5rem;
-  line-height: 1.1;
-  background-position: center;
-  transition: background 0.8s;
-  background-color: #277CEA;
-  color: white;
-  width: 15%;
-  text-decoration: none;
-
-}
-
-
-.btn-cancel:hover {
-  background: #fa4665 radial-gradient(circle, transparent 1%, #fa4665 1%) center/15000%;
-  text-decoration: none;
+  transition: 0.5s;
+  background-size: 200% auto;
   color: white;
 }
-.btn-cancel:active {
-  background-color: #D70018;
-  background-size: 100%;
-  transition: background 0s;
+.btn-grad-red:active {
+  transform: scale(1.1);
 }
-
-.btn-cancel {
-  display: inline-block;
-  font-weight: 400;
+.btn-grad-red:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad-blue {
+  background-image: linear-gradient(to right, #1FA2FF 0%, #12D8FA  51%, #1FA2FF  100%);
   text-align: center;
-  vertical-align: middle;
-  border: 1px solid transparent;
-  padding: 0.5rem 0.5rem;
-  font-size: 1.5rem;
-  line-height: 1.1;
-  background-position: center;
-  transition: background 0.8s;
-  background-color: #D70018;
+  transition: 0.5s;
+  background-size: 200% auto;
   color: white;
-  width: 15%;
-  text-decoration: none;
-
 }
+.btn-grad-blue:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+.btn-grad-blue:active {
+  transform: scale(1.1);
+}
+
+
+
+
 
 /*css up anh*/
 .file__label {
