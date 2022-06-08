@@ -1,3 +1,6 @@
+.container-fluid {
+  min-height: 50vh;
+}
 th,td{
   text-align: center
 }

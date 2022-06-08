@@ -52,7 +52,7 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%); ">
   </div>
 
 
-  <table class="table">
+  <table *ngIf="!message" class="table">
     <thead>
     <tr>
       <th>Stt</th>
@@ -77,27 +77,31 @@ background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%); ">
     </tr>
     </tbody>
   </table>
-  <div *ngIf="massage !=''" style="text-align: center" ><h1>Không thể tìm thấy kết quả</h1></div>
+  <div *ngIf="message !=''" style="text-align: center;color: red" ><h1>{{message}}</h1></div>
+
+  <div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item">
+        <button [disabled]="page < 1" class="page-link" (click)="previous()">
+          <i class="fa fa-angle-left" aria-hidden="true"></i>
+        </button>
+      </li>
+      <li class="page-item"><a class="page-link">{{page + 1}}</a></li>
+      <!--        <li class="page-item"><a class="page-link">{{+totalPages}}</a></li>-->
+      <li class="page-item">
+        <button [disabled]="page >= totalPages - 1" class="page-link" (click)="next()">
+          <i class="fa fa-angle-right" aria-hidden="true"></i>
+        </button>
+      </li>
+    </ul>
+  </nav>
+  </div>
 
 </div>
 
 
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item">
-      <button [disabled]="page < 1" class="page-link" (click)="previous()">
-        <i class="fa fa-angle-left" aria-hidden="true"></i>
-      </button>
-    </li>
-    <li class="page-item"><a class="page-link">{{page + 1}}</a></li>
-    <!--        <li class="page-item"><a class="page-link">{{+totalPages}}</a></li>-->
-    <li class="page-item">
-      <button [disabled]="page >= totalPages - 1" class="page-link" (click)="next()">
-        <i class="fa fa-angle-right" aria-hidden="true"></i>
-      </button>
-    </li>
-  </ul>
-</nav>
+
 <!--page + 1 *-->
 
 <!-- Modal -->
