@@ -3,7 +3,8 @@ import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild} from '@a
 import {SaleReportService} from '../../../services/report/sale-report.service';
 import {QrcodeService} from '../../../services/qrcode/qrcode.service';
 import {ProductService} from '../../../services/product/product.service';
-import {Product} from '../../../models/product';
+import {Product} from "../../../models/product";
+
 
 declare var $: any;
 
