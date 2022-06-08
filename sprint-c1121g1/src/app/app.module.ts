@@ -20,6 +20,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
 import {CKEditorModule} from "ckeditor4-angular";
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +45,6 @@ import {CKEditorModule} from "ckeditor4-angular";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     CKEditorModule
-
   ],
   providers: [],
   exports: [],

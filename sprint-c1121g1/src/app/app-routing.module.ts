@@ -7,6 +7,8 @@ import {StorageCreateComponent} from './component/storage/storage-create/storage
 import {ProductCreateComponent} from './component/product/product-create/product-create.component';
 import {ReportModule} from './component/report/report.module';
 import {ProductUpdateComponent} from './component/product/product-update/product-update.component';
+import {ProductListComponent} from "./component/product/product-list/product-list.component";
+
 
 
 
@@ -16,14 +18,13 @@ const routes: Routes = [
   {path: 'product/create', component: ProductCreateComponent},
   // role admin, bussiness staff
   {path: 'product/edit/:id', component: ProductUpdateComponent},
-  {path: 'storage/create', component: StorageCreateComponent},
 
 
   // {path: 'api/product/edit/:id', component: ProductUpdateComponent},
 
   {path: 'storage/create', component: StorageCreateComponent},
-  {path: 'storage/create', component: StorageCreateComponent},
-  {path: 'storage/create', component: StorageCreateComponent}
+  {path:'listProduct',component: ProductListComponent},
+
 ];
 
 @NgModule({
