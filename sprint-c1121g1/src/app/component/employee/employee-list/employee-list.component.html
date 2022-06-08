@@ -1,1 +1,149 @@
-<p>employee-list works!</p>
+<div class="d-flex justify-content-center">
+  <section class="make-color container">
+    <!--for demo wrap-->
+    <h1 class="my-5">Thông tin nhân viên</h1>
+
+    <div class="mb-3 row">
+      <div class="row col-6 justify-content-between ml-1">
+        <div>
+          <input #names [ngModel]="name" (change)="search(names.value)" style="width: 250px"
+                 class="header-search search-input" placeholder="Bạn cần tìm gì?"
+                 type="text"><i (click)="getAll()"
+                                class="fa fa-repeat"
+                                style="position: relative; right: 26px; top: 3px; font-size: 18px"></i>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="float-right">
+          <button class="btn btn-grad-blue" routerLink="/employee/create"><i class="fa fa-plus" aria-hidden="true"></i>
+            Thêm mới
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="message">
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0.5">
+          <tbody>
+          <tr>
+            <td class="d-flex justify-content-center font-weight-bold text-uppercase"> Không tìm thấy dữ liệu</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="!message">
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+          <tr>
+            <th>STT</th>
+            <th>Họ và tên</th>
+            <th>Ngày sinh</th>
+            <th>Địa chỉ</th>
+            <th>Công việc</th>
+            <th>Số điện thoại</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+          <tr *ngFor="let e of employees; index as i; let j = index" routerLink=" active"
+              (click)="activeProject(j, e.id, e.name)"
+              [ngStyle]="{'background-color': activeProjectIndex === j ? '#84c0ec' : 'white'}">
+
+            <td>{{i + 1}}</td>
+            <td>{{e.name}}</td>
+            <td>{{e.dateOfBirth}}</td>
+            <td>{{e.address}}</td>
+            <td>{{e.namePosition}}</td>
+            <td>{{e.phoneNumber}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="message"></div>
+
+    <div class="row my-3">
+      <div class="row col-4 ml-0">
+        <button type="button" (click)="clickEdit(errorModalBtn)" class="btn btn-grad-blue">
+          <i class="fa fa-paper-plane"></i> Sửa
+        </button>
+        <button type="button" (click)="clickDelete(deleteButton, errorModalBtn)" class="btn btn-grad-red mx-2" data-toggle="modal"
+                data-target="#exampleModaltest">
+          <i class="fa fa-trash"></i> Xoá
+        </button>
+      </div>
+
+      <div class="col-4 d-flex justify-content-center">
+        <p class="page-link">{{(page + 1) + '/' + totalPages}}</p>
+      </div>
+      <div class="col-4">
+        <!--Pagination-->
+        <nav class="d-flex justify-content-end wow fadeIn">
+          <ul class="pagination">
+            <li class="page-item">
+              <button [disabled]="page<=0" class="page-link" (click)="previous()">Trước</button>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <button class="page-link">{{page + 1}}</button>
+            </li>
+            <li class="page-item">
+              <button [disabled]="page>=(totalPages-1)" class="page-link" (click)="next()">Sau</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+<!-- Modal Delete -->
+<button [hidden]="true" #deleteButton data-toggle="modal" data-target="#exampleModal"></button>
+<div id="exampleModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="card-img">
+          <img class="img-fluid" src="https://icon-library.com/images/icon-delete/icon-delete-16.jpg">
+        </div>
+        <h4 class="modal-title w-100">Bạn có chắc chắn muốn xóa ?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa nhân viên có tên là : <b>{{nameDelete}} ?</b></p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button #closeModal type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button (click)="delete(closeModal)" type="button" class="btn btn-danger">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--modal khi khong click id-->
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#myModal1"></button>
+<div id="myModal1" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="card-img">
+          <img src="assets/img/problem.png" class="img-fluid" alt='image'>
+        </div>
+        <h4 class="modal-title w-100">BẠN CÓ QUÊN ID?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Hãy chọn id trước khi chỉnh sửa hoặc xóa bạn nhé.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-grad-blue" data-dismiss="modal">OK</button>
+      </div>
+    </div>
+  </div>
+</div>

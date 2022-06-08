@@ -1,1 +1,253 @@
-<p>employee-create works!</p>
+<form [formGroup]="createEmployeeForm" (ngSubmit)="submit(successBtn)">
+
+  <div class="container-fluid pt-lg-2">
+    <div class="col-9" style="margin: auto">
+      <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;">
+        <div class="card-body">
+          <h4 class="text-center font-weight-bold text-uppercase py-4">THÊM MỚI NHÂN VIÊN </h4>
+          <div class="row" style="padding: 10px 50px">
+
+            <div style="display: flex ; justify-content: center" class="col-md-12">
+              <label for="image">Hình Ảnh <span class="text-danger">(*):</span></label>
+              <input name="image" id="image" type="file" class="file__input" (change)="showPreview($event)"
+                     required="required">
+              <img class="avatar rounded-circle" style="height: 160px; width: 160px;" src="{{imgVip}}">
+              <label for="image" class="file__label">
+                <i class="fa fa-upload"></i>
+              </label>
+              <div>
+                <p style="color: red" *ngIf=" errorImage!= ''">{{errorImage}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="employeeName">Họ và Tên <span class="text-danger">(*):</span></label>
+                <input  type="text" formControlName="employeeName" name="employeeName" id="employeeName"
+                       class="form-control">
+              </div>
+              <div
+                *ngIf="createEmployeeForm.get('employeeName').errors?.required&&(employeeName?.dirty ||employeeName?.touched)"
+                style="color: red">
+                Không được bỏ trống.
+              </div>
+              <div
+                *ngIf="createEmployeeForm.get('employeeName').errors?.minlength&&(employeeName?.dirty ||employeeName?.touched)"
+                style="color: red">
+                Họ và Tên nhân viên phải trên 5 chữ .
+              </div>
+              <div
+                *ngIf="createEmployeeForm.get('employeeName').errors?.maxlength&&(employeeName?.dirty ||employeeName?.touched)"
+                style="color: red">
+                Họ và tên của bạn quá dài.
+              </div>
+              <div
+                *ngIf="createEmployeeForm.get('employeeName').errors?.pattern&&(employeeName?.dirty ||employeeName?.touched)"
+                style="color: red">
+                phải là chữ
+              </div>
+              <div class="form-group">
+                <label for="dateOfBirth">Ngày Tháng Năm Sinh <span class="text-danger">(*):</span></label>
+                <input type="date" (change)="check()" formControlName="dateOfBirth" name="dateOfBirth" id="dateOfBirth"
+                       class="form-control">
+                <div
+                  *ngIf="createEmployeeForm.get('dateOfBirth').errors?.required&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
+                  style="color: red">
+                  Không được bỏ trống.
+                </div>
+                <div
+                  *ngIf="createEmployeeForm.get('dateOfBirth').errors?.pattern&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
+                  style="color: red">
+                  nhập đúng định dạng.
+                </div>
+                <div
+                  *ngIf="createEmployeeForm.get('dateOfBirth').errors?.check&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
+                  style="color: red">
+                  nhân viên phải trên 18 tuổi ;
+                </div>
+
+              </div>
+
+              <div class="form-group">
+                <label for="address">Địa chỉ <span class="text-danger">(*):</span></label>
+                <input type="text" formControlName="address" name="address" id="address" class="form-control">
+
+                <div *ngIf="createEmployeeForm.get('address').errors?.required&&(address?.dirty ||address?.touched)"
+                     style="color: red">
+                  Không được bỏ trống.
+                </div>
+                <div *ngIf="createEmployeeForm.get('address').errors?.minlength&&(address?.dirty ||address?.touched)"
+                     style="color: red">
+                  Địa chỉ phải trên 5 chữ .
+                </div>
+                <div *ngIf="createEmployeeForm.get('address').errors?.maxlength&&(address?.dirty ||address?.touched)"
+                     style="color: red">
+                  Địa chỉ của bạn quá dài.
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Số điện thoại <span class="text-danger">(*):</span></label>
+                <input type="text" formControlName="phoneNumber" name="phoneNumber" id="phoneNumber"
+                       class="form-control">
+
+                <div
+                  *ngIf="createEmployeeForm.get('phoneNumber').errors?.required&&(phoneNumber?.dirty ||phoneNumber?.touched)"
+                  style="color: red">
+                  Không được bỏ trống.
+                </div>
+                <div
+                  *ngIf="createEmployeeForm.get('phoneNumber').errors?.pattern&&(phoneNumber?.dirty ||phoneNumber?.touched)"
+                  style="color: red">
+                  nhập đúng định dạng , VD: 0905139871.
+                </div>
+
+              </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="idCard">Số CMND/CCCD <span class="text-danger">(*):</span></label>
+                <input  [(ngModel)]="idCardFB" type="text" formControlName="idCard" name="idCard" id="idCard" class="form-control">
+                <div *ngIf="createEmployeeForm.get('idCard').errors?.required&&(idCard?.dirty ||idCard?.touched)"
+                     style="color: red">
+                  Không được bỏ trống.
+                </div>
+                <div *ngIf="createEmployeeForm.get('idCard').errors?.pattern&&(idCard?.dirty ||idCard?.touched)"
+                     style="color: red">
+                  nhập đúng định dạng số CMND/CCCD , VD: 048203000188.
+                </div>
+                <div>
+                  <p style="color: red" *ngIf=" errorIdCard!= ''">{{errorIdCard}}</p>
+                </div>
+              </div>
+
+              <div formGroupName="accountDto">
+                <div class="form-group">
+                  <label for="email">Email <span class="text-danger">(*):</span></label>
+                  <input type="text" formControlName="email" name="email" id="email" class="form-control">
+                                    <div *ngIf="createEmployeeForm.get('accountDto.email')?.errors?.required&&(email?.dirty ||email?.touched)" style="color: red">
+                                      Không được bỏ trống.
+                                    </div>
+                                    <div *ngIf="createEmployeeForm.get('accountDto.email')?.errors?.pattern&&(email?.dirty ||email?.touched)" style="color: red">
+                                      nhập đúng định dạng email, VD: abcxyz@codegym.com .
+                                    </div>
+                  <div>
+                    <p style="color: red" *ngIf=" errorEmailEmployee!= ''">{{errorEmailEmployee}}</p>
+                  </div>
+
+
+                </div>
+
+                <div class="form-group">
+                  <label for="userName">Tên Đăng Nhập <span class="text-danger">(*):</span></label>
+                  <input type="text" formControlName="userName" name="userName" id="userName" class="form-control">
+                                    <div *ngIf="createEmployeeForm.get('accountDto.userName')?.errors?.required&&(userName?.dirty ||userName?.touched)" style="color: red">
+                                      Không được bỏ trống.
+                                    </div>
+                  <div
+                    *ngIf="createEmployeeForm.get('accountDto.userName').errors?.minlength&&(userName?.dirty ||userName?.touched)"
+                    style="color: red">
+                     Tên đăng nhập quá ngắn .
+                  </div>
+                  <div
+                    *ngIf="createEmployeeForm.get('accountDto.userName').errors?.maxlength&&(userName?.dirty ||userName?.touched)"
+                    style="color: red">
+                    Tên đăng nhập quá dài.
+                  </div>
+                  <div>
+                    <p style="color: red" *ngIf=" errorUserNameEmployee!= ''">{{errorUserNameEmployee}}</p>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="encryptPassword">Mật Khẩu <span class="text-danger">(*):</span></label>
+                  <input type="password" formControlName="encryptPassword" name="encryptPassword" id="encryptPassword"
+                         class="form-control">
+                                    <div *ngIf="createEmployeeForm.get('accountDto.encryptPassword')?.errors?.required&&(encryptPassword?.dirty ||encryptPassword?.touched)" style="color: red">
+                                      Không được bỏ trống.
+                                    </div>
+                  <div
+                    *ngIf="createEmployeeForm.get('accountDto.encryptPassword').errors?.minlength&&(encryptPassword?.dirty ||userName?.touched)"
+                    style="color: red">
+                    passWord ngẵn quá
+                  </div>
+                  <div
+                    *ngIf="createEmployeeForm.get('accountDto.encryptPassword').errors?.maxlength&&(encryptPassword?.dirty ||userName?.touched)"
+                    style="color: red">
+                    Quá dài rồi bạn ơi
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="position">Chức vụ <span class="text-danger">(*):</span></label>
+                <select [compareWith]="comparefn" name="position" id="position" formControlName="positionDto"
+                        class="form-control">
+                  <option *ngFor="let p of positiones" [ngValue]="p">{{p.positionName}}</option>
+                </select>
+                                <div *ngIf="createEmployeeForm.get('positionDto').errors?.required&&(positionDto?.dirty ||positionDto?.touched)" style="color: red">
+                                  Không được bỏ trống.
+                                </div>
+              </div>
+            </div>
+            <p></p>
+            <div class="text-center" style="margin: auto">
+              <button type="submit" class="btn btn-grad-blue mx-1" style="margin-right: 20px">THÊM MỚI <i
+                class="fa fa-paper-plane"></i></button>
+              <button type="button" class="btn btn-grad-red mx-1" routerLink="/employee/list" > <i class="fa-solid fa-right-from-bracket"></i>HUỶ
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+<button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button   type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Tuyệt!</h4>
+        <p>Thêm nhân viên thành công!</p>
+        <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal" >Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>-->
+<!--&lt;!&ndash;error modal&ndash;&gt;-->
+<!--<div id="errorModal" class="modal fade">-->
+<!--  <div class="modal-dialog modal-confirm modal-confirm-danger">-->
+<!--    <div class="modal-content">-->
+<!--      <div class="modal-header modal-header-danger justify-content-center">-->
+<!--        <div class="icon-box">-->
+<!--          <i class="material-icons">&#xE5CD;</i>-->
+<!--        </div>-->
+<!--        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--      </div>-->
+<!--      <div class="modal-body text-center">-->
+<!--        <h4>Thông báo</h4>-->
+<!--        <p>Dữ liệu đã tồn tại hoặc không đúng định dạng, vui lòng kiểm tra lại!</p>-->
+<!--        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

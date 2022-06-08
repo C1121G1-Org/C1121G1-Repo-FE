@@ -4,7 +4,7 @@ import {ProductService} from '../../../services/product/product.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
-import {formatDate} from '@angular/common';
+
 
 import {Category} from "../../../models/category";
 import {CategoryService} from "../../../services/category/category.service";

@@ -12,13 +12,16 @@ import {InvoiceModule} from './component/invoice/invoice.module';
 import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
+
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
-import {CKEditorModule} from "ckeditor4-angular";
+import {CKEditorModule} from 'ckeditor4-angular';
+import {ErrorComponent} from './error/error.component';
+
 
 
 // @ts-ignore
@@ -28,6 +31,7 @@ import {CKEditorModule} from "ckeditor4-angular";
     HeaderComponent,
     FooterComponent,
     ErrorComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -47,6 +51,7 @@ import {CKEditorModule} from "ckeditor4-angular";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     CKEditorModule
+
   ],
   providers: [],
   exports: [],
