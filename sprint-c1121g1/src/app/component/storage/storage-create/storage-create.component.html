@@ -1,34 +1,42 @@
-<form>
+<!--
+  Created by khoaVC
+  Role: Admin, Storekeeper
+  Time: 10:00 03/06/2022
+  Template: modal list all Suppliers
+-->
+
   <div class="container">
     <div class="row" style="justify-content: center;display: flex">
       <div class="col-md-8">
         <div class="card ">
           <div class="card card-body">
-            <h3 class="text-center font-weight-bold text-uppercase py-4">
-              NHẬP KHO HÀNG HÓA
-            </h3>
-            <div class="form-row">
-              <div class="form-group col-sm-6">
-                <button (click)="checkOnchanges()" type="button" class="btn-create btn-rounded btn-lg" data-toggle="modal"
-                        data-target="#productModal"><i class="fa-solid fa-box"></i> Chọn hàng hóa đã từng nhập
-                  kho <span class="text-danger">(*):</span>
-                </button>
-                <div
-                  *ngIf="productDto.errors?.existed">
-                  <span *ngIf="productDto.errors?.existed" style="color: red">{{productDto.errors?.message}}</span>
+            <form [formGroup]="createForm" (ngSubmit)="importProduct()">
+              <h3 class="text-center font-weight-bold text-uppercase py-4">
+                NHẬP KHO HÀNG HÓA
+              </h3>
+              <div class="form-row">
+                <div class="form-group col-sm-6">
+                  <button type="button" class="btn-create btn-rounded btn-lg"
+                          data-toggle="modal"
+                          data-target="#productModal" (click)="checkOnChange()"><i class="fa-solid fa-box"></i> Chọn hàng hóa đã từng nhập
+                    kho <span class="text-danger">(*):</span>
+                  </button>
+                  <div
+                    *ngIf="productDto.errors?.existed">
+                    <span *ngIf="productDto.errors?.existed" style="color: red">{{productDto.errors?.message}}</span>
+                  </div>
+                </div>
+
+                <div class="form-group col-sm-6">
+                  <button type="button" class="btn-create btn-rounded btn-lg" data-toggle="modal"
+                          data-target="#exampleModal"><i
+                    class="fa-solid fa-qrcode"></i> Quét mã QR
+                  </button>
                 </div>
               </div>
 
-              <div class="form-group col-sm-6">
-                <button type="button" class="btn-create btn-rounded btn-lg" data-toggle="modal" data-target="#exampleModal"><i
-                  class="fa-solid fa-qrcode"></i> Quét mã QR
-                </button>
-              </div>
-            </div>
-            <form [formGroup]="createForm">
               <!--              Product-->
               <input formControlName="productDto" type="text" [(ngModel)]="productData.id" hidden>
-
               <div class="form-row">
                 <div class="form-group col-sm-6">
                   <label for="product">Tên hàng hóa <span class="text-danger">(*):</span></label>
@@ -69,7 +77,7 @@
                   <label for="supplier">Nhà cung cấp <span class="text-danger">(*):</span></label>
                   <div class="input-icons">
                     <i type="button" class="fa-solid fa-folder-plus icon" data-toggle="modal"
-                       data-target="#supplierModal"></i>
+                       data-target="#supplierModal" (click)="checkOnChange()"></i>
                     <div *ngIf="supplierData.supplierName == undefined">
                       <input type="text" class="form-control input-field"
                              id="supplier" placeholder="Chọn nhà cung cấp" disabled>
@@ -81,7 +89,8 @@
                     </div>
                     <div
                       *ngIf="supplierDto.errors?.existed">
-                      <span *ngIf="supplierDto.errors?.existed" style="color: red">{{supplierDto.errors?.message}}</span>
+                      <span *ngIf="supplierDto.errors?.existed"
+                            style="color: red">{{supplierDto.errors?.message}}</span>
                     </div>
 
                   </div>
@@ -92,13 +101,6 @@
                   <label for="quantity"> Số lượng nhập <span class="text-danger">(*):</span></label>
                   <input type="number" class="form-control"
                          id="quantity" placeholder="Số lượng nhập" formControlName="quantity">
-
-<!--                  <div-->
-<!--                    *ngIf="quantity.invalid && (quantity.dirty || quantity.touched) || quantity.errors?.empty">-->
-<!--                    <span *ngIf="quantity.errors?.gte"-->
-<!--                          style="color: red">{{quantity.errors?.requiredValue}}</span>-->
-<!--                    <span *ngIf="quantity.errors.required || quantity.errors.empty" style="color: red">Empty! Input please!</span>-->
-<!--                  </div>-->
                   <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched) || quantity.errors?.empty">
                     <span *ngIf="quantity.errors?.gteQuantityStorage"
                           style="color: red">{{quantity.errors?.requiredValue}}</span><br>
@@ -108,7 +110,7 @@
               </div>
 
               <!--              Status-->
-              <div class="form-group col-sm-6">
+              <div class="form-group col-sm-6" hidden>
                 <label for="status"> Trạng thái <span class="text-danger">(*):</span></label>
                 <input type="radio" class="" id="status" formControlName="status" [value]="true"> Nhập hàng
                 <input type="radio" class="" id="status" formControlName="status" [value]="false"> Xuất hàng
@@ -116,25 +118,31 @@
 
               <div class="form-row">
                 <div class="form-group col-sm-6">
-                  <label for="import"> Ngày thực hiện <span class="text-danger">(*):</span></label>
+                  <label for="import"> Ngày nhập kho <span class="text-danger">(*):</span></label>
                   <input type="date" class="form-control" id="import" formControlName="createdDate">
+                  <div
+                    *ngIf="createdDate.errors?.gteValidateDate">
+                    <span *ngIf="createdDate.errors?.gteValidateDate"
+                          style="color: red">{{createdDate.errors?.requiredValue}}</span>
+                  </div>
                 </div>
+<!--                <input formControlName="createdEmployeeDto" type="text" [(ngModel)]="employeeData." hidden>-->
                 <div class="form-group col-sm-6">
                   <label for="employee"> Người nhập kho <span class="text-danger">(*):</span></label>
                   <input type="text" class="form-control input-field"
-                         id="employee" value="Nguyễn Văn A" disabled>
+                         id="employee" value="{{employeeData.employeeName}}" disabled>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-sm-6 d-flex justify-content-end">
-                  <button type="button" class="btn-confirm btn-rounded btn-lg" (click)="importProduct()"><i
+                  <button type="submit" class="btn btn-grad-blue btn-lg btn-w50"><i
                     class="fa-solid fa-boxes-packing"></i>
                     Thêm vào kho
                   </button>
                 </div>
                 <div class="form-group col-sm-6 d-flex justify-content-start">
-                  <button type="button" class="btn-cancel btn-rounded btn-lg"><i
-                    class="fa-solid fa-right-from-bracket"></i> Hủy
+                  <button type="button" class="btn btn-grad-red btn-lg btn-w50"><i
+                    class="fa-solid fa-right-from-bracket" [routerLink]="['']"></i> Hủy
                   </button>
                 </div>
               </div>
@@ -144,59 +152,53 @@
       </div>
     </div>
   </div>
-</form>
 
 <app-list-supplier-modal (itemOutput)="receiveSupplier($event)"
-                         (flagCreate)="receiveSupplierFlag($event)"></app-list-supplier-modal>
+                         (flagCreate)="receiveSupplierFlag($event)" [item]="check"></app-list-supplier-modal>
 <app-qr-code (sendProduct)="receiveProduct($event)"></app-qr-code>
-<app-list-choose-product-modal (itemOutput)="receiveProduct($event)"></app-list-choose-product-modal>
+<app-list-choose-product-modal (itemOutput)="receiveProduct($event)" [item]="check"></app-list-choose-product-modal>
 
-
-<!-- Modal Sucess -->
-<div id="myModal1" class="modal fade">
-  <div class="modal-dialog modal-confirm">
+<!--success modal-->
+<div id="successfulModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
     <div class="modal-content">
-      <div class="modal-header flex-column">
-        <div class="card-img">
-          <img class="img-fluid" src="https://cdn-icons-png.flaticon.com/512/5775/5775185.png">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
         </div>
-        <h4 class="modal-title w-100">Success!</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
-      <div class="modal-body">
-        <p>Yay! Bạn đã thêm sản phẩm vào kho thành công! <br></p>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-grad-blue" data-dismiss="modal">OK</button>
+      <div class="modal-body text-center">
+        <h4>Tuyệt!</h4>
+        <p>Thêm sản phẩm vào kho thành công.</p>
+        <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal" >Đồng ý</button>
       </div>
     </div>
   </div>
 </div>
 
-<button #btnSuccess type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1" [hidden]="true">
+<!--error modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Hệ thống đang bảo trì, vui lòng thử lại sau vài phút nữa.</p>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button #btnSuccess type="button" class="btn btn-primary" data-toggle="modal" data-target="#successfulModal" [hidden]="true">
 </button>
 
-<!-- Modal Delete -->
-<div id="myModal" class="modal fade">
-  <div class="modal-dialog modal-confirm">
-    <div class="modal-content">
-      <div class="modal-header flex-column">
-        <div class="card-img">
-          <img class="img-fluid" src="https://icon-library.com/images/funny-icon/funny-icon-3.jpg">
-        </div>
-        <h4 class="modal-title w-100">Are you sure?</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-      </div>
-      <div class="modal-body">
-        <p>Do you really want to delete these records? This process cannot be undone.</p>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger">Delete</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<button #btnFailed type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" [hidden]="true">
+<button #btnFailed type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorModal" [hidden]="true">
 </button>
