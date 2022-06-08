@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './common/header/header.component';
-import { FooterComponent } from './common/footer/footer.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './common/header/header.component';
+import {FooterComponent} from './common/footer/footer.component';
 import {EmployeeModule} from './component/employee/employee.module';
 import {ProductModule} from './component/product/product.module';
 import {CustomerModule} from './component/customer/customer.module';
@@ -20,12 +20,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
 import {CKEditorModule} from "ckeditor4-angular";
 
+
 // @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
