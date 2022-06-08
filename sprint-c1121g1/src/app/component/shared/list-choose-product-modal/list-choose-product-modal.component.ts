@@ -1,3 +1,4 @@
+
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {ProductService} from '../../../services/product/product.service';

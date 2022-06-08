@@ -21,7 +21,14 @@
             <ul>
               <li><a href="#">Quản lý thông tin cá nhân</a></li>
               <li><a href="#">Quản lý nhân viên</a></li>
-              <li><a href="#">Quản lý kinh doanh</a></li>
+              <li><a href="#">Quản lý kinh doanh<i class="fa-solid fa-angle-right"></i></a>
+                <div class="sub-menu-2">
+                  <ul>
+                    <li><a href="#">Quản lý lịch sử</a></li>
+                    <li><a href="#">Quản lý khách hàng</a></li>
+                  </ul>
+                </div>
+              </li>
               <li><a href="#">Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
                 <div class="sub-menu-2">
                   <ul>
@@ -31,12 +38,15 @@
                 </div>
               </li>
               <li><a href="#">Xem thông tin hàng hóa</a></li>
-              <li><a href="#">Quản lý bán hàng</a></li>
               <li><a [routerLink]="['/supplier']">Quản lý nhà cung cấp</a></li>
               <li><a [routerLink]="['/invoice']" >Quản lý bán hàng</a></li>
-              <li><a href="#">Quản lý xuất nhập kho</a></li>
-              <li><a routerLink="/storage/create">Nhập kho sản phẩm</a></li>
-
+              <li><a href="#">Quản lý xuất nhập kho<i class="fa-solid fa-angle-right"></i></a>
+                <div class="sub-menu-2">
+                  <ul>
+                    <li><a routerLink="/storage/create">Nhập kho sản phẩm</a></li>
+                  </ul>
+                </div>
+              </li>
             </ul>
           </div>
         </li>
@@ -74,8 +84,6 @@
           </div>
         </li>
         <li class="header-item-login"><a href="#">Đăng nhập</a></li>
-        <li class="header-item-login"><a [routerLink]="['/chooseCustomer']">customer</a></li>
-        <li class="header-item-login"><a [routerLink]="['/chooseProduct']">product</a></li>
       </ul>
     </div>
   </div>
