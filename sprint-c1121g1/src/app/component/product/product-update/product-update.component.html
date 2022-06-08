@@ -139,68 +139,67 @@
                   </div>
                 </div>
 
-                  <div class="form-group col-md-12">
-                    <label for="categoryDto">Danh Mục<span class="text-danger">(*)</span> </label>
-                    <!--                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="category">-->
-                    <select [compareWith]="comparefn" name="categoryDto" id="categoryDto" formControlName="categoryDto"
-                            class="form-control">
-                      <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+                <div class="form-group col-md-12">
+                  <label for="categoryDto">Danh Mục<span class="text-danger">(*)</span> </label>
+                  <!--                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="category">-->
+                  <select [compareWith]="comparefn" name="categoryDto" id="categoryDto" formControlName="categoryDto"
+                          class="form-control">
+                    <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
 
-                    </select>
-                    <!--                        hien thi loi-->
-                    <div
-                      *ngIf="productForm.controls.categoryDto.invalid && (productForm.controls.categoryDto.dirty || productForm.controls.categoryDto.touched || productForm.controls.categoryDto.errors?.empty)">
+                  </select>
+                  <!--                        hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.categoryDto.invalid && (productForm.controls.categoryDto.dirty || productForm.controls.categoryDto.touched || productForm.controls.categoryDto.errors?.empty)">
 
-                      <small
-                        *ngIf="productForm.controls.categoryDto.hasError('required') || productForm.controls.categoryDto.errors.empty"
-                        class="form-text text-danger">Vui lòng chọn danh mục.</small>
-                    </div>
+                    <small
+                      *ngIf="productForm.controls.categoryDto.hasError('required') || productForm.controls.categoryDto.errors.empty"
+                      class="form-text text-danger">Vui lòng chọn danh mục.</small>
                   </div>
+                </div>
 
 
-                  <div class="form-group col-md-12">
-                    <label for="cpu">CPU<span class="text-danger">(*)</span> </label>
-                    <input formControlName="cpu" type="text" class="form-control" name="cpu" id="cpu">
+                <div class="form-group col-md-12">
+                  <label for="cpu">CPU<span class="text-danger">(*)</span> </label>
+                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="cpu">
 
-                    <!--    hien thi loi-->
-                    <div
-                      *ngIf="productForm.controls.cpu.invalid && (productForm.controls.cpu.dirty || productForm.controls.cpu.touched || productForm.controls.cpu.errors?.empty)">
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.cpu.invalid && (productForm.controls.cpu.dirty || productForm.controls.cpu.touched || productForm.controls.cpu.errors?.empty)">
 
-                      <small
-                        *ngIf="productForm.controls.cpu.hasError('required') || productForm.controls.cpu.errors.empty"
-                        class="form-text text-danger">Require not empty.</small>
-                      <small *ngIf="cpu.errors?.maxlength" class="text-form text-danger">Trường cpu phải ngắn hơn 50 kí tự</small>
-                    </div>
+                    <small
+                      *ngIf="productForm.controls.cpu.hasError('required') || productForm.controls.cpu.errors.empty"
+                      class="form-text text-danger">Require not empty.</small>
+                    <small *ngIf="cpu.errors?.maxlength" class="text-form text-danger">Trường cpu phải ngắn hơn 50 kí tự</small>
                   </div>
+                </div>
 
-                  <div class="form-group col-md-12">
-                    <label for="otherDescription">Mô tả thêm </label>
-                    <ckeditor id="otherDescription"  formControlName="otherDescription"></ckeditor>
+                <div class="form-group col-md-12">
+                  <label for="otherDescription">Mô tả thêm </label>
+                  <ckeditor id="otherDescription"  formControlName="otherDescription"></ckeditor>
 
-<!--                    <textarea id="otherDescription" formControlName="otherDescription"-->
-<!--                              class="form-control"> </textarea>-->
+                  <!--                    <textarea id="otherDescription" formControlName="otherDescription"-->
+                  <!--                              class="form-control"> </textarea>-->
 
-                  </div>
+                </div>
 
-                  <div class=" col-md-12 text-center mx-auto mt-4">
-<!--                    <button style="width: 200px;" type="submit" class="btn btn-primary "-->
-<!--                    ><i class="fa fa-paper-plane"></i>Xác nhận-->
-<!--                    </button>-->
+                <div class=" col-md-12 text-center mx-auto mt-4">
+                  <!--                    <button style="width: 200px;" type="submit" class="btn btn-primary "-->
+                  <!--                    ><i class="fa fa-paper-plane"></i>Xác nhận-->
+                  <!--                    </button>-->
 
-<!--                    <a type="button" class="btn btn-danger"-->
-<!--                       style="margin-left: 10px; width: 200px"-->
-<!--                       data-toggle="modal"-->
-<!--                       data-target="#cancelModal">-->
-<!--                      Hủy</a>-->
+                  <!--                    <a type="button" class="btn btn-danger"-->
+                  <!--                       style="margin-left: 10px; width: 200px"-->
+                  <!--                       data-toggle="modal"-->
+                  <!--                       data-target="#cancelModal">-->
+                  <!--                      Hủy</a>-->
 
-                    <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
-                      class="fa fa-paper-plane"></i>CHỈNH SỬA
-                    </button>
-                    <a data-toggle="modal"
-                       data-target="#cancelModal"
-                       style="width: 200px" type="submit" class="btn btn-grad-red mx-1">
-                      <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
-                  </div>
+                  <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
+                    class="fa fa-paper-plane"></i>CHỈNH SỬA
+                  </button>
+                  <a data-toggle="modal"
+                     data-target="#cancelModal"
+                     style="width: 200px" type="submit" class="btn btn-grad-red mx-1">
+                    <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
                 </div>
               </div>
             </div>
@@ -208,6 +207,7 @@
         </div>
       </div>
     </div>
+  </div>
 </form>
 
 <!--<script>-->

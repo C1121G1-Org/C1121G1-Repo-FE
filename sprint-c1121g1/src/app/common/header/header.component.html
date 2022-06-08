@@ -20,12 +20,14 @@
           <div class="sub-menu">
             <ul>
               <li><a href="#">Quản lý thông tin cá nhân</a></li>
-              <li><a href="#">Quản lý nhân viên</a></li>
+
+              <li><a routerLink="employee/list">Quản lý nhân viên</a></li>
               <li><a href="#">Quản lý kinh doanh<i class="fa-solid fa-angle-right"></i></a>
                 <div class="sub-menu-2">
                   <ul>
                     <li><a href="#">Quản lý lịch sử</a></li>
                     <li><a [routerLink]="['/customer/list']">Quản lý khách hàng</a></li>
+
                   </ul>
                 </div>
               </li>

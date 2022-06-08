@@ -3,6 +3,7 @@
   Time: 10:00 03/06/2022
   Interface: Product
 */
+
 import {Category} from "./category";
 
 export interface Product {
@@ -22,5 +23,6 @@ export interface Product {
   promotions?:string;
   fiveStarRating?:number;
   category?:Category;
+
 }
 

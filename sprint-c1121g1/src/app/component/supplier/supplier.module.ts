@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+// @ts-ignore
 import { CommonModule } from '@angular/common';
 
 import { SupplierRoutingModule } from './supplier-routing.module';

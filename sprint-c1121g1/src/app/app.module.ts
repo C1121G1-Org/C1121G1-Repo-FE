@@ -12,6 +12,7 @@ import {InvoiceModule} from './component/invoice/invoice.module';
 import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
+
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -29,6 +30,7 @@ import {ErrorComponent} from './error/error.component';
     HeaderComponent,
     FooterComponent,
     ErrorComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,7 @@ import {ErrorComponent} from './error/error.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     CKEditorModule
+
   ],
   providers: [],
   exports: [],

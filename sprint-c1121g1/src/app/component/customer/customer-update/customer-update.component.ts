@@ -4,6 +4,7 @@ import {Router, ActivatedRoute, ParamMap} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../../models/customer';
 import {CustomerDto} from '../../../dto/customer-dto';
+// @ts-ignore
 import {DatePipe} from '@angular/common';
 import {async} from 'rxjs/internal/scheduler/async';
 
