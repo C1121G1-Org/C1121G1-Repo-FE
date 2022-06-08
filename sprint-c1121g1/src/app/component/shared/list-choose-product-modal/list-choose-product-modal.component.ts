@@ -1,10 +1,9 @@
 
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {IProduct} from '../../../models/IProduct';
 import {ProductService} from '../../../services/product/product.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {IProduct} from '../../../dto/iProduct';
-
 
 
 @Component({

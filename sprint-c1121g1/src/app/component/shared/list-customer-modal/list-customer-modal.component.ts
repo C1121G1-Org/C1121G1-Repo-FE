@@ -157,15 +157,4 @@ export class ListCustomerModalComponent implements OnInit, OnChanges {
     this.ngOnInit();
   }
 
-  lastPage() {
-    this.pageNumber = this.totalPages - 1;
-    this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
-  }
-
-  firstPage() {
-    this.pageNumber = 0;
-    this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
-  }
-
 }
-
