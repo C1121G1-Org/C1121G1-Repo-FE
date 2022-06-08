@@ -18,6 +18,10 @@ const routes: Routes = [
   {path: 'product/create', component: ProductCreateComponent},
   // role admin, bussiness staff
   {path: 'product/edit/:id', component: ProductUpdateComponent},
+
+
+  // {path: 'api/product/edit/:id', component: ProductUpdateComponent},
+
   {path: 'storage/create', component: StorageCreateComponent},
   {path:'listProduct',component: ProductListComponent},
 

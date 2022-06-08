@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
 import {Supplier} from '../../../models/supplier';
@@ -6,6 +6,8 @@ import {SecurityService} from '../../../services/security/security.service';
 import {gteQuantityStorage} from '../../../services/storage/gte-quantity-storage';
 import {Router} from '@angular/router';
 import {StorageService} from '../../../services/storage/storage.service';
+import {gteValidateDate} from '../../../services/storage/gte-validate-date';
+import {Employee} from '../../../models/employee';
 
 declare var $: any;
 
@@ -17,6 +19,7 @@ declare var $: any;
 
 /*
   Created by khoaVC
+  Role: Admin, Storekeeper
   Time: 10:00 03/06/2022
   Component: StorageCreateComponent
   Function: all function
@@ -26,21 +29,23 @@ export class StorageCreateComponent implements OnInit {
   createForm: FormGroup;
   productData: Product = {};
   supplierData: Supplier = {};
+  employeeData: Employee = {};
   today: string;
-  check = false;
   image = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
+  check: boolean;
 
-  @ViewChild('btnSuccess') btnSuccess: any;
-  @ViewChild('btnFailed') btnFailed: any;
+  @ViewChild('btnSuccess', {static: true}) btnSuccess: ElementRef;
+  @ViewChild('btnFailed', {static: true}) btnFailed: ElementRef;
 
   constructor(private fb: FormBuilder, private securityService: SecurityService, private router: Router,
               private storageService: StorageService) {
   }
 
+
   ngOnInit(): void {
     this.getToday();
     this.createForm = this.fb.group({
-      createdDate: [this.today, Validators.required],
+      createdDate: [this.today, [Validators.required, gteValidateDate]],
       status: [true, Validators.required],
       quantity: [undefined, [Validators.required, gteQuantityStorage]],
       createdEmployeeDto: [undefined, Validators.required],
@@ -48,9 +53,8 @@ export class StorageCreateComponent implements OnInit {
       supplierDto: [undefined, Validators.required]
     });
     this.getEmployee();
-    // tslint:disable-next-line:triple-equals
-    console.log(this.productData.toString().length === 1);
-    console.log(this.productData);
+    this.productData = {};
+    this.supplierData = {};
   }
 
   get createdDate() {
@@ -77,24 +81,28 @@ export class StorageCreateComponent implements OnInit {
     return this.createForm.get('supplierDto');
   }
 
+  // GET TODAY
   getToday() {
     const todayTemp = new Date();
-    const todayDate = todayTemp.getDate();
-    let todayDateString = todayTemp.getDate().toString();
-    const todayMonth = todayTemp.getMonth() + 1;
-    let todayMonthString = (todayTemp.getMonth() + 1).toString();
-    const todayFullYear = todayTemp.getFullYear();
-    if (todayMonth < 9) {
-      todayDateString = `0${todayMonth}`;
-    }
+    const todayDate = todayTemp.getUTCDate();
+    const todayMonth = todayTemp.getUTCMonth() + 1;
+    const todayFullYear = todayTemp.getUTCFullYear();
+    let todayDateString: any;
+    let todayMonthString: any;
     if (todayDate < 10) {
-      todayMonthString = `0${todayDate}`;
+      todayDateString = '0' + todayDate;
+    } else {
+      todayDateString = todayDate;
     }
-    this.today = `${todayFullYear}-${todayMonthString}-${todayDateString}`;
+    if (todayMonth < 10) {
+      todayMonthString = '0' + todayMonth;
+    } else {
+      todayMonthString = todayMonth;
+    }
+    this.today = todayFullYear + '-' + todayMonthString + '-' + todayDateString;
   }
 
   receiveProduct(item: any) {
-    console.log(this.productData);
     this.productData = item;
     this.image = this.productData.image;
   }
@@ -102,11 +110,11 @@ export class StorageCreateComponent implements OnInit {
   getEmployee() {
     this.securityService.getPersonalInformation().subscribe(
       (response) => {
-        console.log(response);
-        this.createForm.controls.createdEmployeeDto.setValue(response.id);
+        this.employeeData = response
+        this.createForm.controls.createdEmployeeDto.setValue(this.employeeData.id);
       },
       (error) => {
-        alert('FAILED');
+        this.btnFailed.nativeElement.click();
       }
     );
   }
@@ -135,7 +143,7 @@ export class StorageCreateComponent implements OnInit {
   }
 
   importProduct() {
-    console.log(this.createForm);
+    console.log(this.createForm.value);
     if (this.createForm.invalid) {
       if (this.productData.id === undefined) {
         this.productDto.setErrors({existed: true, message: 'Hãy chọn Sản phẩm'});
@@ -150,8 +158,8 @@ export class StorageCreateComponent implements OnInit {
     } else {
       this.storageService.create(this.createForm.value).subscribe(
         (response) => {
-          console.log(response);
           this.btnSuccess.nativeElement.click();
+          this.ngOnInit();
         },
         (error) => {
           this.btnFailed.nativeElement.click();
@@ -161,8 +169,7 @@ export class StorageCreateComponent implements OnInit {
 
   }
 
-  checkOnchanges() {
+  checkOnChange() {
     this.check = !this.check;
   }
 }
-
