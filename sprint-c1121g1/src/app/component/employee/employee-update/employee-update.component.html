@@ -104,7 +104,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label for="idCard">Số CMND/CCCD <span class="text-danger">(*):</span></label>
-                <input type="text" formControlName="idCard" name="idCard" id="idCard" class="form-control">
+                <input type="text" readonly formControlName="idCard" name="idCard" id="idCard" class="form-control">
                 <div *ngIf="editEmployeeForm.get('idCard').errors?.required&&(idCard?.dirty ||idCard?.touched)"
                      style="color: red">
                   Không được bỏ trống.
@@ -121,7 +121,7 @@
               <div formGroupName="accountDto">
                 <div class="form-group">
                   <label for="email">Email <span class="text-danger">(*):</span></label>
-                  <input type="text" formControlName="email" name="email" id="email" class="form-control">
+                  <input readonly type="text" formControlName="email" name="email" id="email" class="form-control">
                   <div *ngIf="editEmployeeForm.get('accountDto.email')?.errors?.required&&(email?.dirty ||email?.touched)" style="color: red">
                     Không được bỏ trống.
                   </div>
@@ -136,7 +136,7 @@
 
                 <div class="form-group">
                   <label for="userName">Tên Đăng Nhập <span class="text-danger">(*):</span></label>
-                  <input type="text" formControlName="userName" name="userName" id="userName" class="form-control">
+                  <input readonly type="text" formControlName="userName" name="userName" id="userName" class="form-control">
                   <div *ngIf="editEmployeeForm.get('accountDto.userName')?.errors?.required&&(userName?.dirty ||userName?.touched)" style="color: red">
                     Không được bỏ trống.
                   </div>
@@ -147,7 +147,7 @@
 
                 <div class="form-group">
                   <label for="encryptPassword">Mật Khẩu <span class="text-danger">(*):</span></label>
-                  <input type="passWord" formControlName="encryptPassword" name="encryptPassword" id="encryptPassword"
+                  <input readonly type="passWord" formControlName="encryptPassword" name="encryptPassword" id="encryptPassword"
                          class="form-control">
                   <div *ngIf="editEmployeeForm.get('accountDto.encryptPassword')?.errors?.required&&(encryptPassword?.dirty ||encryptPassword?.touched)" style="color: red">
                     Không được bỏ trống.
