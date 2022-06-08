@@ -6,6 +6,10 @@ import {ProductListBestsellerComponent} from './component/homepage/product-list-
 
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
+  {
+    path: 'employee',
+    loadChildren: () => import('./component/employee/employee.module').then(module => module.EmployeeModule)
+  }
 ];
 
 @NgModule({

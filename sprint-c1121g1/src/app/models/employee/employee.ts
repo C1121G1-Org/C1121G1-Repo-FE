@@ -1,3 +1,5 @@
+import {Positions} from './positions';
+
 export interface Employee {
   id?: number;
   employeeName?: string;
@@ -6,6 +8,6 @@ export interface Employee {
   idCard?: string;
   phoneNumber?: string;
   image?: string;
-  position?: Position;
+  positions?: Positions;
   account?: Account;
 }

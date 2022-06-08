@@ -2,10 +2,9 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {EmployeeService} from '../../../services/employee/employee.service';
-import {Positions} from '../../../models/positions';
-import {formatDate} from '@angular/common';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
+import {Positions} from '../../../models/employee/positions';
 
 
 @Component({
@@ -129,6 +128,7 @@ export class EmployeeCreateComponent implements OnInit {
           this.employeeService.saveEmployee(this.createEmployeeForm.value).subscribe(() => {
             successBtn.click();
             this.createEmployeeForm.reset(window.location.reload());
+            this.router.navigate(['employee/list']);
           }, error => {
 
             this.errorIdCard = error.error.errorMap.idCard;

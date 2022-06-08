@@ -1,11 +1,12 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Positions} from '../../../models/positions';
+import {Positions} from '../../../models/employee/positions';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmployeeService} from '../../../services/employee/employee.service';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {formatDate} from '@angular/common';
+
 
 // @ts-ignore
 // @ts-ignore
@@ -26,15 +27,15 @@ export class EmployeeUpdateComponent implements OnInit {
   errorUserNameEmployee: string;
   age: number;
 
+  // @ts-ignore
+  // @ts-ignore
   constructor(private employeeService: EmployeeService,
               private activetedRoute: ActivatedRoute,
               private router: Router,
               @Inject(AngularFireStorage) private storage: AngularFireStorage) {
     this.activetedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       this.id = +paramMap.get('id');
-      console.log(this.id);
       this.getEmployeeDto(this.id);
-
     });
   }
   check() {
@@ -75,14 +76,14 @@ export class EmployeeUpdateComponent implements OnInit {
         image: new FormControl(next.image, Validators.compose([Validators.required])),
         positionDto: new FormGroup({
           id: new FormControl(next.positionDto.id),
-        positionName: new FormControl(next.positionDto.positionName, Validators.compose([Validators.required]))
+          positionName: new FormControl(next.positionDto.positionName, Validators.compose([Validators.required]))
         }),
         accountDto: new FormGroup({
           id : new FormControl(next.accountDto.id),
           // tslint:disable-next-line:max-line-length
           userName: new FormControl(next.accountDto.userName, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(15)])),
           // tslint:disable-next-line:max-line-length
-          encryptPassword: new FormControl(next.accountDto.encryptPassword, Validators.compose([Validators.required ,Validators.minLength(6), Validators.maxLength(15)])),
+          encryptPassword: new FormControl(next.accountDto.encryptPassword, Validators.compose([Validators.required , Validators.minLength(6), Validators.maxLength(15)])),
           email: new FormControl(next.accountDto.email, Validators.compose([Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')])),
         }),
 
@@ -90,6 +91,9 @@ export class EmployeeUpdateComponent implements OnInit {
       this.imgVip = next.image;
       console.log(next.positionDto.positionName);
 
+    }, error => {
+      alert('bạn đang chọn một đường dẫn không tồn tại nếu còn cố chấp thì đừng trách tối ác ');
+      this.router.navigate(['/employee/list']);
     });
   }
 
@@ -105,28 +109,26 @@ export class EmployeeUpdateComponent implements OnInit {
             this.editEmployeeForm.patchValue({image: url});
             const employee = this.editEmployeeForm.value;
             this.employeeService.updateEmployee(id, employee).subscribe(() => {
-              this.router.navigate(['/list']);
-              alert('Cập nhật thành công');
+              this.router.navigate(['/employee/list']);
             }, error => {
-              // this.errorIdCard = error.error.errorMap.idCard;
-              // this.errorEmailEmployee = error.error.errorMap1.email;
-              // this.errorUserNameEmployee = error.error.errorMap1.userName;
+              this.errorIdCard = error.error.errorMap.idCard;
+              this.errorEmailEmployee = error.error.errorMap.email;
+              this.errorUserNameEmployee = error.error.errorMap.userName;
             });
           });
         })
       ).subscribe();
-  }else{
+    }else{
       const employee = this.editEmployeeForm.value;
       this.employeeService.updateEmployee(id, employee).subscribe(() => {
-        this.router.navigate(['/list']);
-        alert('Cập nhật thành công');
+        this.router.navigate(['/employee/list']);
       }, error => {
         this.errorIdCard = error.error.errorMap.idCard;
-        console.log(error.error.errorMap1.email);
-        // this.errorEmailEmployee = error.error.errorMap1.email;
-        // this.errorUserNameEmployee = error.error.errorMap1.userName;
+        console.log(error.error.errorMap.email);
+        this.errorEmailEmployee = error.error.errorMap.email;
+        this.errorUserNameEmployee = error.error.errorMap.userName;
       });
-}}
+    }}
 
 
   showPreview(event: any) {

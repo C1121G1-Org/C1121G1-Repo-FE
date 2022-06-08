@@ -15,11 +15,13 @@ import {HomepageModule} from './component/homepage/homepage.module';
 import {ReportModule} from './component/report/report.module';
 
 
-
 // @ts-ignore
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
+
 import {SecurityModule} from './component/security/security.module';
+
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import {SecurityModule} from './component/security/security.module';
     HomepageModule,
     ReportModule,
     SecurityModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

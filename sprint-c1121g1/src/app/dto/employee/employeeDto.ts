@@ -1,4 +1,3 @@
-
 import {AccountDto} from './accountDto';
 import {PositionDto} from './positionsDto';
 
