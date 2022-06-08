@@ -1,4 +1,4 @@
-<form [formGroup]="editForm" (ngSubmit)="updateCustomer(id)">
+<form [formGroup]="editForm" (ngSubmit)="updateCustomer(id,openSuccessModalBtn,errorModalBtn)">
   <div class="container-fluid">
     <div class="row" style="justify-content: center;display: flex">
       <div class="col-md-8">
@@ -71,8 +71,8 @@
                 </div>
 
                 <div style="justify-content: center;display: flex">
-                  <button type="submit" class="btn btn-primary " data-toggle="modal" data-target="#test"  >Xác nhận</button>
-                  <button  type="button" class="btn btn-danger" routerLink="/customer/list" ><i class="fa-solid fa-right-from-bracket"></i>Hủy</button>
+                  <button type="submit" class="btn btn-grad-blue mx-1"><i class="fa fa-paper-plane"></i>Xác nhận</button>
+                  <button  type="button" class="btn btn-grad-red mx-1" routerLink="/customer/list" ><i class="fa-solid fa-right-from-bracket"></i>Quay lại</button>
                 </div>
               </div>
             </div>
@@ -82,3 +82,46 @@
     </div>
   </div>
 </form>
+
+
+
+<!--success modal-->
+<button [hidden]="true" #openSuccessModalBtn data-toggle="modal" data-target="#successModal"></button>
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" (click)="checkConfirm()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Tuyệt!</h4>
+        <p>Cập nhật thông tin khách hàng thành công.</p>
+        <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" (click)="checkConfirm()" data-dismiss="modal" >Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--error modal-->
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Hệ thống đang bảo trì, vui lòng thử lại sau vài phút nữa.</p>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
+      </div>
+    </div>
+  </div>
+</div>

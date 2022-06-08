@@ -5,6 +5,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../../models/customer';
 import {CustomerDto} from '../../../dto/customer-dto';
 import {DatePipe} from '@angular/common';
+import {async} from 'rxjs/internal/scheduler/async';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class CustomerUpdateComponent implements OnInit {
   phone = '';
   page = 0;
   totalElement = 0;
+  flag=false;
 
   constructor(private customerService: CustomerService,
               private router: Router,
@@ -38,6 +40,7 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.flag=false;
     this.customerService.getAllCustomer1(this.name, this.phone, this.page).subscribe(
       (data: any) => {
         this.totalElement = data.totalElements;
@@ -87,27 +90,41 @@ export class CustomerUpdateComponent implements OnInit {
     Time: 12:38 PM 2022-06-06
     Function: updateCustomer
     */
-  updateCustomer(id: number) {
+  updateCustomer(id: number, openSuccessModalBtn: HTMLButtonElement, errorModalBtn: HTMLButtonElement) {
     if (this.editForm.invalid) {
-      console.log(this.editForm);
-      alert(this.editForm.get('dateOfBirth').value);
+      /*console.log(this.editForm);*/
+      errorModalBtn.click();
+      /*alert(this.editForm.get('dateOfBirth').value);
       for (const el in this.editForm.controls) {
         if (this.editForm.controls[el].errors) {
           console.log(el);
         }
-      }
+      }*/
     } else {
-      const editDate: string = this.parseDateForm(this.editForm.get('dateOfBirth').value);
-      this.editForm.get('dateOfBirth').patchValue(this.parseDateData(editDate));
+      /*const editDate: string = this.parseDateForm(this.editForm.get('dateOfBirth').value);
+      alert(editDate);
+      this.editForm.get('dateOfBirth').patchValue(this.parseDateData(editDate));*/
       const customer = this.editForm.value;
-      this.customerService.updateCustomer(id, customer).subscribe(() => {
+      this.customerService.updateCustomer(id, customer).subscribe(async res => {
+        openSuccessModalBtn.click();
+        await this.wait(3000);
+        if(this.flag==false){
+          openSuccessModalBtn.click();
+        }
         this.router.navigate(['/customer/list']);
-        alert('Cập nhật thành công');
       }, e => {
+        errorModalBtn.click();
         console.log(e);
       });
     }
   }
 
+  wait(ms){
+    return new Promise(r => setTimeout(r,ms));
+  }
 
+
+  checkConfirm() {
+    this.flag=true;
+  }
 }

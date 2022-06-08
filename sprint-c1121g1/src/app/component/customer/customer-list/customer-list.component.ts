@@ -12,17 +12,14 @@ import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/form
 export class CustomerListComponent implements OnInit {
   customerList: Customer[];
   idClick = 0;
-  flagEdit=true;
   public activeProjectIndex: number;
   totalPage = 0;
   page = 0;
   nameCustomer = '';
   phoneNumber = '';
-  message = '';
-  totalElement = 0;
+  message = false;
   collection: any[] = this.customerList;
   searchForm: FormGroup;
-  flag = false;
 
   constructor(private customerService: CustomerService,
               private router: Router) {
@@ -34,13 +31,15 @@ export class CustomerListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.customerService.getAllCustomer1(this.nameCustomer, this.phoneNumber, this.page).subscribe(
+    this.customerService.getAllCustomer1(this.nameCustomer='', this.phoneNumber='', this.page).subscribe(
       (data: any) => {
         this.customerList = data.content;
         this.page = data.number;
         this.totalPage = data.totalPages;
+      }, err => {
+        console.log(err);
       });
-    this.flag = false;
+    this.message = false;
   }
 
   /*
@@ -99,17 +98,16 @@ export class CustomerListComponent implements OnInit {
   search() {
     const input = this.searchForm.get('inputSearch').value;
     const type = this.searchForm.get('typeSearch').value;
-    /*const pattern = /^([^0-9]*)$/;
-    const pattern2 = /^(090\d{7})|(091\d{7})|(\(\+84\)90\d{7})|(\(\+84\)91\d{7})$/;*/
+
     if (type === 'nameCustomer' && input.trim() !== '') {
-      this.customerService.getAllCustomer1(this.nameCustomer = input.trim(), this.phoneNumber, this.page).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer = input.trim(), this.phoneNumber='', this.page).subscribe(
         (data: any) => {
-          alert(input);
+          this.message = false;
           this.customerList = data.content;
           this.page = data.number;
           this.totalPage = data.totalPages;
         }, err => {
-          this.message = 'Không tìm thấy kết quả trả về';
+          this.message = true;
           this.customerList = null;
           this.page = 0;
           this.totalPage = 0;
@@ -117,36 +115,47 @@ export class CustomerListComponent implements OnInit {
         }
       );
     } else if (type === 'phoneNumber' && input.trim() !== '') {
-      this.customerService.getAllCustomer1(this.nameCustomer, this.phoneNumber = input.trim(), this.page).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer='', this.phoneNumber = input.trim(), this.page).subscribe(
         (data: any) => {
-          alert(input);
+          this.message = false;
           this.customerList = data.content;
           this.page = data.number;
           this.totalPage = data.totalPages;
         }, err => {
-          this.message = 'Không tìm thấy kết quả trả về';
+          this.message = true;
           this.customerList = null;
           this.page = 0;
           this.totalPage = 0;
           console.log(err);
         }
       );
-    } else if (input.trim() === '') {
-      this.ngOnInit();
+    } else if (input.trim() == '') {
+      this.customerService.getAllCustomer1(this.nameCustomer='', this.phoneNumber='', this.page).subscribe(
+        (data: any) => {
+          this.message = false;
+          this.customerList = data.content;
+          this.page = data.number;
+          this.totalPage = data.totalPages;
+          console.log(this.customerList);
+        }, err => {
+          this.message = true;
+          console.log(err);
+        });
     }
   }
 
   clearAll() {
     this.searchForm.reset();
+    this.nameCustomer = '';
+    this.phoneNumber = '';
   }
 
   toEditForm(sucessButton: HTMLButtonElement) {
     if (this.idClick == 0) {
-      this.flagEdit=false;
       sucessButton.click();
     }
     else{
-      this.router.navigate(['/customer/edit/',this.idClick]);
+      this.router.navigate( ['/customer/edit/',this.idClick]);
     }
   }
 }
