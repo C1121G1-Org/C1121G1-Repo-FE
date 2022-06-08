@@ -19,7 +19,6 @@
     <select />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
     <list default="true" id="fad4696a-3319-4e44-9503-61edbfa0e9fb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app.component.html" afterDir="false" />
@@ -31,14 +30,12 @@
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/employee/positions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/employee/positions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/employee/employee.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/employee/employee.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/environments/environment.ts" afterDir="false" />
-=======
     <list default="true" id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="">
-<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.ts" afterDir="false" />
-=======
       <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/dto/categoryDto.ts" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/dto/productDto.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -55,9 +52,7 @@
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/product.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/category/category.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/category/category.service.ts" afterDir="false" />
->>>>>>> 33ed05d92b7366d7a0617deeb93b48ccd3639c01
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" afterDir="false" />
->>>>>>> ab5ef27be0e6dd574aa57568c617c60ca1721d16
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,11 +62,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-<<<<<<< HEAD
   <component name="ProjectId" id="2A0trHEIjTAPGhqAXaPMH4kVeyJ" />
-=======
   <component name="ProjectId" id="2A0N1UPBl59KBX64chs1GNUyYSb" />
->>>>>>> ab5ef27be0e6dd574aa57568c617c60ca1721d16
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -80,7 +72,6 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -90,7 +81,6 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="D:\codegym\module6\projectFe\C1121G1-Repo-FE\sprint-c1121g1\node_modules\typescript\lib" />
-=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$/sprint-c1121g1/src/app/component/report" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -99,6 +89,11 @@
     <property name="ts.external.directory.path" value="D:\CodeGym\Module_6\FE2\C1121G1-Repo-FE\sprint-c1121g1\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\shared" />
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component" />
+      <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\models" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\report" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component\shared" />
@@ -111,14 +106,12 @@
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\component" />
       <recent name="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\src\app\models" />
     </key>
->>>>>>> ab5ef27be0e6dd574aa57568c617c60ca1721d16
   </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-<<<<<<< HEAD
       <changelist id="fad4696a-3319-4e44-9503-61edbfa0e9fb" name="Default Changelist" comment="" />
       <created>1654158527538</created>
       <option name="number" value="Default" />
@@ -135,7 +128,6 @@
       <workItem from="1654596391299" duration="4429000" />
       <workItem from="1654608263426" duration="81000" />
       <workItem from="1654652853131" duration="4957000" />
-=======
       <changelist id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="" />
       <created>1654142327836</created>
       <option name="number" value="Default" />
@@ -148,13 +140,9 @@
       <workItem from="1654260460348" duration="5013000" />
       <workItem from="1654323268452" duration="5927000" />
       <workItem from="1654347466756" duration="3176000" />
-<<<<<<< HEAD
       <workItem from="1654594083155" duration="980000" />
       <workItem from="1654595091454" duration="2278000" />
-=======
       <workItem from="1654661051989" duration="156000" />
->>>>>>> 33ed05d92b7366d7a0617deeb93b48ccd3639c01
->>>>>>> ab5ef27be0e6dd574aa57568c617c60ca1721d16
     </task>
     <servers />
   </component>
@@ -174,7 +162,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-<<<<<<< HEAD
     <state x="526" y="204" key="#Notifications" timestamp="1654446640971">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -187,7 +174,6 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1654608340607" />
-=======
     <state x="499" y="155" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1654230331946">
       <screen x="0" y="0" width="1536" height="816" />
     </state>
@@ -212,6 +198,5 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1515" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1654661183500" />
->>>>>>> ab5ef27be0e6dd574aa57568c617c60ca1721d16
   </component>
 </project>

@@ -23,7 +23,6 @@ import {CKEditorModule} from 'ckeditor4-angular';
 import {ErrorComponent} from './error/error.component';
 
 
-
 // @ts-ignore
 @NgModule({
   declarations: [
