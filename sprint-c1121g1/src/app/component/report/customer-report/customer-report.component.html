@@ -132,7 +132,7 @@
               <p *ngIf="customerReport.gender == false">Nữ</p>
               <p *ngIf="customerReport.gender == true">Nam</p>
             </td>
-            <td>{{customerReport.dateOfBirth}}</td>
+            <td>{{customerReport.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
             <td class="desc">{{customerReport.email}}</td>
             <td>{{customerReport.phoneNumber}}</td>
             <td>{{customerReport.purchaseTimes}}</td>
