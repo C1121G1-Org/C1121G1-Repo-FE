@@ -20,10 +20,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84de2ab8-78c5-4b5e-8469-defb3cdc37d7" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/shared/list-product-modal/list-product-modal.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/supplier/supplier-create/supplier-create.component.ts" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/dto/categoryDto.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/dto/productDto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-create/product-create.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-create/product-create.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-create/product-create.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-create/product-create.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-create/product-create.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-create/product-create.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-update/product-update.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-update/product-update.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-update/product-update.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-update/product-update.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-update/product-update.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product-update/product-update.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/component/product/product.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/product.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/models/product.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/category/category.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/category/category.service.ts" afterDir="false" />
+>>>>>>> 33ed05d92b7366d7a0617deeb93b48ccd3639c01
       <change beforePath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/sprint-c1121g1/src/app/services/product/product.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +66,8 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="ts.external.directory.path" value="D:\sprint-1\angular-sprint-1\C1121G1-Repo-FE\sprint-c1121g1\node_modules\typescript\lib" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="D:\CodeGym\Module_6\FE2\C1121G1-Repo-FE\sprint-c1121g1\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -80,8 +100,12 @@
       <workItem from="1654260460348" duration="5013000" />
       <workItem from="1654323268452" duration="5927000" />
       <workItem from="1654347466756" duration="3176000" />
+<<<<<<< HEAD
       <workItem from="1654594083155" duration="980000" />
       <workItem from="1654595091454" duration="2278000" />
+=======
+      <workItem from="1654661051989" duration="156000" />
+>>>>>>> 33ed05d92b7366d7a0617deeb93b48ccd3639c01
     </task>
     <servers />
   </component>
@@ -109,5 +133,21 @@
       <screen x="0" y="0" width="1536" height="816" />
     </state>
     <state x="549" y="163" key="FileChooserDialogImpl/0.0.1536.816@0.0.1536.816" timestamp="1654151334336" />
+    <state width="1515" height="223" key="GridCell.Tab.0.bottom" timestamp="1654661183500">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1515" height="223" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1654661183500" />
+    <state width="1515" height="223" key="GridCell.Tab.0.center" timestamp="1654661183500">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1515" height="223" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1654661183500" />
+    <state width="1515" height="223" key="GridCell.Tab.0.left" timestamp="1654661183499">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1515" height="223" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1654661183499" />
+    <state width="1515" height="223" key="GridCell.Tab.0.right" timestamp="1654661183500">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state width="1515" height="223" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1654661183500" />
   </component>
 </project>

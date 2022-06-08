@@ -7,10 +7,6 @@ import { InvoiceCreateComponent } from './invoice-create/invoice-create.componen
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../shared/shared.module";
 
-
-
-
-
 @NgModule({
   declarations: [InvoiceHistoryComponent, InvoiceCreateComponent],
     exports: [

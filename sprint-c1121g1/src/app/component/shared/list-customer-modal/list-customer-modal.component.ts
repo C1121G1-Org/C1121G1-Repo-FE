@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges
 import {ICustomer} from '../../../models/ICustomer';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {Router} from '@angular/router';
-import {IProduct} from '../../../models/IProduct';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -92,11 +91,11 @@ export class ListCustomerModalComponent implements OnInit, OnChanges {
     return this.currentCustomer.id === this.selectedCustomer.id ? true : false;
   }
 
-  getAllCustomerPage(index: any) {
-    this.indexCurrent = index;
-    this.pageNumber = index - 1;
-    this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
-  }
+  // getAllCustomerPage(index: any) {
+  //   this.indexCurrent = index;
+  //   this.pageNumber = index - 1;
+  //   this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+  // }
 
   search(value: string) {
     value = value.trim();
@@ -158,15 +157,4 @@ export class ListCustomerModalComponent implements OnInit, OnChanges {
     this.ngOnInit();
   }
 
-  lastPage() {
-    this.pageNumber = this.totalPages - 1;
-    this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
-  }
-
-  firstPage() {
-    this.pageNumber = 0;
-    this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
-  }
-
 }
-

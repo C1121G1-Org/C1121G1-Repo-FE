@@ -1,3 +1,4 @@
+
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {IProduct} from '../../../models/IProduct';
 import {ProductService} from '../../../services/product/product.service';
@@ -17,7 +18,9 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 */
 export class ListChooseProductModalComponent implements OnInit, OnChanges {
   @Output() itemOutput = new EventEmitter();
-  @Input() item: boolean;
+
+  @Input() item : boolean;
+
   productList: IProduct[] = [];
   pageNumber: number;
   totalPages = [];
@@ -48,6 +51,7 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
     this.searchValue = '';
     this.searchByPrice = '';
     this.searchByName = '';
+    this.checkSearch = 'name';
     this.ngOnInit();
   }
 
@@ -59,10 +63,10 @@ export class ListChooseProductModalComponent implements OnInit, OnChanges {
     this.message = false;
     this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice, searchByQuantity).subscribe((res: any) => {
       this.productList = res.content;
-      console.log(this.productList);
       this.pageNumber = res.pageable.pageNumber;
       this.totalPages = res.totalPages;
       this.first = res.first;
+      this.pageSize = res.pageable.pageSize;
       this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
       this.pageSize = res.pageable.pageSize;
       // // @ts-ignore

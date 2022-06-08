@@ -8,9 +8,12 @@ import {InvoiceService} from '../../../services/invoice/invoice.service';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {ICustomer} from '../../../models/ICustomer';
-import {IProduct} from '../../../models/iProduct';
+import {IProduct} from '../../../dto/iProduct';
+
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
+
 
 /*
  Created by LongNHL
@@ -336,3 +339,4 @@ export class InvoiceCreateComponent implements OnInit {
 
 
 }
+
