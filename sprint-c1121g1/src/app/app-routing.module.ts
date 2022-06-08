@@ -12,11 +12,10 @@ import {ProductUpdateComponent} from './component/product/product-update/product
 
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
-  {path: 'api/product/create', component: ProductCreateComponent},
-  {path: 'api/product/edit/:id', component: ProductUpdateComponent},
+  {path: 'product/create', component: ProductCreateComponent},
+  {path: 'product/edit/:id', component: ProductUpdateComponent},
   {path: 'storage/create', component: StorageCreateComponent},
   {path: 'storage/create', component: StorageCreateComponent},
-  {path: 'api/product/edit/:id', component: ProductUpdateComponent},
   {path: 'storage/create', component: StorageCreateComponent}
 ];
 
