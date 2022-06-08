@@ -1,10 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './common/header/header.component';
-import { FooterComponent } from './common/footer/footer.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
+import {HeaderComponent} from './common/header/header.component';
+import {FooterComponent} from './common/footer/footer.component';
 import {EmployeeModule} from './component/employee/employee.module';
 import {ProductModule} from './component/product/product.module';
 import {CustomerModule} from './component/customer/customer.module';
@@ -12,22 +12,20 @@ import {InvoiceModule} from './component/invoice/invoice.module';
 import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
-// import {ReportModule} from './component/report/report.module';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
-
-
-
+import {ErrorComponent} from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +43,7 @@ import {ReportModule} from './component/report/report.module';
     ReportModule,
     SecurityModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    FormsModule
+    HttpClientModule
   ],
   providers: [],
   exports: [],
