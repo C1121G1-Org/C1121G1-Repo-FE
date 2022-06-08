@@ -4,7 +4,14 @@ import {ProductListBestsellerComponent} from "./component/homepage/product-list-
 
 
 const routes: Routes = [
-  {path:'', component: ProductListBestsellerComponent}
+
+  {path: '', component: ProductListBestsellerComponent},
+  {path: 'api/product/create', component: ProductCreateComponent},
+  {path: 'api/product/edit/:id', component: ProductUpdateComponent},
+  {path: 'storage/create', component: StorageCreateComponent},
+  {path: 'storage/create', component: StorageCreateComponent},
+  {path: 'api/product/edit/:id', component: ProductUpdateComponent},
+  {path: 'storage/create', component: StorageCreateComponent}
 ];
 
 @NgModule({
