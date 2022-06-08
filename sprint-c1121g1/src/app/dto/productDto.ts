@@ -1,9 +1,12 @@
-export interface ProductDto {
+
+import {CategoryDto} from "./categoryDto";
+
+export interface Product {
   id?: number;
   name?: string;
-  price?: number;
+  price?: string;
   image?: string;
-   // qrScan: string;
+  // qrScan: string;
   screenSize?: string;
   camera?: string;
   selfie?: string;
@@ -11,4 +14,8 @@ export interface ProductDto {
   memory?: string;
   otherDescription?: string;
   deleteFlag?: boolean;
+  discount?:number;
+  promotions?:string;
+  fiveStarRating?:number;
+  categoryDto?: CategoryDto;
 }
