@@ -5,7 +5,9 @@
   Template: modal list all Suppliers
 -->
 
-<div class="container">
+
+  <div class="container">
+
     <div class="row" style="justify-content: center;display: flex">
       <div class="col-md-8">
         <div class="card ">
@@ -156,6 +158,7 @@
 <app-list-supplier-modal (itemOutput)="receiveSupplier($event)" (flagCreate)="receiveSupplierFlag($event)" [item]="check"></app-list-supplier-modal>
 <app-qr-code (sendProduct)="receiveProduct($event)"></app-qr-code>
 <app-list-choose-product-modal (itemOutput)="receiveProduct($event)" [item]="check"></app-list-choose-product-modal>
+
 <!--success modal-->
 <div id="successfulModal" class="modal fade">
   <div class="modal-dialog modal-confirm modal-confirm-success">
@@ -200,4 +203,3 @@
 
 <button #btnFailed type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorModal" [hidden]="true">
 </button>
-
