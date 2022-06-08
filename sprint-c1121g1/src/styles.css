@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, table, input, textarea {
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;

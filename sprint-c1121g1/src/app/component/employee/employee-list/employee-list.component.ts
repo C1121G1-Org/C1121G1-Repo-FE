@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {EmployeeService} from "../../../services/employee/employee.service";
-import {EmployeeInterface} from "../../../dto/employee/employee-interface";
-import {Router} from "@angular/router";
+import {EmployeeService} from '../../../services/employee/employee.service';
+import {EmployeeInterface} from '../../../dto/employee/employee-interface';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -17,10 +17,10 @@ export class EmployeeListComponent implements OnInit {
   page: any;
   totalPages = 0;
   activeProjectIndex: number;
-  idClick=0;
+  idClick = 0;
 
   constructor(private employeeService: EmployeeService,
-              private router:Router) { }
+              private router: Router) { }
 
   ngOnInit(): void {
     this.getAll();
@@ -108,7 +108,7 @@ export class EmployeeListComponent implements OnInit {
       Function: click event line-by-line
    */
 
-  public activeProject(index: number, id: number, nameEmployee : string) : void {
+  public activeProject(index: number, id: number, nameEmployee: string): void {
 
     this.activeProjectIndex = index;
     this.nameDelete = nameEmployee;
@@ -126,7 +126,7 @@ export class EmployeeListComponent implements OnInit {
       closeModal.click();
       this.ngOnInit();
     }, e => {
-      console.log(e)
+      console.log(e);
     });
 
   }
@@ -138,10 +138,10 @@ export class EmployeeListComponent implements OnInit {
    */
 
   clickDelete(deleteButton: HTMLButtonElement, errorButton: HTMLButtonElement) {
-    if(this.idClick == 0){
+    if (this.idClick == 0){
       errorButton.click();
     }else {
-      deleteButton.click()
+      deleteButton.click();
     }
   }
 
@@ -152,8 +152,8 @@ export class EmployeeListComponent implements OnInit {
    */
 
   clickEdit(errorButton: HTMLButtonElement) {
-    if(this.idClick){
-      this.router.navigate(['/employee/edit/',this.idClick]);
+    if (this.idClick){
+      this.router.navigate(['/employee/edit/', this.idClick]);
     }else {
       errorButton.click();
     }
