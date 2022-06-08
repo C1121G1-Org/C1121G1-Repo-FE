@@ -7,7 +7,7 @@ import { ProductCreateComponent } from './product-create/product-create.componen
 import { ProductUpdateComponent } from './product-update/product-update.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {CKEditorModule} from "ckeditor4-angular";
+import {CKEditorModule} from 'ckeditor4-angular';
 
 
 @NgModule({

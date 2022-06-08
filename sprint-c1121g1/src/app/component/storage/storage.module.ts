@@ -13,7 +13,7 @@ import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
-  declarations: [StorageCreateComponent, QrcodeCreateComponent, StorageUpdateComponent, StorageListComponent, ListSupplierModalComponent],
+  declarations: [StorageCreateComponent, QrcodeCreateComponent, StorageUpdateComponent, StorageListComponent],
   imports: [
     CommonModule,
     StorageRoutingModule,
