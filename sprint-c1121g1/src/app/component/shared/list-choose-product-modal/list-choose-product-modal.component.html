@@ -10,37 +10,33 @@
       <div class="modal-content">
         <div class="modal-body">
           <div class="card card-body">
-            <h1 class="text-center font-weight-bold text-uppercase  py-4">
+            <h1 style="font-size: 36px" class="text-center font-weight-bold text-uppercase  py-4">
               CHỌN SẢN PHẨM
             </h1>
           </div>
           <div class="card card-body">
             <div class="table-editable">
-              <div class="row">
+              <div class="row ml-2">
                 <div class="col-12">
-                  <div class="mb-3" style="display: flex; justify-content: space-evenly">
+                  <div class="mb-3" style="display: flex">
                     <div>
                       <p style="margin-top: 10px">Tìm kiếm theo: </p>
                     </div>
-                    <div>
+                    <div class="mx-2">
                       <select [(ngModel)]="checkSearch" class="search-select background-search">
                         <option value="name">Tên sản phẩm</option>
-                        <option value="price">giá</option>
+                        <option value="price">Giá</option>
                       </select>
                     </div>
 
-                    <div style="position: relative">
+                    <div [formGroup]="formSearch" style="position: relative">
                       <input [(ngModel)]="searchValue" #element style="width: 300px"
                              class="header-search search-input background-search"
+                             formControlName="keySearch"
                              placeholder="Bạn cần tìm gì?"
-                             type="text"><i (click)="search(element.value)"
-                      class="fa fa-search"
-                      style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
-                    </div>
-                    <div>
-                      <button  (click)="getAll()" class="btn-search btn-rounded  btn-sm my-0"
-                              style="width: 100px">làm Mới
-                      </button>
+                             type="text" (change)="search(element.value)"><i (click)="search(element.value)"
+                                                                             class="fa fa-search"
+                                                                             style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                     </div>
                   </div>
                   <!--                search-->
@@ -49,56 +45,23 @@
               </div>
               <div>
 
-
                 <!--              phần hiên thị lỗi-->
-                <div *ngIf="message">
-                  <div class="tbl-header">
-                    <table class="table table-bordered table-responsive-md ">
-                      <thead>
-                      <tr>
-                        <th class="text-center">STT</th>
-                        <th class="text-center">Tên Sản Phẩm</th>
-                        <th class="text-center">Mã Sản Phẩm</th>
-                        <th class="text-center">Giá(VND)</th>
-                        <th class="text-center">CPU</th>
-                        <th class="text-center">Lưu Trữ</th>
-                        <th class="text-center">số lượng</th>
-                      </tr>
-                      </thead>
-                    </table>
-                  </div>
-
-                  <div>
-                    <table class=" table table-bordered table-responsive-md">
-                      <tbody>
-                      <tr>
-                        <td style="text-align: center ; color: #D70018; font-size: 20px ; padding-bottom: 350px">Không
-                          tìm
-                          thấy dữ liệu cần
-                          tìm.
-                        </td>
-
-                      </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+                <h2 class="text-danger d-flex justify-content-center" style="padding: 164px ; font-size: 35px"
+                    *ngIf="message">không tìm thấy sản phẩm.</h2>
                 <!--end hiển thị llox-->
-
-
                 <div>
                   <div *ngIf="!message">
                     <div class="tbl-header">
                       <table class="table table-bordered table-responsive-md ">
                         <thead>
                         <tr>
-                          <th class="text-center">STT</th>
+                          <th width="60px" class="text-center">STT</th>
                           <th class="text-center">Tên Sản Phẩm</th>
-                          <th class="text-center">Mã Sản Phẩm</th>
+                          <th width="150px" class="text-center">Mã Sản Phẩm</th>
                           <th class="text-center">Giá(VND)</th>
                           <th class="text-center">CPU</th>
                           <th class="text-center">Lưu Trữ</th>
-                          <th class="text-center">Số lượng</th>
+                          <th width="150px" class="text-center">Số lượng</th>
                         </tr>
                         </thead>
                       </table>
@@ -107,67 +70,68 @@
                     <div class="tbl-content">
                       <table class=" table table-bordered table-responsive-md">
                         <tbody>
-                        <tr (click)="getProduct(product)" *ngFor="let product of productList; index as i"
+                        <tr style="cursor: pointer" (click)="getProduct(product)"
+                            *ngFor="let product of productList; index as i"
                             [class.heightLight]="isSelectedProduct(product)">
-                          <td class="text-center">{{(pageNumber)*pageSize+(i+1)}}</td>
-                          <td class="text-center">{{product.name}}</td>
-                          <td class="text-center">{{product.id}}</td>
+                          <td width="60px" class="text-center">{{(pageNumber) * pageSize + (i + 1)}}</td>
+                          <td class="text-center desc">{{product.name}}</td>
+                          <td width="150px" class="text-center">{{product.id}}</td>
                           <td class="text-center">{{product.price |currency :'VND':''}}</td>
-                          <td class="text-center">{{product.cpu}}</td>
+                          <td class="text-center desc">{{product.cpu}}</td>
                           <td class="text-center">{{product.memory}}</td>
-                          <td class="text-center">{{product.quantity}}</td>
+                          <td width="150px" class="text-center">{{product.quantity}}</td>
                         </tr>
                         </tbody>
                       </table>
                     </div>
                   </div>
                   <br>
-                  <div class="row">
-                    <div class="col-6">
-                      <div style="margin-left: 19px">
-                        <button *ngIf="currentProduct" (click)="chooseProduct(exit)" type="button"
-                                class="btn-edit btn-rounded  btn-lg my-0">
-                          <i class="fa fa-paper-plane"></i> Chọn
-                        </button>
-                        <button (click)="close()" type="button" class="btn-delete btn-rounded  btn-lg my-0"
-                                data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
-                        </button>
-                        <button [hidden]="true" #exit type="button" class="btn-delete btn-rounded  btn-lg my-0"
-                                data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
-                        </button>
-                      </div>
+
+                  <div class="row my-3 ml-2">
+                    <div class="row col-4 ml-0 mx-10">
+                      <button *ngIf="currentProduct" (click)="chooseProduct(exit)" type="button"
+                              class="btn btn-grad-blue  btn-lg my-0 mx-0">
+                        <i class="fa fa-paper-plane"></i>
+                        Chọn
+                      </button>
+                      <button (click)="close()" type="button"
+                              class="btn btn-grad-red  btn-lg mx-2"
+                              data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
+                      </button>
+                      <button [hidden]="true" #exit type="button" class="btn-delete btn-rounded  btn-lg mx-0"
+                              data-dismiss="modal"><i class="fa-solid fa-right-from-bracket"></i> Thoát
+                      </button>
                     </div>
 
-
-                    <div class="col-6">
+                    <div *ngIf="!message" class="col-4 d-flex justify-content-center">
+                      {{(pageNumber + 1) + '/' + totalPages}}
+                    </div>
+                    <div class="col-4">
                       <!--Pagination-->
-                      <nav aria-label="Page navigation example"
-                           style="display: flex; justify-content: end ; margin-right: 19px">
+                      <nav class="d-flex justify-content-end wow fadeIn">
                         <ul class="pagination">
                           <li *ngIf="!message &&!first " style="color: #333333" class="page-item"><a
                             (click)="previousPage()" class="page-link"
-                            style="width:70px ; height: 40px ;text-align: center ; line-height: 35px ; box-sizing: border-box ; background-color: #277CEA"><<</a>
+                            style="width:90px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">Trang
+                            trước</a>
                           </li>
-                          <div *ngFor="let index of totalPages">
-                            <li [class.select-index]="checkColorIndex(index)" *ngIf="!message" style="color: #333333"
-                                class="page-item"><a
-                              [ngClass]="index == pageNumber+1 ? 'active' : ''"
-                              (click)="getAllProductPage(index)"
-                              style="width:40px ; height: 40px ; text-align: center ;line-height: 35px ; box-sizing: border-box ; background-color: #277CEA"
-                              class="page-link">{{index}}</a></li>
-                          </div>
+                          <li style="color: #333333" class="page-item"><a class="page-link"
+                                                                          style="width:40px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">{{pageNumber + 1}}</a>
+                          </li>
                           <li *ngIf="!last && !message" style="color: #333333" class="page-item"><a (click)="nextPage()"
                                                                                                     class="page-link"
-                                                                                                    style="width:50px ;text-align: center ; height: 40px ; line-height: 35px ; box-sizing: border-box;  background-color: #277CEA"
-                          >>></a>
+                                                                                                    style="width:70px ;text-align: center ; height: 40px ;color: blue; line-height: 35px ; box-sizing: border-box;  background-color: white; cursor: pointer"
+                          >Trang kế</a>
+
                           </li>
                         </ul>
                       </nav>
-                      <!--Pagination-->
                     </div>
                   </div>
                 </div>
               </div>
+
+
             </div>
           </div>
         </div>
@@ -177,24 +141,21 @@
 </div>
 <!--modall-->
 <div id="successModal" class="modal fade">
-  <div class="modal-dialog modal-confirm modal-confirm-success">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
-      <div class="modal-header modal-header-success justify-content-center">
+      <div class="modal-header modal-header-danger justify-content-center">
         <div class="icon-box">
-          <i class="material-icons">&#xE876;</i>
+          <i class="material-icons">&#xE5CD;</i>
         </div>
-        <button type="button" class="close" data-mdb-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Thông báo!</h4>
+        <h4>Thông báo</h4>
         <p>Không có sản phẩm nào được chọn.</p>
-        <button type="button" class="btn btn-danger" id="delete_btn" data-dismiss="modal">Đồng ý
-        </button>
+        <button class="btn-modal btn btn-danger" data-dismiss="modal">Thử lại</button>
       </div>
     </div>
   </div>
 </div>
-
 <div [hidden]="true" id="main-container">
 
 </div>

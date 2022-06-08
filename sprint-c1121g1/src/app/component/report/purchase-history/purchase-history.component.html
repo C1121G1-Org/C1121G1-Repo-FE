@@ -1,106 +1,147 @@
 <!--  Created by TuanNQ-->
 <!--  Time: 11:00 02/06/2022-->
 <!--  Function: Show detail purchase history-->
+<!--  Modal -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="purchase-history.component.css">
-<div class="card card-body">
-  <h3 style="text-align: center">Lịch sử mua hàng</h3>
-</div>
+<div class="d-flex justify-content-center">
+  <section class="make-color container">
+    <!--for demo wrap-->
+    <h1 class="my-5">Lịch sử mua hàng</h1>
 
-<div class="row">
+    <div class="row">
 
-  <div class="card col col-md-3 col-lg-3" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title" style="text-align: center">Thông tin khách hàng:</h5>
-      <p><strong class="card-text">Họ và tên: </strong><span> {{customerReport.name}}</span></p>
-      <p><strong class="card-text">Email: </strong><span> {{customerReport.email}}</span></p>
-      <p><strong class="card-text">Giới tính: </strong>
-        <span *ngIf="customerReport.gender == false"> Nữ</span>
-        <span *ngIf="customerReport.gender == true"> Nam</span>
-      </p>
-      <p><strong class="card-text">Số điện thoại: </strong><span> {{customerReport.phoneNumber}}</span></p>
-      <p><strong class="card-text">Ngày sinh: </strong><span> {{customerReport.dateOfBirth}}</span></p>
-      <p><strong class="card-text">Số lượng đơn hàng: </strong><span> {{customerReport.purchaseTimes}}</span></p>
-    </div>
-  </div>
-
-  <div class="col col-md-8 col-lg-8">
-    <div>
-      <!-- Search form -->
-      <br>
-      <div class="navbar-nav ms-auto d-flex flex-row">
-        <div class="input-group mb-3 col-md-3">
-          <input type="date" class="form-control" placeholder="Start date"
-                 [(ngModel)]="startDate">
-        </div>
-
-        <div class="input-group mb-3 col-md-3">
-          <input type="date" class="form-control" placeholder="End date"
-                 [(ngModel)]="endDate">
+      <div class="card col col-md-3 col-lg-3 make-color" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title" style="text-align: center">Thông tin khách hàng:</h5>
+          <p><strong class="card-text">Họ và tên: </strong><span> {{customerReport.name}}</span></p>
+          <p><strong class="card-text">Email: </strong><span> {{customerReport.email}}</span></p>
+          <p><strong class="card-text">Giới tính: </strong>
+            <span *ngIf="customerReport.gender == false"> Nữ</span>
+            <span *ngIf="customerReport.gender == true"> Nam</span>
+          </p>
+          <p><strong class="card-text">Số điện thoại: </strong><span> {{customerReport.phoneNumber}}</span></p>
+          <p><strong class="card-text">Ngày sinh: </strong><span> {{customerReport.dateOfBirth}}</span></p>
+          <p><strong class="card-text">Số lượng đơn hàng: </strong><span> {{customerReport.purchaseTimes}}</span></p>
         </div>
       </div>
 
-      <div>
-        <button type="button" class="btn btn-primary"
-                (click)="detailPurchaseHitory()">Tìm kiếm
-        </button>
-      </div>
+      <div class="col col-md-8 col-lg-8">
+        <div>
+          <!-- Search form -->
+          <br>
+          <div class="navbar-nav ms-auto d-flex flex-row">
+            <div class=" mb-3 col-md-3">
+              <label>Ngày bắt đầu: </label>
+            </div>
 
-      <h5>Chi tiết lịch sử mua hàng: </h5>
+            <div class=" mb-3 col-md-3">
+              <label>Ngày kết thúc: </label>
+            </div>
+          </div>
 
-      <div [hidden]="checkPurchaseHistories == false">
-        <div class="tbl-header">
-          <table class="table table-bordered table-responsive-md">
-            <thead>
-            <tr>
-              <th class="text-center" scope="col">STT</th>
-              <th class="text-center" scope="col">Ngày mua</th>
-              <th class="text-center" scope="col">Sản phẩm mua</th>
-              <th class="text-center" scope="col">Số tiền (VND)</th>
-            </tr>
-            </thead>
-          </table>
-        </div>
+          <div class="navbar-nav ms-auto d-flex flex-row">
+            <div class="input-group mb-3 col-md-3">
+              <input type="date" class="form-control" placeholder="Start date"
+                     [(ngModel)]="startDate">
+            </div>
 
-        <div class="tbl-content">
-          <table class="table table-bordered table-responsive-md">
-            <tbody>
+            <div class="input-group mb-3 col-md-3">
+              <input type="date" class="form-control" placeholder="End date"
+                     [(ngModel)]="endDate">
+            </div>
+          </div>
 
-            <tr *ngFor="let purchaseHitory of purchaseHistories, index as i">
-              <td class="text-center">{{i + 1}}</td>
-              <td class="text-center">{{purchaseHitory.purchaseDate}}</td>
-              <td class="text-center">
-                <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#deleteModal"
-                        (click)="getPurchaseProduct(purchaseHitory.id)">Xem chi tiết
-                </button>
-              </td>
-              <td class="text-center">{{purchaseHitory.totalMoney | currency: "VND"}}</td>
-            </tr>
+          <div>
+            <button type="button" class="btn btn-grad-blue"
+                    (click)="detailPurchaseHitory()">Tìm kiếm
+            </button>
+          </div>
 
-            </tbody>
-          </table>
+          <h5>Chi tiết lịch sử mua hàng: </h5>
 
-          <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
-            <a type="button" class="btn btn-outline-info" (click)="previousPage()"
-               [hidden]="pageNumber == 0">Previous</a>
-            <span>{{pageNumber + 1}}</span>/<span>{{totalPages}}</span>
-            <a type="button" class="btn btn-outline-info" (click)="nextPage()"
-               [hidden]="pageNumber == totalPages - 1">Next</a>
+          <div *ngIf="checkPurchaseHistories == false">
+            <div class="tbl-content">
+              <table cellpadding="0" cellspacing="0" border="0.5">
+                <tbody>
+                <tr>
+                  <td class="d-flex justify-content-center font-weight-bold text-uppercase">
+                    Không tìm thấy lịch sử mua hàng nào phù hợp.
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div *ngIf="checkPurchaseHistories == true">
+            <div class="tbl-header">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                  <th scope="col">STT</th>
+                  <th scope="col">Ngày mua</th>
+                  <th scope="col">Sản phẩm mua</th>
+                  <th scope="col">Số tiền (VND)</th>
+                </tr>
+                </thead>
+              </table>
+            </div>
+
+            <div class="tbl-content">
+              <table class="table table-bordered table-responsive-md">
+                <tbody>
+
+                <tr *ngFor="let purchaseHitory of purchaseHistories, index as i">
+                  <td class="text-center">{{i + 1}}</td>
+                  <td class="text-center">{{purchaseHitory.purchaseDate}}</td>
+                  <td class="text-center">
+                    <button type="button" class="btn btn-grad-blue" data-toggle="modal"
+                            data-target="#deleteModal"
+                            (click)="getPurchaseProduct(purchaseHitory.id)">Xem chi tiết
+                    </button>
+                  </td>
+                  <td class="text-center">{{purchaseHitory.totalMoney | currency: "VND"}}</td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div [hidden]="checkPurchaseHistories == true" class="text-center">
-        <h2>Không tìm thấy lịch sử mua hàng nào phù hợp.</h2>
+    <div class="row my-3">
+      <div class="row col-4 ml-0">
+        <button type="button" data-toggle="modal" data-target="#myModal1"
+                class="btn btn-grad-blue" [routerLink]="['/report/customer-report']">
+          <i class="fa fa-paper-plane"></i> Quay lại
+        </button>
+      </div>
+
+      <div class="col-4 d-flex justify-content-center">
+        <p class="page-link">{{(pageNumber + 1) + '/' + totalPages}}</p>
+      </div>
+      <div class="col-4">
+        <!--Pagination-->
+        <nav class="d-flex justify-content-end wow fadeIn">
+          <ul class="pagination">
+            <li class="page-item">
+              <button [disabled]="pageNumber<=0" class="page-link" (click)="previousPage()">Trước</button>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <button class="page-link">{{pageNumber + 1}}</button>
+            </li>
+            <li class="page-item">
+              <button [disabled]="pageNumber>=(totalPages-1)" class="page-link" (click)="nextPage()">Sau</button>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
-  </div>
-</div>
-
-<div style="text-align: center" class="container col-6">
-  <button type="button" style="display: inline-block" class="btn btn-primary"
-          [routerLink]="['/report/customer-report']">Quay lại
-  </button>
+  </section>
 </div>
 
 <!-- Delete Modal -->
@@ -112,7 +153,7 @@
         <h5>Sản phẩm đã mua trong đơn hàng: </h5>
 
         <div class="tbl-header">
-          <table class="table table-bordered table-responsive-md">
+          <table cellpadding="0" cellspacing="0" border="0">
             <thead>
             <tr>
               <th class="text-center" scope="col">STT</th>
@@ -124,31 +165,49 @@
         </div>
 
         <div class="tbl-content">
-          <table class="table table-bordered table-responsive-md">
+          <table class=" table table-bordered table-responsive-md">
             <tbody>
 
             <tr *ngFor="let purchaseProduct of purchaseProducts, index as i">
-              <td class="text-center">{{i + 1}}</td>
-              <td class="text-center">{{purchaseProduct.productName}}</td>
-              <td class="text-center">{{purchaseProduct.quantity}}</td>
+              <td>{{i + 1}}</td>
+              <td>{{purchaseProduct.productName}}</td>
+              <td>{{purchaseProduct.quantity}}</td>
             </tr>
 
             </tbody>
           </table>
-
-          <div class="col-12" style="display: flex; justify-content: flex-end; padding-right: 20px">
-            <a type="button" class="btn btn-outline-info" (click)="productPreviousPage()"
-               [hidden]="productPageNumber == 0">Previous</a>
-            <span>{{productPageNumber + 1}}</span>/<span>{{productTotalPages}}</span>
-            <a type="button" class="btn btn-outline-info" (click)="productNextPage()"
-               [hidden]="productPageNumber == productTotalPages - 1">Next</a>
-          </div>
-
         </div>
       </div>
 
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      <div class="row my-3">
+        <div class="row col-4 ml-0">
+          <!--          <button type="button" data-toggle="modal" data-target="#myModal1"-->
+          <!--                  class="btn btn-grad-blue">-->
+          <!--            <i class="fa fa-paper-plane"></i> Đóng-->
+          <!--          </button>-->
+        </div>
+
+        <div class="col-4 d-flex justify-content-center">
+          <p class="page-link">{{(pageNumber + 1) + '/' + totalPages}}</p>
+        </div>
+        <div class="col-4">
+          <!--Pagination-->
+          <nav class="d-flex justify-content-end wow fadeIn">
+            <ul class="pagination">
+              <li class="page-item">
+                <button [disabled]="pageNumber<=0" class="page-link"
+                        (click)="productPreviousPage()">Trước</button>
+              </li>
+              <li class="page-item active" aria-current="page">
+                <button class="page-link">{{pageNumber + 1}}</button>
+              </li>
+              <li class="page-item">
+                <button [disabled]="pageNumber>=(totalPages-1)" class="page-link"
+                        (click)="productNextPage()">Sau</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>

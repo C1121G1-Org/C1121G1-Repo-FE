@@ -153,8 +153,8 @@
     </div>
   </div>
 
-<app-list-supplier-modal (itemOutput)="receiveSupplier($event)"
-                         (flagCreate)="receiveSupplierFlag($event)" [item]="check"></app-list-supplier-modal>
+<app-list-supplier-modal (itemOutput)="receiveSupplier($event)" (flagCreate)="receiveSupplierFlag($event)" [item]="check"></app-list-supplier-modal>
+<app-qr-code></app-qr-code>
 <app-qr-code (sendProduct)="receiveProduct($event)"></app-qr-code>
 <app-list-choose-product-modal (itemOutput)="receiveProduct($event)" [item]="check"></app-list-choose-product-modal>
 

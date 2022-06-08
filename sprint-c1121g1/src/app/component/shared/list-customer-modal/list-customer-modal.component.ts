@@ -1,7 +1,8 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ICustomer} from '../../../models/ICustomer';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-list-customer-modal',
@@ -13,11 +14,12 @@ import {Router} from '@angular/router';
   Time: 13:37 03/06/2022
   Method: pageProduct()
 */
-export class ListCustomerModalComponent implements OnInit {
+export class ListCustomerModalComponent implements OnInit, OnChanges {
   @Output() itemOutput = new EventEmitter();
+  @Input() item: boolean;
   pageNumber: number;
   customerList: ICustomer[] = [];
-  totalPages = [];
+  totalPages: number;
   searchByName = '';
   searchByPhone = '';
   selectedCustomer: ICustomer;
@@ -30,8 +32,14 @@ export class ListCustomerModalComponent implements OnInit {
   searchValue = '';
   indexCurrent: number;
   selectedIndex: number;
+  formSearch: FormGroup;
+  pageSize: number;
+
 
   constructor(private customerService: CustomerService, private router: Router) {
+    this.formSearch = new FormGroup({
+      keySearch: new FormControl('', [Validators.pattern('^[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\s]*$')])
+    });
   }
 
   ngOnInit(): void {
@@ -54,8 +62,9 @@ export class ListCustomerModalComponent implements OnInit {
         this.totalPages = res.totalPages;
         this.first = res.first;
         this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
+        this.pageSize = res.pageable.pageSize;
         // @ts-ignore
-        this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
+        // this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
       }
     }, error => {
       this.message = true;
@@ -82,24 +91,32 @@ export class ListCustomerModalComponent implements OnInit {
     return this.currentCustomer.id === this.selectedCustomer.id ? true : false;
   }
 
-  getAllCustomerPage(index: any) {
-    this.indexCurrent = index;
-    this.pageNumber = index - 1;
-    this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
-  }
+  // getAllCustomerPage(index: any) {
+  //   this.indexCurrent = index;
+  //   this.pageNumber = index - 1;
+  //   this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+  // }
 
   search(value: string) {
-    this.currentCustomer = null;
-    this.pageNumber = 0;
-    if (this.checkSearch === 'phone') {
-      this.searchByPhone = value;
-      this.searchByName = '';
+    value = value.trim();
+    if (!this.formSearch.valid) {
+      this.searchByPhone = 'sadsad8sa0d89as';
+      this.searchByName = '34543fddcsd';
       this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
     } else {
-      this.searchByName = value;
-      this.searchByPhone = '';
-      this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+      this.currentCustomer = null;
+      this.pageNumber = 0;
+      if (this.checkSearch === 'phone') {
+        this.searchByPhone = value;
+        this.searchByName = '';
+        this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+      } else {
+        this.searchByName = value;
+        this.searchByPhone = '';
+        this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+      }
     }
+
   }
 
   close() {
@@ -111,7 +128,7 @@ export class ListCustomerModalComponent implements OnInit {
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#successModal');
+    button.setAttribute('data-target', '#customerModals');
     container.appendChild(button);
     button.click();
 
@@ -132,4 +149,13 @@ export class ListCustomerModalComponent implements OnInit {
     }
     return this.indexCurrent === this.selectedIndex ? true : false;
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.searchValue = '';
+    this.searchByPhone = '';
+    this.searchByName = '';
+    this.ngOnInit();
+  }
+
 }
+
