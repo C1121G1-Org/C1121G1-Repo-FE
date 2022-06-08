@@ -1,9 +1,4 @@
-/*
-  Created by khoaVC
-  Time: 10:00 03/06/2022
-  Interface: Product
-*/
-import {Category} from "./category";
+import {CategoryDto} from "./categoryDto";
 
 export interface Product {
   id?: number;
@@ -21,6 +16,5 @@ export interface Product {
   discount?:number;
   promotions?:string;
   fiveStarRating?:number;
-  category?:Category;
+  categoryDto?: CategoryDto;
 }
-
