@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
 import {InvoiceService} from '../../../services/invoice/invoice.service';
 import {InvoiceDto} from '../../../dto/invoiceDto';
@@ -22,14 +22,14 @@ export class InvoiceHistoryComponent implements OnInit {
   productQuantity = 0;
 
   formSearch = new FormGroup({
-    keyword: new FormControl('', Validators.pattern('[0-9a-zA-Z\\\\s]*'))
+    keyword: new FormControl('', Validators.pattern('[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\\\s]*'))
   });
 
   keyword = '';
   sort = '';
   page = 0;
   totalPages = 0;
-  massage = '';
+  message = '';
 
   checkDate = true;
   checkCustomer = true;
@@ -53,18 +53,24 @@ export class InvoiceHistoryComponent implements OnInit {
   }
 
   getSearch(keyword: string, sort: string, page: number) {
-    this.massage = '';
     this.keyword = this.formSearch.get('keyword').value;
     this.invoiceService.getAll(this.keyword.trim(), this.sort, this.page).subscribe(data => {
+        if (!this.formSearch.valid || data == null) {
+          this.message = 'Không thể tìm thấy kết quả ';
+          this.page = 0;
+          this.totalPages = 0;
+          this.invoiceList = null;
+        }
         console.log(data);
         this.page = data.number;
         this.totalPages = data.totalPages;
         this.invoiceList = data.content;
         console.log(data.content);
+
       },
       error => {
         console.log(error);
-        this.massage = 'Không thể tìm thấy kết quả ';
+        this.message = 'Không thể tìm thấy kết quả ';
         this.page = 0;
         this.totalPages = 0;
         this.invoiceList = null;
