@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import {EmployeeService} from '../../../services/employee/employee.service';
 import {EmployeeInterface} from '../../../dto/employee/employee-interface';
+
+
 
 @Component({
   selector: 'app-employee-list',
@@ -8,6 +11,7 @@ import {EmployeeInterface} from '../../../dto/employee/employee-interface';
   styleUrls: ['./employee-list.component.css']
 })
 export class EmployeeListComponent implements OnInit {
+
 
   employees: EmployeeInterface[] = [];
   name: any = '';
@@ -99,8 +103,8 @@ export class EmployeeListComponent implements OnInit {
       Function: click event line-by-line
    */
 
-  public activeProject(index: number, id: number, nameEmployee: string): void {
 
+  public activeProject(index: number, id: number, nameEmployee: string): void {
     this.activeProjectIndex = index;
     this.nameDelete = nameEmployee;
     this.idClick = id;
