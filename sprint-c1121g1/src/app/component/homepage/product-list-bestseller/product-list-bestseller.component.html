@@ -3,7 +3,6 @@ Create by chienLV
 Time: 16h00 03/06/2022
 Function: get list product bestseller from database
 -->
-
 <!--Slider-->
 <section class="slider">
   <div class="container">
@@ -37,11 +36,15 @@ Function: get list product bestseller from database
 <section class="category">
   <div class="container">
     <div class="category-items">
-      <div class="category-item" *ngFor="let category of categorires">
-        <div class="category-item-picture">
-          <img src="{{category.image}}" alt="">
+      <h3 *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</h3>
+
+      <div (click)="findProductBestsellerByCategory(category)" class="category-item" *ngFor="let category of categorires">
+        <div class="category-item-picture" >
+          <a href="#list-product-bestseller">
+            <img src="{{category.image}}" >
+          </a>
         </div>
-        <p class="category-item-title">{{category.name}}</p>
+          <p class="category-item-title">{{category.name}}</p>
       </div>
     </div>
   </div>
@@ -118,20 +121,22 @@ Function: get list product bestseller from database
   </div>
 </section>
 <!--Product Gallery-->
-<section class="product-gallery-one">
+<section class="product-gallery-one" id="list-product-bestseller">
   <div class="container">
     <div class="product-gallery-one-content">
       <div class="product-gallery-one-content-title">
         <h2>ĐIỆN THOẠI BÁN CHẠY</h2>
         <ul>
           <li *ngFor="let category of topFiveCategories; index as i">
-            <a *ngIf="i < 5" href="#">{{category.name}}</a>
+            <a (click)="findProductBestsellerByCategory(category)">{{category.name}}</a>
           </li>
-          <li><a href="#">Xem tất cả</a></li>
+          <li><a (click)="getAllProductBestSeller()">Xem tất cả</a></li>
+          <li *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</li>
         </ul>
       </div>
       <div class="product-gallery-one-content-product">
         <h3 *ngIf="flagProductBestseller">Điện thoại bán chạy chưa được cập nhật!</h3>
+        <h3 *ngIf="flagProductBestsellerByCategory">Không tìm thấy sản phẩm nào!</h3>
         <div class="product-gallery-one-content-product-item" *ngFor="let productBestseller of productBestsellers">
           <img src="{{productBestseller.image}}" alt="">
           <div class="product-gallery-one-content-product-item-text">

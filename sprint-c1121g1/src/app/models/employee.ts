@@ -6,23 +6,23 @@ import {Position} from './position';
   Interface: Employee
 */
 export interface Employee {
-  id: number;
+  id?: number;
 
-  employeeName: string;
+  employeeName?: string;
 
-  dateOfBirth: boolean;
+  dateOfBirth?: boolean;
 
-  address: string;
+  address?: string;
 
-  idCard: string;
+  idCard?: string;
 
-  phoneNumber: string;
+  phoneNumber?: string;
 
-  image: string;
+  image?: string;
 
-  position: Position;
+  position?: Position;
 
-  account: Account;
+  account?: Account;
 
-  deleteFlag: boolean;
+  deleteFlag?: boolean;
 }
