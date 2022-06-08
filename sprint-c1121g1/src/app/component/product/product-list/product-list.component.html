@@ -1,1 +1,195 @@
-<p>product-list works!</p>
+<div class="d-flex justify-content-center">
+  <section class="make-color container">
+    <!--for demo wrap-->
+    <h1 class="my-5">Thông tin hàng hóa</h1>
+
+    <div class="mb-3 row">
+      <div class="row col-6 justify-content-between ml-1">
+        <div>
+          <h5 style="margin-top: 10px;">Tìm kiếm theo</h5>
+        </div>
+        <div>
+          <select [(ngModel)]="checkSearch" name="" id="" class="search-select">
+            <option value="name">Tên hàng hóa</option>
+            <option value="price">Giá</option>
+            <option value="quantity">Số lượng</option>
+          </select>
+        </div>
+        <div [formGroup]="formSearch">
+          <input [(ngModel)]="searchValue" #element (change)="search(element.value)" style="width: 250px"
+                 class="header-search search-input" placeholder="Bạn cần tìm gì?"
+                 formControlName="searchKey"
+                 type="text"><i (click)="getAll()"
+                                class="fa fa-repeat"
+                                style="position: relative; right: 26px; top: 3px; font-size: 18px"></i>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="float-right">
+          <button class="btn btn-grad-blue" routerLink="/product/create"><i class="fa fa-plus" aria-hidden="true"></i>
+            Thêm mới
+          </button>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="message">
+      <!--      <div class="tbl-header">-->
+      <!--        <table cellpadding="0" cellspacing="0" border="0.5">-->
+      <!--          <thead>-->
+      <!--          <tr>-->
+      <!--            <th>STT</th>-->
+      <!--            <th>Tên</th>-->
+      <!--            <th>Giá (VND)</th>-->
+      <!--            <th>CPU</th>-->
+      <!--            <th>Lưu Trữ</th>-->
+      <!--            <th>Số Lượng</th>-->
+      <!--          </tr>-->
+      <!--          </thead>-->
+      <!--        </table>-->
+      <!--      </div>-->
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0.5">
+          <tbody>
+          <tr>
+            <td class="d-flex justify-content-center font-weight-bold text-uppercase" style="color: red"> Không tìm thấy sản phẩm</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="!message">
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+          <tr>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Giá (VND)</th>
+            <th>CPU</th>
+            <th>Lưu Trữ</th>
+            <th>Số Lượng</th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+          <tr *ngFor="let product of productList; index as i,
+          let j=index" routerLinkActive="active" (click)="activeProject(j,product)"
+              [ngStyle]="{'background-color': activeProjectIndex === j ? '#84c0ec' : ''}">
+            <td>{{(pageNumber*pageSize)+(i+1)}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top" title="{{product.name}}">
+              {{product.name}}</td>
+            <td>{{product.price | currency :'VND':''}}</td>
+            <td>{{product.cpu}}</td>
+            <td>{{product.memory}}</td>
+            <td>{{product.quantity}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row my-3">
+      <div class="row col-4 ml-0">
+        <button (click)="checkProductEdit(errorModalBtn)" type="button"
+                class="btn btn-grad-blue">
+          <i class="fa fa-paper-plane"></i> Sửa
+        </button>
+        <button (click)="checkProduct(errorModalBtn,deleteModal)" type="button" class="btn btn-grad-red mx-2">
+          <i class="fa fa-trash"></i> Xoá
+        </button>
+      </div>
+
+      <div class="col-4 d-flex justify-content-center">
+        <p class="page-link">{{(pageNumber + 1) + '/' + totalPages}}</p>
+      </div>
+      <div class="col-4">
+        <!--Pagination-->
+        <nav class="d-flex justify-content-end wow fadeIn">
+          <ul class="pagination">
+            <li class="page-item">
+              <button [disabled]="first" class="page-link" (click)="previousPage()">Trang Trước</button>
+            </li>
+            <li class="page-item active" aria-current="page">
+              <button class="page-link">{{pageNumber + 1}}</button>
+            </li>
+            <li class="page-item">
+              <button [disabled]="last" class="page-link" (click)="nextPage()">Trang Sau</button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+</div>
+
+<button [hidden]="true" #sucessButton data-toggle="modal" data-target="#successModal"></button>
+<!--success modal-->
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Tuyệt!</h4>
+        <br>
+        <p>Sản phẩm đã được xóa</p>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--delete modal-->
+<button [hidden]="true" #deleteModal data-toggle="modal" data-target="#deleteModal"></button>
+<div id="deleteModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="fa fa-trash"></i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Bạn có muốn xóa sản phẩm <span style="color: red">{{getName}}</span> không ?</p>
+        <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>
+        <div class="d-flex justify-content-center">
+          <button type="button" class="btn btn-grad-blue mx-3" #cancel data-dismiss="modal">Hủy</button>
+          <button (click)="deleteProduct(sucessButton,cancel,errorModalBtn)" type="button" class="btn btn-grad-red">Xóa</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
+<!--error modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Vui lòng chọn sản phẩm!</p>
+        <div class="d-flex justify-content-center">
+          <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+// @ts-ignore
 import { CommonModule } from '@angular/common';
 
 import { EmployeeRoutingModule } from './employee-routing.module';
@@ -7,6 +8,7 @@ import { EmployeeUpdateComponent } from './employee-update/employee-update.compo
 import { EmployeeListComponent } from './employee-list/employee-list.component';
 
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+// @ts-ignore
 import {HttpClientModule} from '@angular/common/http';
 
 
@@ -21,7 +23,6 @@ import {HttpClientModule} from '@angular/common/http';
     ReactiveFormsModule,
     FormsModule
   ],
-
   exports: [
     EmployeeListComponent
   ]

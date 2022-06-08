@@ -4,9 +4,10 @@ import {ProductService} from '../../../services/product/product.service';
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+// @ts-ignore
 import {formatDate} from '@angular/common';
-import {Product} from '../../../models/product';
-
+import {CategoryService} from "../../../services/category/category.service";
+import {Category} from "../../../models/category";
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
@@ -19,8 +20,9 @@ export class ProductCreateComponent implements OnInit {
   flag = false;
   productName: string;
   errorProductName: string;
-
+  categoryList: Category[] = [];
   constructor(private productService: ProductService,
+              private categoryService: CategoryService,
               private router: Router,
               // private alertService: AlertService,
               @Inject(AngularFireStorage) private storage: AngularFireStorage) {
@@ -34,14 +36,18 @@ export class ProductCreateComponent implements OnInit {
       selfie: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       cpu: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       memory: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      otherDescription: new FormControl(  ''),
+      otherDescription: new FormControl(''),
+      categoryDto: new FormControl('', Validators.compose([Validators.required])),
     });
-
   }
-
+  comparefn(t1: Category, t2: Category): boolean {
+    return t1 && t2 ? t1.id === t2.id : t1 === t2;
+  }
   ngOnInit(): void {
+    this.categoryService.getAll().subscribe(data => {
+      this.categoryList = data;
+    });
   }
-
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
@@ -55,8 +61,6 @@ export class ProductCreateComponent implements OnInit {
       this.imgVip = reader.result as string;
     };
   }
-
-
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
@@ -65,7 +69,6 @@ export class ProductCreateComponent implements OnInit {
   getCurrentDateTime(): string {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
   }
-
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
@@ -107,16 +110,16 @@ export class ProductCreateComponent implements OnInit {
           fileRef.getDownloadURL().subscribe((url) => {
             this.productForm.patchValue({image: url});
             this.productService.createProduct(this.productForm.value).subscribe(() => {
+                console.log(this.productForm.value);
                 this.productForm.reset();
                 successBtn.click();
                 this.router.navigateByUrl('/api/product/listProduct');
                 // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                 console.log('success');
               }, error => {
-              console.log(error);
-              console.log(error.error.errorMap.name);
-              this.errorProductName = error.error.errorMap.name;
-
+                console.log(error);
+                console.log(error.error.errorMap.name);
+                this.errorProductName = error.error.errorMap.name;
               }
             );
           });
@@ -124,48 +127,35 @@ export class ProductCreateComponent implements OnInit {
       ).subscribe();
     }
   }
-
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
 */
-
-
-
   get name() {
     return this.productForm.get('name');
   }
-
   get price() {
     return this.productForm.get('price');
   }
-
   get image() {
     return this.productForm.get('image');
   }
-
   get screenSize() {
     return this.productForm.get('screenSize');
   }
-
   get camera() {
     return this.productForm.get('camera');
   }
-
   get selfie() {
     return this.productForm.get('selfie');
   }
-
   get cpu() {
     return this.productForm.get('cpu');
   }
-
   get memory() {
     return this.productForm.get('memory');
   }
-
   get otherDescription() {
     return this.productForm.get('otherDescription');
   }
-
 }

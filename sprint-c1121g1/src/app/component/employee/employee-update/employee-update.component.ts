@@ -5,7 +5,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {EmployeeService} from '../../../services/employee/employee.service';
 import {finalize} from 'rxjs/operators';
 import {AngularFireStorage} from '@angular/fire/storage';
-import {formatDate} from '@angular/common';
+
 
 
 // @ts-ignore
