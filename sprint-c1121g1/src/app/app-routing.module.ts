@@ -14,11 +14,12 @@ import {ProductListComponent} from "./component/product/product-list/product-lis
 
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
-  {path: 'storage/create', component: StorageCreateComponent},
+  // role admin, bussiness staff
+  {path: 'product/create', component: ProductCreateComponent},
+  // role admin, bussiness staff
+  {path: 'product/edit/:id', component: ProductUpdateComponent},
   {path: 'storage/create', component: StorageCreateComponent},
   {path:'listProduct',component: ProductListComponent},
-  {path: 'product/create',component : ProductCreateComponent},
-  {path: 'product/edit/:id',component : ProductUpdateComponent},
 
 ];
 
