@@ -80,8 +80,8 @@ export class ProductUpdateComponent implements OnInit {
       console.log(e);
       this.imgVip = reader.result as string;
     };
-
   }
+
 
   /*
     Created by TuanPA

@@ -116,6 +116,7 @@ export class ProductCreateComponent implements OnInit {
               console.log(error);
               console.log(error.error.errorMap.name);
               this.errorProductName = error.error.errorMap.name;
+
               }
             );
           });
