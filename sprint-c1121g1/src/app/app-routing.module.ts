@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {ProductListBestsellerComponent} from './component/homepage/product-list-bestseller/product-list-bestseller.component';
 
 
+
 const routes: Routes = [
   {path: '', component: ProductListBestsellerComponent},
   {

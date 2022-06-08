@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {Employee} from "../../models/employee/employee";
-import {EmployeeDto} from "../../dto/employee/employee-dto";
-import {Positions} from "../../models/employee/positions";
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {EmployeeInterface} from '../../dto/employee/employee-interface';
+import {Positions} from '../../models/employee/positions';
+import {EmployeeDto} from '../../dto/employee/employeeDto';
 
 export const environment = {
   production: false,
@@ -17,8 +17,7 @@ const API_URL = `${environment.apiUrl}`;
 
 export class EmployeeService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   getAll(name: string, page: number): Observable<any> {
     return this.http.get<any>(API_URL + `/list?page=${page}&keyName=${name}`);
@@ -27,21 +26,19 @@ export class EmployeeService {
   saveEmployee(employeeDto): Observable<EmployeeDto> {
     return this.http.post<EmployeeDto>(API_URL + '/create', employeeDto);
   }
-
   getAllPosition(): Observable<Positions[]> {
     return this.http.get<Positions[]>(API_URL + '/position/list');
   }
 
   findById(id: number): Observable<EmployeeDto> {
-    return this.http.get<EmployeeDto>(API_URL + `/${id}`);
+    return this.http.get<EmployeeDto>(`${API_URL}/${id}`);
   }
-
-  updateEmployee(id: number, employeeDto: EmployeeDto): Observable<EmployeeDto> {
+    updateEmployee(id: number, employeeDto: EmployeeDto): Observable<EmployeeDto> {
     return this.http.patch<EmployeeDto>(`${API_URL}/update/${id}`, employeeDto);
   }
 
-  deleteEmployee(id: number): Observable<EmployeeDto> {
+  deleteEmployee(id: number): Observable<EmployeeInterface> {
     // @ts-ignore
-    return this.http.patch<EmployeeDto>(API_URL + `/delete/` + id);
+    return this.http.patch<EmployeeInterface>(API_URL + `/delete/` + id);
   }
 }

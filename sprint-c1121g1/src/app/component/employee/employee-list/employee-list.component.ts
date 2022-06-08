@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {EmployeeService} from "../../../services/employee/employee.service";
-import {EmployeeDto} from "../../../dto/employee/employee-dto";
-import {HttpErrorResponse} from "@angular/common/http";
-import {Employee} from "../../../models/employee/employee";
+
+import {EmployeeService} from '../../../services/employee/employee.service';
+import {EmployeeInterface} from '../../../dto/employee/employee-interface';
+
+
 
 @Component({
   selector: 'app-employee-list',
@@ -11,7 +12,8 @@ import {Employee} from "../../../models/employee/employee";
 })
 export class EmployeeListComponent implements OnInit {
 
-  employees: EmployeeDto[] = [];
+
+  employees: EmployeeInterface[] = [];
   name: any = '';
   nameDelete: string ;
   message: boolean;
@@ -101,8 +103,8 @@ export class EmployeeListComponent implements OnInit {
       Function: click event line-by-line
    */
 
-  public activeProject(index: number, id: number, nameEmployee : string) : void {
 
+  public activeProject(index: number, id: number, nameEmployee: string): void {
     this.activeProjectIndex = index;
     this.nameDelete = nameEmployee;
     this.idClick = id;
