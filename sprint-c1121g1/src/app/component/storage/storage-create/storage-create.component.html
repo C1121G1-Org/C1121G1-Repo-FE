@@ -154,7 +154,7 @@
   </div>
 
 <app-list-supplier-modal (itemOutput)="receiveSupplier($event)" (flagCreate)="receiveSupplierFlag($event)" [item]="check"></app-list-supplier-modal>
-<app-qr-code></app-qr-code>
+
 <app-qr-code (sendProduct)="receiveProduct($event)"></app-qr-code>
 <app-list-choose-product-modal (itemOutput)="receiveProduct($event)" [item]="check"></app-list-choose-product-modal>
 
@@ -202,3 +202,4 @@
 
 <button #btnFailed type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorModal" [hidden]="true">
 </button>
+

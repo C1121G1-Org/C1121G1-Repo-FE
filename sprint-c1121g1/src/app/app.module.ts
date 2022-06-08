@@ -18,8 +18,10 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
-import {ErrorComponent} from './error/error.component';
+import {CKEditorModule} from "ckeditor4-angular";
 
+
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,10 +45,12 @@ import {ErrorComponent} from './error/error.component';
     ReportModule,
     SecurityModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    HttpClientModule
+    HttpClientModule,
+    CKEditorModule
   ],
   providers: [],
   exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
