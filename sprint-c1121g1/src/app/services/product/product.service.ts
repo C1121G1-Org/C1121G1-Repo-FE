@@ -1,5 +1,5 @@
-// @ts-ignore
 
+// @ts-ignore
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Product} from '../../models/product';
@@ -35,29 +35,23 @@ export class ProductService {
     return this.http.post<any>(this.productApi + '/create', product);
   }
 
-
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
     Function: find by id
 */
-
-
   findById(id: number): Observable<Product> {
     return this.http.get<Product>(this.productApi + '/' + id);
   }
-
 
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
     Function: edit product
 */
-
   updateProduct(id: number, value: any): Observable<any> {
     return this.http.patch<any>(this.productApi + '/' + 'update/' + id, value);
   }
-
   /*
    Created by tamHT
    Time: 13:37 03/06/2022
