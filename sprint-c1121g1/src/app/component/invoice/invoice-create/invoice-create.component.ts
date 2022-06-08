@@ -34,12 +34,14 @@ export class InvoiceCreateComponent implements OnInit {
   printInvoice: string;
   money: string;
   disableFlag: boolean = false;
-  // errorMap: any = {};
-  errorMap: string[] = [];
+  errorMap: any = [];
+  // errorMap: string[] = [];
   error: any = {};
   checkOnchange: boolean;
   flagProduct: boolean = false;
   flagProductNull: boolean = true;
+  errorList: string[] =[];
+  dict: {key, value}[];
 
 
   constructor(private fb: FormBuilder,
@@ -158,8 +160,6 @@ export class InvoiceCreateComponent implements OnInit {
       button.click();
     }
     this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
-
-    // this.errorMap["productList"] = null;
   }
 
   deleteProduct(i: number, length: number) {
@@ -211,17 +211,12 @@ export class InvoiceCreateComponent implements OnInit {
           this.generatePDF('yes',);
         }
         this.invoiceForm.reset();
-        // window.location.reload();
+        window.location.reload();
       });
     }, error => {
-      this.errorMap = error.error.errorMap;
-
-      // console.log(this.errorMap);
-      // console.log(this.errorMap["products.quantity"]);
-      // this.dict = Object.entries(error.error.errorMap).map(([k, v]) => {
-      //   return {key: k, value: v};
-      // });
-      // console.log(this.dict)
+      this.dict = Object.entries(error.error.errorMap).map(([k, v]) => {
+        return {key: k, value: v};
+      });
     });
   }
 
