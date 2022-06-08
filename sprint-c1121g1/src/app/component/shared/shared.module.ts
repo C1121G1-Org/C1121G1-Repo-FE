@@ -8,11 +8,12 @@ import {ListSupplierModalComponent} from './list-supplier-modal/list-supplier-mo
 import {ListCustomerModalComponent} from './list-customer-modal/list-customer-modal.component';
 import {ListChooseProductModalComponent} from './list-choose-product-modal/list-choose-product-modal.component';
 import {SuccessModalComponent} from './success-modal/success-modal.component';
+import {ListProductModalComponent} from "./list-product-modal/list-product-modal.component";
 
 
 @NgModule({
   declarations: [QrCodeComponent, ListSupplierModalComponent, ListCustomerModalComponent,
-    ListChooseProductModalComponent, SuccessModalComponent],
+    ListChooseProductModalComponent, SuccessModalComponent,ListProductModalComponent],
   imports: [
     CommonModule,
     SharedRoutingModule,
