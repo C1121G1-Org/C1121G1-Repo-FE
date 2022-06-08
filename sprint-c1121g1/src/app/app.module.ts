@@ -25,7 +25,7 @@ import {CKEditorModule} from "ckeditor4-angular";
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
