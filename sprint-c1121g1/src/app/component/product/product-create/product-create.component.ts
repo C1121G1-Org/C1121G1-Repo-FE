@@ -4,8 +4,10 @@ import {ProductService} from '../../../services/product/product.service';
 import {Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
+// @ts-ignore
 import {formatDate} from '@angular/common';
-import {Product} from '../../../models/product';
+import {CategoryService} from '../../../services/category/category.service';
+import {Category} from '../../../models/category';
 
 @Component({
   selector: 'app-product-create',
@@ -16,11 +18,15 @@ export class ProductCreateComponent implements OnInit {
   imgVip = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
   productForm: FormGroup;
   selectedImage: any = null;
+  flagCheckImage: boolean;
+  alertImage = '';
   flag = false;
   productName: string;
   errorProductName: string;
+  categoryList: Category[] = [];
 
   constructor(private productService: ProductService,
+              private categoryService: CategoryService,
               private router: Router,
               // private alertService: AlertService,
               @Inject(AngularFireStorage) private storage: AngularFireStorage) {
@@ -34,12 +40,26 @@ export class ProductCreateComponent implements OnInit {
       selfie: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       cpu: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       memory: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      otherDescription: new FormControl(  ''),
+      otherDescription: new FormControl(''),
+      categoryDto: new FormControl('', Validators.compose([Validators.required])),
     });
+  }
 
+  comparefn(t1: Category, t2: Category): boolean {
+    return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
 
   ngOnInit(): void {
+    console.log(this.validateImange(this.imgVip));
+    this.productForm.controls.categoryDto.setValue(undefined);
+    this.categoryService.getAll().subscribe(data => {
+      this.categoryList = data;
+    });
+  }
+
+
+  validateImange(e): boolean {
+    return e == 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
   }
 
   /*
@@ -48,14 +68,15 @@ export class ProductCreateComponent implements OnInit {
   */
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
+    if (this.selectedImage) {
+      this.alertImage = '';
+    }
     const reader = new FileReader();
     reader.readAsDataURL(this.selectedImage);
     reader.onload = e => {
-      console.log(e);
       this.imgVip = reader.result as string;
     };
   }
-
 
   /*
     Created by TuanPA
@@ -70,9 +91,16 @@ export class ProductCreateComponent implements OnInit {
       Created by TuanPA
       Date: 9:08 3/6/2022
   */
-  save(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
-    if (this.productForm.invalid) {
-      console.log(this.productForm.value);
+  save(errorModalBtn: HTMLButtonElement, successButton: HTMLButtonElement) {
+    // if (this.validateImange(this.imgVip)){
+    //   this.flagCheckImage = true;
+    //   this.productForm.controls.image.setErrors({existed: 'Empty! Please input!'});
+    // }
+
+    if (this.productForm.invalid || !this.selectedImage) {
+      if (!this.selectedImage) {
+        this.alertImage = 'Vui lòng nhập ảnh';
+      }
       if (this.productForm.controls.name.value == '') {
         this.productForm.controls.name.setErrors({empty: 'Empty! Please input!'});
       }
@@ -97,26 +125,27 @@ export class ProductCreateComponent implements OnInit {
       if (this.productForm.controls.memory.value == '') {
         this.productForm.controls.memory.setErrors({empty: 'Empty! Please input!'});
       }
+      if (this.productForm.controls.categoryDto.value == '' || this.productForm.controls.categoryDto.value == undefined) {
+        this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
+      }
     } else {
-      console.log(this.productForm.value);
-      // const nameImg = this.getCurrentDateTime();
+      this.alertImage = '';
       const nameImg = '/PD-' + this.productName + '.jpg';
       const fileRef = this.storage.ref(nameImg);
       this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             this.productForm.patchValue({image: url});
+            this.flagCheckImage = false;
             this.productService.createProduct(this.productForm.value).subscribe(() => {
                 this.productForm.reset();
-                successBtn.click();
+                successButton.click();
                 this.router.navigateByUrl('/api/product/listProduct');
                 // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                 console.log('success');
               }, error => {
-              console.log(error);
-              console.log(error.error.errorMap.name);
-              this.errorProductName = error.error.errorMap.name;
-
+                errorModalBtn.click();
+                this.errorProductName = error.error.errorMap.name;
               }
             );
           });
@@ -129,9 +158,6 @@ export class ProductCreateComponent implements OnInit {
     Created by TuanPA
     Date: 9:08 3/6/2022
 */
-
-
-
   get name() {
     return this.productForm.get('name');
   }

@@ -22,7 +22,8 @@
             <span *ngIf="customerReport.gender == true"> Nam</span>
           </p>
           <p><strong class="card-text">Số điện thoại: </strong><span> {{customerReport.phoneNumber}}</span></p>
-          <p><strong class="card-text">Ngày sinh: </strong><span> {{customerReport.dateOfBirth}}</span></p>
+          <p><strong class="card-text">Ngày
+            sinh: </strong><span> {{customerReport.dateOfBirth | date: 'dd-MM-yyyy'}}</span></p>
           <p><strong class="card-text">Số lượng đơn hàng: </strong><span> {{customerReport.purchaseTimes}}</span></p>
         </div>
       </div>
@@ -33,22 +34,22 @@
           <br>
           <div class="navbar-nav ms-auto d-flex flex-row">
             <div class=" mb-3 col-md-3">
-              <label>Ngày bắt đầu: </label>
+              <label>Từ ngày: </label>
             </div>
 
             <div class=" mb-3 col-md-3">
-              <label>Ngày kết thúc: </label>
+              <label>Đến ngày: </label>
             </div>
           </div>
 
           <div class="navbar-nav ms-auto d-flex flex-row">
             <div class="input-group mb-3 col-md-3">
-              <input type="date" class="form-control" placeholder="Start date"
+              <input type="date" class="form-control"
                      [(ngModel)]="startDate">
             </div>
 
             <div class="input-group mb-3 col-md-3">
-              <input type="date" class="form-control" placeholder="End date"
+              <input type="date" class="form-control"
                      [(ngModel)]="endDate">
             </div>
           </div>
@@ -94,15 +95,15 @@
                 <tbody>
 
                 <tr *ngFor="let purchaseHitory of purchaseHistories, index as i">
-                  <td class="text-center">{{i + 1}}</td>
-                  <td class="text-center">{{purchaseHitory.purchaseDate}}</td>
-                  <td class="text-center">
+                  <td>{{pageNumber * pageSize + (i + 1)}}</td>
+                  <td>{{purchaseHitory.purchaseDate | date : 'dd-MM-yyyy'}}</td>
+                  <td>
                     <button type="button" class="btn btn-grad-blue" data-toggle="modal"
                             data-target="#deleteModal"
                             (click)="getPurchaseProduct(purchaseHitory.id)">Xem chi tiết
                     </button>
                   </td>
-                  <td class="text-center">{{purchaseHitory.totalMoney | currency: "VND"}}</td>
+                  <td>{{purchaseHitory.totalMoney | currency: "VND" : ''}} đ</td>
                 </tr>
 
                 </tbody>
@@ -129,13 +130,21 @@
         <nav class="d-flex justify-content-end wow fadeIn">
           <ul class="pagination">
             <li class="page-item">
-              <button [disabled]="pageNumber<=0" class="page-link" (click)="previousPage()">Trước</button>
+              <button [ngStyle]="{'background-color': (pageNumber <= 0) ? 'gray' :
+            'white','color': (pageNumber <= 0) ? 'white' : 'blue'}"
+                      [disabled]="(pageNumber <= 0)" class="page-link"
+                      (click)="previousPage()">Trước
+              </button>
             </li>
-            <li class="page-item active" aria-current="page">
-              <button class="page-link">{{pageNumber + 1}}</button>
+            <li class="page-item " aria-current="page">
+              <button [disabled]="true" class="page-link">{{pageNumber + 1}}</button>
             </li>
             <li class="page-item">
-              <button [disabled]="pageNumber>=(totalPages-1)" class="page-link" (click)="nextPage()">Sau</button>
+              <button [ngStyle]="{'background-color': (pageNumber >= totalPages - 1) ? 'gray' :
+            'white','color': (pageNumber >= totalPages - 1) ? 'white' : 'blue'}"
+                      [disabled]="(pageNumber >= totalPages - 1)" class="page-link"
+                      (click)="nextPage()">Sau
+              </button>
             </li>
           </ul>
         </nav>
@@ -149,16 +158,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <div>
+      <div class="make-color">
         <h5>Sản phẩm đã mua trong đơn hàng: </h5>
 
         <div class="tbl-header">
           <table cellpadding="0" cellspacing="0" border="0">
             <thead>
             <tr>
-              <th class="text-center" scope="col">STT</th>
-              <th class="text-center" scope="col">Tên sản phẩm</th>
-              <th class="text-center" scope="col">Số lượng</th>
+              <th scope="col">STT</th>
+              <th scope="col">Tên sản phẩm</th>
+              <th scope="col">Số lượng</th>
             </tr>
             </thead>
           </table>
@@ -167,13 +176,11 @@
         <div class="tbl-content">
           <table class=" table table-bordered table-responsive-md">
             <tbody>
-
             <tr *ngFor="let purchaseProduct of purchaseProducts, index as i">
               <td>{{i + 1}}</td>
               <td>{{purchaseProduct.productName}}</td>
               <td>{{purchaseProduct.quantity}}</td>
             </tr>
-
             </tbody>
           </table>
         </div>
@@ -181,10 +188,7 @@
 
       <div class="row my-3">
         <div class="row col-4 ml-0">
-          <!--          <button type="button" data-toggle="modal" data-target="#myModal1"-->
-          <!--                  class="btn btn-grad-blue">-->
-          <!--            <i class="fa fa-paper-plane"></i> Đóng-->
-          <!--          </button>-->
+
         </div>
 
         <div class="col-4 d-flex justify-content-center">
@@ -195,15 +199,22 @@
           <nav class="d-flex justify-content-end wow fadeIn">
             <ul class="pagination">
               <li class="page-item">
-                <button [disabled]="pageNumber<=0" class="page-link"
-                        (click)="productPreviousPage()">Trước</button>
+                <button [ngStyle]="{'background-color': (productPageNumber <= 0) ? 'gray' :
+            'white','color': (productPageNumber <= 0) ? 'white' : 'blue'}"
+                        [disabled]="(productPageNumber <= 0)" class="page-link"
+                        (click)="productPreviousPage()">Trước
+                </button>
               </li>
-              <li class="page-item active" aria-current="page">
-                <button class="page-link">{{pageNumber + 1}}</button>
+              <li class="page-item " aria-current="page">
+                <button [disabled]="true" class="page-link">{{productPageNumber + 1}}</button>
               </li>
               <li class="page-item">
-                <button [disabled]="pageNumber>=(totalPages-1)" class="page-link"
-                        (click)="productNextPage()">Sau</button>
+                <button [ngStyle]="{'background-color':
+                (productPageNumber >= productTotalPages - 1) ? 'gray' :'white',
+                'color': (productPageNumber >= productTotalPages - 1) ? 'white' : 'blue'}"
+                        [disabled]="(productPageNumber >= productPageNumber - 1)" class="page-link"
+                        (click)="productNextPage()">Sau
+                </button>
               </li>
             </ul>
           </nav>

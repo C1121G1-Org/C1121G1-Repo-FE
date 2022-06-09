@@ -37,14 +37,14 @@ Function: get list product bestseller from database
   <div class="container">
     <div class="category-items">
       <h3 *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</h3>
-
-      <div (click)="findProductBestsellerByCategory(category)" class="category-item" *ngFor="let category of categorires">
-        <div class="category-item-picture" >
+      <div (click)="findProductBestsellerByCategory(category)" class="category-item"
+           *ngFor="let category of categorires">
+        <div class="category-item-picture">
           <a href="#list-product-bestseller">
-            <img src="{{category.image}}" >
+            <img src="{{category.image}}">
           </a>
         </div>
-          <p class="category-item-title">{{category.name}}</p>
+        <p class="category-item-title">{{category.name}}</p>
       </div>
     </div>
   </div>
@@ -73,8 +73,10 @@ Function: get list product bestseller from database
                 <li><img src="assets/img/icon-fire.png" alt="">
                   <p>Siêu hot</p></li>
                 <li>{{productNewest.name}}</li>
-                <li>{{productNewest.price - productNewest.price * productNewest.discount / 100 | currency: "VND"}}</li>
-                <li><a>{{productNewest.price | currency: "VND"}}</a><span> -{{productNewest.discount}}%</span></li>
+                <li>{{productNewest.price - productNewest.price * productNewest.discount / 100 | currency: "VND": ''}}
+                  <sup>đ</sup></li>
+                <li><a>{{productNewest.price | currency: "VND":''}}<sup>đ</sup></a><span> -{{productNewest.discount}}
+                  %</span></li>
                 <li>{{productNewest.promotions}}</li>
                 <li>
                   <i class="fas fa-star"></i>
@@ -95,8 +97,10 @@ Function: get list product bestseller from database
                 <li><img src="assets/img/icon-fire.png" alt="">
                   <p>Siêu hot</p></li>
                 <li>{{productNewest.name}}</li>
-                <li>{{productNewest.price - productNewest.price * productNewest.discount / 100 | currency: "VND"}}</li>
-                <li><a>{{productNewest.price | currency: "VND"}}</a><span> -{{productNewest.discount}}%</span></li>
+                <li>{{productNewest.price - productNewest.price * productNewest.discount / 100 | currency: "VND":''}}
+                  <sup>đ</sup></li>
+                <li><a>{{productNewest.price | currency: "VND":''}}<sup>đ</sup></a><span> -{{productNewest.discount}}
+                  %</span></li>
                 <li>{{productNewest.promotions}}</li>
                 <li>
                   <i class="fas fa-star"></i>
@@ -127,9 +131,14 @@ Function: get list product bestseller from database
       <div class="product-gallery-one-content-title">
         <h2>ĐIỆN THOẠI BÁN CHẠY</h2>
         <ul>
-          <li *ngFor="let category of topFiveCategories; index as i">
+          <li *ngFor="let category of topFiveCategories; index as i ">
             <a (click)="findProductBestsellerByCategory(category)">{{category.name}}</a>
           </li>
+          <!--          <li *ngFor="let category of topFiveCategories; index as i "-->
+          <!--              (click)="activeProject(i, category)"-->
+          <!--              [ngStyle]="{'background-color': activeProjectIndex === i ? '#9ddceb' : 'white' }">-->
+          <!--            <a (click)="findProductBestsellerByCategory(category)">{{category.name}}</a>-->
+          <!--          </li>-->
           <li><a (click)="getAllProductBestSeller()">Xem tất cả</a></li>
           <li *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</li>
         </ul>
@@ -143,8 +152,10 @@ Function: get list product bestseller from database
             <li><img src="assets/img/icon-fire.png" alt="">
               <p>Bán siêu chạy</p></li>
             <li>{{productBestseller.name}}</li>
-            <li>{{productBestseller.price - productBestseller.price * productBestseller.discount / 100 | currency: "VND"}}</li>
-            <li><a>{{productBestseller.price | currency: "VND"}}</a><span> -{{productBestseller.discount}}%</span></li>
+            <li>{{productBestseller.price - productBestseller.price * productBestseller.discount / 100 | currency: "VND":''}}
+              <sup>đ</sup></li>
+            <li><a>{{productBestseller.price | currency: "VND":''}}
+              <sup>đ</sup></a><span> -{{productBestseller.discount}}%</span></li>
             <li>{{productBestseller.promotions}}</li>
             <li>
               <i class="fas fa-star"></i>
@@ -160,3 +171,4 @@ Function: get list product bestseller from database
     </div>
   </div>
 </section>
+<!--<script src="assets/script.js"></script>-->

@@ -6,20 +6,20 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="d-flex justify-content-center">
-  <section class="make-color container-fluid">
+<div class="d-flex justify-content-center container">
+  <section class="make-color container">
     <!--for demo wrap-->
-    <h1 class="my-5">Quản lý khách hàng</h1>
+    <h1 class="my-5">Quản lý báo cáo khách hàng</h1>
 
     <div>
-      <div class="row"
-           style="margin-right: -10px;margin-right: -10px;margin-left: -10px;margin-right: 0px;margin-left: 0px">
 
-        <div class="col-2 col-md-2">
-          <h5>Tùy chọn lọc: </h5>
+      <div class="row d-flex justify-content-center align-content-start">
+
+        <div style="padding-right: 10px;">
+          <h5 style="margin-bottom: 0">Tùy chọn lọc: </h5>
         </div>
 
-        <div class="col-4 col-md-4">
+        <div class="col-1 col-md-1">
           <div class="form-check">
             <input #element1 class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"
                    value="1" (change)="filterVariable(element1)"
@@ -41,9 +41,9 @@
               </label>
             </div>
 
-            <div class="col-7 col-md-7">
+            <div class="col-7 col-md-8">
               <div class="row">
-                <div class="form-check col-4 col-md-4">
+                <div class="form-check col-4 col-md-5">
                   <input class="form-check-input" type="checkbox" value="false" id="defaultCheck1"
                          [disabled]="chooseFilter != 2"
                          (click)="chooseSearchGender()">
@@ -56,13 +56,13 @@
                   <select class="custom-select custom-select-sm"
                           [disabled]="chooseGenderSearch != true"
                           (change)="searchGender($event.target)">
-                    <option hidden>Gender selection</option>
+                    <option hidden>Chọn giới tính</option>
                     <option value="true">Nam</option>
                     <option value="false">Nữ</option>
                   </select>
                 </div>
 
-                <div class="form-check col-4 col-md-4">
+                <div class="form-check col-4 col-md-5">
                   <input class="form-check-input" type="checkbox" value="2" id="defaultCheck2"
                          [disabled]="chooseFilter != 2"
                          (click)="chooseSearchAge()">
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="col-7 col-md-7" (change)="searchAge($event.target)">
-                  <input class="form-control" type="number" [disabled]="chooseAgeSearch != true">
+                  <input placeholder="Nhập tuổi" class="form-control" type="number" [disabled]="chooseAgeSearch != true">
                 </div>
               </div>
             </div>
@@ -86,10 +86,6 @@
                 class="btn btn-grad-blue mx-1" (click)="filter(errorBtn)">Lọc
         </button>
       </div>
-    </div>
-
-    <div style="float: left">
-      <h5>Số lượng khách hàng: {{customerQuantity}}</h5>
     </div>
 
     <div *ngIf="checkReportCustomers == false">
@@ -110,13 +106,13 @@
         <table cellpadding="0" cellspacing="0" border="0">
           <thead>
           <tr>
-            <th>STT</th>
+            <th style="width: 70px">STT</th>
             <th>Họ và tên</th>
-            <th>Giới tính</th>
+            <th style="width: 70px">Giới tính</th>
             <th>Ngày sinh</th>
             <th>Địa chỉ email</th>
             <th>Số điện thoại</th>
-            <th>Số lần mua</th>
+            <th style="width: 100px">Số lần mua</th>
             <th>Lịch sử mua hàng</th>
           </tr>
           </thead>
@@ -126,16 +122,20 @@
         <table class=" table table-bordered table-responsive-md">
           <tbody>
           <tr *ngFor="let customerReport of customerReports, index as i">
-            <td>{{i + 1}}</td>
-            <td class="desc">{{customerReport.name}}</td>
-            <td>
-              <p *ngIf="customerReport.gender == false">Nữ</p>
-              <p *ngIf="customerReport.gender == true">Nam</p>
+            <td style="width: 70px">{{(pageNumber * pageSize) + (i + 1)}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top"
+                title="{{customerReport.name}}">
+              {{customerReport.name}}
             </td>
-            <td>{{customerReport.dateOfBirth}}</td>
-            <td class="desc">{{customerReport.email}}</td>
+            <td style="width: 70px" *ngIf="customerReport.gender == false">Nữ</td>
+            <td style="width: 70px" *ngIf="customerReport.gender == true">Nam</td>
+            <td>{{customerReport.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top"
+                title="{{customerReport.email}}">
+              {{customerReport.email}}
+            </td>
             <td>{{customerReport.phoneNumber}}</td>
-            <td>{{customerReport.purchaseTimes}}</td>
+            <td style="width: 100px">{{customerReport.purchaseTimes}}</td>
             <td>
               <button type="button"
                       class="btn btn-grad-blue"
@@ -164,13 +164,19 @@
         <nav class="d-flex justify-content-end wow fadeIn">
           <ul class="pagination">
             <li class="page-item">
-              <button [disabled]="pageNumber<=0" class="page-link" (click)="previousPage()">Trước</button>
+              <button [ngStyle]="{'background-color': (pageNumber <= 0) ? 'gray' :
+            'white','color': (pageNumber <= 0) ? 'white' : 'blue'}"
+                      [disabled]="(pageNumber <= 0)" class="page-link"
+                      (click)="previousPage()">Trước</button>
             </li>
-            <li class="page-item active" aria-current="page">
-              <button class="page-link">{{pageNumber + 1}}</button>
+            <li class="page-item " aria-current="page">
+              <button [disabled]="true" class="page-link">{{pageNumber + 1}}</button>
             </li>
             <li class="page-item">
-              <button [disabled]="pageNumber>=(totalPages-1)" class="page-link" (click)="nextPage()">Sau</button>
+              <button [ngStyle]="{'background-color': (pageNumber >= totalPages - 1) ? 'gray' :
+            'white','color': (pageNumber >= totalPages - 1) ? 'white' : 'blue'}"
+                      [disabled]="(pageNumber >= totalPages - 1)" class ="page-link"
+                      (click)="nextPage()">Sau</button>
             </li>
           </ul>
         </nav>

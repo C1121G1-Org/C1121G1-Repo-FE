@@ -64,9 +64,9 @@
   <div class="row mt-3">
     <div class="col-4"></div>
     <div>
-      <p style="font-size: 30px"><strong>Tổng số đơn hàng : {{totalInvoices}}</strong></p>
+      <p style="font-size: 30px"><strong>Tổng số đơn hàng : {{totalInvoices}} Đơn</strong></p>
       <p class="text-danger text-center" style="font-size: 30px"><strong>Tổng Doanh Thu
-        : {{totalSales|currency:"VND"}}</strong></p>
+        : {{totalSales|currency:"VND":''}} VNĐ </strong></p>
     </div>
   </div>
   <div class="row d-flex justify-content-center">
@@ -82,9 +82,5 @@
     </div>
   </div>
 </div>
-
-
-
-<app-qr-code (sendProduct)="getProductFromQRCode($event)"></app-qr-code>
 
 

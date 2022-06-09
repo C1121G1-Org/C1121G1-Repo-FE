@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {HomepageService} from '../../../services/homepage/homepage.service';
 import {ProductBestseller} from '../../../dto/product-bestseller';
-import {Category} from "../../../models/category";
-import {CategoryService} from "../../../services/category/category.service";
+import {Category} from '../../../models/category';
+import {CategoryService} from '../../../services/category/category.service';
+import * as scriptHomepage from '../../../../assets/scriptHomepage.js';
 
 @Component({
   selector: 'app-product-list-bestseller',
@@ -31,11 +32,13 @@ export class ProductListBestsellerComponent implements OnInit {
     this.getAllProductBestSeller();
     this.getAllProductNewest();
     this.getAllCategory();
+    scriptHomepage();
   }
 
   getAllProductBestSeller() {
     this.homepageService.getProductBestseller().subscribe((productBestsellers) => {
       this.flagProductBestseller = false;
+      this.flagProductBestsellerByCategory = false;
       this.productBestsellers = productBestsellers;
       if (this.productBestsellers.length === 0) {
         this.flagProductBestseller = true;
@@ -79,7 +82,7 @@ export class ProductListBestsellerComponent implements OnInit {
     this.homepageService.getProductBestsellerByCategory(category).subscribe((productBestsellerByCategories) => {
       this.flagProductBestsellerByCategory = false;
       this.productBestsellers = productBestsellerByCategories;
-      if (this.productBestsellers.length == 0) {
+      if (this.productBestsellers.length === 0) {
         this.flagProductBestsellerByCategory = true;
       }
     }, error => {

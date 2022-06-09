@@ -1,11 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {ProductService} from '../../../services/product/product.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
-import {formatDate} from '@angular/common';
-import {Product} from '../../../models/product';
+import {Category} from '../../../models/category';
+import {CategoryService} from '../../../services/category/category.service';
 
 @Component({
   selector: 'app-product-update',
@@ -26,16 +26,18 @@ export class ProductUpdateComponent implements OnInit {
     cpu: new FormControl(),
     memory: new FormControl(),
     otherDescription: new FormControl(),
+    categoryDto: new FormControl()
   });
   selectedImage: any = null;
   flag = false;
   img2 = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
-  productSave: Product;
   errorProductName: string;
   id: number;
   productName = '';
+  categoryList: Category[] = [];
 
   constructor(private productService: ProductService,
+              private categoryService: CategoryService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               @Inject(AngularFireStorage) private storage: AngularFireStorage) {
@@ -44,8 +46,9 @@ export class ProductUpdateComponent implements OnInit {
       this.id = Number(paramMap.get('id'));
 
       this.productService.findById(this.id).subscribe(product => {
-        console.log(product);
+        // console.log(product);
         this.imgVip = product.image;
+
         console.log(this.img2);
         this.productForm = new FormGroup({
           id: new FormControl(product.id),
@@ -58,13 +61,21 @@ export class ProductUpdateComponent implements OnInit {
           cpu: new FormControl(product.cpu, [Validators.required, Validators.maxLength(50)]),
           memory: new FormControl(product.memory, [Validators.required, Validators.maxLength(50)]),
           otherDescription: new FormControl(product.otherDescription),
+          // category: new FormControl(product.category, Validators.compose([Validators.required])),
+          categoryDto: new FormControl(product.category)
         });
+      }, error => {
+        console.log(error.error);
+        this.router.navigateByUrl('/error');
       });
     });
   }
 
 
   ngOnInit(): void {
+    this.categoryService.getAll().subscribe(data => {
+      this.categoryList = data;
+    });
   }
 
   /*
@@ -82,20 +93,23 @@ export class ProductUpdateComponent implements OnInit {
     };
   }
 
-
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
 */
-  getCurrentDateTime(): string {
-    return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
+
+
+  comparefn(t1: Category, t2: Category): boolean {
+    return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
+
 
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
   */
-  save(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
+  save(errorModalBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
+
     console.log(this.productForm.value);
     if (this.productForm.invalid) {
       console.log(this.productForm.value);
@@ -124,6 +138,9 @@ export class ProductUpdateComponent implements OnInit {
       if (this.productForm.controls.memory.value == '') {
         this.productForm.controls.memory.setErrors({empty: 'Empty! Please input!'});
       }
+      if (this.productForm.controls.categoryDto.value == '') {
+        this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
+      }
     } else {
       if (this.selectedImage != null) {
         // const nameImg = this.getCurrentDateTime();
@@ -142,8 +159,10 @@ export class ProductUpdateComponent implements OnInit {
                   // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                   console.log('success');
                 }, error => {
+
                   console.log(error.error.errorMap.name);
                   this.errorProductName = error.error.errorMap.name;
+                  errorModalBtn.click();
                 }
               );
             });
@@ -151,15 +170,17 @@ export class ProductUpdateComponent implements OnInit {
         ).subscribe();
       } else {
         this.productService.updateProduct(this.id, this.productForm.value).subscribe(() => {
-            // alert('edited successfully');
-            successBtn.click();
-            this.router.navigateByUrl('/api/product/listProduct');
-            // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
-            console.log('success');
-          }, error => {
-            console.log(error.error.errorMap.name);
-            this.errorProductName = error.error.errorMap.name;
-          });
+          // alert('edited successfully');
+          successBtn.click();
+          this.router.navigateByUrl('/api/product/listProduct');
+          // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
+          console.log('success');
+        }, error => {
+          console.log(error.error.errorMap.name);
+          this.errorProductName = error.error.errorMap.name;
+          errorModalBtn.click();
+
+        });
       }
     }
   }

@@ -23,3 +23,12 @@ export class StorageService {
     return this.http.post<any>(`${this.apiBaseUrl}/api/storage/create`, data);
   }
 }
+
+
+
+
+
+
+
+
+

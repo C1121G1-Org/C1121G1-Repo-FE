@@ -234,7 +234,7 @@
                        formControlName="supplierName">
                 <p style="color: red" *ngIf="( supplierForm.controls.supplierName.hasError( 'required')&&
 (supplierForm.controls.supplierName.touched|| supplierForm.controls.supplierName.dirty))">Tên nhà cung cấp không được để trống</p>
-                <p style="color: red" *ngIf="errorSupplierName != ''">{{errorSupplierName}}</p>
+                <p style="color: red" *ngIf="check">{{errorSupplierName}}</p>
               </div>
 
               <div class="form-group col-md-8">
@@ -261,23 +261,24 @@
 
                 <p style="color: red" *ngIf="( supplierForm.controls.email.hasError( 'email')&&
 (supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))">không đúng định dạng, vd:haivan@gmail.com</p>
-                <p style="color: red" *ngIf="errorEmail != ''">{{errorEmail}}</p>
+                <p style="color: red" *ngIf="check">{{errorEmail}}</p>
               </div>
 
               <div class=" col-md-12 text-center mx-auto mt-4">
-                <div class="text-center " style="margin-bottom: 40px" >
-                  <button  type="submit" class="btn btn-primary " style="margin-right: 20px">
-                    <i class="fa fa-paper-plane"></i>Thêm mới
-                  </button>
-                  <button type="button" class="btn btn-danger "  [routerLink]="['']" ><i class="fa-solid fa-right-from-bracket"></i> Hủy</button>
-
-                </div>
+                <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
+                  class="fa fa-paper-plane"></i>THÊM MỚI
+                </button>
+                <a data-toggle="modal"
+                   data-target="#cancelModal"
+                   style="width: 200px" type="submit" class="btn btn-grad-red mx-1"  [routerLink]="['']">
+                  <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </form>
 </div>
 
