@@ -4,15 +4,15 @@
     <h1 class="my-5">Thông tin hàng hóa</h1>
 
     <div class="mb-3 row">
-      <div class="row col-6 justify-content-between ml-1">
+      <div class="row col-10 ml-1">
         <div>
           <h5 style="margin-top: 10px;">Tìm kiếm theo</h5>
         </div>
-        <div>
-          <select [(ngModel)]="checkSearch" name="" id="" class="search-select">
+        <div class="mx-1">
+          <select [(ngModel)]="checkSearch" class="search-select">
             <option value="name">Tên hàng hóa</option>
-            <option value="price">Giá</option>
-            <option value="quantity">Số lượng</option>
+            <option value="price">Giá (Nhỏ hơn)</option>
+            <option value="quantity">Số lượng (Lớn hơn)</option>
           </select>
         </div>
         <div [formGroup]="formSearch">
@@ -24,7 +24,7 @@
                                 style="position: relative; right: 26px; top: 3px; font-size: 18px"></i>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-2">
         <div class="float-right">
           <button class="btn btn-grad-blue" routerLink="/product/create"><i class="fa fa-plus" aria-hidden="true"></i>
             Thêm mới
@@ -63,11 +63,30 @@
           <thead>
           <tr>
             <th>STT</th>
-            <th>Tên</th>
-            <th>Giá (VND)</th>
-            <th>CPU</th>
-            <th>Lưu Trữ</th>
-            <th>Số Lượng</th>
+            <th (click)="changeSortName()">
+              <i *ngIf="checkSortName" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSortName" class="fa-solid fa-arrow-up-9-1"></i>
+              Tên
+            </th>
+            <th (click)="changeSort()">
+              <i *ngIf="checkSort" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSort" class="fa-solid fa-arrow-up-9-1"></i>
+              Giá (VND)
+            </th>
+            <th (click)="changeSortCpu()">
+              <i *ngIf="checkSortCpu" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSortCpu" class="fa-solid fa-arrow-up-9-1"></i>
+              Chipset
+            </th>
+            <th (click)="changeSortMemory()" >
+              <i *ngIf="checkSortMemory" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSortMemory" class="fa-solid fa-arrow-up-9-1"></i>
+              Bộ nhớ trong
+            </th>
+            <th (click)="changeSortQuantity()">
+              <i *ngIf="checkSortQuantity" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSortQuantity" class="fa-solid fa-arrow-up-9-1"></i>
+              Số Lượng (Chiếc)</th>
           </tr>
           </thead>
         </table>
@@ -77,14 +96,16 @@
           <tbody>
           <tr *ngFor="let product of productList; index as i,
           let j=index" routerLinkActive="active" (click)="activeProject(j,product)"
-              [ngStyle]="{'background-color': activeProjectIndex === j ? '#84c0ec' : ''}">
+              [ngStyle]="{'background-color': activeProjectIndex === j && flagClick ? '#84c0ec' : ''}">
             <td>{{(pageNumber*pageSize)+(i+1)}}</td>
             <td class="desc" data-toggle="tooltip" data-placement="top" title="{{product.name}}">
-              {{product.name}}</td>
+              {{product.name}}
+            </td>
             <td>{{product.price |currency :'VND':''}}</td>
             <td>{{product.cpu}}</td>
-            <td>{{product.memory}}</td>
-            <td>{{product.quantity}}</td>
+            <td>&emsp;{{product.memory}}</td>
+            <td>
+              &nbsp;&nbsp;&nbsp;&nbsp;{{product.quantity}}</td>
           </tr>
           </tbody>
         </table>
@@ -110,13 +131,13 @@
         <nav class="d-flex justify-content-end wow fadeIn">
           <ul class="pagination">
             <li class="page-item">
-              <button [disabled]="first" class="page-link" (click)="previousPage()">Trang Trước</button>
+              <button [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}" [disabled]="first" class="page-link" (click)="previousPage()">Trước</button>
             </li>
-            <li class="page-item active" aria-current="page">
-              <button class="page-link">{{pageNumber + 1}}</button>
+            <li class="page-item" aria-current="page">
+              <button [disabled]="true" class="page-link">{{pageNumber + 1}}</button>
             </li>
             <li class="page-item">
-              <button [disabled]="last" class="page-link" (click)="nextPage()">Trang Sau</button>
+              <button [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}" [disabled]="last" class ="page-link" (click)="nextPage()">Sau</button>
             </li>
           </ul>
         </nav>
@@ -137,7 +158,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Tuyệt!</h4>
+        <h4>Thông báo</h4>
         <br>
         <p>Sản phẩm đã được xóa</p>
         <div class="d-flex justify-content-center">

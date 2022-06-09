@@ -3,6 +3,7 @@ import {ICustomer} from '../../../models/ICustomer';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {IProduct} from '../../../models/IProduct';
 
 @Component({
   selector: 'app-list-customer-modal',
@@ -34,6 +35,8 @@ export class ListCustomerModalComponent implements OnInit, OnChanges {
   selectedIndex: number;
   formSearch: FormGroup;
   pageSize: number;
+  activeProjectIndex: number;
+  flagClick = false;
 
 
   constructor(private customerService: CustomerService, private router: Router) {
@@ -48,9 +51,21 @@ export class ListCustomerModalComponent implements OnInit, OnChanges {
   }
 
   chooseCustomer(exit) {
-    this.itemOutput.emit(this.currentCustomer);
-    this.currentCustomer = null;
-    exit.click();
+    if (this.currentCustomer) {
+      this.itemOutput.emit(this.currentCustomer);
+      this.currentCustomer = null;
+      exit.click();
+    } else {
+      const container = document.getElementById('main-container');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.style.display = 'none';
+      button.setAttribute('data-toggle', 'modal');
+      button.setAttribute('data-target', '#customerModals');
+      container.appendChild(button);
+      button.click();
+    }
+
   }
 
   getModalCustomer(pageNumber, searchByName, searchByPhone) {
@@ -79,16 +94,23 @@ export class ListCustomerModalComponent implements OnInit, OnChanges {
     this.getModalCustomer(this.pageNumber - 1, this.searchByName, this.searchByPhone);
   }
 
-  getCustomer(customer: ICustomer): void {
-    this.currentCustomer = customer;
-  }
 
-  isSelected(customer: ICustomer): boolean {
-    this.selectedCustomer = customer;
-    if (!this.currentCustomer) {
-      return false;
+  isSelected(index: number, customer: ICustomer): void {
+    if (this.activeProjectIndex != index) {
+      this.flagClick = true;
+      this.activeProjectIndex = index;
+      this.currentCustomer = customer;
+    } else {
+      this.flagClick = !this.flagClick;
+      this.currentCustomer = null;
     }
-    return this.currentCustomer.id === this.selectedCustomer.id ? true : false;
+    if (this.flagClick) {
+      this.currentCustomer = customer;
+    } else {
+      this.currentCustomer = null;
+    }
+
+
   }
 
   // getAllCustomerPage(index: any) {
@@ -139,6 +161,7 @@ export class ListCustomerModalComponent implements OnInit, OnChanges {
     this.searchValue = '';
     this.searchByPhone = '';
     this.searchByName = '';
+    this.flagClick = !this.flagClick;
     this.ngOnInit();
   }
 

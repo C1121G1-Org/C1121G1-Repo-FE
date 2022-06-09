@@ -1,14 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {ProductService} from '../../../services/product/product.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';
 import {finalize} from 'rxjs/operators';
-import {formatDate} from '@angular/common';
-
-import {Category} from "../../../models/category";
-import {CategoryService} from "../../../services/category/category.service";
-import {Product} from "../../../dto/productDto";
+import {Category} from '../../../models/category';
+import {CategoryService} from '../../../services/category/category.service';
 
 @Component({
   selector: 'app-product-update',
@@ -69,7 +66,7 @@ export class ProductUpdateComponent implements OnInit {
         });
       }, error => {
         console.log(error.error);
-        alert('cút')
+        this.router.navigateByUrl('/error');
       });
     });
   }
@@ -111,7 +108,7 @@ export class ProductUpdateComponent implements OnInit {
       Created by TuanPA
       Date: 9:08 3/6/2022
   */
-  save(errorBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
+  save(errorModalBtn: HTMLButtonElement, successBtn: HTMLButtonElement) {
 
     console.log(this.productForm.value);
     if (this.productForm.invalid) {
@@ -141,6 +138,9 @@ export class ProductUpdateComponent implements OnInit {
       if (this.productForm.controls.memory.value == '') {
         this.productForm.controls.memory.setErrors({empty: 'Empty! Please input!'});
       }
+      if (this.productForm.controls.categoryDto.value == '') {
+        this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
+      }
     } else {
       if (this.selectedImage != null) {
         // const nameImg = this.getCurrentDateTime();
@@ -162,6 +162,7 @@ export class ProductUpdateComponent implements OnInit {
 
                   console.log(error.error.errorMap.name);
                   this.errorProductName = error.error.errorMap.name;
+                  errorModalBtn.click();
                 }
               );
             });
@@ -177,6 +178,8 @@ export class ProductUpdateComponent implements OnInit {
         }, error => {
           console.log(error.error.errorMap.name);
           this.errorProductName = error.error.errorMap.name;
+          errorModalBtn.click();
+
         });
       }
     }

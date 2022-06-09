@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row" style="justify-content: center;display: flex">
       <div class="col-md-10">
-        <div class="card ">
+        <div class="card make-color">
           <div class="card card-body">
             <h3 class="text-center font-weight-bold text-uppercase py-4">
               THÊM MỚI THÔNG TIN HÀNG HÓA
@@ -11,13 +11,10 @@
             <div class="row" style="justify-content: center;display: flex">
               <div class="col-md-8 row">
                 <input type="hidden" formControlName="id">
-
                 <div class="form-group col-md-6">
                   <label for="name">Tên Hàng <span class="text-danger">(*):</span></label>
-                  <input [(ngModel)]="productName" formControlName="name" type="text" class="form-control"
-                         name="name" id="name">
-                  <small class="form-text text-danger" *ngIf="errorProductName!=''">{{errorProductName}}</small>
-
+                  <input formControlName="name" type="text" class="form-control" name="name" id="name">
+                  <!--                  <small class="form-text text-danger" *ngIf="errorProductName!=''">{{errorProductName}}</small>-->
                   <div
                     *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched|| productForm.controls.name.errors?.empty)">
                     <!--                    <small *ngIf="productForm.controls.name.errors?.maxlength" class="form-text text-danger">Tên phải ít hơn 255 ký tự </small>-->
@@ -27,18 +24,13 @@
                       *ngIf="productForm.controls.name.hasError('required') || productForm.controls.name.errors.empty"
                       class="form-text text-danger">Vui lòng nhập tên hàng hóa.</small>
                   </div>
-
                 </div>
-
                 <div class="form-group col-md-6">
-                  <label for="price">Giá <span class="text-danger">(*):</span></label>
+                  <label for="price">Giá (VND) <span class="text-danger">(*):</span></label>
                   <input type="text" id=price formControlName="price" class="form-control" name="price">
                   <!--                  <input onChange="format_curency(this);" type="text" id=price formContronlName="price" class="form-control" name="price">-->
                   <!--                  <input [ngModel]="productForm.controls.price.value | currency"-->
                   <!--                  (ngModelChange)="productForm.controls.price =$event" name="inputField" type="text" />-->
-
-                  <span>VND</span>
-
                   <div
                     *ngIf="productForm.controls.price.invalid && (productForm.controls.price.dirty || productForm.controls.price.touched|| productForm.controls.price.errors?.empty)">
                     <small
@@ -48,7 +40,6 @@
                       0. </small>
                   </div>
                 </div>
-
                 <div class="form-group col-md-12">
                   <div class="file">
                     <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
@@ -58,22 +49,16 @@
                       <i class="fa fa-upload"></i>
                     </label>
                   </div>
-
                   <!--    hien thi loi-->
-                  <div
-                    *ngIf="productForm.controls.image.invalid && (productForm.controls.image.dirty || productForm.controls.image.touched || productForm.controls.image.errors?.empty)">
-                    <small
-                      *ngIf="productForm.controls.image.hasError('required') || productForm.controls.image.errors.empty"
-                      class="form-text text-danger">Vui lòng chọn hình ảnh.</small>
+                  <div>
+                    <small class="text-danger" *ngIf="alertImage!=''">{{alertImage}}</small>
                   </div>
                 </div>
-
                 <div class="form-group col-md-6">
                   <label for="screenSize">Kích Thước Màn Hình <span
                     class="text-danger">(*):</span></label>
                   <input formControlName="screenSize" type="text" class="form-control"
                          name="screenSize" id="screenSize">
-
                   <!--    hien thi loi-->
                   <div
                     *ngIf="productForm.controls.screenSize.invalid && (productForm.controls.screenSize.dirty || productForm.controls.screenSize.touched || productForm.controls.screenSize.errors?.empty)">
@@ -84,50 +69,39 @@
                       phải ngắn hơn 50 kí tự</small>
                   </div>
                 </div>
-
-
                 <div class="form-group col-md-6">
                   <label for="camera">Camera<span
                     class="text-danger">(*):</span></label>
                   <input formControlName="camera" type="text" class="form-control"
                          name="camera" id="camera">
-
                   <!--    hien thi loi-->
                   <div
                     *ngIf="productForm.controls.camera.invalid && (productForm.controls.camera.dirty || productForm.controls.camera.touched || productForm.controls.camera.errors?.empty)">
-
                     <small
                       *ngIf="productForm.controls.camera.hasError('required') || productForm.controls.camera.errors.empty"
                       class="form-text text-danger">Vui lòng nhập thông số camera.</small>
                     <small *ngIf="camera.errors?.maxlength" class="text-form text-danger">Trường camera phải ngắn hơn 50
                       kí tự</small>
-
                   </div>
                 </div>
-
                 <div class="form-group col-md-6">
                   <label for="selfie">Selfie<span class="text-danger">(*):</span></label>
                   <input formControlName="selfie" type="text" class="form-control" name="selfie"
                          id="selfie">
-
                   <!--    hien thi loi-->
                   <div
                     *ngIf="productForm.controls.selfie.invalid && (productForm.controls.selfie.dirty || productForm.controls.selfie.touched || productForm.controls.selfie.errors?.empty)">
-
                     <small
                       *ngIf="productForm.controls.selfie.hasError('required') || productForm.controls.selfie.errors.empty"
                       class="form-text text-danger">Vui lòng nhập thông số camera trước.</small>
                     <small *ngIf="selfie.errors?.maxlength" class="text-form text-danger">Trường selfie phải ngắn hơn 50
                       kí tự</small>
-
                   </div>
                 </div>
-
                 <div class="form-group col-md-6">
                   <label for="memory">Lưu trữ<span class="text-danger">(*):</span></label>
                   <input formControlName="memory" type="text" class="form-control" name="memory"
                          id="memory">
-
                   <!--    hien thi loi-->
                   <div
                     *ngIf="productForm.controls.memory.invalid && (productForm.controls.memory.dirty || productForm.controls.memory.touched || productForm.controls.memory.errors?.empty)">
@@ -136,75 +110,46 @@
                     <small
                       *ngIf="productForm.controls.memory.hasError('required') || productForm.controls.memory.errors.empty"
                       class="form-text text-danger">Vui lòng nhập thông số bộ nhớ.</small>
-                    <small *ngIf="memory.errors?.maxlength" class="text-form text-danger">Trường lưu trữ phải ngắn hơn
-                      50 kí tự</small>
-
+                    <small *ngIf="memory.errors?.maxlength" class="text-form text-danger">Trường lưu trữ phải ngắn hơn 50 kí tự</small>
                   </div>
                 </div>
-
-
                 <div class="form-group col-md-12">
                   <label for="category">Danh Mục<span class="text-danger">(*)</span> </label>
                   <!--                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="category">-->
-                  <select [compareWith]="comparefn" name="category" id="category" formControlName="categoryDto"
+                  <select (change)="validateCategory($event.target)" [compareWith]="comparefn" name="category" id="category" formControlName="categoryDto"
                           class="form-control">
+                    <option [ngValue]="''"> -- Chọn danh mục sản phẩm --</option>
                     <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
                   </select>
-
                   <!--    hien thi loi-->
                   <div
-                    *ngIf="productForm.controls.categoryDto.invalid && (productForm.controls.categoryDto.dirty || productForm.controls.categoryDto.touched || productForm.controls.categoryDto.errors?.empty)">
-
-                    <small
-                      *ngIf="productForm.controls.categoryDto.hasError('required') || productForm.controls.categoryDto.errors.empty"
-                      class="form-text text-danger">Vui lòng chọn danh mục.</small>
-
+                    *ngIf="productForm.controls.categoryDto.errors?.empty">
+                    <small class="form-text text-danger">Vui lòng chọn danh mục.</small>
                   </div>
                 </div>
-
-
                 <div class="form-group col-md-12">
                   <label for="cpu">CPU<span class="text-danger">(*)</span> </label>
                   <input formControlName="cpu" type="text" class="form-control" name="cpu" id="cpu">
-
                   <!--    hien thi loi-->
                   <div
                     *ngIf="productForm.controls.cpu.invalid && (productForm.controls.cpu.dirty || productForm.controls.cpu.touched || productForm.controls.cpu.errors?.empty)">
-
                     <small
                       *ngIf="productForm.controls.cpu.hasError('required') || productForm.controls.cpu.errors.empty"
                       class="form-text text-danger">Vui lòng nhập thông số cpu.</small>
                     <small *ngIf="cpu.errors?.maxlength" class="text-form text-danger">Trường cpu phải ngắn hơn 50 kí
                       tự</small>
-
                   </div>
                 </div>
-
                 <div class="form-group col-md-12">
                   <label for="otherDescription">Mô tả thêm </label>
                   <ckeditor id="otherDescription" formControlName="otherDescription"></ckeditor>
-
-                  <!--                  <textarea id="otherDescription" formControlName="otherDescription"-->
-                  <!--                            class="form-control">    </textarea>-->
-
                 </div>
-
                 <div class=" col-md-12 text-center mx-auto mt-4">
-                  <!--                  <button style="width: 200px;" type="submit" class="btn btn-primary "-->
-                  <!--                  ><i class="fa fa-paper-plane"></i>Xác nhận-->
-                  <!--                  </button>-->
-
-                  <!--                  <a type="button" class="btn btn-danger"-->
-                  <!--                     style="margin-left: 10px; width: 200px"-->
-                  <!--                     data-toggle="modal"-->
-                  <!--                     data-target="#cancelModal">-->
-                  <!--                    Hủy</a>-->
-
                   <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
                     class="fa fa-paper-plane"></i>THÊM MỚI
                   </button>
                   <a data-toggle="modal"
-                     data-target="#deleteModal"
+                     data-target="#cancelModal"
                      style="width: 200px" type="submit" class="btn btn-grad-red mx-1">
                     <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
                 </div>
@@ -216,80 +161,11 @@
     </div>
   </div>
 </form>
-
 <!--<script>-->
 <!--  function format_curency(a) {-->
 <!--    a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");-->
 <!--  }-->
 <!--</script>-->
-
-
-<!-- Modal -->
-<!--<div class="modal fade " id="cancelModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
-<!--  <div class="modal-dialog">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title" id="exampleModalLabel">Bạn có muốn hủy thêm mới</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--          <span aria-hidden="true">&times;</span>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-
-<!--      </div>-->
-<!--      <div class="modal-footer">-->
-<!--        <a type="button" [routerLink]="['/product/listProduct']" class="btn btn-primary">Có</a>-->
-<!--        <button type="button" class="btn btn-danger" data-dismiss="modal">Không</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-<!--notification modal-->
-<!--<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>-->
-<!--&lt;!&ndash;error modal&ndash;&gt;-->
-<!--<div class="modal fade " tabindex="-1" id="errorModal">-->
-<!--  <div class="modal-dialog" style="text-align: center">-->
-<!--    <div class="modal-content" style="text-align: center">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title">Thông báo</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <p>Dữ liệu đã tồn tại, vui lòng kiểm tra lại!</p>-->
-<!--      </div>-->
-<!--      <div class="modal-footer d-flex justify-content-center">-->
-<!--        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>-->
-<!--&lt;!&ndash;success modal&ndash;&gt;-->
-<!--<div class="modal fade" tabindex="-1" id="successModal">-->
-<!--  <div class="modal-dialog" style="text-align: center">-->
-<!--    <div class="modal-content" style="text-align: center">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title">Thông báo</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <p>Thêm mới thông tin hàng hóa thành công!</p>-->
-<!--      </div>-->
-<!--      <div class="modal-footer d-flex justify-content-center">-->
-<!--        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/api/product/listProduct']">-->
-<!--          OK-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-
-
 <button [hidden]="true" #successButton data-toggle="modal" data-target="#successModal"></button>
 <!--success modal-->
 <div id="successModal" class="modal fade">
@@ -302,20 +178,19 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Tuyệt!</h4>
+        <h4>Thông báo!</h4>
         <br>
-        <p>Sản phẩm đã được xóa</p>
+        <p>Tạo mới sản phẩm thành công</p>
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</button>
+          <a [routerLink]="['/listProduct']" type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</a>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-<!--delete modal-->
+<!--warning modal-->
 <!--<button [hidden]="true" #deleteModal data-toggle="modal" data-target="#deleteModal"></button>-->
-<div id="deleteModal" class="modal fade">
+<div id="cancelModal" class="modal fade">
   <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
       <div class="modal-header modal-header-danger justify-content-center">
@@ -326,17 +201,18 @@
       </div>
       <div class="modal-body text-center">
         <h4>Thông báo</h4>
-<!--        <p>Bạn có muốn xóa sản phẩm <span style="color: red">{{getName}}</span> không ?</p>-->
-        <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>
+        <p>Bạn có muốn hủy thêm mới hàng hóa không ?</p>
+        <!--        <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>-->
         <div class="d-flex justify-content-center">
-          <button type="button" class="btn btn-grad-blue mx-3" #cancel data-dismiss="modal">Hủy</button>
-          <button  type="button" class="btn btn-grad-red">Xóa</button>
+          <a [routerLink]="['/listProduct']" style="width: 100px;" type="button" class="btn btn-grad-blue mx-3"
+             data-dismiss="modal">Có</a>
+          <button type="button" style="width: 100px;" class="btn btn-grad-red" #cancel data-dismiss="modal">Không
+          </button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
 <!--error modal-->
 <div id="errorModal" class="modal fade">
@@ -350,7 +226,7 @@
       </div>
       <div class="modal-body text-center">
         <h4>Thông báo</h4>
-        <p>Vui lòng chọn đúng sản phẩm!</p>
+        <p>Sản phẩm bạn nhập đã tồn tại!</p>
         <div class="d-flex justify-content-center">
           <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
         </div>

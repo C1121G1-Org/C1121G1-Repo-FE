@@ -29,7 +29,10 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
   @Output() flagCreate = new EventEmitter();
   @ViewChild('btnClose') btnClose;
   @ViewChild('btnNoneSelectedModal') btnNoneSelectedModal;
-  searchForm: FormGroup;
+  searchForm: FormGroup = this.fb.group({
+    field: [],
+    value: []
+  });
   pageNumber = 0;
   pageSize: number;
   first = true;
@@ -50,11 +53,12 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
     this.getAllSuppliers('', '', '', '');
     this.searchForm = this.fb.group({
       field: ['supplier'],
-      value: ['', Validators.pattern('^[ @.0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$')]
+      value: ['', Validators.pattern('^[ \\/,@.0-9a-zA-ZàÁáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíÍịỉĩòóọỏõôÔồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ]+(\\s[ \\/,@.0-9a-zA-ZàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđĐ]+)*$')]
     });
   }
 
   getItem(item: any) {
+    // tslint:disable-next-line:triple-equals
     if (item.id == this.chosenItem.id || this.chosenItem.id == undefined || !this.flag) {
       this.flag = !this.flag;
     }
@@ -70,6 +74,7 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
   }
 
   checkSelected() {
+    // tslint:disable-next-line:triple-equals
     if (!this.flag && this.chosenItem.id == undefined) {
       this.btnNoneSelectedModal.nativeElement.click();
     }
@@ -90,7 +95,7 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
       (response) => {
         this.first = response.first;
         this.totalPages = response.totalPages;
-        this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);  // [1, 2, 3, 4, 5]
+        // this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);  // [1, 2, 3, 4, 5]
         this.pageSize = response.pageable.pageSize;
         this.last = (response.pageable.offset + response.pageable.pageSize) >= response.totalElements;
         this.suppliers = response.content;
@@ -101,21 +106,27 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
   }
 
   search() {
+    // this.pageNumber = 0;
     if (this.searchForm.invalid) {
       this.errorFlag = true;
     } else {
       switch (this.searchForm.value.field) {
         case 'supplier':
-          this.getAllSuppliers(this.searchForm.value.value.trim(), '', '', '');
+          this.getAllSuppliers(this.searchForm.value.value.trim().toLowerCase(), '', '', '');
+          this.pageNumber = 0;
           break;
         case 'address':
-          this.getAllSuppliers('', this.searchForm.value.value.trim(), '', '');
+          console.log('address');
+          this.getAllSuppliers('', this.searchForm.value.value.trim().toLowerCase(), '', '');
+          this.pageNumber = 0;
           break;
         case 'phone':
-          this.getAllSuppliers('', '', this.searchForm.value.value.trim(), '');
+          this.getAllSuppliers('', '', this.searchForm.value.value.trim().toLowerCase(), '');
+          this.pageNumber = 0;
           break;
         case 'email':
-          this.getAllSuppliers('', '', '', this.searchForm.value.value.trim());
+          this.getAllSuppliers('', '', '', this.searchForm.value.value.trim().toLowerCase());
+          this.pageNumber = 0;
           break;
       }
     }

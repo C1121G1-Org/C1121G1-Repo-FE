@@ -55,6 +55,7 @@ export class StorageCreateComponent implements OnInit {
     this.getEmployee();
     this.productData = {};
     this.supplierData = {};
+    this.image = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   }
 
   get createdDate() {
@@ -110,7 +111,7 @@ export class StorageCreateComponent implements OnInit {
   getEmployee() {
     this.securityService.getPersonalInformation().subscribe(
       (response) => {
-        this.employeeData = response
+        this.employeeData = response;
         this.createForm.controls.createdEmployeeDto.setValue(this.employeeData.id);
       },
       (error) => {
@@ -146,13 +147,13 @@ export class StorageCreateComponent implements OnInit {
     console.log(this.createForm.value);
     if (this.createForm.invalid) {
       if (this.productData.id === undefined) {
-        this.productDto.setErrors({existed: true, message: 'Hãy chọn Sản phẩm'});
+        this.productDto.setErrors({existed: true, message: 'Hãy chọn sản phẩm!'});
       }
       if (this.supplierData.id === undefined) {
-        this.supplierDto.setErrors({existed: true, message: 'Hãy chọn Nhà cung cấp'});
+        this.supplierDto.setErrors({existed: true, message: 'Hãy chọn nhà cung cấp!'});
       }
       if (this.quantity.value === null) {
-        this.quantity.setErrors({empty: true, message: 'Hãy nhập số lượng của sản phẩm'});
+        this.quantity.setErrors({empty: true, message: 'Hãy nhập số lượng của sản phẩm!'});
       }
       this.router.navigateByUrl('/storage/create');
     } else {

@@ -1,5 +1,5 @@
-import {ICustomer} from "../models/ICustomer";
-import {ProductInvoice} from "./productInvoice";
+import {ICustomer} from '../models/ICustomer';
+import {ProductInvoice} from './productInvoice';
 
 export interface InvoiceDetail {
     customerDto?: ICustomer;

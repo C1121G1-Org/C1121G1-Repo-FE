@@ -3,6 +3,7 @@
 <!--Time: 13:37 03/06/2022-->
 <!--Method: pageProduct()-->
 <!--*/-->
+
 <div style="display: flex  ; justify-content: center ">
   <div class="modal fade" id="customerModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
        aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -35,8 +36,8 @@
                              placeholder="Bạn cần tìm gì?"
                              (change)="search(element.value)"
                              formControlName="keySearch"
-                             type="text"><i (click)="search(element.value)"
-                                            class="fa fa-search"
+                             type="text"><i (click)="getAll()"
+                                            class="fa fa-repeat"
                                             style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                     </div>
                   </div>
@@ -56,7 +57,7 @@
                       <tr>
                         <th width="60px" class="text-center">STT</th>
                         <th width="200px" class="text-center">Họ và tên</th>
-                        <th width="100px" class="text-center">Mã khách hàng</th>
+                        <th width="150px" class="text-center">Mã khách hàng</th>
                         <th class="text-center">Số điện thoại</th>
                         <th  width="200px" class="text-center">Địa chỉ</th>
                         <th class="text-center">Sgày sinh</th>
@@ -69,12 +70,12 @@
                   <div class="tbl-content">
                     <table class=" table table-bordered table-responsive-md">
                       <tbody>
-                      <tr style="cursor: pointer" (click)="getCustomer(customer)"
-                          *ngFor="let customer of customerList; index as i"
-                          [class.heightLight]="isSelected(customer)">
+                      <tr style="cursor: pointer"(click)="isSelected(j,customer)"
+                          *ngFor="let customer of customerList; index as i,let j=index"
+                          [ngStyle]="{'background-color': activeProjectIndex === j && flagClick ? '#84c0ec' : ''}">
                         <td  width="60px" class="text-center">{{(pageNumber)*pageSize+(i+1)}}</td>
                         <td width="200px" class="pt-3-half ">{{customer.customerName}}</td>
-                        <td width="100px" class="text-center">{{customer.id}}</td>
+                        <td width="150px" class="text-center">{{customer.id}}</td>
                         <td class="text-center">{{customer.phoneNumber}}</td>
 
                         <td  width="200px" class="text-center desc"><i data-toggle="tooltip" data-placement="top"
@@ -93,7 +94,6 @@
                 </div>
 
                 <br>
-
 
                 <div class="row my-3 ml-3">
                   <div class="row col-4">
@@ -147,7 +147,8 @@
   </div>
 </div>
 <!--modall-->
-<div id="customerModals" class="modal fade">
+<div class="modal fade" id="customerModals" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
       <div class="modal-header modal-header-danger justify-content-center">

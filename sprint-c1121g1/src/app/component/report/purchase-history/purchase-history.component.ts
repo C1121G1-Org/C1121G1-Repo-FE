@@ -30,6 +30,8 @@ export class PurchaseHistoryComponent implements OnInit {
   pageNumber = 0;
   totalPages = 0;
 
+  pageSize = 0;
+
   id: number;
   customerReport: ReportCustomerDto = {};
 
@@ -62,7 +64,8 @@ export class PurchaseHistoryComponent implements OnInit {
 
           this.purchaseHistories = purchaseHitories.content;
           this.totalPages = purchaseHitories.totalPages;
-          this.pageNumber = purchaseHitories.pageabel.pageNumber;
+          this.pageNumber = purchaseHitories.pageable.pageNumber;
+          this.pageSize = purchaseHitories.pageable.pageSize;
         }
 
       });
@@ -103,7 +106,8 @@ export class PurchaseHistoryComponent implements OnInit {
       this.invoiceIdPage = invoiceId;
       this.purchaseProducts = purchaseProducts.content;
       this.productTotalPages = purchaseProducts.totalPages;
-      this.productPageNumber = purchaseProducts.pageabel.pageNumber;
+      this.productPageNumber = purchaseProducts.pageable.pageNumber;
+      this.pageSize = purchaseProducts.pageable.pageSize;
     });
   }
 
