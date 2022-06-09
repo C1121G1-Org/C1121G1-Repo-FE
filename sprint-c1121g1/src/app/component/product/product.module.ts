@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { ProductRoutingModule } from './product-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
-import {CommaSeparatedNumberPipe, ProductCreateComponent} from './product-create/product-create.component';
+import { ProductCreateComponent} from './product-create/product-create.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
 // @ts-ignore
 import {HttpClientModule} from '@angular/common/http';
@@ -13,7 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CKEditorModule} from 'ckeditor4-angular';
 
 @NgModule({
-  declarations: [ProductListComponent, ProductCreateComponent, ProductUpdateComponent, CommaSeparatedNumberPipe],
+  declarations: [ProductListComponent, ProductCreateComponent, ProductUpdateComponent],
 
     imports: [
         HttpClientModule,
