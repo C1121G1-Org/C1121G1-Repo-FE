@@ -31,7 +31,6 @@ import {TokenInterceptorService} from './services/security/token-interceptor.ser
     HeaderComponent,
     FooterComponent,
     ErrorComponent,
-
   ],
   imports: [
     BrowserModule,

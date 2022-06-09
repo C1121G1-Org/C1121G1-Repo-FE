@@ -73,7 +73,7 @@
                       <table class=" table table-bordered table-responsive-md">
                         <tbody>
                         <tr *ngFor="let item of suppliers; index as i" (click)="getItem(item)"
-                            [class.highlight]="item === chosenItem && flag" style="cursor: pointer">
+                            [class.highlight]="item === tempItem && flag" style="cursor: pointer">
                           <td class="text-center w-8">{{(pageNumber) * pageSize + (i + 1)}}</td>
                           <td class="text-center desc"><i data-toggle="tooltip" data-placement="top"
                                                           title="{{item.supplierName}}">

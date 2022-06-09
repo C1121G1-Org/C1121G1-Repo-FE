@@ -113,9 +113,6 @@
                      style="color: red">
                   nhập đúng định dạng số CMND/CCCD , VD: 048203000188.
                 </div>
-                <!--                <div>-->
-                <!--                  <p style="color: red" *ngIf=" errorIdCard!= ''">{{errorIdCard}}</p>-->
-                <!--                </div>-->
               </div>
 
               <div formGroupName="accountDto">
@@ -125,9 +122,6 @@
                   <div *ngIf="editEmployeeForm.get('accountDto.email')?.errors?.required&&(email?.dirty ||email?.touched)" style="color: red">
                     Không được bỏ trống.
                   </div>
-                  <!--                  <div *ngIf="editEmployeeForm.get('accountDto.email')?.errors?.pattern&&(email?.dirty ||email?.touched)" style="color: red">-->
-                  <!--                    nhập đúng định dạng email, VD: abcxyz@codegym.com .-->
-                  <!--                  </div>-->
                   <div>
                     <p style="color: red" *ngIf=" errorEmailEmployee!= ''">{{errorEmailEmployee}}</p>
                   </div>
@@ -140,9 +134,6 @@
                   <div *ngIf="editEmployeeForm.get('accountDto.userName')?.errors?.required&&(userName?.dirty ||userName?.touched)" style="color: red">
                     Không được bỏ trống.
                   </div>
-                  <!--                  <div>-->
-                  <!--                    <p style="color: red" *ngIf=" errorUserNameEmployee!= ''&&(userName?.dirty ||userName?.touched)">{{errorUserNameEmployee}}</p>-->
-                  <!--                  </div>-->
                 </div>
 
                 <div class="form-group">

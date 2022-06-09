@@ -54,11 +54,11 @@ export class SaleReportComponent implements OnInit {
 
   showSaleReport() {
     if (this.getStartDay().value == '') {
-      this.getStartDay().setErrors({empty: true})
+      this.getStartDay().setErrors({empty: true});
     }
 
     if (this.getEndDay().value == '') {
-      this.getEndDay().setErrors({empty: true})
+      this.getEndDay().setErrors({empty: true});
     }
 
     if (this.getTypeReport().value == 'ID' && this.getProductId().value == '') {
@@ -81,8 +81,8 @@ export class SaleReportComponent implements OnInit {
         this.alertClass = '';
 
         for (const dt of data.data) {
-          let date = dt.date.split("-");
-          let newDate = date[0] + "/" + date[1];
+          const date = dt.date.split('-');
+          const newDate = date[0] + '/' + date[1];
           xValues.push(newDate);
           invoices.push(dt.invoiceQuantity);
           sales.push(dt.totalMoney);
@@ -98,8 +98,8 @@ export class SaleReportComponent implements OnInit {
               label: 'Doanh Thu (VNĐ)',
               // pointRadius: 3,
               // pointBackgroundColor: 'red',
-              borderWidth:1,
-              barThickness:30,
+              borderWidth: 1,
+              barThickness: 30,
               borderColor: 'red',
               backgroundColor: 'red',
               data: sales,
@@ -118,14 +118,14 @@ export class SaleReportComponent implements OnInit {
               label: 'Đơn hàng ( Đơn )',
               // fill: false,
               data: invoices.map(value => {
-                return value.toFixed(0)
+                return value.toFixed(0);
               }),
               // pointRadius: 3,
               // pointBackgroundColor: 'blue',
               backgroundColor: '#1589FF',
               borderColor: '#1589FF',
-              borderWidth:1,
-              barThickness:30
+              borderWidth: 1,
+              barThickness: 30
               // tension: 0.5
             }]
           },

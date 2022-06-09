@@ -21,6 +21,7 @@ declare var $: any;
 
 export class ListSupplierModalComponent implements OnInit, OnChanges {
   chosenItem: Supplier = {};
+  tempItem: Supplier = {};
   flag: boolean;
   errorFlag: boolean;
   errorMessage: string;
@@ -60,13 +61,13 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
 
   getItem(item: any) {
     // tslint:disable-next-line:triple-equals
-    if (item.id == this.chosenItem.id || this.chosenItem.id == undefined || !this.flag) {
+    if (item.id == this.tempItem.id || this.tempItem.id == undefined || !this.flag) {
       this.flag = !this.flag;
     }
     if (this.flag) {
-      this.chosenItem = item;
+      this.tempItem = item;
     } else {
-      this.chosenItem = {};
+      this.tempItem = {};
     }
   }
 
@@ -76,12 +77,13 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
 
   checkSelected() {
     // tslint:disable-next-line:triple-equals
-    if (!this.flag && this.chosenItem.id == undefined) {
+    if (!this.flag && this.chosenItem.id == undefined || this.chosenItem.id == undefined ) {
       this.btnNoneSelectedModal.nativeElement.click();
     }
   }
 
   sendItem() {
+    this.chosenItem = this.tempItem;
     this.itemOutput.emit(this.chosenItem);
     if (this.flag) {
       this.closeModal();

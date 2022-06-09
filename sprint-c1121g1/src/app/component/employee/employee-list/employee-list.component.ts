@@ -134,7 +134,6 @@ export class EmployeeListComponent implements OnInit {
     } else {
       this.idClick = 0;
     }
-
   }
 
   /*

@@ -23,7 +23,7 @@ export class ProductListBestsellerComponent implements OnInit {
   flagProductNewest = false;
   flagCategory = false;
   flagProductBestsellerByCategory = false;
-  activeProjectIndex: number;
+  // activeProjectIndex: number;
 
   constructor(private homepageService: HomepageService, private categoryService: CategoryService) {
   }
@@ -37,6 +37,7 @@ export class ProductListBestsellerComponent implements OnInit {
   getAllProductBestSeller() {
     this.homepageService.getProductBestseller().subscribe((productBestsellers) => {
       this.flagProductBestseller = false;
+      this.flagProductBestsellerByCategory = false;
       this.productBestsellers = productBestsellers;
       if (this.productBestsellers.length === 0) {
         this.flagProductBestseller = true;

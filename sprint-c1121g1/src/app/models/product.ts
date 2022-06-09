@@ -19,10 +19,10 @@ export interface Product {
   memory?: string;
   otherDescription?: string;
   deleteFlag?: boolean;
-  discount?:number;
-  promotions?:string;
-  fiveStarRating?:number;
-  category?:Category;
+  discount?: number;
+  promotions?: string;
+  fiveStarRating?: number;
+  category?: Category;
 
 }
 

@@ -8,6 +8,9 @@ import {finalize} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
 import {CategoryService} from '../../../services/category/category.service';
 import {Category} from '../../../models/category';
+
+
+
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',

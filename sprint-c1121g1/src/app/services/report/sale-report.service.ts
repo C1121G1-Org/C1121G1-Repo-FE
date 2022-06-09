@@ -15,4 +15,8 @@ export class SaleReportService {
   getAllSaleReports(startDay: string, endDay: string, productId: string): Observable<any> {
     return this.http.get<any>(`${this.URL_SALE_REPORT}?startDay=${startDay}&endDay=${endDay}&productId=${productId}`);
   }
+
+  getListProduct(): Observable<any> {
+    return this.http.get(`${this.URL_SALE_REPORT}/list-product`);
+  }
 }
