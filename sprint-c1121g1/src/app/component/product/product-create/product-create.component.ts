@@ -52,9 +52,11 @@ export class ProductCreateComponent implements OnInit {
       this.categoryList = data;
     });
   }
+
   validateImange(e): boolean {
     return e == 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
   }
+
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
@@ -83,6 +85,7 @@ export class ProductCreateComponent implements OnInit {
       Date: 9:08 3/6/2022
   */
   save(errorModalBtn: HTMLButtonElement, successButton: HTMLButtonElement) {
+
     // if (this.validateImange(this.imgVip)){
     //   this.flagCheckImage = true;
     //   this.productForm.controls.image.setErrors({existed: 'Empty! Please input!'});
@@ -91,6 +94,7 @@ export class ProductCreateComponent implements OnInit {
       if (!this.selectedImage) {
         this.alertImage = 'Vui lòng nhập ảnh';
       }
+
       if (this.productForm.controls.name.value == '') {
         this.productForm.controls.name.setErrors({empty: 'Empty! Please input!'});
       }
@@ -128,12 +132,14 @@ export class ProductCreateComponent implements OnInit {
             this.productForm.patchValue({image: url});
             this.flagCheckImage = false;
             this.productService.createProduct(this.productForm.value).subscribe(() => {
+
                 this.productForm.reset();
                 successButton.click();
                 // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                 console.log('success');
               }, error => {
                 console.log(this.productForm.value);
+
                 errorModalBtn.click();
                 this.errorProductName = error.error.errorMap.name;
               }
@@ -174,6 +180,7 @@ export class ProductCreateComponent implements OnInit {
   get otherDescription() {
     return this.productForm.get('otherDescription');
   }
+
   validateCategory(target: any) {
     if (this.productForm.controls.categoryDto.value != '') {
       this.productForm.controls.categoryDto.setErrors({empty: null});
@@ -182,4 +189,5 @@ export class ProductCreateComponent implements OnInit {
       this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
     }
   }
+
 }

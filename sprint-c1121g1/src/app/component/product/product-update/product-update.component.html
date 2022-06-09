@@ -14,7 +14,12 @@
                 <div class="form-group col-md-6">
                   <label for="name">Tên Hàng <span class="text-danger">(*):</span></label>
                   <input formControlName="name" type="text" class="form-control" name="name" id="name">
+<<<<<<< HEAD
                   <!--                  <small class="form-text text-danger" *ngIf="errorProductName!=''">{{errorProductName}}</small>-->
+=======
+<!--                  <small class="form-text text-danger" *ngIf="errorProductName!=''">{{errorProductName}}</small>-->
+
+>>>>>>> b14e2a6160997e879bf0f46546588c27c6683541
                   <div
                     *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched|| productForm.controls.name.errors?.empty)">
                     <small *ngIf="name.errors?.maxlength" class="text-form text-danger">Tên phải ngắn hơn 250 kí tự</small>
@@ -114,16 +119,25 @@
                       50 kí tự</small>
                   </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b14e2a6160997e879bf0f46546588c27c6683541
                 <div class="form-group col-md-12">
                   <label for="categoryDto">Danh Mục<span class="text-danger">(*)</span> </label>
                   <!--                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="category">-->
                   <select [compareWith]="comparefn" name="categoryDto" id="categoryDto" formControlName="categoryDto"
                           class="form-control">
                     <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b14e2a6160997e879bf0f46546588c27c6683541
                   </select>
                   <!--                        hien thi loi-->
                   <div
                     *ngIf="productForm.controls.categoryDto.invalid && (productForm.controls.categoryDto.dirty || productForm.controls.categoryDto.touched || productForm.controls.categoryDto.errors?.empty)">
+<<<<<<< HEAD
                     <small
                       *ngIf="productForm.controls.categoryDto.hasError('required') || productForm.controls.categoryDto.errors.empty"
                       class="form-text text-danger">Vui lòng chọn danh mục.</small>
@@ -141,6 +155,48 @@
                     <small *ngIf="cpu.errors?.maxlength" class="text-form text-danger">Trường cpu phải ngắn hơn 50 kí
                       tự</small>
                   </div>
+=======
+
+                    <small
+                      *ngIf="productForm.controls.categoryDto.hasError('required') || productForm.controls.categoryDto.errors.empty"
+                      class="form-text text-danger">Vui lòng chọn danh mục.</small>
+                  </div>
+                </div>
+
+
+                <div class="form-group col-md-12">
+                  <label for="cpu">CPU<span class="text-danger">(*)</span> </label>
+                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="cpu">
+
+                  <!--    hien thi loi-->
+                  <div
+                    *ngIf="productForm.controls.cpu.invalid && (productForm.controls.cpu.dirty || productForm.controls.cpu.touched || productForm.controls.cpu.errors?.empty)">
+
+                    <small
+                      *ngIf="productForm.controls.cpu.hasError('required') || productForm.controls.cpu.errors.empty"
+                      class="form-text text-danger">Vui lòng nhập thông số cpu.</small>
+                    <small *ngIf="cpu.errors?.maxlength" class="text-form text-danger">Trường cpu phải ngắn hơn 50 kí
+                      tự</small>
+                  </div>
+
+                </div>
+
+
+                <div class="form-group col-md-12">
+                  <label for="otherDescription">Mô tả thêm </label>
+                  <ckeditor id="otherDescription" formControlName="otherDescription"></ckeditor>
+
+                </div>
+
+                <div class=" col-md-12 text-center mx-auto mt-4">
+                  <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
+                    class="fa fa-paper-plane"></i>CHỈNH SỬA
+                  </button>
+                  <a data-toggle="modal"
+                     data-target="#cancelModal"
+                     style="width: 200px" type="submit" class="btn btn-grad-red mx-1">
+                    <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
+>>>>>>> b14e2a6160997e879bf0f46546588c27c6683541
                 </div>
                 <div class="form-group col-md-12">
                   <label for="otherDescription">Mô tả thêm </label>
@@ -168,6 +224,11 @@
 <!--    a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");-->
 <!--  }-->
 <!--</script>-->
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b14e2a6160997e879bf0f46546588c27c6683541
 <button [hidden]="true" #successButton data-toggle="modal" data-target="#successModal"></button>
 <!--success modal-->
 <div id="successModal" class="modal fade">
@@ -180,7 +241,11 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
+<<<<<<< HEAD
         <h4>Thông báo!</h4>
+=======
+        <h4>Tuyệt!</h4>
+>>>>>>> b14e2a6160997e879bf0f46546588c27c6683541
         <br>
         <p>Chỉnh sửa sản phẩm thành công</p>
         <div class="d-flex justify-content-center">
@@ -191,6 +256,10 @@
     </div>
   </div>
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b14e2a6160997e879bf0f46546588c27c6683541
 <!--warning modal-->
 <!--<button [hidden]="true" #deleteModal data-toggle="modal" data-target="#deleteModal"></button>-->
 <div id="cancelModal" class="modal fade">
@@ -214,6 +283,10 @@
     </div>
   </div>
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b14e2a6160997e879bf0f46546588c27c6683541
 <button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
 <!--error modal-->
 <div id="errorModal" class="modal fade">

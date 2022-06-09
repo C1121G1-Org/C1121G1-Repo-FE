@@ -14,6 +14,7 @@ import {CKEditorModule} from 'ckeditor4-angular';
 
 
 
+
 @NgModule({
   declarations: [ProductListComponent, ProductCreateComponent, ProductUpdateComponent],
 

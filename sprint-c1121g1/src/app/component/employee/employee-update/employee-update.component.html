@@ -1,4 +1,6 @@
+
 <form [formGroup]="editEmployeeForm" (ngSubmit)="updateEmployee(id ,successBtn)" >
+
   <div class="container-fluid pt-lg-2">
     <div class="col-9" style="margin: auto">
       <div style="box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 5px 0px, rgba(0, 0, 0, 0.1) 0px 2px 10px 0px;">
@@ -56,6 +58,7 @@
                   nhập đúng định dạng.
                 </div>
                 <div
+
                   *ngIf="editEmployeeForm.get('dateOfBirth').errors?.check&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
                   style="color: red">
                   nhân viên phải trên 18 tuổi ;
@@ -113,9 +116,11 @@
                      style="color: red">
                   nhập đúng định dạng số CMND/CCCD , VD: 048203000188.
                 </div>
+
                 <!--                <div>-->
                 <!--                  <p style="color: red" *ngIf=" errorIdCard!= ''">{{errorIdCard}}</p>-->
                 <!--                </div>-->
+
               </div>
 
               <div formGroupName="accountDto">
@@ -125,9 +130,11 @@
                   <div *ngIf="editEmployeeForm.get('accountDto.email')?.errors?.required&&(email?.dirty ||email?.touched)" style="color: red">
                     Không được bỏ trống.
                   </div>
+
                   <!--                  <div *ngIf="editEmployeeForm.get('accountDto.email')?.errors?.pattern&&(email?.dirty ||email?.touched)" style="color: red">-->
                   <!--                    nhập đúng định dạng email, VD: abcxyz@codegym.com .-->
                   <!--                  </div>-->
+
                   <div>
                     <p style="color: red" *ngIf=" errorEmailEmployee!= ''">{{errorEmailEmployee}}</p>
                   </div>
@@ -140,9 +147,11 @@
                   <div *ngIf="editEmployeeForm.get('accountDto.userName')?.errors?.required&&(userName?.dirty ||userName?.touched)" style="color: red">
                     Không được bỏ trống.
                   </div>
+
                   <!--                  <div>-->
                   <!--                    <p style="color: red" *ngIf=" errorUserNameEmployee!= ''&&(userName?.dirty ||userName?.touched)">{{errorUserNameEmployee}}</p>-->
                   <!--                  </div>-->
+
                 </div>
 
                 <div class="form-group">
@@ -205,3 +214,4 @@
     </div>
   </div>
 </div>
+

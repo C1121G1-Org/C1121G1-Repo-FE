@@ -67,7 +67,9 @@ export class EmployeeUpdateComponent implements OnInit {
         // tslint:disable-next-line:max-line-length
         id: new FormControl(next.id),
         // tslint:disable-next-line:max-line-length
+
         employeeName: new FormControl(next.employeeName, Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(50), Validators.pattern('^([aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+)((\\s{1}[a-aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+){1,})$')])),
+
         dateOfBirth: new FormControl(next.dateOfBirth, Validators.compose([Validators.required, Validators.pattern('^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$')])),
         // tslint:disable-next-line:max-line-length
         address: new FormControl(next.address, Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100)])),
@@ -83,7 +85,9 @@ export class EmployeeUpdateComponent implements OnInit {
           // tslint:disable-next-line:max-line-length
           userName: new FormControl(next.accountDto.userName, Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(15)])),
           // tslint:disable-next-line:max-line-length
+
           encryptPassword: new FormControl(next.accountDto.encryptPassword, Validators.compose([Validators.required])),
+
           email: new FormControl(next.accountDto.email, Validators.compose([Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')])),
         }),
 
@@ -98,7 +102,9 @@ export class EmployeeUpdateComponent implements OnInit {
 
 
 
+
   updateEmployee(id: number , successBtn: HTMLButtonElement) {
+
     if (this.selectedImage != null) {
       const nameImg = '/EmP-' + this.editEmployeeForm.get('idCard') + '.jpg';
       const fileRef = this.storage.ref(nameImg);
@@ -108,7 +114,9 @@ export class EmployeeUpdateComponent implements OnInit {
             this.editEmployeeForm.patchValue({image: url});
             const employee = this.editEmployeeForm.value;
             this.employeeService.updateEmployee(id, employee).subscribe(() => {
+
               successBtn.click();
+
             }, error => {
               this.errorIdCard = error.error.errorMap.idCard;
               this.errorEmailEmployee = error.error.errorMap.email;
@@ -120,7 +128,9 @@ export class EmployeeUpdateComponent implements OnInit {
     }else{
       const employee = this.editEmployeeForm.value;
       this.employeeService.updateEmployee(id, employee).subscribe(() => {
+
         successBtn.click();
+
       }, error => {
         this.errorIdCard = error.error.errorMap.idCard;
         console.log(error.error.errorMap.email);
