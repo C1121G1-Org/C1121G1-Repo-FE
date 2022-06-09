@@ -81,7 +81,9 @@ export class SaleReportComponent implements OnInit {
         this.alertClass = '';
 
         for (const dt of data.data) {
-          xValues.push(dt.date);
+          let date = dt.date.split("-");
+          let newDate = date[0] + "/" + date[1];
+          xValues.push(newDate);
           invoices.push(dt.invoiceQuantity);
           sales.push(dt.totalMoney);
           this.totalSales = this.sumArr(sales);
@@ -89,41 +91,46 @@ export class SaleReportComponent implements OnInit {
         }
 
         this.chart1 = new Chart('doanhThu', {
-          type: 'line',
+          type: 'bar',
           data: {
             labels: xValues,
             datasets: [{
               label: 'Doanh Thu (VNĐ)',
-              pointRadius: 3,
-              pointBackgroundColor: 'red',
+              // pointRadius: 3,
+              // pointBackgroundColor: 'red',
+              borderWidth:1,
+              barThickness:30,
               borderColor: 'red',
               backgroundColor: 'red',
               data: sales,
-              fill: false,
-              tension: 0.1
+              // fill: false,
+              // tension: 0.5
             }]
           },
           options: {}
         });
 
         this.chart2 = new Chart('donHang', {
-          type: 'line',
+          type: 'bar',
           data: {
             labels: xValues,
             datasets: [{
               label: 'Đơn hàng ( Đơn )',
-              fill: false,
+              // fill: false,
               data: invoices.map(value => {
                 return value.toFixed(0)
               }),
-              pointRadius: 3,
-              pointBackgroundColor: 'blue',
-              backgroundColor: 'blue',
-              borderColor: 'blue',
-              tension: 0.1
+              // pointRadius: 3,
+              // pointBackgroundColor: 'blue',
+              backgroundColor: '#1589FF',
+              borderColor: '#1589FF',
+              borderWidth:1,
+              barThickness:30
+              // tension: 0.5
             }]
           },
-          options: {}
+          options: {
+          }
         });
       }, error => {
 

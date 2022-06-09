@@ -52,7 +52,7 @@
 
                 <!--              phần hiên thị lỗi-->
                 <h2 class="text-danger d-flex justify-content-center" style="padding: 150px ; font-size: 35px"
-                    *ngIf="errorFlag">không tìm thấy dữ liệu .</h2>
+                    *ngIf="errorFlag">KHÔNG TÌM THẤY DỮ LIỆU!</h2>
                 <!--end hiển thị llox-->
                 <div>
                   <div *ngIf="!errorFlag">
@@ -60,11 +60,11 @@
                       <table class="table table-bordered table-responsive-md ">
                         <thead>
                         <tr>
-                          <th class="text-center w-8">STT</th>
-                          <th class="text-center">Tên nhà cung cấp</th>
-                          <th class="text-center">Địa chỉ</th>
-                          <th class="text-center w-13">Số điện thoại</th>
-                          <th class="text-center">Email</th>
+                          <th class="text-center w-8" style="color: white">STT</th>
+                          <th class="text-center" style="color: white">Tên nhà cung cấp</th>
+                          <th class="text-center" style="color: white">Địa chỉ</th>
+                          <th class="text-center w-13" style="color: white">Số điện thoại</th>
+                          <th class="text-center" style="color: white">Email</th>
                         </tr>
                         </thead>
                       </table>
@@ -91,7 +91,7 @@
                   <br>
 
                   <div class="row my-3 ml-3">
-                    <div class="row col-6 mx-10">
+                    <div class="row col-4 mx-10">
                       <button (click)="sendItem()" type="button"
                               class="btn btn-grad-blue  btn-lg my-0 mx-0">
                         <i class="fa fa-paper-plane"></i>
@@ -103,8 +103,11 @@
                         class="fa-solid fa-right-from-bracket"></i> Thoát
                       </button>
                     </div>
+                    <div class="col-4 d-flex justify-content-center">
+                      <li class="page-link" style="width:90px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">{{(pageNumber + 1) + '/' + totalPages}}</li>
+                    </div>
 
-                    <div class="col-6 ml-0" *ngIf="!errorFlag">
+                    <div class="col-4 ml-0" *ngIf="!errorFlag">
                       <!--Pagination-->
 
                       <nav class="d-flex justify-content-end wow fadeIn">
@@ -141,19 +144,17 @@
 </button>
 <!--modall-->
 <div id="noneSelectedModal" class="modal fade">
-  <div class="modal-dialog modal-confirm modal-confirm-success">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
-      <div class="modal-header modal-header-success justify-content-center">
+      <div class="modal-header modal-header-danger justify-content-center">
         <div class="icon-box">
-          <i class="material-icons">&#xE876;</i>
+          <i class="material-icons">&#xE5CD;</i>
         </div>
-        <button type="button" class="close" data-mdb-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Thông báo!</h4>
+        <h4>Thông báo</h4>
         <p>Không có nhà cung cấp nào được chọn.</p>
-        <button type="button" class="btn btn-danger" id="delete_btn" data-dismiss="modal">Đồng ý
-        </button>
+        <button class="btn-modal btn btn-danger" data-dismiss="modal">Thử lại</button>
       </div>
     </div>
   </div>

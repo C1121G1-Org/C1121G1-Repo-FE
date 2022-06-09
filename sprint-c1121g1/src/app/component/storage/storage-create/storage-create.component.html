@@ -5,7 +5,9 @@
   Template: modal list all Suppliers
 -->
 
+
   <div class="container">
+
     <div class="row" style="justify-content: center;display: flex">
       <div class="col-md-8">
         <div class="card ">
@@ -83,12 +85,11 @@
                              id="supplier" placeholder="Chọn nhà cung cấp" disabled>
                     </div>
                     <div *ngIf="supplierData.supplierName">
-                      <input type="text" class="form-control input-field"
+                      <input type="text" class="form-control input-field desc"
                              [value]="supplierData.supplierName +' - '+ supplierData.address"
                              id="supplier" placeholder="Chọn nhà cung cấp" disabled>
                     </div>
-                    <div
-                      *ngIf="supplierDto.errors?.existed">
+                    <div *ngIf="supplierDto.errors?.existed">
                       <span *ngIf="supplierDto.errors?.existed"
                             style="color: red">{{supplierDto.errors?.message}}</span>
                     </div>
@@ -97,14 +98,14 @@
                 </div>
 
                 <!--                Quantity-->
-                <div class="form-group col-sm-6">
+                <div class=" col-sm-6">
                   <label for="quantity"> Số lượng nhập <span class="text-danger">(*):</span></label>
                   <input type="number" class="form-control"
                          id="quantity" placeholder="Số lượng nhập" formControlName="quantity">
                   <div *ngIf="quantity.invalid && (quantity.dirty || quantity.touched) || quantity.errors?.empty">
                     <span *ngIf="quantity.errors?.gteQuantityStorage"
-                          style="color: red">{{quantity.errors?.requiredValue}}</span><br>
-                    <span *ngIf="quantity.errors?.empty || quantity.errors.required" style="color: red">Hãy nhập số lượng của sản phẩm</span>
+                          style="color: red">{{quantity.errors?.requiredValue}}</span>
+                    <span *ngIf="quantity.errors?.empty || quantity.errors.required" style="color: red">Hãy nhập số lượng của sản phẩm!</span>
                   </div>
                 </div>
               </div>
@@ -141,8 +142,8 @@
                   </button>
                 </div>
                 <div class="form-group col-sm-6 d-flex justify-content-start">
-                  <button type="button" class="btn btn-grad-red btn-lg btn-w50"><i
-                    class="fa-solid fa-right-from-bracket" [routerLink]="['']"></i> Hủy
+                  <button type="button" class="btn btn-grad-red btn-lg btn-w50" [routerLink]="['']"><i
+                    class="fa-solid fa-right-from-bracket"></i> Hủy
                   </button>
                 </div>
               </div>
@@ -154,7 +155,6 @@
   </div>
 
 <app-list-supplier-modal (itemOutput)="receiveSupplier($event)" (flagCreate)="receiveSupplierFlag($event)" [item]="check"></app-list-supplier-modal>
-<app-qr-code></app-qr-code>
 <app-qr-code (sendProduct)="receiveProduct($event)"></app-qr-code>
 <app-list-choose-product-modal (itemOutput)="receiveProduct($event)" [item]="check"></app-list-choose-product-modal>
 
@@ -169,7 +169,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Tuyệt!</h4>
+        <h4>THÔNG BÁO!</h4>
         <p>Thêm sản phẩm vào kho thành công.</p>
         <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal" >Đồng ý</button>
       </div>
@@ -202,3 +202,4 @@
 
 <button #btnFailed type="button" class="btn btn-primary" data-toggle="modal" data-target="#errorModal" [hidden]="true">
 </button>
+

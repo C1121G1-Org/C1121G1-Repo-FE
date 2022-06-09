@@ -1,1 +1,127 @@
-<p>customer-update works!</p>
+<form [formGroup]="editForm" (ngSubmit)="updateCustomer(id,openSuccessModalBtn,errorModalBtn)">
+  <div class="container-fluid">
+    <div class="row" style="justify-content: center;display: flex">
+      <div class="col-md-8">
+        <div class="card ">
+          <div class="card card-body">
+            <h3 class="text-center font-weight-bold text-uppercase py-4">
+              Chỉnh sửa thông tin khách hàng
+            </h3>
+            <!--                        <h4 class="card-title" style="justify-content: center;display: flex">Thêm mới nhà cung cấp</h4>-->
+            <div class="row" style="justify-content: center;display: flex">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label for="id">Tên<span class="text-danger">(*):</span></label>
+                  <input type="text" class="form-control" placeholder="Hãy điền tên của bạn..." id="id"
+                         formControlName="customerName" >
+                  <div *ngIf="editForm.get('customerName')?.touched ||editForm.get('customerName').dirty">
+                    <small class="text-danger" *ngIf="editForm.get('customerName')?.hasError('required')">Tên không được để trống!</small>
+                    <small class="text-danger" *ngIf="editForm.get('customerName')?.hasError('pattern')">Tên không đúng địng dạng!</small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="supplier">Địa chỉ<span class="text-danger">(*):</span></label>
+                  <input type="text" class="form-control" id="supplier"
+                         formControlName="address" placeholder="Hãy điền địa chỉ của bạn...">
+                  <div *ngIf="editForm.get('address')?.touched ||editForm.get('address').dirty">
+                    <small class="text-danger" *ngIf="editForm.get('address')?.hasError('required')">Địa chỉ không được để trống!</small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="address">Email<span class="text-danger">(*):</span></label>
+                  <input type="text" class="form-control" id="address"
+                         formControlName="email" placeholder="Hãy điền email của bạn...">
+                  <div *ngIf="editForm.get('email')?.touched ||editForm.get('email').dirty">
+                    <small class="text-danger" *ngIf="editForm.get('email')?.hasError('required')">Email không được để trống!</small>
+                    <small class="text-danger" *ngIf="editForm.get('email')?.hasError('pattern')">Email không đúng địng dạng!</small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="phoneNumber">Số điện thoại<span class="text-danger">(*):</span></label>
+                  <input type="text" class="form-control" formControlName="phoneNumber" id="phoneNumber"
+                         placeholder="Nhập số điện thoại của bạn">
+                  <div *ngIf="editForm.get('phoneNumber')?.touched ||editForm.get('phoneNumber').dirty">
+                    <small class="text-danger" *ngIf="editForm.get('phoneNumber')?.hasError('required')">SĐT không được để trống!</small>
+                    <small class="text-danger" *ngIf="editForm.get('phoneNumber')?.hasError('pattern')">SĐT không đúng địng dạng!</small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Ngày sinh<span class="text-danger">(*)</span>:</label>
+                  <input type="date" class="form-control" formControlName="dateOfBirth" name="email" id="email" >
+                  <div *ngIf="editForm.get('dateOfBirth')?.touched ||editForm.get('dateOfBirth').dirty">
+                    <small class="text-danger" *ngIf="editForm.get('dateOfBirth')?.hasError('required')">Ngày sinh không được để
+                      trống!</small>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Giới tính<span class="text-danger">(*)</span>:</label>
+                  <select class="form-control" formControlName="gender" id="gender" >
+                    <option value=true>Nam</option>
+                    <option value=false>Nữ</option>
+                  </select>
+                  <div *ngIf="editForm.get('gender')?.touched ||editForm.get('gender').dirty">
+                    <small class="text-danger" *ngIf="editForm.get('gender')?.hasError('required')">Giới tính không được để
+                      trống!</small>
+                  </div>
+                </div>
+
+                <div style="justify-content: center;display: flex">
+                  <button type="submit" class="btn btn-grad-blue mx-1"><i class="fa fa-paper-plane"></i>Xác nhận</button>
+                  <button  type="button" class="btn btn-grad-red mx-1" routerLink="/customer/list" ><i class="fa-solid fa-right-from-bracket"></i>Quay lại</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+
+
+
+<!--success modal-->
+<button [hidden]="true" #openSuccessModalBtn data-toggle="modal" data-target="#successModal"></button>
+<div id="successModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-success">
+    <div class="modal-content">
+      <div class="modal-header modal-header-success justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE876;</i>
+        </div>
+        <button type="button" (click)="checkConfirm()" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo!</h4>
+        <p>Cập nhật thông tin khách hàng thành công.</p>
+        <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" (click)="checkConfirm()" data-dismiss="modal" >Đồng ý</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--error modal-->
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Hệ thống đang bảo trì, vui lòng thử lại sau vài phút nữa.</p>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
+      </div>
+    </div>
+  </div>
+</div>

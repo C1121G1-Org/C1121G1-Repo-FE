@@ -29,13 +29,17 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
   @Output() flagCreate = new EventEmitter();
   @ViewChild('btnClose') btnClose;
   @ViewChild('btnNoneSelectedModal') btnNoneSelectedModal;
-  searchForm: FormGroup;
+  searchForm: FormGroup = this.fb.group({
+    field: [],
+    value: []
+  });
   pageNumber = 0;
   pageSize: number;
   first = true;
   totalPages: any;
   last: boolean;
   @Input() item: any;
+  pattern = new RegExp('^[ \\/,@.0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủuưừứựửữỳýỵỷỹđ]+(\\s[ \\/,@.0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$');
 
   constructor(private supplierService: SupplierService, private fb: FormBuilder) {
   }
@@ -50,11 +54,12 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
     this.getAllSuppliers('', '', '', '');
     this.searchForm = this.fb.group({
       field: ['supplier'],
-      value: ['', Validators.pattern('^[ @.0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+(\\s[a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]+)*$')]
+      value: ['']
     });
   }
 
   getItem(item: any) {
+    // tslint:disable-next-line:triple-equals
     if (item.id == this.chosenItem.id || this.chosenItem.id == undefined || !this.flag) {
       this.flag = !this.flag;
     }
@@ -70,6 +75,7 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
   }
 
   checkSelected() {
+    // tslint:disable-next-line:triple-equals
     if (!this.flag && this.chosenItem.id == undefined) {
       this.btnNoneSelectedModal.nativeElement.click();
     }
@@ -77,7 +83,6 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
 
   sendItem() {
     this.itemOutput.emit(this.chosenItem);
-    // if (this.chosenItem.id != undefined) {
     if (this.flag) {
       this.closeModal();
       this.ngOnInit();
@@ -90,33 +95,51 @@ export class ListSupplierModalComponent implements OnInit, OnChanges {
       (response) => {
         this.first = response.first;
         this.totalPages = response.totalPages;
-        this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);  // [1, 2, 3, 4, 5]
+        // this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);  // [1, 2, 3, 4, 5]
         this.pageSize = response.pageable.pageSize;
         this.last = (response.pageable.offset + response.pageable.pageSize) >= response.totalElements;
         this.suppliers = response.content;
       },
       (error) => {
+        console.log('loi roi');
         this.errorFlag = true;
       });
   }
 
   search() {
+    const valueLower = this.searchForm.value.value.trim().toLowerCase().replace(/ /g, '');
+    if (!this.pattern.test(valueLower) && valueLower != ''){
+      this.searchForm.setErrors({regex: 'Nhập sai định dạng, bạn vui long nhập lại!'});
+    }
     if (this.searchForm.invalid) {
       this.errorFlag = true;
     } else {
+      this.errorFlag = false;
       switch (this.searchForm.value.field) {
         case 'supplier':
-          this.getAllSuppliers(this.searchForm.value.value.trim(), '', '', '');
+          if (valueLower != ''){
+            this.pageNumber = 0;
+            this.getAllSuppliers(valueLower, '', '', '');
+          } else {
+            console.log('do ddaay');
+            this.getAllSuppliers('', '', '', '');
+          }
           break;
         case 'address':
-          this.getAllSuppliers('', this.searchForm.value.value.trim(), '', '');
+          this.pageNumber = 0;
+          this.getAllSuppliers('', valueLower, '', '');
           break;
         case 'phone':
-          this.getAllSuppliers('', '', this.searchForm.value.value.trim(), '');
+          this.pageNumber = 0;
+          this.getAllSuppliers('', '', valueLower, '');
           break;
         case 'email':
-          this.getAllSuppliers('', '', '', this.searchForm.value.value.trim());
+          this.pageNumber = 0;
+          this.getAllSuppliers('', '', '', valueLower);
           break;
+        default:
+          this.getAllSuppliers('', '', '', '');
+
       }
     }
   }

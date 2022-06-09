@@ -28,6 +28,7 @@ export class CustomerReportComponent implements OnInit {
   checkAgeValue = true;
   checkSelectiveValue = true;
   customerQuantity: number;
+  pageSize = 0 ;
 
   constructor(private reportService: ReportAndHistoryService) {
   }
@@ -41,14 +42,14 @@ export class CustomerReportComponent implements OnInit {
   filterAllCustomerReport() {
 
     this.reportService.filterAllCustomerReport(this.pageNumber).subscribe(customerReports => {
-
+      console.log(customerReports);
       this.checkReportCustomers = true;
       this.customerQuantity = customerReports.totalElements;
 
       this.customerReports = customerReports.content;
       this.totalPages = customerReports.totalPages;
-      this.pageNumber = customerReports.pageabel.pageNumber;
-
+      this.pageNumber = customerReports.pageable.pageNumber;
+      this.pageSize = customerReports.pageable.pageSize;
     });
   }
 
@@ -59,10 +60,11 @@ export class CustomerReportComponent implements OnInit {
           this.checkReportCustomers = false;
         } else {
           this.checkReportCustomers = true;
+          this.pageSize = customerReports.pageable.pageSize;
 
           this.customerReports = customerReports.content;
           this.totalPages = customerReports.totalPages;
-          this.pageNumber = customerReports.pageabel.pageNumber;
+          this.pageNumber = customerReports.pageable.pageNumber;
         }
       });
   }
@@ -74,10 +76,11 @@ export class CustomerReportComponent implements OnInit {
           this.checkReportCustomers = false;
         } else {
           this.checkReportCustomers = true;
+          this.pageSize = customerReports.pageable.pageSize;
 
           this.customerReports = customerReports.content;
           this.totalPages = customerReports.totalPages;
-          this.pageNumber = customerReports.pageabel.pageNumber;
+          this.pageNumber = customerReports.pageable.pageNumber;
         }
       });
   }
@@ -89,10 +92,11 @@ export class CustomerReportComponent implements OnInit {
           this.checkReportCustomers = false;
         } else {
           this.checkReportCustomers = true;
+          this.pageSize = customerReports.pageable.pageSize;
 
           this.customerReports = customerReports.content;
           this.totalPages = customerReports.totalPages;
-          this.pageNumber = customerReports.pageabel.pageNumber;
+          this.pageNumber = customerReports.pageable.pageNumber;
         }
       });
   }
