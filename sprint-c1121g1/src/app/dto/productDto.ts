@@ -1,5 +1,5 @@
 
-import {CategoryDto} from "./categoryDto";
+import {CategoryDto} from './categoryDto';
 
 export interface Product {
   id?: number;

@@ -31,29 +31,45 @@ export class ProductListComponent implements OnInit {
   idClick: number;
   getName: string;
   formSearch: FormGroup;
-  checkButton = true
-  pageSize : number
+  pageSize: number
+  flagClick = false;
+  chosenItem: Product;
+  checkSort = false;
+  checkSelected = true;
+  sort = 'priceDesc';
+  checkSortName =false;
+  checkSortQuantity =false;
+  checkSortCpu = false;
+  checkSortMemory = false;
 
   constructor(private productService: ProductService, private router: Router) {
     this.formSearch = new FormGroup({
-      searchKey: new FormControl('',Validators.pattern('^[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\s]*$'))
+      searchKey: new FormControl('', Validators.pattern('^[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\s]*$'))
     })
   }
 
 
   ngOnInit(): void {
-    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
   }
 
-  activeProject(index: number,product : Product ): void {
-
-    this.activeProjectIndex = index;
-    this.getName = product.name;
-    this.idClick = product.id;
-    this.checkButton = false;
+  activeProject(index: number, product: Product): void {
+    if (this.activeProjectIndex != index) {
+      this.flagClick = true
+      this.activeProjectIndex = index;
+    } else {
+      this.flagClick = !this.flagClick;
+    }
+    if (this.flagClick) {
+      this.getName = product.name;
+      this.idClick = product.id;
+    } else {
+      this.idClick = undefined;
+    }
+    console.log(this.chosenItem);
   }
 
-  deleteProduct(sucessButton: HTMLButtonElement,cancel : HTMLButtonElement,errorButton: HTMLButtonElement) {
+  deleteProduct(sucessButton: HTMLButtonElement, cancel: HTMLButtonElement, errorButton: HTMLButtonElement) {
 
     this.productService.deleteProductById(this.idClick).subscribe(() => {
       cancel.click();
@@ -65,24 +81,25 @@ export class ProductListComponent implements OnInit {
     });
   }
 
-  checkProduct(errorButton: HTMLButtonElement,deleteModal:HTMLButtonElement) {
-    if (this.idClick){
+  checkProduct(errorButton: HTMLButtonElement, deleteModal: HTMLButtonElement) {
+    if (this.idClick) {
       deleteModal.click();
-    }else {
-      errorButton.click();
-    }
-  }
-  checkProductEdit(errorButton: HTMLButtonElement) {
-    if (this.idClick){
-      this.router.navigateByUrl("/product/edit/" + this.idClick)
-    }else {
+    } else {
       errorButton.click();
     }
   }
 
-  getModalProduct(pageNumber, searchByName, searchByPrice, searchByQuantity) {
+  checkProductEdit(errorButton: HTMLButtonElement) {
+    if (this.idClick) {
+      this.router.navigateByUrl("/product/edit/" + this.idClick)
+    } else {
+      errorButton.click();
+    }
+  }
+
+  getModalProduct(pageNumber, searchByName, searchByPrice, searchByQuantity,sort) {
     this.message = false;
-    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice, searchByQuantity).subscribe((res: any) => {
+    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice, searchByQuantity,sort).subscribe((res: any) => {
       this.productList = res.content;
       console.log(res)
       console.log(this.productList);
@@ -91,26 +108,25 @@ export class ProductListComponent implements OnInit {
       this.first = res.first;
       this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
       this.pageSize = res.pageable.pageSize
-
     }, error => {
       this.message = true;
     });
   }
 
   nextPage() {
-    this.getModalProduct(this.pageNumber + 1, this.searchByName, this.searchByPrice, this.searchByQuantity);
+    this.getModalProduct(this.pageNumber + 1, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
   }
 
   previousPage() {
-    this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice, this.searchByQuantity);
+    this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
   }
 
 
   search(value: any) {
     value = value.trim();
-    if (!this.formSearch.valid){
+    if (!this.formSearch.valid) {
       this.searchByName = '123abcxyz'
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
     }
     this.currentProduct = null;
     this.pageNumber = 0;
@@ -118,17 +134,17 @@ export class ProductListComponent implements OnInit {
       this.searchByPrice = value;
       this.searchByName = '';
       this.searchByQuantity = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
     } else if (this.checkSearch === 'quantity') {
       this.searchByPrice = '';
       this.searchByName = '';
       this.searchByQuantity = value;
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
     } else {
       this.searchByQuantity = '';
       this.searchByName = value;
       this.searchByPrice = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
     }
   }
 
@@ -152,9 +168,61 @@ export class ProductListComponent implements OnInit {
     this.searchValue = '';
     this.searchByPrice = '';
     this.searchByName = '';
+    this.sort = 'priceDesc'
     this.ngOnInit();
   }
 
+  changeSort() {
+    this.checkSort = !this.checkSort;
+    if (this.checkSort == true) {
+      this.sort = 'priceAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'priceDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+  }
+  changeSortName() {
+    this.checkSortName = !this.checkSortName;
+    if (this.checkSortName == true) {
+      this.sort = 'nameAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'nameDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+
+  }
+
+  changeSortQuantity() {
+    this.checkSortQuantity = !this.checkSortQuantity;
+    if (this.checkSortQuantity == true) {
+      this.sort = 'quantityAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'quantityDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+  }
+  changeSortCpu() {
+    this.checkSortCpu = !this.checkSortCpu;
+    if (this.checkSortCpu == true) {
+      this.sort = 'cpuAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'cpuDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+  }
+
+  changeSortMemory() {
+    this.checkSortMemory = !this.checkSortMemory;
+    if (this.checkSortMemory == true) {
+      this.sort = 'memoryAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'memoryDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+  }
 }
-
-

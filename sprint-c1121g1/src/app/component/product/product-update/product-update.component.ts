@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {ProductService} from '../../../services/product/product.service';
 import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {AngularFireStorage} from '@angular/fire/storage';

@@ -34,7 +34,7 @@ export class ReportAndHistoryService {
     Observable<any> {
     return this.httpClient.get<any>(
       'http://localhost:8080/api/customer/purchase-history/' + id +
-      '?startDate='+ startDate + '&endDate=' + endDate + '&page=' + page);
+      '?startDate=' + startDate + '&endDate=' + endDate + '&page=' + page);
   }
 
   getPurchaseProduct(id: number, page: number): Observable<any> {

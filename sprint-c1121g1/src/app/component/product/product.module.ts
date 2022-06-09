@@ -10,7 +10,8 @@ import { ProductUpdateComponent } from './product-update/product-update.componen
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 // @ts-ignore
-import {CKEditorModule} from "ckeditor4-angular";
+import {CKEditorModule} from 'ckeditor4-angular';
+
 
 
 

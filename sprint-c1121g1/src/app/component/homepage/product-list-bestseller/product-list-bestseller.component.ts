@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HomepageService} from '../../../services/homepage/homepage.service';
 import {ProductBestseller} from '../../../dto/product-bestseller';
-import {Category} from "../../../models/category";
-import {CategoryService} from "../../../services/category/category.service";
+import {Category} from '../../../models/category';
+import {CategoryService} from '../../../services/category/category.service';
 
 @Component({
   selector: 'app-product-list-bestseller',
@@ -23,6 +23,7 @@ export class ProductListBestsellerComponent implements OnInit {
   flagProductNewest = false;
   flagCategory = false;
   flagProductBestsellerByCategory = false;
+  activeProjectIndex: number;
 
   constructor(private homepageService: HomepageService, private categoryService: CategoryService) {
   }
@@ -88,4 +89,9 @@ export class ProductListBestsellerComponent implements OnInit {
       this.flagProductBestsellerByCategory = true;
     });
   }
+
+  // // Choose category
+  // public activeProject(index: number, customer): void {
+  //   this.activeProjectIndex = index;
+  // }
 }

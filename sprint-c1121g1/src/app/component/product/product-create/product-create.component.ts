@@ -17,6 +17,8 @@ export class ProductCreateComponent implements OnInit {
   imgVip = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
   productForm: FormGroup;
   selectedImage: any = null;
+  flagCheckImage: boolean;
+  alertImage = '';
   flag = false;
   productName: string;
   errorProductName: string;
@@ -44,20 +46,29 @@ export class ProductCreateComponent implements OnInit {
     return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
   ngOnInit(): void {
+    console.log(this.validateImange(this.imgVip));
+    this.productForm.controls.categoryDto.setValue('');
     this.categoryService.getAll().subscribe(data => {
       this.categoryList = data;
     });
   }
+
+  validateImange(e): boolean {
+    return e == 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+  }
+
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
   */
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
+    if (this.selectedImage) {
+      this.alertImage = '';
+    }
     const reader = new FileReader();
     reader.readAsDataURL(this.selectedImage);
     reader.onload = e => {
-      console.log(e);
       this.imgVip = reader.result as string;
     };
   }
@@ -74,8 +85,16 @@ export class ProductCreateComponent implements OnInit {
       Date: 9:08 3/6/2022
   */
   save(errorModalBtn: HTMLButtonElement, successButton: HTMLButtonElement) {
-    if (this.productForm.invalid) {
-      console.log(this.productForm.value);
+
+    // if (this.validateImange(this.imgVip)){
+    //   this.flagCheckImage = true;
+    //   this.productForm.controls.image.setErrors({existed: 'Empty! Please input!'});
+    // }
+    if (this.productForm.invalid || !this.selectedImage) {
+      if (!this.selectedImage) {
+        this.alertImage = 'Vui lòng nhập ảnh';
+      }
+
       if (this.productForm.controls.name.value == '') {
         this.productForm.controls.name.setErrors({empty: 'Empty! Please input!'});
       }
@@ -104,24 +123,23 @@ export class ProductCreateComponent implements OnInit {
         this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
       }
     } else {
-      console.log(this.productForm.value);
-      // const nameImg = this.getCurrentDateTime();
+      this.alertImage = '';
       const nameImg = '/PD-' + this.productName + '.jpg';
       const fileRef = this.storage.ref(nameImg);
       this.storage.upload(nameImg, this.selectedImage).snapshotChanges().pipe(
         finalize(() => {
           fileRef.getDownloadURL().subscribe((url) => {
             this.productForm.patchValue({image: url});
+            this.flagCheckImage = false;
             this.productService.createProduct(this.productForm.value).subscribe(() => {
-                console.log(this.productForm.value);
+
                 this.productForm.reset();
                 successButton.click();
-                this.router.navigateByUrl('/api/product/listProduct');
                 // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                 console.log('success');
               }, error => {
-                console.log(error);
-                console.log(error.error.errorMap.name);
+                console.log(this.productForm.value);
+
                 errorModalBtn.click();
                 this.errorProductName = error.error.errorMap.name;
               }
@@ -162,4 +180,14 @@ export class ProductCreateComponent implements OnInit {
   get otherDescription() {
     return this.productForm.get('otherDescription');
   }
+
+  validateCategory(target: any) {
+    if (this.productForm.controls.categoryDto.value != '') {
+      this.productForm.controls.categoryDto.setErrors({empty: null});
+      this.productForm.controls.categoryDto.updateValueAndValidity();
+    } else {
+      this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
+    }
+  }
+
 }

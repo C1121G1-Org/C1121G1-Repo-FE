@@ -10,8 +10,5 @@ export interface Employee {
   image?: string;
   positions?: Positions;
   account?: Account;
-<<<<<<< HEAD
-=======
 
->>>>>>> 65b33218f7cc686307f43f4a682101b286841134
 }

@@ -24,7 +24,7 @@ export class CustomerUpdateComponent implements OnInit {
   phone = '';
   page = 0;
   totalElement = 0;
-  flag=false;
+  flag = false;
 
   constructor(private customerService: CustomerService,
               private router: Router,
@@ -41,7 +41,7 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.flag=false;
+    this.flag = false;
     this.customerService.getAllCustomer1(this.name, this.phone, this.page).subscribe(
       (data: any) => {
         this.totalElement = data.totalElements;
@@ -109,7 +109,7 @@ export class CustomerUpdateComponent implements OnInit {
       this.customerService.updateCustomer(id, customer).subscribe(async res => {
         openSuccessModalBtn.click();
         await this.wait(3000);
-        if(this.flag==false){
+        if (this.flag == false){
           openSuccessModalBtn.click();
         }
         this.router.navigate(['/customer/list']);
@@ -121,11 +121,11 @@ export class CustomerUpdateComponent implements OnInit {
   }
 
   wait(ms){
-    return new Promise(r => setTimeout(r,ms));
+    return new Promise(r => setTimeout(r, ms));
   }
 
 
   checkConfirm() {
-    this.flag=true;
+    this.flag = true;
   }
 }

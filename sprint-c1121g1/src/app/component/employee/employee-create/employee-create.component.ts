@@ -70,7 +70,7 @@ export class EmployeeCreateComponent implements OnInit {
   // @ts-ignore
   createEmployeeForm: FormGroup = new FormGroup({
     // tslint:disable-next-line:max-line-length
-    employeeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern('^([a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\\s{1}[a-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$')])),
+    employeeName: new FormControl('', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(50), Validators.pattern('^([aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+)((\\s{1}[a-aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ]+){1,})$')])),
     dateOfBirth: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^\\d{4}\\-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01])$')])),
     address: new FormControl('', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(100)])),
     idCard: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[0-9_-]{9,12}$')])),
@@ -127,8 +127,6 @@ export class EmployeeCreateComponent implements OnInit {
           this.createEmployeeForm.patchValue({image: url});
           this.employeeService.saveEmployee(this.createEmployeeForm.value).subscribe(() => {
             successBtn.click();
-            this.createEmployeeForm.reset(window.location.reload());
-            this.router.navigate(['employee/list']);
           }, error => {
 
             this.errorIdCard = error.error.errorMap.idCard;

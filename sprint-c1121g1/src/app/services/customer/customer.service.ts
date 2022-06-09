@@ -1,7 +1,7 @@
 import {Customer} from '../../models/customer';
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 
 @Injectable({
@@ -41,7 +41,7 @@ export class CustomerService {
     */
 
   getAllCustomer1(name: string, phone: string, page: number): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.URL_LIST + '/list' + '/?page=' + page + '&keyName=' + name + '&keyPhone=' + phone);
+    return this.http.get<Customer[]>(this.URL_LIST + '/list' + '?page=' + page + '&keyName=' + name + '&keyPhone=' + phone);
   }
 
 

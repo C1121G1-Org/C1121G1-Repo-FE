@@ -194,23 +194,25 @@
                 </tr>
                 </tbody>
               </table>
+              <!--              <div *ngIf="flagProductNull">-->
+              <!--                <span class="messageError"-->
+              <!--                      *ngIf="errorMap['productList']!=null" class="messageError">{{errorMap['productList']}}-->
+              <!--                </span>-->
+              <!--              </div>-->
+              <!--              <div >-->
+              <!--                <div class="messageError" *ngFor ="let err of dict;let i = index" >-->
+              <!--                  <p>{{dict[i].value}}</p>-->
+              <!--                </div>-->
+              <!--              </div>-->
               <div *ngIf="flagProductNull">
-                <span class="messageError"
-                      *ngIf="errorMap['productList']!=null" class="messageError">{{errorMap['productList']}}
-                </span>
+                    <span class="messageError"
+                          *ngIf="errorMap['productList']!=null" class="messageError">{{errorMap['productList']}}
+                    </span>
               </div>
-              <div >
-                <div class="messageError" *ngFor ="let err of dict;let i = index" >
+              <div *ngIf="!flagProduct">
+                <div class="messageError" *ngFor="let err of dict;let i = index">
                   <p>{{dict[i].value}}</p>
                 </div>
-                <!--              <div *ngIf="!flagProduct">-->
-                <!--                <span class="col alert alert-danger" role="alert"-->
-                <!--                       *ngIf="errorMap['quantity']!=null" class="messageError">{{errorMap['quantity']}}-->
-                <!--                </span>-->
-                <!--                <span class="col alert alert-danger" role="alert"-->
-                <!--                       *ngIf="errorMap['productNull']!=null" class="messageError">{{errorMap['productNull']}}-->
-                <!--                </span>-->
-                <!--              </div>-->
               </div>
             </div>
           </div>
@@ -291,7 +293,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Tuyệt!</h4>
+        <h4>Thông Báo!</h4>
         <p>Tạo đơn bán hàng thành công.</p>
         <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</button>
       </div>

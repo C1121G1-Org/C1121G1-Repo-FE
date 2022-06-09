@@ -233,91 +233,54 @@
                 <input type="text" class="form-control" name="supplierName" id="supplierName"
                        formControlName="supplierName">
                 <p style="color: red" *ngIf="( supplierForm.controls.supplierName.hasError( 'required')&&
-(supplierForm.controls.supplierName.touched|| supplierForm.controls.supplierName.dirty))">Tên nhà cung cấp không được để trống</p>
-                <p style="color: red" *ngIf="errorSupplierName != ''">{{errorSupplierName}}</p>
+(supplierForm.controls.supplierName.touched|| supplierForm.controls.supplierName.dirty))">Tên nhà cung cấp không được để trống!</p>
+                <p style="color: red" *ngIf="check">{{errorSupplierName}}</p>
               </div>
 
               <div class="form-group col-md-8">
                 <label for="address" class="mb-3">Địa chỉ<span class="text-danger">(*)</span>:</label>
                 <input type="text" class="form-control" name="address" id="address" formControlName="address">
                 <p style="color: red" *ngIf="( supplierForm.controls.address.hasError( 'required')&&
-(supplierForm.controls.address.touched|| supplierForm.controls.address.dirty))">Địa chỉ không được để trống</p>
+(supplierForm.controls.address.touched|| supplierForm.controls.address.dirty))">Địa chỉ không được để trống!</p>
               </div>
 
               <div class="form-group col-md-8">
                 <label for="phone" class="mb-3">Số điện thoại<span class="text-danger">(*)</span>:</label>
                 <input type="text" class="form-control" name="phone" id="phone" formControlName="phone">
                 <p style="color: red" *ngIf="( supplierForm.controls.phone.hasError( 'required')&&
-(supplierForm.controls.phone.touched|| supplierForm.controls.phone.dirty))">SĐT không được để trống</p>
+(supplierForm.controls.phone.touched|| supplierForm.controls.phone.dirty))">SĐT không được để trống!</p>
                 <p style="color: red" *ngIf="( supplierForm.controls.phone.hasError( 'pattern')&&
-(supplierForm.controls.phone.touched|| supplierForm.controls.phone.dirty))">SĐT phải bắt đầu từ 090|091XXXXXXX</p>
+(supplierForm.controls.phone.touched|| supplierForm.controls.phone.dirty))">SĐT phải bắt đầu từ 09XXXXXXXX!</p>
               </div>
 
               <div class="form-group col-md-8">
                 <label for="email" class="mb-3">Email<span class="text-danger">(*)</span>:</label>
                 <input type="email" class="form-control" name="email" id="email" formControlName="email">
                 <p style="color: red" *ngIf="( supplierForm.controls.email.hasError( 'required')&&
-(supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))">Email không được để trống</p>
+(supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))">Email không được để trống!</p>
 
                 <p style="color: red" *ngIf="( supplierForm.controls.email.hasError( 'email')&&
-(supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))">không đúng định dạng, vd:haivan@gmail.com</p>
-                <p style="color: red" *ngIf="errorEmail != ''">{{errorEmail}}</p>
+(supplierForm.controls.email.touched|| supplierForm.controls.email.dirty))">Không đúng định dạng, vd:haivan@gmail.com!</p>
+                <p style="color: red" *ngIf="check">{{errorEmail}}</p>
               </div>
 
               <div class=" col-md-12 text-center mx-auto mt-4">
-                <div class="text-center " style="margin-bottom: 40px" >
-                  <button  type="submit" class="btn btn-primary " style="margin-right: 20px">
-                    <i class="fa fa-paper-plane"></i>Thêm mới
-                  </button>
-                  <button type="button" class="btn btn-danger "  [routerLink]="['']" ><i class="fa-solid fa-right-from-bracket"></i> Hủy</button>
-
-                </div>
+                <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
+                  class="fa fa-paper-plane"></i>THÊM MỚI
+                </button>
+                <a data-toggle="modal"
+                   data-target="#cancelModal"
+                   style="width: 200px" type="submit" class="btn btn-grad-red mx-1"  [routerLink]="['']">
+                  <i class="fa-solid fa-right-from-bracket"></i>HỦY </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </form>
 </div>
-
-<!--<button [hidden]="true" #errorBtn data-toggle="modal" data-target="#errorModal"></button>-->
-<!--&lt;!&ndash;error modal&ndash;&gt;-->
-<!--<div class="modal fade " tabindex="-1" id="errorModal">-->
-<!--  <div class="modal-dialog" style="text-align: center">-->
-<!--    <div class="modal-content" style="text-align: center">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title">Thông báo</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <p>Dữ liệu đã tồn tại hoặc không đúng định dạng, vui lòng kiểm tra lại!</p>-->
-<!--      </div>-->
-<!--      <div class="modal-footer d-flex justify-content-center">-->
-<!--        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>-->
-<!--&lt;!&ndash;success modal&ndash;&gt;-->
-<!--<div class="modal fade" tabindex="-1" id="successModal">-->
-<!--  <div class="modal-dialog" style="text-align: center">-->
-<!--    <div class="modal-content" style="text-align: center">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title">Thông báo</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ></button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <p>Thêm mới nhà cung cấp thành công!</p>-->
-<!--      </div>-->
-<!--      <div class="modal-footer d-flex justify-content-center">-->
-<!--        <button type="button" class="btn btn-primary" data-dismiss="modal" [routerLink]="['/supplier/create']">OK</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
 
 <button [hidden]="true" #successBtn data-toggle="modal" data-target="#successModal"></button>
 <!--success modal-->
@@ -331,7 +294,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Tuyệt!</h4>
+        <h4>THÔNG BÁO</h4>
         <p>Thêm mới nhà cung cấp thành công!</p>
         <button #closeModalBtn type="button" class="btn-modal btn-grad-blue" data-dismiss="modal" >Đồng ý</button>
       </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
 import {InvoiceService} from '../../../services/invoice/invoice.service';
 import {InvoiceDto} from '../../../dto/invoiceDto';
@@ -17,23 +17,33 @@ Function: Search,Pageable
 export class InvoiceHistoryComponent implements OnInit {
 
   invoiceList: InvoiceDto[] = [];
+  productsInvoice: InvoiceDto[] = [];
 
   productName = '';
   productQuantity = 0;
+  pageNum: number;
+  pageNumbers: number;
+  detailPageNum: number;
+  detailPageNumbers: number;
 
   formSearch = new FormGroup({
-    keyword: new FormControl('', Validators.pattern('[0-9a-zA-Z\\\\s]*'))
+    keyword: new FormControl('', Validators.pattern('[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\s]*'))
   });
 
   keyword = '';
   sort = '';
   page = 0;
   totalPages = 0;
-  massage = '';
-
+  pageDetail = 0;
+  totalPagesDetail = 0;
+  message = false;
   checkDate = true;
   checkCustomer = true;
   checkTotalMoney = true;
+
+  last: boolean;
+  first: boolean;
+
 
   constructor(private invoiceService: InvoiceService) {
   }
@@ -47,24 +57,41 @@ export class InvoiceHistoryComponent implements OnInit {
     this.getSearch('', '', this.page);
   }
 
-  getInvoiceDetailId(quantity: number, name: string) {
-    this.productQuantity = quantity;
-    this.productName = name;
+  getInvoiceDetailId(id: number) {
+    this.invoiceService.findProduct(this.pageDetail, id).subscribe(data => {
+      this.productsInvoice = data.content;
+      this.pageDetail = 0;
+      this.totalPagesDetail = data.totalPages;
+      this.detailPageNum = data.pageable.pageSize;
+      this.detailPageNumbers = data.pageable.pageNumber;
+    });
   }
 
   getSearch(keyword: string, sort: string, page: number) {
-    this.massage = '';
     this.keyword = this.formSearch.get('keyword').value;
     this.invoiceService.getAll(this.keyword.trim(), this.sort, this.page).subscribe(data => {
-        console.log(data);
-        this.page = data.number;
-        this.totalPages = data.totalPages;
-        this.invoiceList = data.content;
-        console.log(data.content);
+        if (!this.formSearch.valid || data == null) {
+          this.message = true;
+          this.page = 0;
+          this.totalPages = 0;
+          this.invoiceList = null;
+        } else {
+          this.message = false;
+          this.page = data.number;
+          this.totalPages = data.totalPages;
+          this.invoiceList = data.content;
+          console.log(this.invoiceList);
+          this.pageNum = data.pageable.pageSize;
+          this.pageNumbers = data.pageable.pageNumber;
+          this.first = data.first;
+          this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
+        }
+
+
       },
       error => {
         console.log(error);
-        this.massage = 'Không thể tìm thấy kết quả ';
+        this.message = false;
         this.page = 0;
         this.totalPages = 0;
         this.invoiceList = null;
@@ -83,6 +110,20 @@ export class InvoiceHistoryComponent implements OnInit {
     if (this.page < this.totalPages - 1) {
       this.page += 1;
       this.getSearch(this.keyword, this.sort, this.page);
+    }
+  }
+
+  previousDetail() {
+    if (this.pageDetail > 0) {
+      this.pageDetail -= 1;
+      this.getSearch(this.keyword, this.sort, this.pageDetail);
+    }
+  }
+
+  nextDetail() {
+    if (this.pageDetail < this.totalPagesDetail - 1) {
+      this.pageDetail += 1;
+      this.getSearch(this.keyword, this.sort, this.pageDetail);
     }
   }
 
@@ -165,7 +206,12 @@ export class InvoiceHistoryComponent implements OnInit {
     }
   }
 
+  reset() {
+    this.getSearch('', '', this.page);
+  }
+
   changeKeyword() {
-    this.keyword = this.formSearch.get('keyword').value;
+      this.keyword = this.formSearch.get('keyword').value;
+      this.page = 0;
   }
 }

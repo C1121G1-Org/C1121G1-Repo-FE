@@ -13,14 +13,14 @@ export class HomepageService {
   }
 
   getProductBestseller(): Observable<any> {
-    return this.http.get<any>(this.homepageApi + "listProductBestseller");
+    return this.http.get<any>(this.homepageApi + 'listProductBestseller');
   }
 
   getProductNewest(): Observable<any> {
-    return this.http.get<any>(this.homepageApi + "listProductNewest");
+    return this.http.get<any>(this.homepageApi + 'listProductNewest');
   }
 
   getProductBestsellerByCategory(category: Category): Observable<any> {
-    return this.http.get<any>(this.homepageApi + "listProductBestseller/" + category.id)
+    return this.http.get<any>(this.homepageApi + 'listProductBestseller/' + category.id);
   }
 }

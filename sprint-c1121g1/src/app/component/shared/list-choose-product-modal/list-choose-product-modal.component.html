@@ -25,7 +25,7 @@
                     <div class="mx-2">
                       <select [(ngModel)]="checkSearch" class="search-select background-search">
                         <option value="name">Tên sản phẩm</option>
-                        <option value="price">Giá</option>
+                        <option value="price">Khoảng giá</option>
                       </select>
                     </div>
 
@@ -34,8 +34,8 @@
                              class="header-search search-input background-search"
                              formControlName="keySearch"
                              placeholder="Bạn cần tìm gì?"
-                             type="text" (change)="search(element.value)"><i (click)="search(element.value)"
-                                                                             class="fa fa-search"
+                             type="text" (change)="search(element.value)"><i (click)="repeat()"
+                                                                             class="fa fa-repeat"
                                                                              style="position: absolute; right: 15px; top: 9px; font-size: 20px"></i>
                     </div>
                   </div>
@@ -56,12 +56,28 @@
                         <thead>
                         <tr>
                           <th width="60px" class="text-center">STT</th>
-                          <th class="text-center">Tên Sản Phẩm</th>
+                          <th (click)="changeSortName()" class="text-center">
+                            <i *ngIf="checkSortName" class="fa-solid fa-arrow-down-1-9"></i>
+                            <i *ngIf="!checkSortName" class="fa-solid fa-arrow-up-9-1"></i>
+                            Tên Sản Phẩm</th>
                           <th width="150px" class="text-center">Mã Sản Phẩm</th>
-                          <th class="text-center">Giá(VND)</th>
-                          <th class="text-center">CPU</th>
-                          <th class="text-center">Lưu Trữ</th>
-                          <th width="150px" class="text-center">Số lượng</th>
+                          <th (click)="changeSort()" class="text-center">
+                            <i *ngIf="checkSort" class="fa-solid fa-arrow-down-1-9"></i>
+                            <i *ngIf="!checkSort" class="fa-solid fa-arrow-up-9-1"></i>
+                            Giá(VND)
+                          </th>
+                          <th (click)="changeSortCpu()" class="text-center">
+                            <i *ngIf="checkSortCpu" class="fa-solid fa-arrow-down-1-9"></i>
+                            <i *ngIf="!checkSortCpu" class="fa-solid fa-arrow-up-9-1"></i>
+                            Chipset</th>
+                          <th (click)="changeSortMemory()" class="text-center">
+                            <i *ngIf="checkSortMemory" class="fa-solid fa-arrow-down-1-9"></i>
+                            <i *ngIf="!checkSortMemory" class="fa-solid fa-arrow-up-9-1"></i>
+                            Bộ nhớ trong</th>
+                          <th (click)="changeSortQuantity()" width="150px" class="text-center">
+                            <i *ngIf="checkSortQuantity" class="fa-solid fa-arrow-down-1-9"></i>
+                            <i *ngIf="!checkSortQuantity" class="fa-solid fa-arrow-up-9-1"></i>
+                            Số lượng</th>
                         </tr>
                         </thead>
                       </table>
@@ -70,11 +86,15 @@
                     <div class="tbl-content">
                       <table class=" table table-bordered table-responsive-md">
                         <tbody>
-                        <tr style="cursor: pointer" (click)="getProduct(product)"
-                            *ngFor="let product of productList; index as i"
-                            [class.heightLight]="isSelectedProduct(product)">
+                        <tr style="cursor: pointer" (click)="isSelectedProduct(j,product)"
+                            *ngFor="let product of productList; index as i, let j=index"
+                            [ngStyle]="{'background-color': activeProjectIndex === j && flagClick ? '#84c0ec' : ''}">
                           <td width="60px" class="text-center">{{(pageNumber) * pageSize + (i + 1)}}</td>
-                          <td class="text-center desc">{{product.name}}</td>
+                          <td class="text-center desc">
+                            <i data-toggle="tooltip" data-placement="top"
+                               title="{{product.name}}">
+                              {{product.name}}</i>
+                          </td>
                           <td width="150px" class="text-center">{{product.id}}</td>
                           <td class="text-center">{{product.price |currency :'VND':''}}</td>
                           <td class="text-center desc">{{product.cpu}}</td>
@@ -110,7 +130,7 @@
                       <!--Pagination-->
                       <nav *ngIf="!message" class="d-flex justify-content-end wow fadeIn">
                         <ul class="pagination">
-                          <li *ngIf="!message &&!first " style="color: #333333" class="page-item"><a
+                          <li *ngIf="!first " style="color: #333333" class="page-item"><a
                             (click)="previousPage()" class="page-link"
                             style="width:90px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">Trang
                             trước</a>
@@ -118,9 +138,9 @@
                           <li style="color: #333333" class="page-item"><a class="page-link"
                                                                           style="width:40px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">{{pageNumber + 1}}</a>
                           </li>
-                          <li *ngIf="!last && !message" style="color: #333333" class="page-item"><a (click)="nextPage()"
-                                                                                                    class="page-link"
-                                                                                                    style="width:70px ;text-align: center ; height: 40px ;color: blue; line-height: 35px ; box-sizing: border-box;  background-color: white; cursor: pointer"
+                          <li *ngIf="!last" style="color: #333333" class="page-item"><a (click)="nextPage()"
+                                                                                        class="page-link"
+                                                                                        style="width:70px ;text-align: center ; height: 40px ;color: blue; line-height: 35px ; box-sizing: border-box;  background-color: white; cursor: pointer"
                           >Trang kế</a>
 
                           </li>
@@ -140,7 +160,8 @@
   </div>
 </div>
 <!--modall-->
-<div id="successModal" class="modal fade">
+<div class="modal fade" id="productModals" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
       <div class="modal-header modal-header-danger justify-content-center">

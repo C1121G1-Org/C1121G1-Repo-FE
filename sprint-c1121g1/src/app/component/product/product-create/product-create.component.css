@@ -121,3 +121,17 @@ Modal
   min-width: 150px;
   border: none;
 }
+
+
+.make-color {
+  /*background: -webkit-linear-gradient(left, #dc3545, #111be2);*/
+  /*background: linear-gradient(to right, #dc3545, #111be2);*/
+  background-color: #d9e4f5;
+  background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%);
+  /*background-color: #FBDA61;*/
+  /*background: linear-gradient(-45deg, #ffec61, #f321d7);*/
+  font-family: 'Montserrat', sans-serif;
+  /*box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;*/
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  /*box-shadow: rgba(240, 46, 170, 0.4) -5px 5px, rgba(240, 46, 170, 0.3) -10px 10px, rgba(240, 46, 170, 0.2) -15px 15px, rgba(240, 46, 170, 0.1) -20px 20px, rgba(240, 46, 170, 0.05) -25px 25px;*/
+}

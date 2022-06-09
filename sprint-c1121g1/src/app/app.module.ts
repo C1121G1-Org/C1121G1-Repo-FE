@@ -21,6 +21,10 @@ import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
 import {CKEditorModule} from 'ckeditor4-angular';
 
+import {ErrorComponent} from './error/error.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {TokenInterceptorService} from './services/security/token-interceptor.service';
+
 
 // @ts-ignore
 @NgModule({
@@ -28,6 +32,7 @@ import {CKEditorModule} from 'ckeditor4-angular';
     AppComponent,
     HeaderComponent,
     FooterComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,8 +52,20 @@ import {CKEditorModule} from 'ckeditor4-angular';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     CKEditorModule
+
   ],
-  providers: [],
+  providers: [
+    /*
+      Created by KhaiTT
+      Date: 20:30 02/05/2022
+      Function: This providers use for TokenInterceptorService.
+    */
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   exports: [],
   bootstrap: [AppComponent]
 })
