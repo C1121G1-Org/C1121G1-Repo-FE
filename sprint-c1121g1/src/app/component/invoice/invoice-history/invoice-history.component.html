@@ -163,7 +163,7 @@
               <table cellpadding="0" cellspacing="0" border="0">
                 <tbody>
                 <tr *ngFor="let product of productsInvoice;let i = index">
-                  <td>{{ pageNumbers * pageNum + (i + 1)}}</td>
+                  <td>{{ detailPageNumbers * detailPageNum + (i + 1)}}</td>
                   <td>{{product.productName}}</td>
                   <td>{{product.quantity}}</td>
                 </tr>
@@ -176,7 +176,7 @@
               </div>
 
               <div class="col-4 d-flex justify-content-center">
-                <p class="page-link">{{(page + 1) + '/' + totalPages}}</p>
+                <p class="page-link">{{(pageDetail + 1) + '/' + totalPagesDetail}}</p>
               </div>
               <div class="col-4">
                 <!--Pagination-->
@@ -184,17 +184,17 @@
                   <ul class="pagination">
                     <li class="page-item">
                       <button
-                        [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}"
-                        [disabled]="first" class="page-link" (click)="previous()">Trước
+                        [ngStyle]="{'background-color': pageDetail <= 0 ? 'gray' : 'white','color': pageDetail <= 0  ? 'white' : 'blue'}"
+                        [disabled]="pageDetail <= 0" class="page-link" (click)="previousDetail()">Trước
                       </button>
                     </li>
                     <li class="page-item " aria-current="page">
-                      <button [disabled]="true" class="page-link">{{page + 1}}</button>
+                      <button [disabled]="true" class="page-link">{{pageDetail + 1}}</button>
                     </li>
                     <li class="page-item">
                       <button
-                        [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}"
-                        [disabled]="last" class="page-link" (click)="next()">Sau
+                        [ngStyle]="{'background-color': pageDetail >= totalPagesDetail - 1 ? 'gray' : 'white','color': pageDetail >= totalPagesDetail - 1 ? 'white' : 'blue'}"
+                        [disabled]="pageDetail >= totalPagesDetail - 1" class="page-link" (click)="nextDetail()">Sau
                       </button>
                     </li>
                   </ul>
@@ -237,8 +237,7 @@
         <table cellpadding="0" cellspacing="0" border="0.5">
           <tbody>
           <tr>
-            <td class="d-flex justify-content-center font-weight-bold text-uppercase" style="color: red"> Không tìm thấy
-              sản phẩm
+            <td class="d-flex justify-content-center font-weight-bold text-uppercase" style="color: red"> Không tìm thấy kết quả
             </td>
           </tr>
           </tbody>
@@ -261,8 +260,8 @@
                 </a>
               </div>
             </th>
-            <th >THỜI GIAN</th>
-            <th>
+            <th>THỜI GIAN</th>
+            <th style="width: 250px">
               <div>
                 <a *ngIf="checkCustomer == true" (click)="sortCustomer()">
                   <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>HỌ TÊN KHÁCH HÀNG
@@ -272,7 +271,7 @@
                 </a>
               </div>
             </th>
-            <th >THÔNG TIN SẢN PHẨM</th>
+            <th style="width: 250px">THÔNG TIN SẢN PHẨM</th>
             <th >
               <div>
                 <a *ngIf="checkTotalMoney == true" (click)="sortTotalMoney()">
@@ -293,12 +292,12 @@
           <tr *ngFor="let invoice of invoiceList ;let i = index">
             <td style="width: 100px">{{ pageNumbers * pageNum + (i + 1)}}</td>
             <td>{{invoice.createDate }}</td>
-            <td >{{invoice.createTime}}</td>
-            <td>{{invoice.customerName}}</td>
-            <td><a class="btn btn-grad-red" data-toggle="modal"
+            <td style="width: 150px">{{invoice.createTime}}</td>
+            <td style="width: 260px">{{invoice.customerName}}</td>
+            <td style="width: 250px"><a class="btn btn-grad-red" data-toggle="modal"
                    data-target="#staticBackdrop"
                    (click)="getInvoiceDetailId(invoice.invoiceId)">Chi tiết</a></td>
-            <td>{{invoice.totalMoney | currency :'VND' : ''}} đ</td>
+            <td style="width: 150px">{{invoice.totalMoney | currency :'VND' : ''}} đ</td>
           </tr>
           </tbody>
         </table>

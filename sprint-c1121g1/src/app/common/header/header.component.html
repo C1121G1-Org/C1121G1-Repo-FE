@@ -20,15 +20,15 @@
           <div class="sub-menu">
             <ul>
               <li *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1"><a routerLink="employee/list">Quản lý nhân viên</a></li>
-              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_BUSINESS_STAFF'].indexOf(role)!==-1" ><a >Quản lý kinh doanh<i class="fa-solid fa-angle-right"></i></a>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_STAFF'].indexOf(role)!==-1" ><a >Quản lý kinh doanh<i class="fa-solid fa-angle-right"></i></a>
                 <div class="sub-menu-2">
                   <ul>
                     <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER'].indexOf(role)!==-1"><a [routerLink]="['/listInvoice']">Quản lý lịch sử</a></li>
-                    <li *ngIf="['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF'].indexOf(role)!==-1"><a [routerLink]="['/customer/list']">Quản lý khách hàng</a></li>
+                    <li *ngIf="['ROLE_ADMIN', 'ROLE_STAFF'].indexOf(role)!==-1"><a [routerLink]="['/customer/list']">Quản lý khách hàng</a></li>
                   </ul>
                 </div>
               </li>
-              <li><a *ngIf="['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF'].indexOf(role)!==-1" href="#">Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
+              <li><a *ngIf="['ROLE_ADMIN', 'ROLE_STAFF'].indexOf(role)!==-1" href="#">Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
                 <div class="sub-menu-2">
                   <ul>
                     <li><a [routerLink]="['/sale-report/list']">Quản lý báo cáo bán hàng</a></li>
@@ -36,8 +36,8 @@
                   </ul>
                 </div>
               </li>
-              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_BUSINESS_STAFF'].indexOf(role)!==-1"><a routerLink="/listProduct">Xem thông tin hàng hóa</a></li>
-              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a [routerLink]="['/supplier']">Quản lý nhà cung cấp</a></li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_STAFF'].indexOf(role)!==-1"><a routerLink="/listProduct">Xem thông tin hàng hóa</a></li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a [routerLink]="['/supplier']">Quản lý nhà cung cấp</a></li>
               <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER'].indexOf(role)!==-1"><a [routerLink]="['/invoice']" >Quản lý bán hàng</a></li>
               <li *ngIf="['ROLE_ADMIN', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a href="#">Quản lý xuất nhập kho<i class="fa-solid fa-angle-right"></i></a>
                 <div class="sub-menu-2">
@@ -87,7 +87,7 @@
           <div class="header-item header-item-menu">
             <div class="header-icon">
               <img src="{{imageLink}}"
-                   alt="" width="40px" style="border-radius: 50%">
+                   alt="" style="border-radius: 50%;width: 40px; height: 40px; object-fit: cover">
             </div>
             <div class="header-text">
               {{username}} <i class="fa-solid fa-angle-down"></i>

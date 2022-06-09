@@ -34,6 +34,13 @@ export class ProductListComponent implements OnInit {
   pageSize: number
   flagClick = false;
   chosenItem: Product;
+  checkSort = false;
+  checkSelected = true;
+  sort = 'priceDesc';
+  checkSortName =false;
+  checkSortQuantity =false;
+  checkSortCpu = false;
+  checkSortMemory = false;
 
   constructor(private productService: ProductService, private router: Router) {
     this.formSearch = new FormGroup({
@@ -43,7 +50,7 @@ export class ProductListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+    this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
   }
 
   activeProject(index: number, product: Product): void {
@@ -90,9 +97,9 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  getModalProduct(pageNumber, searchByName, searchByPrice, searchByQuantity) {
+  getModalProduct(pageNumber, searchByName, searchByPrice, searchByQuantity,sort) {
     this.message = false;
-    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice, searchByQuantity).subscribe((res: any) => {
+    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice, searchByQuantity,sort).subscribe((res: any) => {
       this.productList = res.content;
       console.log(res)
       console.log(this.productList);
@@ -101,18 +108,17 @@ export class ProductListComponent implements OnInit {
       this.first = res.first;
       this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
       this.pageSize = res.pageable.pageSize
-
     }, error => {
       this.message = true;
     });
   }
 
   nextPage() {
-    this.getModalProduct(this.pageNumber + 1, this.searchByName, this.searchByPrice, this.searchByQuantity);
+    this.getModalProduct(this.pageNumber + 1, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
   }
 
   previousPage() {
-    this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice, this.searchByQuantity);
+    this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
   }
 
 
@@ -120,7 +126,7 @@ export class ProductListComponent implements OnInit {
     value = value.trim();
     if (!this.formSearch.valid) {
       this.searchByName = '123abcxyz'
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
     }
     this.currentProduct = null;
     this.pageNumber = 0;
@@ -128,17 +134,17 @@ export class ProductListComponent implements OnInit {
       this.searchByPrice = value;
       this.searchByName = '';
       this.searchByQuantity = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
     } else if (this.checkSearch === 'quantity') {
       this.searchByPrice = '';
       this.searchByName = '';
       this.searchByQuantity = value;
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
     } else {
       this.searchByQuantity = '';
       this.searchByName = value;
       this.searchByPrice = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
     }
   }
 
@@ -162,7 +168,61 @@ export class ProductListComponent implements OnInit {
     this.searchValue = '';
     this.searchByPrice = '';
     this.searchByName = '';
+    this.sort = 'priceDesc'
     this.ngOnInit();
   }
 
+  changeSort() {
+    this.checkSort = !this.checkSort;
+    if (this.checkSort == true) {
+      this.sort = 'priceAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'priceDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+  }
+  changeSortName() {
+    this.checkSortName = !this.checkSortName;
+    if (this.checkSortName == true) {
+      this.sort = 'nameAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'nameDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+
+  }
+
+  changeSortQuantity() {
+    this.checkSortQuantity = !this.checkSortQuantity;
+    if (this.checkSortQuantity == true) {
+      this.sort = 'quantityAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'quantityDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+  }
+  changeSortCpu() {
+    this.checkSortCpu = !this.checkSortCpu;
+    if (this.checkSortCpu == true) {
+      this.sort = 'cpuAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'cpuDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+  }
+
+  changeSortMemory() {
+    this.checkSortMemory = !this.checkSortMemory;
+    if (this.checkSortMemory == true) {
+      this.sort = 'memoryAsc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    } else {
+      this.sort = 'memoryDesc';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
+    }
+  }
 }

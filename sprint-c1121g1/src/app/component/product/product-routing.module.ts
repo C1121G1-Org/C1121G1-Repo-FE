@@ -12,12 +12,12 @@ const routes: Routes = [
   {
     path: 'product/create', component: ProductCreateComponent, canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF']
+      roles: ['ROLE_ADMIN', 'ROLE_STAFF', 'ROLE_SELLER']
     }
   },
   {path: 'product/edit/:id', component: ProductUpdateComponent, canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF']
+      roles: ['ROLE_ADMIN', 'ROLE_STAFF', 'ROLE_SELLER']
     }},
   {path: 'chooseCustomer', component: ListCustomerModalComponent, canActivate: [AuthGuard],
     data: {
@@ -29,7 +29,7 @@ const routes: Routes = [
     }},
   {path: 'listProduct', component: ProductListComponent, canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF', 'ROLE_SELLER']
+      roles: ['ROLE_ADMIN', 'ROLE_STAFF', 'ROLE_SELLER']
     }},
 
 ];

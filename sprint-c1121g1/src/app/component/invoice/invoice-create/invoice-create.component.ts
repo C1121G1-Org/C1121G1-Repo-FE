@@ -279,10 +279,6 @@ export class InvoiceCreateComponent implements OnInit {
                 text: `Ngày: ${new Date().toLocaleString()}`,
                 alignment: 'right'
               },
-              {
-                text: `No.: ${((Math.random() * 1000).toFixed(0))}`,
-                alignment: 'right'
-              }
             ]
           ]
         },
@@ -296,11 +292,11 @@ export class InvoiceCreateComponent implements OnInit {
             widths: ['*', 'auto', 'auto', 'auto'],
             body: [
               ['Sản phẩm', 'Giá tiền', 'Số lượng', 'Tổng tiền'],
-              ...this.products.getRawValue().map(p => ([p.name, p.price, p.quantity, (p.price * p.quantity).toFixed(2)])),
+              ...this.products.getRawValue().map(p => ([p.name, p.price, p.quantity, (p.price * p.quantity).toFixed(0)])),
               [{
                 text: 'Total Amount',
                 colSpan: 3
-              }, {}, {}, this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2)]
+              }, {}, {}, this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(0)]
             ]
           }
         },
@@ -314,7 +310,7 @@ export class InvoiceCreateComponent implements OnInit {
         },
         {
           columns: [
-            [{qr: `${this.invoiceDetail.customerDto.customerName}`, fit: '50'}],
+            [{qr: `c1121G1.codegym@gmail.com`, fit: '50'}],
             [{text: 'Signature', alignment: 'right', italics: true}],
           ]
         },

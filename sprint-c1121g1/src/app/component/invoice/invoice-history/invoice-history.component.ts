@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormGroup, Validators, FormControl} from '@angular/forms';
 import {InvoiceService} from '../../../services/invoice/invoice.service';
 import {InvoiceDto} from '../../../dto/invoiceDto';
@@ -23,6 +23,8 @@ export class InvoiceHistoryComponent implements OnInit {
   productQuantity = 0;
   pageNum: number;
   pageNumbers: number;
+  detailPageNum: number;
+  detailPageNumbers: number;
 
   formSearch = new FormGroup({
     keyword: new FormControl('', Validators.pattern('[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\s]*'))
@@ -32,6 +34,8 @@ export class InvoiceHistoryComponent implements OnInit {
   sort = '';
   page = 0;
   totalPages = 0;
+  pageDetail = 0;
+  totalPagesDetail = 0;
   message = false;
   checkDate = true;
   checkCustomer = true;
@@ -54,24 +58,24 @@ export class InvoiceHistoryComponent implements OnInit {
   }
 
   getInvoiceDetailId(id: number) {
-    this.invoiceService.findProduct(this.page, id).subscribe(data => {
+    this.invoiceService.findProduct(this.pageDetail, id).subscribe(data => {
       this.productsInvoice = data.content;
-      this.page = 0;
-      this.totalPages = 0;
+      this.pageDetail = 0;
+      this.totalPagesDetail = data.totalPages;
+      this.detailPageNum = data.pageable.pageSize;
+      this.detailPageNumbers = data.pageable.pageNumber;
     });
   }
 
   getSearch(keyword: string, sort: string, page: number) {
     this.keyword = this.formSearch.get('keyword').value;
     this.invoiceService.getAll(this.keyword.trim(), this.sort, this.page).subscribe(data => {
-        console.log(data.content);
         if (!this.formSearch.valid || data == null) {
           this.message = true;
           this.page = 0;
           this.totalPages = 0;
           this.invoiceList = null;
         } else {
-          console.log(data);
           this.message = false;
           this.page = data.number;
           this.totalPages = data.totalPages;
@@ -106,6 +110,20 @@ export class InvoiceHistoryComponent implements OnInit {
     if (this.page < this.totalPages - 1) {
       this.page += 1;
       this.getSearch(this.keyword, this.sort, this.page);
+    }
+  }
+
+  previousDetail() {
+    if (this.pageDetail > 0) {
+      this.pageDetail -= 1;
+      this.getSearch(this.keyword, this.sort, this.pageDetail);
+    }
+  }
+
+  nextDetail() {
+    if (this.pageDetail < this.totalPagesDetail - 1) {
+      this.pageDetail += 1;
+      this.getSearch(this.keyword, this.sort, this.pageDetail);
     }
   }
 
@@ -193,6 +211,7 @@ export class InvoiceHistoryComponent implements OnInit {
   }
 
   changeKeyword() {
-    this.keyword = this.formSearch.get('keyword').value;
+      this.keyword = this.formSearch.get('keyword').value;
+      this.page = 0;
   }
 }

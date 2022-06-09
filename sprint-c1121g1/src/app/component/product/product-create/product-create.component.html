@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <div class="row" style="justify-content: center;display: flex">
       <div class="col-md-10">
-        <div class="card ">
+        <div class="card make-color">
           <div class="card card-body">
             <h3 class="text-center font-weight-bold text-uppercase py-4">
               THÊM MỚI THÔNG TIN HÀNG HÓA
@@ -15,6 +15,7 @@
                   <label for="name">Tên Hàng <span class="text-danger">(*):</span></label>
                   <input formControlName="name" type="text" class="form-control" name="name" id="name">
                   <!--                  <small class="form-text text-danger" *ngIf="errorProductName!=''">{{errorProductName}}</small>-->
+
                   <div
                     *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched|| productForm.controls.name.errors?.empty)">
                     <!--                    <small *ngIf="productForm.controls.name.errors?.maxlength" class="form-text text-danger">Tên phải ít hơn 255 ký tự </small>-->
@@ -44,7 +45,7 @@
                   <div class="file">
                     <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
                     <input name="img" id="img" type="file" class="file__input" (change)="showPreview($event)">
-                    <img style="width: 180px; height: 200px" src="{{imgVip}}" >
+                    <img style="width: 180px; height: 200px" src="{{imgVip}}">
                     <label for="img" class="file__label">
                       <i class="fa fa-upload"></i>
                     </label>
@@ -110,26 +111,24 @@
                     <small
                       *ngIf="productForm.controls.memory.hasError('required') || productForm.controls.memory.errors.empty"
                       class="form-text text-danger">Vui lòng nhập thông số bộ nhớ.</small>
-                    <small *ngIf="memory.errors?.maxlength" class="text-form text-danger">Trường lưu trữ phải ngắn hơn
-                      50 kí tự</small>
+                    <small *ngIf="memory.errors?.maxlength" class="text-form text-danger">Trường lưu trữ phải ngắn hơn 50 kí tự</small>
                   </div>
                 </div>
                 <div class="form-group col-md-12">
                   <label for="category">Danh Mục<span class="text-danger">(*)</span> </label>
                   <!--                  <input formControlName="cpu" type="text" class="form-control" name="cpu" id="category">-->
-                  <select [compareWith]="comparefn" name="category" id="category" formControlName="categoryDto"
+                  <select (change)="validateCategory($event.target)" [compareWith]="comparefn" name="category" id="category" formControlName="categoryDto"
                           class="form-control">
-                    <option [value]="undefined"> -- Chọn danh mục sản phẩm --</option>
+                    <option [ngValue]="''"> -- Chọn danh mục sản phẩm --</option>
                     <option *ngFor="let category of categoryList" [ngValue]="category">{{category.name}}</option>
                   </select>
                   <!--    hien thi loi-->
                   <div
-                    *ngIf="productForm.controls.categoryDto.invalid && (productForm.controls.categoryDto.dirty || productForm.controls.categoryDto.touched || productForm.controls.categoryDto.errors?.empty)">
-                    <small
-                      *ngIf="productForm.controls.categoryDto.hasError('required') || productForm.controls.categoryDto.errors.empty"
-                      class="form-text text-danger">Vui lòng chọn danh mục.</small>
+                    *ngIf="productForm.controls.categoryDto.errors?.empty">
+                    <small class="form-text text-danger">Vui lòng chọn danh mục.</small>
                   </div>
                 </div>
+
                 <div class="form-group col-md-12">
                   <label for="cpu">CPU<span class="text-danger">(*)</span> </label>
                   <input formControlName="cpu" type="text" class="form-control" name="cpu" id="cpu">
@@ -146,8 +145,10 @@
                 <div class="form-group col-md-12">
                   <label for="otherDescription">Mô tả thêm </label>
                   <ckeditor id="otherDescription" formControlName="otherDescription"></ckeditor>
+
                 </div>
                 <div class=" col-md-12 text-center mx-auto mt-4">
+
                   <button style="width: 200px" type="submit" class="btn btn-grad-blue mx-1"><i
                     class="fa fa-paper-plane"></i>THÊM MỚI
                   </button>
@@ -169,6 +170,7 @@
 <!--    a.value = a.value.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");-->
 <!--  }-->
 <!--</script>-->
+
 <button [hidden]="true" #successButton data-toggle="modal" data-target="#successModal"></button>
 <!--success modal-->
 <div id="successModal" class="modal fade">
@@ -181,12 +183,13 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
       <div class="modal-body text-center">
-        <h4>Tuyệt!</h4>
+        <h4>Thông báo!</h4>
         <br>
         <p>Tạo mới sản phẩm thành công</p>
         <div class="d-flex justify-content-center">
-          <a [routerLink]="['/listProduct']" type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng
-            ý</a>
+
+          <a [routerLink]="['/listProduct']" type="button" class="btn-modal btn-grad-blue" data-dismiss="modal">Đồng ý</a>
+
         </div>
       </div>
     </div>
@@ -208,6 +211,7 @@
         <p>Bạn có muốn hủy thêm mới hàng hóa không ?</p>
         <!--        <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>-->
         <div class="d-flex justify-content-center">
+
           <a [routerLink]="['/listProduct']" style="width: 100px;" type="button" class="btn btn-grad-blue mx-3"
              data-dismiss="modal">Có</a>
           <button type="button" style="width: 100px;" class="btn btn-grad-red" #cancel data-dismiss="modal">Không

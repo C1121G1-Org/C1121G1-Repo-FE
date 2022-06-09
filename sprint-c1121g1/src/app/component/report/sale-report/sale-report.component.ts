@@ -3,6 +3,7 @@ import {Chart, LineController, LineElement, PointElement, registerables, LinearS
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
 import {SaleReportService} from '../../../services/report/sale-report.service';
+import {ProductService} from "../../../services/product/product.service";
 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 Chart.register(...registerables);
@@ -20,6 +21,7 @@ Chart.register(...registerables);
 })
 export class SaleReportComponent implements OnInit {
   product: Product = {};
+  products: Product[] = [];
 
   chart1 = Chart.getChart('');
   chart2 = Chart.getChart('');
@@ -37,6 +39,13 @@ export class SaleReportComponent implements OnInit {
   totalInvoices = 0;
 
   constructor(private saleReportService: SaleReportService) {
+    this.saleReportService.getListProduct().subscribe(data => {
+      this.products = data;
+      this.formSearch.get('productId').setValue(this.products[3].id);
+      this.formSearch.get('productId').updateValueAndValidity();
+    }, err => {
+      console.log(err)
+    });
   }
 
   ngOnInit(): void {
@@ -54,11 +63,11 @@ export class SaleReportComponent implements OnInit {
 
   showSaleReport() {
     if (this.getStartDay().value == '') {
-      this.getStartDay().setErrors({empty: true});
+      this.getStartDay().setErrors({empty: true})
     }
 
     if (this.getEndDay().value == '') {
-      this.getEndDay().setErrors({empty: true});
+      this.getEndDay().setErrors({empty: true})
     }
 
     if (this.getTypeReport().value == 'ID' && this.getProductId().value == '') {
@@ -81,9 +90,8 @@ export class SaleReportComponent implements OnInit {
         this.alertClass = '';
 
         for (const dt of data.data) {
-          const date = dt.date.split('-');
-          const newDate = date[0] + '/' + date[1];
-          console.log(newDate);
+          let date = dt.date.split("-");
+          let newDate = date[0] + "/" + date[1];
           xValues.push(newDate);
           invoices.push(dt.invoiceQuantity);
           sales.push(dt.totalMoney);
@@ -92,38 +100,42 @@ export class SaleReportComponent implements OnInit {
         }
 
         this.chart1 = new Chart('doanhThu', {
-          type: 'line',
+          type: 'bar',
           data: {
             labels: xValues,
             datasets: [{
               label: 'Doanh Thu (VNĐ)',
-              pointRadius: 3,
-              pointBackgroundColor: 'red',
+              // pointRadius: 3,
+              // pointBackgroundColor: 'red',
+              borderWidth: 1,
+              barThickness: 30,
               borderColor: 'red',
               backgroundColor: 'red',
               data: sales,
-              fill: false,
-              tension: 0.5
+              // fill: false,
+              // tension: 0.5
             }]
           },
           options: {}
         });
 
         this.chart2 = new Chart('donHang', {
-          type: 'line',
+          type: 'bar',
           data: {
             labels: xValues,
             datasets: [{
               label: 'Đơn hàng ( Đơn )',
-              fill: false,
+              // fill: false,
               data: invoices.map(value => {
-                return value.toFixed(0);
+                return value.toFixed(0)
               }),
-              pointRadius: 3,
-              pointBackgroundColor: 'blue',
-              backgroundColor: 'blue',
-              borderColor: 'blue',
-              tension: 0.5
+              // pointRadius: 3,
+              // pointBackgroundColor: 'blue',
+              backgroundColor: '#1589FF',
+              borderColor: '#1589FF',
+              borderWidth: 1,
+              barThickness: 30
+              // tension: 0.5
             }]
           },
           options: {}

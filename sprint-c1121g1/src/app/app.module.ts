@@ -20,9 +20,11 @@ import {SecurityModule} from './component/security/security.module';
 import {HttpClientModule} from '@angular/common/http';
 import {ReportModule} from './component/report/report.module';
 import {CKEditorModule} from 'ckeditor4-angular';
+
 import {ErrorComponent} from './error/error.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptorService} from './services/security/token-interceptor.service';
+
 
 // @ts-ignore
 @NgModule({
@@ -31,7 +33,6 @@ import {TokenInterceptorService} from './services/security/token-interceptor.ser
     HeaderComponent,
     FooterComponent,
     ErrorComponent,
-
   ],
   imports: [
     BrowserModule,

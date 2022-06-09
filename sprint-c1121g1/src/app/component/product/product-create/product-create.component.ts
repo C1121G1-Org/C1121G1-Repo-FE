@@ -8,7 +8,6 @@ import {finalize} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
 import {CategoryService} from '../../../services/category/category.service';
 import {Category} from '../../../models/category';
-
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
@@ -24,7 +23,6 @@ export class ProductCreateComponent implements OnInit {
   productName: string;
   errorProductName: string;
   categoryList: Category[] = [];
-
   constructor(private productService: ProductService,
               private categoryService: CategoryService,
               private router: Router,
@@ -44,19 +42,16 @@ export class ProductCreateComponent implements OnInit {
       categoryDto: new FormControl('', Validators.compose([Validators.required])),
     });
   }
-
   comparefn(t1: Category, t2: Category): boolean {
     return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
-
   ngOnInit(): void {
     console.log(this.validateImange(this.imgVip));
-    this.productForm.controls.categoryDto.setValue(undefined);
+    this.productForm.controls.categoryDto.setValue('');
     this.categoryService.getAll().subscribe(data => {
       this.categoryList = data;
     });
   }
-
 
   validateImange(e): boolean {
     return e == 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
@@ -77,7 +72,6 @@ export class ProductCreateComponent implements OnInit {
       this.imgVip = reader.result as string;
     };
   }
-
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
@@ -86,21 +80,21 @@ export class ProductCreateComponent implements OnInit {
   getCurrentDateTime(): string {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
   }
-
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
   */
   save(errorModalBtn: HTMLButtonElement, successButton: HTMLButtonElement) {
+
     // if (this.validateImange(this.imgVip)){
     //   this.flagCheckImage = true;
     //   this.productForm.controls.image.setErrors({existed: 'Empty! Please input!'});
     // }
-
     if (this.productForm.invalid || !this.selectedImage) {
       if (!this.selectedImage) {
         this.alertImage = 'Vui lòng nhập ảnh';
       }
+
       if (this.productForm.controls.name.value == '') {
         this.productForm.controls.name.setErrors({empty: 'Empty! Please input!'});
       }
@@ -125,7 +119,7 @@ export class ProductCreateComponent implements OnInit {
       if (this.productForm.controls.memory.value == '') {
         this.productForm.controls.memory.setErrors({empty: 'Empty! Please input!'});
       }
-      if (this.productForm.controls.categoryDto.value == '' || this.productForm.controls.categoryDto.value == undefined) {
+      if (this.productForm.controls.categoryDto.value == '') {
         this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
       }
     } else {
@@ -138,12 +132,14 @@ export class ProductCreateComponent implements OnInit {
             this.productForm.patchValue({image: url});
             this.flagCheckImage = false;
             this.productService.createProduct(this.productForm.value).subscribe(() => {
+
                 this.productForm.reset();
                 successButton.click();
-                this.router.navigateByUrl('/api/product/listProduct');
                 // this.router.navigateByUrl('vaccine-list').then(r => this.alertService.showMessage("Thêm mới thành công!"));
                 console.log('success');
               }, error => {
+                console.log(this.productForm.value);
+
                 errorModalBtn.click();
                 this.errorProductName = error.error.errorMap.name;
               }
@@ -153,7 +149,6 @@ export class ProductCreateComponent implements OnInit {
       ).subscribe();
     }
   }
-
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
@@ -161,37 +156,38 @@ export class ProductCreateComponent implements OnInit {
   get name() {
     return this.productForm.get('name');
   }
-
   get price() {
     return this.productForm.get('price');
   }
-
   get image() {
     return this.productForm.get('image');
   }
-
   get screenSize() {
     return this.productForm.get('screenSize');
   }
-
   get camera() {
     return this.productForm.get('camera');
   }
-
   get selfie() {
     return this.productForm.get('selfie');
   }
-
   get cpu() {
     return this.productForm.get('cpu');
   }
-
   get memory() {
     return this.productForm.get('memory');
   }
-
   get otherDescription() {
     return this.productForm.get('otherDescription');
+  }
+
+  validateCategory(target: any) {
+    if (this.productForm.controls.categoryDto.value != '') {
+      this.productForm.controls.categoryDto.setErrors({empty: null});
+      this.productForm.controls.categoryDto.updateValueAndValidity();
+    } else {
+      this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
+    }
   }
 
 }

@@ -11,8 +11,8 @@
         <div class="mx-1">
           <select [(ngModel)]="checkSearch" class="search-select">
             <option value="name">Tên hàng hóa</option>
-            <option value="price">Giá trong khoảng</option>
-            <option value="quantity">Số lượng trong khoảng</option>
+            <option value="price">Giá (Nhỏ hơn)</option>
+            <option value="quantity">Số lượng (Lớn hơn)</option>
           </select>
         </div>
         <div [formGroup]="formSearch">
@@ -63,11 +63,30 @@
           <thead>
           <tr>
             <th>STT</th>
-            <th>Tên</th>
-            <th>Giá (VND)</th>
-            <th>CPU</th>
-            <th>Lưu Trữ</th>
-            <th>Số Lượng (Chiếc)</th>
+            <th (click)="changeSortName()">
+              <i *ngIf="checkSortName" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSortName" class="fa-solid fa-arrow-up-9-1"></i>
+              Tên
+            </th>
+            <th (click)="changeSort()">
+              <i *ngIf="checkSort" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSort" class="fa-solid fa-arrow-up-9-1"></i>
+              Giá (VND)
+            </th>
+            <th (click)="changeSortCpu()">
+              <i *ngIf="checkSortCpu" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSortCpu" class="fa-solid fa-arrow-up-9-1"></i>
+              Chipset
+            </th>
+            <th (click)="changeSortMemory()" >
+              <i *ngIf="checkSortMemory" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSortMemory" class="fa-solid fa-arrow-up-9-1"></i>
+              Bộ nhớ trong
+            </th>
+            <th (click)="changeSortQuantity()">
+              <i *ngIf="checkSortQuantity" class="fa-solid fa-arrow-down-1-9"></i>
+              <i *ngIf="!checkSortQuantity" class="fa-solid fa-arrow-up-9-1"></i>
+              Số Lượng (Chiếc)</th>
           </tr>
           </thead>
         </table>
@@ -80,11 +99,15 @@
               [ngStyle]="{'background-color': activeProjectIndex === j && flagClick ? '#84c0ec' : ''}">
             <td>{{(pageNumber*pageSize)+(i+1)}}</td>
             <td class="desc" data-toggle="tooltip" data-placement="top" title="{{product.name}}">
-              {{product.name}}</td>
+
+              {{product.name}}
+            </td>
             <td>{{product.price |currency :'VND':''}}</td>
+
             <td>{{product.cpu}}</td>
             <td>&emsp;{{product.memory}}</td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;{{product.quantity}}</td>
+            <td>
+              &nbsp;&nbsp;&nbsp;&nbsp;{{product.quantity}}</td>
           </tr>
           </tbody>
         </table>

@@ -3,7 +3,7 @@
   Time: 10:00 03/06/2022
   Interface: ProductBestseller
 */
-import {Category} from "../models/category";
+import {Category} from '../models/category';
 
 export interface ProductBestseller {
   id: number;

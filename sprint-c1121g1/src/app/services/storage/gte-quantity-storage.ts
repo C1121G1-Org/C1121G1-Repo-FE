@@ -5,11 +5,11 @@ export function gteQuantityStorage(control: AbstractControl): ValidationErrors |
   const v = control.value;
   if (v !== null) {
     if (isNaN(v)) {
-      return { gteQuantityStorage: true, requiredValue: 'Bạn phải nhập số' };
+      return { gteQuantityStorage: true, requiredValue: 'Bạn phải nhập số!' };
     }
 
     if (v <= 0) {
-      return { gteQuantityStorage: true, requiredValue: 'Bạn phải nhập số lớn hơn 0' };
+      return { gteQuantityStorage: true, requiredValue: 'Bạn phải nhập số lớn hơn 0!' };
     }
   }
   return null;

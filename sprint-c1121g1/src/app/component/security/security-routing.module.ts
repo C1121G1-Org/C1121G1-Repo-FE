@@ -13,11 +13,11 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'personal-information', component: PersonalInformationComponent, canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF', 'ROLE_SELLER', 'ROLE_STOREKEEPER']
+      roles: ['ROLE_ADMIN', 'ROLE_STAFF', 'ROLE_SELLER', 'ROLE_STOREKEEPER']
     }},
   {path: 'change-personal-password', component: ChangePersonalPasswordComponent, canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF', 'ROLE_SELLER', 'ROLE_STOREKEEPER']
+      roles: ['ROLE_ADMIN', 'ROLE_STAFF', 'ROLE_SELLER', 'ROLE_STOREKEEPER']
     }},
   {path: 'forgot-password', component: ForgotPasswordComponent},
   {path: 'reset-password', component: ResetPaswordComponent},

@@ -20,10 +20,12 @@ export class EmployeeListComponent implements OnInit {
   totalPages = 0;
   activeProjectIndex: number;
   idClick = 0;
+
   pageSize: 0;
   firsts: boolean;
   last: boolean;
   flag = false;
+
 
   constructor(private employeeService: EmployeeService,
               private router: Router) { }
@@ -45,9 +47,11 @@ export class EmployeeListComponent implements OnInit {
       this.employees = data.content;
       this.page = data.number;
       this.totalPages = data.totalPages;
+
       this.pageSize  = data.pageable.pageSize;
       this.firsts = data.first;
       this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
+
     }, error => {
       this.message = true;
     });
@@ -88,6 +92,7 @@ export class EmployeeListComponent implements OnInit {
           this.page = data.number;
           this.firsts = data.first;
           this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
+
         }, err => {
           console.log(err);
         }
@@ -106,8 +111,10 @@ export class EmployeeListComponent implements OnInit {
         data => {
           this.employees = data.content;
           this.page = data.number;
+
           this.firsts = data.first;
           this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
+
         }, err => {
           console.log(err);
         }
@@ -122,6 +129,7 @@ export class EmployeeListComponent implements OnInit {
    */
 
   public activeProject(index: number, id: number, nameEmployee: string): void {
+
     if (this.activeProjectIndex !== index) {
       this.flag = true;
     } else {
@@ -134,6 +142,7 @@ export class EmployeeListComponent implements OnInit {
     } else {
       this.idClick = 0;
     }
+
 
   }
 
@@ -164,6 +173,7 @@ export class EmployeeListComponent implements OnInit {
       deleteButton.click();
     }else {
       errorButton.click();
+
     }
   }
 

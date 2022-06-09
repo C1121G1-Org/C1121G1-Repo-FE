@@ -7,7 +7,9 @@
       <div class="row col-6 justify-content-between ml-1">
         <div>
           <input #names [ngModel]="name" (change)="search(names.value)" style="width: 250px"
+
                  class="header-search search-input" placeholder="Nhập tên  nhân viên ?"
+
                  type="text"><i (click)="getAll()"
                                 class="fa fa-repeat"
                                 style="position: relative; right: 26px; top: 3px; font-size: 18px"></i>
@@ -52,14 +54,16 @@
           <tbody>
           <tr *ngFor="let e of employees; index as i; let j = index" routerLink=" active"
               (click)="activeProject(j, e.id, e.name)"
+
               [ngStyle]="{'background-color': activeProjectIndex === j && flag ? '#84c0ec' : 'white'}">
 
-            <td>{{page * pageSize + (i + 1)}}</td>
-            <td>{{e.name}}</td>
-            <td>{{e.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
-            <td>{{e.address}}</td>
-            <td>{{e.namePosition}}</td>
-            <td>{{e.phoneNumber}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top">{{page * pageSize + (i + 1)}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top" title="{{e.name}}">{{e.name}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top">{{e.dateOfBirth | date : 'dd-MM-yyyy'}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top" title="{{e.address}}">{{e.address}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top" title="{{e.namePosition}}">{{e.namePosition}}</td>
+            <td class="desc" data-toggle="tooltip" data-placement="top">{{e.phoneNumber}}</td>
+
           </tr>
           </tbody>
         </table>
@@ -89,12 +93,15 @@
           <ul class="pagination">
             <li *ngIf="!firsts" class="page-item">
               <button   class="page-link" (click)="previous()">Trước</button>
+
             </li>
             <li class="page-item active" aria-current="page">
               <button class="page-link">{{page + 1}}</button>
             </li>
+
             <li *ngIf="!last" class="page-item">
               <button   class="page-link" (click)="next()">Sau</button>
+
             </li>
           </ul>
         </nav>
@@ -107,6 +114,7 @@
 <!-- Modal Delete -->
 <button [hidden]="true" #deleteButton data-toggle="modal" data-target="#exampleModal"></button>
 <div id="exampleModal" class="modal fade">
+
   <div class="modal-dialog modal-confirm modal-confirm-danger">
     <div class="modal-content">
       <div class="modal-header modal-header-danger justify-content-center">
@@ -123,6 +131,7 @@
           <button type="button" class="btn btn-grad-blue mx-3" #closeModal data-dismiss="modal">Hủy</button>
           <button (click)="delete(closeModal)" type="button" class="btn btn-grad-red">Xóa</button>
         </div>
+
       </div>
     </div>
   </div>
@@ -148,6 +157,7 @@
         <div class="d-flex justify-content-center">
           <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
         </div>
+
       </div>
     </div>
   </div>

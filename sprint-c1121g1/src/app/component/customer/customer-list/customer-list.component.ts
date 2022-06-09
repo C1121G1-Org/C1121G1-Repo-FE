@@ -1,8 +1,8 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {Router} from '@angular/router';
 import {Customer} from '../../../models/customer';
-import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-customer-list',
@@ -13,6 +13,8 @@ export class CustomerListComponent implements OnInit {
   customerList: Customer[];
   idClick = 0;
   public activeProjectIndex: number;
+  first = false;
+  last = false;
   totalPage = 0;
   page = 0;
   nameCustomer = '';
@@ -20,6 +22,7 @@ export class CustomerListComponent implements OnInit {
   message = false;
   collection: any[] = this.customerList;
   searchForm: FormGroup;
+  flag = false;
 
   constructor(private customerService: CustomerService,
               private router: Router) {
@@ -31,9 +34,11 @@ export class CustomerListComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.customerService.getAllCustomer1(this.nameCustomer='', this.phoneNumber='', this.page).subscribe(
+    this.customerService.getAllCustomer1(this.nameCustomer = '', this.phoneNumber = '', this.page).subscribe(
       (data: any) => {
         this.customerList = data.content;
+        this.first = data.first;
+        this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
         this.page = data.number;
         this.totalPage = data.totalPages;
       }, err => {
@@ -48,9 +53,18 @@ export class CustomerListComponent implements OnInit {
   Role: admin, business
   Function: take id and flag from html
   */
-  public activeProject(index: number, id: number): void {
+  public activeProject(index: number, cus: Customer): void {
+    if (this.activeProjectIndex != index){
+      this.flag = true;
+    }else{
+      this.flag = !this.flag;
+    }
     this.activeProjectIndex = index;
-    this.idClick = id;
+    if (this.flag == true){
+      this.idClick = cus.id;
+    }else{
+      this.idClick = 0;
+    }
   }
 
   /*
@@ -64,6 +78,8 @@ export class CustomerListComponent implements OnInit {
         (data: any) => {
           this.customerList = data.content;
           this.page = data.number;
+          this.first = data.first;
+          this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
         }, err => {
           console.log(err);
         }
@@ -83,6 +99,8 @@ export class CustomerListComponent implements OnInit {
         (data: any) => {
           this.customerList = data.content;
           this.page = data.number;
+          this.first = data.first;
+          this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
         }, err => {
           console.log(err);
         }
@@ -98,14 +116,38 @@ export class CustomerListComponent implements OnInit {
   search() {
     const input = this.searchForm.get('inputSearch').value;
     const type = this.searchForm.get('typeSearch').value;
+    /*let pattern = /^[a-zA-Z ]*$/;
+    let pattern2 = /^[0-9]*$/;
+    let boo=input.test(pattern);
+    let boo2=input.test(pattern2);
+    alert(boo);
+    alert(boo2);
+    if (type === 'nameCustomer' && input.trim() !== '') {
+      alert(input.test(pattern));
+      /!*if (input.test(pattern)) {
+        this.searchForm.get('inputSearch').setErrors({patternName: true});
+      } else {
+        alert('name success!');
+      }*!/
+    } else if (type === 'phoneCustomer' && input.trim() !== '') {
+      alert(input.test(pattern2));
+      /!*if (input.test(pattern2)) {
+        this.searchForm.get('inputSearch').setErrors({patternPhone: true});
+      } else {
+        alert('phone success!');
+      }*!/
+    }*/
+
 
     if (type === 'nameCustomer' && input.trim() !== '') {
-      this.customerService.getAllCustomer1(this.nameCustomer = input.trim(), this.phoneNumber='', this.page).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer = input.trim(), this.phoneNumber = '', this.page).subscribe(
         (data: any) => {
           this.message = false;
           this.customerList = data.content;
           this.page = data.number;
           this.totalPage = data.totalPages;
+          this.first = data.first;
+          this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
         }, err => {
           this.message = true;
           this.customerList = null;
@@ -115,12 +157,14 @@ export class CustomerListComponent implements OnInit {
         }
       );
     } else if (type === 'phoneNumber' && input.trim() !== '') {
-      this.customerService.getAllCustomer1(this.nameCustomer='', this.phoneNumber = input.trim(), this.page).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer = '', this.phoneNumber = input.trim(), this.page).subscribe(
         (data: any) => {
           this.message = false;
           this.customerList = data.content;
           this.page = data.number;
           this.totalPage = data.totalPages;
+          this.first = data.first;
+          this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
         }, err => {
           this.message = true;
           this.customerList = null;
@@ -130,12 +174,14 @@ export class CustomerListComponent implements OnInit {
         }
       );
     } else if (input.trim() == '') {
-      this.customerService.getAllCustomer1(this.nameCustomer='', this.phoneNumber='', this.page).subscribe(
+      this.customerService.getAllCustomer1(this.nameCustomer = '', this.phoneNumber = '', this.page).subscribe(
         (data: any) => {
           this.message = false;
           this.customerList = data.content;
           this.page = data.number;
           this.totalPage = data.totalPages;
+          this.first = data.first;
+          this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
           console.log(this.customerList);
         }, err => {
           this.message = true;
@@ -148,14 +194,14 @@ export class CustomerListComponent implements OnInit {
     this.searchForm.reset();
     this.nameCustomer = '';
     this.phoneNumber = '';
+    this.ngOnInit();
   }
 
   toEditForm(sucessButton: HTMLButtonElement) {
     if (this.idClick == 0) {
       sucessButton.click();
-    }
-    else{
-      this.router.navigate( ['/customer/edit/',this.idClick]);
+    } else {
+      this.router.navigate(['/customer/edit/', this.idClick]);
     }
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {InvoiceDetail} from "../../dto/InvoiceDetail";
+import {InvoiceDetail} from '../../dto/InvoiceDetail';
 
 
 @Injectable({
@@ -22,8 +22,8 @@ export class InvoiceService {
    Time: 9:30 2/06/2022
    Function: create invoice
    */
-  createInvoice(invoiceDetail: InvoiceDetail):Observable<any> {
-    return this.http.post<any>(`http://localhost:8080/api/invoiceDetail/create`,invoiceDetail);
+  createInvoice(invoiceDetail: InvoiceDetail): Observable<any> {
+    return this.http.post<any>(`http://localhost:8080/api/invoiceDetail/create`, invoiceDetail);
 
   }
   /*
@@ -32,8 +32,7 @@ export class InvoiceService {
    Function: update quantity invoice
    */
   updateQuantity(invoiceDetail: InvoiceDetail): Observable<any> {
-    return  this.http.patch<any>(`http://localhost:8080/api/invoiceDetail/updateQuantityProduct`,invoiceDetail)
-
+    return  this.http.patch<any>(`http://localhost:8080/api/invoiceDetail/updateQuantityProduct`, invoiceDetail);
   }
 /*
   Created by CongNV

@@ -18,7 +18,7 @@ const routes: Routes = [
   // Role : Admin , Business Staff
   {path: 'sale-report/list', component: SaleReportComponent, canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF']
+      roles: ['ROLE_ADMIN', 'ROLE_STAFF']
     }},
   /*
     Created by TuanNQ
@@ -27,7 +27,7 @@ const routes: Routes = [
   */
   {path: 'report/customer-report', component: CustomerReportComponent, canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF']
+      roles: ['ROLE_ADMIN', 'ROLE_STAFF']
     }},
   /*
     Created by TuanNQ
@@ -36,7 +36,7 @@ const routes: Routes = [
   */
   {path: 'report/purchase-hitory/:id', component: PurchaseHistoryComponent, canActivate: [AuthGuard],
     data: {
-      roles: ['ROLE_ADMIN', 'ROLE_BUSINESS_STAFF']
+      roles: ['ROLE_ADMIN', 'ROLE_STAFF']
     }},
 ];
 

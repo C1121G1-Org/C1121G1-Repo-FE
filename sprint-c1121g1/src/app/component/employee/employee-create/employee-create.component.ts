@@ -128,6 +128,7 @@ export class EmployeeCreateComponent implements OnInit {
           this.employeeService.saveEmployee(this.createEmployeeForm.value).subscribe(() => {
             successBtn.click();
           }, error => {
+
             this.errorIdCard = error.error.errorMap.idCard;
             this.errorEmailEmployee = error.error.errorMap.email;
             this.errorUserNameEmployee = error.error.errorMap.userName;
