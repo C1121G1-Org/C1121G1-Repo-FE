@@ -42,6 +42,7 @@ export class InvoiceCreateComponent implements OnInit {
   checkOnchange: boolean;
   flagProduct = false;
   flagProductNull = true;
+  flagNoProduct = true;
   errorList: string[] = [];
   dict: { key, value }[];
 
@@ -128,7 +129,7 @@ export class InvoiceCreateComponent implements OnInit {
   }
 
   chooseProduct() {
-
+    this.flagNoProduct = false;
     const productForm = this.createProducts(this.currentProduct);
     if (this.products.controls.length !== 0) {
       this.flagProductNull = true;
@@ -294,7 +295,7 @@ export class InvoiceCreateComponent implements OnInit {
               ['Sản phẩm', 'Giá tiền', 'Số lượng', 'Tổng tiền'],
               ...this.products.getRawValue().map(p => ([p.name, p.price, p.quantity, (p.price * p.quantity).toFixed(0)])),
               [{
-                text: 'Total Amount',
+                text: 'Tổng tiền thanh toán',
                 colSpan: 3
               }, {}, {}, this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(0)]
             ]
@@ -311,7 +312,7 @@ export class InvoiceCreateComponent implements OnInit {
         {
           columns: [
             [{qr: `c1121G1.codegym@gmail.com`, fit: '50'}],
-            [{text: 'Signature', alignment: 'right', italics: true}],
+            [{text: 'Chữ ký', alignment: 'right', italics: true}],
           ]
         },
         {
