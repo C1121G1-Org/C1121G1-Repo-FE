@@ -36,7 +36,10 @@ Function: get list product bestseller from database
 <section class="category">
   <div class="container">
     <div class="category-items">
-      <h3 *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</h3>
+      <div class="error-product-newest error-product-bestseller" *ngIf="flagCategory">
+        <h4><i class="fa-solid fa-screwdriver-wrench"></i> Danh mục sản phẩm đang được cập nhật.</h4>
+        <img src="https://combinedmedia.ie/wp-content/uploads/2022/02/website-maintenance-1.png" alt="">
+      </div>
       <div (click)="findProductBestsellerByCategory(category)" class="category-item"
            *ngFor="let category of categorires">
         <div class="category-item-picture">
@@ -64,8 +67,11 @@ Function: get list product bestseller from database
       </div>
       <div class="slider-product-one-content-container">
         <div class="slider-product-one-content-items-content">
+          <div class="error-product-newest" *ngIf="flagProductNewest">
+            <h4 class="error-messsage"><i class="fa-solid fa-screwdriver-wrench"></i> Điện thoại nổi bật nhất đang được cập nhật.</h4>
+            <img src="https://societywebsolutions.com/wp-content/uploads/2021/03/Under-construction-pana.svg" alt="">
+          </div>
           <div class="slider-product-one-content-items">
-            <h3 class="error-messsage" *ngIf="flagProductNewest">Điện thoại nổi bật nhất chưa được cập nhật!</h3>
             <div class="slider-product-one-content-item"
                  *ngFor="let productNewest of topfiveproductNewests; index as i">
               <img src="{{productNewest.image}}" alt="">
@@ -130,7 +136,7 @@ Function: get list product bestseller from database
     <div class="product-gallery-one-content">
       <div class="product-gallery-one-content-title">
         <h2>ĐIỆN THOẠI BÁN CHẠY</h2>
-        <ul>
+        <ul *ngIf="flagCategory == false">
           <li *ngFor="let category of topFiveCategories; index as i ">
             <a (click)="findProductBestsellerByCategory(category)">{{category.name}}</a>
           </li>
@@ -140,12 +146,17 @@ Function: get list product bestseller from database
           <!--            <a (click)="findProductBestsellerByCategory(category)">{{category.name}}</a>-->
           <!--          </li>-->
           <li><a (click)="getAllProductBestSeller()">Xem tất cả</a></li>
-          <li *ngIf="flagCategory">Danh mục sản phẩm chưa cập nhật!</li>
         </ul>
       </div>
       <div class="product-gallery-one-content-product">
-        <h3 *ngIf="flagProductBestseller">Điện thoại bán chạy chưa được cập nhật!</h3>
-        <h3 *ngIf="flagProductBestsellerByCategory">Không tìm thấy sản phẩm nào!</h3>
+        <div class="error-product-newest error-product-bestseller" *ngIf="flagProductBestseller">
+          <h4><i class="fa-solid fa-screwdriver-wrench"></i> Điện thoại bán chạy đang được cập nhật.</h4>
+          <img src="https://www.webdesignlane.com/assets/images/web-mentan-banner-img.png" alt="">
+        </div>
+        <div class="error-product-newest error-product-bestseller error-not-found-product-bestseller" *ngIf="flagProductBestsellerByCategory">
+          <h4><i class="fa-solid fa-screwdriver-wrench"></i> Không tìm thất sản phẩm nào.</h4>
+          <img src="https://www.navigation.com/static/WFS/Shop-CitroenEMEA-Site/-/Shop-CitroenEMEA/en_GB/Product%20Not%20Found.png" alt="">
+        </div>
         <div class="product-gallery-one-content-product-item" *ngFor="let productBestseller of productBestsellers">
           <img src="{{productBestseller.image}}" alt="">
           <div class="product-gallery-one-content-product-item-text">
