@@ -10,5 +10,4 @@ export interface Employee {
   image?: string;
   positions?: Positions;
   account?: Account;
-
 }

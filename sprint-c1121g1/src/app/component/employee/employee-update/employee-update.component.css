@@ -47,7 +47,6 @@ button {
   transform: scale(1.1);
 }
 
-
 .modal-confirm {
   color: #434E65;
   width: 525px;
@@ -137,4 +136,3 @@ button {
 .btn-grad-blue:active {
   transform: scale(1.1);
 }
-
