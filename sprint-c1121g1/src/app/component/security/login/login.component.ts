@@ -54,11 +54,15 @@ export class LoginComponent implements OnInit {
   login(errorModalBtn: HTMLButtonElement, closeErrorModal: HTMLButtonElement) {
     this.securityService.login(this.loginForm.value).subscribe(data => {
       if (this.loginForm.value.remember_me) {
-        this.tokenStorageService.saveTokenLocal(data.accessToken);
+        this.tokenStorageService.saveTokenLocal(data.token);
         this.tokenStorageService.saveUserLocal(data);
+        this.tokenStorageService.setRememberFlag();
       } else {
-        this.tokenStorageService.saveTokenSession(data.accessToken);
-        this.tokenStorageService.saveUserLocal(data);
+        // this.tokenStorageService.saveTokenLocal(data.token);
+        // this.tokenStorageService.saveUserLocal(data);
+        // this.tokenStorageService.setNoRememberFlag();
+        this.tokenStorageService.saveTokenSession(data.token);
+        this.tokenStorageService.saveUserSession(data);
       }
       this.securityService.isLoggedIn = true;
       this.username = this.tokenStorageService.getUser().username;
@@ -82,5 +86,9 @@ export class LoginComponent implements OnInit {
         this.securityService.isLoggedIn = false;
       }
     });
+  }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
   }
 }

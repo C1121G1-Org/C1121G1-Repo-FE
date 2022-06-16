@@ -31,6 +31,7 @@ export class ForgotPasswordComponent implements OnInit {
   errorMessage: string;
   notFoundMessage: string;
   spinFlag = false;
+  countTimeOut: any;
   constructor(private securityService: SecurityService,
               private router: Router,
               private dataService: DataService,
@@ -44,17 +45,16 @@ export class ForgotPasswordComponent implements OnInit {
 
   submit(openSuccessModalBtn: HTMLButtonElement, countdowm: CountdownComponent,
          closeModal: HTMLButtonElement, errorModalBtn: HTMLButtonElement, resetCodeBtn: HTMLButtonElement) {
-    console.log(countdowm.i.value);
     this.securityService.findAccountByEmail(this.usernameForm.value.email).subscribe(() => {
       openSuccessModalBtn.click();
       countdowm.resume();
       this.spinFlag = false;
       this.dataService.sendData(this.usernameForm.value.email);
       // tslint:disable-next-line:only-arrow-functions
-      setTimeout(function(){
+      this.countTimeOut =  setTimeout(function(){
         closeModal.click();
         // tslint:disable-next-line:only-arrow-functions
-        setTimeout(function(){
+        setTimeout(function() {
           errorModalBtn.click();
         }, 500);
         countdowm.restart();
@@ -66,9 +66,13 @@ export class ForgotPasswordComponent implements OnInit {
     });
   }
 
-  refreshCode() {
+  refreshCode(countdowm: CountdownComponent) {
     this.securityService.refreshChangePasswordCode(this.usernameForm.value.email).subscribe(res => {
       console.log('refresh success');
+      countdowm.restart();
+      this.confirmCode = '';
+      this.notFoundMessage = '';
+      clearTimeout(this.countTimeOut);
     }, error => {
       console.log('refresh false');
     });

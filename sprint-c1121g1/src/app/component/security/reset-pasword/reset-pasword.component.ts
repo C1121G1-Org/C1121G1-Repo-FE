@@ -18,6 +18,8 @@ export class ResetPaswordComponent implements OnInit {
     confirmNewPassword: new FormControl('', [Validators.required])
   });
   emailResetPassword: string;
+  showNewPassword: any;
+  showConfirmNewPassword: any;
   constructor(private dataService: DataService,
               private securityService: SecurityService,
               private tokenStorageService: TokenStorageService,
@@ -65,5 +67,13 @@ export class ResetPaswordComponent implements OnInit {
         closeErrorModalBtn.click();
       }, 5000);
     });
+  }
+
+  toggleShowNewPassword() {
+    this.showNewPassword = !this.showNewPassword;
+  }
+
+  toggleShowConfirmNewPassword() {
+    this.showConfirmNewPassword = !this.showConfirmNewPassword;
   }
 }

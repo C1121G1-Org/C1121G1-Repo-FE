@@ -39,3 +39,29 @@ footer ul li a:hover {
 a {
   color: white;
 }
+
+@media screen and (max-width: 1024px) {
+  .footer-list-payment .footer-item img,
+  .footer-list-transport .footer-item img {
+    width: 100%;
+  }
+
+  .footer-list-payment .footer-item img:first-child,
+  .footer-list-transport .footer-item img:first-child {
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+
+  .footer-item {
+    padding-bottom: 5px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .cskh,
+  .c1121g1,
+  .payment
+  {
+    display: none;
+  }
+}

@@ -1,0 +1,155 @@
+<!--
+  Created by khoaVC
+  Role: Admin, Storekeeper
+  Time: 10:00 03/06/2022
+  Template: modal list all Suppliers
+-->
+<div style="display: flex  ; justify-content: center ">
+  <div class="modal fade" id="supplierModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body">
+          <div class="card card-body">
+            <h1 style="font-size: 36px" class="text-center font-weight-bold text-uppercase  py-4">
+              CHỌN NHÀ CUNG CẤP
+            </h1>
+          </div>
+          <div class="card card-body">
+            <div class="table-editable">
+              <div class="">
+                <div class="">
+                  <form [formGroup]="searchForm" (ngSubmit)="search()">
+                    <div class="form-row d-flex justify-content-around">
+                      <div class="form-row">
+                        <div class="">
+                          <p style="margin-top: 10px">Tìm kiếm theo: </p>
+                        </div>
+                        <div class="mx-2">
+                          <select class="search-select background-search" formControlName="field">
+                            <option value="supplier">Tên nhà cung cấp</option>
+                            <option value="address">Địa chỉ</option>
+                            <option value="phone">Số điện thoại</option>
+                            <option value="email">Email</option>
+                          </select>
+                        </div>
+                        <div class="">
+                          <input style="width: 250px" class="header-search search-input" placeholder="Bạn cần tìm gì?"
+                                 type="text" formControlName="value"><i (click)="refresh()" class="fa fa-repeat"
+                                                                        style="position: relative; right: 26px; top: 3px; font-size: 18px; cursor: pointer"></i>
+                        </div>
+                      </div>
+                      <div class="">
+                        <button class="btn btn-grad-blue w-100"><i class="fa fa-search"></i> Tìm kiếm</button>
+                      </div>
+                    </div>
+                  </form>
+                  <!--                search-->
+                </div>
+              </div>
+              <div>
+                <!--              phần hiên thị lỗi-->
+                <h2 class="text-danger d-flex justify-content-center" style="padding: 150px ; font-size: 35px"
+                    *ngIf="errorFlag">KHÔNG TÌM THẤY DỮ LIỆU!</h2>
+                <!--end hiển thị llox-->
+                <div>
+                  <div *ngIf="!errorFlag">
+                    <div class="tbl-header">
+                      <table class="table table-bordered table-responsive-md ">
+                        <thead>
+                        <tr>
+                          <th class="text-center w-8" style="color: white">STT</th>
+                          <th class="text-center" style="color: white">Tên nhà cung cấp</th>
+                          <th class="text-center" style="color: white">Địa chỉ</th>
+                          <th class="text-center w-13" style="color: white">Số điện thoại</th>
+                          <th class="text-center" style="color: white">Email</th>
+                        </tr>
+                        </thead>
+                      </table>
+                    </div>
+                    <div class="tbl-content">
+                      <table class=" table table-bordered table-responsive-md">
+                        <tbody>
+                        <tr *ngFor="let item of suppliers; index as i" (click)="getItem(item)"
+                            [class.highlight]="item === tempItem && flag" style="cursor: pointer">
+                          <td class="text-center w-8">{{(pageNumber) * pageSize + (i + 1)}}</td>
+                          <td class="text-center desc"><i data-toggle="tooltip" data-placement="top"
+                                                          title="{{item.supplierName}}">
+                            {{item.supplierName}}</i></td>
+                          <td class="text-center desc"><i data-toggle="tooltip" data-placement="top"
+                                                          title="{{item.address}}">
+                            {{item.address}}</i></td>
+                          <td class="text-center w-13">{{item.phone}}</td>
+                          <td class="text-center">{{item.email}}</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row my-3 ml-3">
+                    <div class="row col-4 mx-10">
+                      <button (click)="sendItem()" type="button"
+                              class="btn btn-grad-blue  btn-lg my-0 mx-0">
+                        <i class="fa fa-paper-plane"></i>
+                        Chọn
+                      </button>
+                      <button type="button"
+                              class="btn btn-grad-red  btn-lg mx-2"
+                              data-dismiss="modal" #btnClose (click)="checkSelected()"><i
+                        class="fa-solid fa-right-from-bracket"></i> Thoát
+                      </button>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                      <li class="page-link" style="width:90px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">{{(pageNumber + 1) + '/' + totalPages}}</li>
+                    </div>
+                    <div class="col-4 ml-0" *ngIf="!errorFlag">
+                      <!--Pagination-->
+                      <nav class="d-flex justify-content-end wow fadeIn">
+                        <ul class="pagination">
+                          <li *ngIf="!first " style="color: #333333" class="page-item"><a
+                            (click)="previous()" class="page-link"
+                            style="width:90px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">Trang
+                            trước</a>
+                          </li>
+                          <li style="color: #333333" class="page-item"><a class="page-link"
+                                                                          style="width:40px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">{{pageNumber + 1}}</a>
+                          </li>
+                          <li *ngIf="!last" style="color: #333333" class="page-item"><a (click)="next()"
+                                                                                        class="page-link"
+                                                                                        style="width:70px ;text-align: center ; height: 40px ;color: blue; line-height: 35px ; box-sizing: border-box;  background-color: white; cursor: pointer"
+                          >Trang kế</a>
+                          </li>
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<button #btnNoneSelectedModal type="button" class="btn btn-primary" data-toggle="modal" data-target="#noneSelectedModal"
+        [hidden]="true">
+</button>
+<!--modall-->
+<div id="noneSelectedModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Không có nhà cung cấp nào được chọn.</p>
+        <button class="btn-modal btn btn-danger" data-dismiss="modal">Thử lại</button>
+      </div>
+    </div>
+  </div>
+</div>

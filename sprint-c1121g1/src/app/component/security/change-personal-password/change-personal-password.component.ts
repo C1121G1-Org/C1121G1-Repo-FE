@@ -18,6 +18,9 @@ export class ChangePersonalPasswordComponent implements OnInit {
     newPassword: new FormControl('', [Validators.required, Validators.pattern('^.*(?=.{8,})(?=..*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$')]),
     confirmNewPassword: new FormControl('', [Validators.required])
   });
+  showCurrentPassword: any;
+  showNewPassword: any;
+  showConfirmNewPassword: any;
   constructor(private securityService: SecurityService) { }
 
   ngOnInit(): void {
@@ -69,5 +72,17 @@ export class ChangePersonalPasswordComponent implements OnInit {
         }, 5000);
       }
     });
+  }
+
+  toggleShowCurrentPassword() {
+    this.showCurrentPassword = !this.showCurrentPassword;
+  }
+
+  toggleShowNewPassword() {
+    this.showNewPassword = !this.showNewPassword;
+  }
+
+  toggleShowConfirmNewPassword() {
+    this.showConfirmNewPassword = !this.showConfirmNewPassword;
   }
 }
