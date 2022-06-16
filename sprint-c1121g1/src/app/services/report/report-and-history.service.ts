@@ -1,10 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ReportCustomerDto} from '../../dto/report-customer-dto';
-import {PurchaseHistoryDto} from '../../dto/purchase-history-dto';
-import {PurchaseProductDto} from '../../dto/purchase-product-dto';
-
 
 /*
     Created by TuanNQ
@@ -34,7 +30,7 @@ export class ReportAndHistoryService {
     Observable<any> {
     return this.httpClient.get<any>(
       'http://localhost:8080/api/customer/purchase-history/' + id +
-      '?startDate='+ startDate + '&endDate=' + endDate + '&page=' + page);
+      '?startDate=' + startDate + '&endDate=' + endDate + '&page=' + page);
   }
 
   getPurchaseProduct(id: number, page: number): Observable<any> {

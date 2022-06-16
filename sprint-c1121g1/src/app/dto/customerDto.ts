@@ -5,5 +5,5 @@ interface CustomerDto {
   dateOfBirth ?: string;
   email ?: string;
   address ?: string;
-  gender?:boolean;
+  gender?: boolean;
 }

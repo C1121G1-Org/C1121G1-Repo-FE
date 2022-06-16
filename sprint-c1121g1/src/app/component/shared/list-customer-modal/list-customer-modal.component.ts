@@ -1,7 +1,9 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {ICustomer} from '../../../models/ICustomer';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {IProduct} from '../../../models/IProduct';
 
 @Component({
   selector: 'app-list-customer-modal',
@@ -13,11 +15,12 @@ import {Router} from '@angular/router';
   Time: 13:37 03/06/2022
   Method: pageProduct()
 */
-export class ListCustomerModalComponent implements OnInit {
+export class ListCustomerModalComponent implements OnInit, OnChanges {
   @Output() itemOutput = new EventEmitter();
+  @Input() item: boolean;
   pageNumber: number;
   customerList: ICustomer[] = [];
-  totalPages = [];
+  totalPages: number;
   searchByName = '';
   searchByPhone = '';
   selectedCustomer: ICustomer;
@@ -30,8 +33,16 @@ export class ListCustomerModalComponent implements OnInit {
   searchValue = '';
   indexCurrent: number;
   selectedIndex: number;
+  formSearch: FormGroup;
+  pageSize: number;
+  activeProjectIndex: number;
+  flagClick = false;
+
 
   constructor(private customerService: CustomerService, private router: Router) {
+    this.formSearch = new FormGroup({
+      keySearch: new FormControl('', [Validators.pattern('^[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\s]*$')])
+    });
   }
 
   ngOnInit(): void {
@@ -40,9 +51,21 @@ export class ListCustomerModalComponent implements OnInit {
   }
 
   chooseCustomer(exit) {
-    this.itemOutput.emit(this.currentCustomer);
-    this.currentCustomer = null;
-    exit.click();
+    if (this.currentCustomer) {
+      this.itemOutput.emit(this.currentCustomer);
+      this.currentCustomer = null;
+      exit.click();
+    } else {
+      const container = document.getElementById('main-container');
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.style.display = 'none';
+      button.setAttribute('data-toggle', 'modal');
+      button.setAttribute('data-target', '#customerModals');
+      container.appendChild(button);
+      button.click();
+    }
+
   }
 
   getModalCustomer(pageNumber, searchByName, searchByPhone) {
@@ -54,8 +77,9 @@ export class ListCustomerModalComponent implements OnInit {
         this.totalPages = res.totalPages;
         this.first = res.first;
         this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
+        this.pageSize = res.pageable.pageSize;
         // @ts-ignore
-        this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
+        // this.totalPages = Array(this.totalPages).fill(1).map((x, i) => i + 1);
       }
     }, error => {
       this.message = true;
@@ -70,36 +94,51 @@ export class ListCustomerModalComponent implements OnInit {
     this.getModalCustomer(this.pageNumber - 1, this.searchByName, this.searchByPhone);
   }
 
-  getCustomer(customer: ICustomer): void {
-    this.currentCustomer = customer;
-  }
 
-  isSelected(customer: ICustomer): boolean {
-    this.selectedCustomer = customer;
-    if (!this.currentCustomer) {
-      return false;
+  isSelected(index: number, customer: ICustomer): void {
+    if (this.activeProjectIndex != index) {
+      this.flagClick = true;
+      this.activeProjectIndex = index;
+      this.currentCustomer = customer;
+    } else {
+      this.flagClick = !this.flagClick;
+      this.currentCustomer = null;
     }
-    return this.currentCustomer.customerName === this.selectedCustomer.customerName ? true : false;
+    if (this.flagClick) {
+      this.currentCustomer = customer;
+    } else {
+      this.currentCustomer = null;
+    }
+
+
   }
 
-  getAllCustomerPage(index: any) {
-    this.indexCurrent = index;
-    this.pageNumber = index - 1;
-    this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
-  }
+  // getAllCustomerPage(index: any) {
+  //   this.indexCurrent = index;
+  //   this.pageNumber = index - 1;
+  //   this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+  // }
 
   search(value: string) {
-    this.currentCustomer = null;
-    this.pageNumber = 0;
-    if (this.checkSearch === 'phone') {
-      this.searchByPhone = value;
-      this.searchByName = '';
+    value = value.trim();
+    if (!this.formSearch.valid) {
+      this.searchByPhone = 'sadsad8sa0d89as';
+      this.searchByName = '34543fddcsd';
       this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
     } else {
-      this.searchByName = value;
-      this.searchByPhone = '';
-      this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+      this.currentCustomer = null;
+      this.pageNumber = 0;
+      if (this.checkSearch === 'phone') {
+        this.searchByPhone = value;
+        this.searchByName = '';
+        this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+      } else {
+        this.searchByName = value;
+        this.searchByPhone = '';
+        this.getModalCustomer(this.pageNumber, this.searchByName, this.searchByPhone);
+      }
     }
+
   }
 
   close() {
@@ -111,16 +150,18 @@ export class ListCustomerModalComponent implements OnInit {
     button.type = 'button';
     button.style.display = 'none';
     button.setAttribute('data-toggle', 'modal');
-    button.setAttribute('data-target', '#successModal');
+    button.setAttribute('data-target', '#customerModals');
     container.appendChild(button);
     button.click();
 
   }
 
   getAll() {
+    this.currentCustomer = null;
     this.searchValue = '';
     this.searchByPhone = '';
     this.searchByName = '';
+    this.flagClick = !this.flagClick;
     this.ngOnInit();
   }
 
@@ -131,4 +172,12 @@ export class ListCustomerModalComponent implements OnInit {
     }
     return this.indexCurrent === this.selectedIndex ? true : false;
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.searchValue = '';
+    this.searchByPhone = '';
+    this.searchByName = '';
+    this.ngOnInit();
+  }
+
 }

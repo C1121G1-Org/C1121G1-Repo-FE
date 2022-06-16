@@ -3,12 +3,12 @@
   <div class="container">
     <div class="menu-bar-content">
       <ul>
-        <li class="logo"><a [routerLink]="['']">
+        <li class="logo"><a href="#">
           <img src="assets/img/LOGO5.png" alt="">
         </a></li>
         <li><input class="header-search" readonly placeholder="Bạn cần tìm gì?" type="text"><i
           class="fa fa-search"></i></li>
-        <li>
+        <li [hidden]="!isLoggedIn">
           <div class="header-item header-item-menu">
             <div class="header-icon">
               <i class="fa-solid fa-align-left"> </i>
@@ -19,24 +19,33 @@
           </div>
           <div class="sub-menu">
             <ul>
-              <li><a href="#">Quản lý thông tin cá nhân</a></li>
-              <li><a href="#">Quản lý nhân viên</a></li>
-              <li><a href="#">Quản lý kinh doanh</a></li>
-              <li><a href="#">Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
+              <li *ngIf="['ROLE_ADMIN'].indexOf(role)!==-1"><a routerLink="employee/list">Quản lý nhân viên</a></li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_STAFF'].indexOf(role)!==-1" ><a >Quản lý kinh doanh<i class="fa-solid fa-angle-right"></i></a>
                 <div class="sub-menu-2">
                   <ul>
-                    <li><a [routerLink]="['/sale-report/list']">Quản lý báo cáo bán hàng</a></li>
-                    <li><a href="#">Quản lý báo cáo khách hàng</a></li>
+                    <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER'].indexOf(role)!==-1"><a [routerLink]="['/listInvoice']">Quản lý lịch sử</a></li>
+                    <li *ngIf="['ROLE_ADMIN', 'ROLE_STAFF'].indexOf(role)!==-1"><a [routerLink]="['/customer/list']">Quản lý khách hàng</a></li>
                   </ul>
                 </div>
               </li>
-              <li><a href="#">Xem thông tin hàng hóa</a></li>
-              <li><a href="#">Quản lý bán hàng</a></li>
-              <li><a [routerLink]="['/supplier']">Quản lý nhà cung cấp</a></li>
-              <li><a [routerLink]="['/invoice']" >Quản lý bán hàng</a></li>
-              <li><a href="#">Quản lý xuất nhập kho</a></li>
-              <li><a routerLink="/storage/create">Nhập kho sản phẩm</a></li>
-
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_STAFF'].indexOf(role)!==-1"><a>Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
+                <div class="sub-menu-2">
+                  <ul>
+                    <li><a [routerLink]="['/sale-report/list']">Quản lý báo cáo bán hàng</a></li>
+                    <li><a [routerLink]="['/report/customer-report']">Quản lý báo cáo khách hàng</a></li>
+                  </ul>
+                </div>
+              </li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER', 'ROLE_STAFF'].indexOf(role)!==-1"><a routerLink="/listProduct">Xem thông tin hàng hóa</a></li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a [routerLink]="['/supplier']">Quản lý nhà cung cấp</a></li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_SELLER'].indexOf(role)!==-1"><a [routerLink]="['/invoice']" >Quản lý bán hàng</a></li>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_STOREKEEPER'].indexOf(role)!==-1"><a href="#">Quản lý xuất nhập kho<i class="fa-solid fa-angle-right"></i></a>
+                <div class="sub-menu-2">
+                  <ul>
+                    <li><a routerLink="/storage/create">Nhập kho sản phẩm</a></li>
+                  </ul>
+                </div>
+              </li>
             </ul>
           </div>
         </li>
@@ -73,7 +82,25 @@
             </div>
           </div>
         </li>
-        <li class="header-item-login"><a href="#">Đăng nhập</a></li>
+        <li [hidden]="isLoggedIn" class="header-item-login"><a [routerLink]="['/login']">Đăng nhập</a></li>
+        <li [hidden]="!isLoggedIn">
+          <div class="header-item header-item-menu">
+            <div class="header-icon">
+              <img src="{{imageLink}}"
+                   alt="" style="border-radius: 50%;width: 40px; height: 40px; object-fit: cover">
+            </div>
+            <div class="header-text">
+              {{username}} <i class="fa-solid fa-angle-down"></i>
+            </div>
+          </div>
+          <div class="sub-menu">
+            <ul>
+              <li><a [routerLink]="['/personal-information']">Thông tin cá nhân</a></li>
+              <li><a [routerLink]="['/change-personal-password']">Bảo mật</a></li>
+              <li><a (click)="logOut()">Đăng xuất</a></li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

@@ -30,6 +30,8 @@ export class PurchaseHistoryComponent implements OnInit {
   pageNumber = 0;
   totalPages = 0;
 
+  pageSize = 0;
+
   id: number;
   customerReport: ReportCustomerDto = {};
 
@@ -62,34 +64,35 @@ export class PurchaseHistoryComponent implements OnInit {
 
           this.purchaseHistories = purchaseHitories.content;
           this.totalPages = purchaseHitories.totalPages;
-          this.pageNumber = purchaseHitories.pageabel.pageNumber;
+          this.pageNumber = purchaseHitories.pageable.pageNumber;
+          this.pageSize = purchaseHitories.pageable.pageSize;
         }
 
-    });
+      });
   }
 
   previousPage() {
     this.reportService.getPurchaseHistory(this.id, this.startDate, this.endDate, this.pageNumber - 1)
       .subscribe(purchaseHitories => {
-      this.purchaseHistories = purchaseHitories.content;
-      if (this.pageNumber - 1 <= 0) {
-        this.pageNumber = 0;
-      } else {
-        this.pageNumber = this.pageNumber - 1;
-      }
-    });
+        this.purchaseHistories = purchaseHitories.content;
+        if (this.pageNumber - 1 <= 0) {
+          this.pageNumber = 0;
+        } else {
+          this.pageNumber = this.pageNumber - 1;
+        }
+      });
   }
 
   nextPage() {
     this.reportService.getPurchaseHistory(this.id, this.startDate, this.endDate, this.pageNumber + 1)
       .subscribe(purchaseHitories => {
-      this.purchaseHistories = purchaseHitories.content;
-      if (this.pageNumber + 1 >= this.totalPages) {
-        this.pageNumber = this.totalPages - 1;
-      } else {
-        this.pageNumber = this.pageNumber + 1;
-      }
-    });
+        this.purchaseHistories = purchaseHitories.content;
+        if (this.pageNumber + 1 >= this.totalPages) {
+          this.pageNumber = this.totalPages - 1;
+        } else {
+          this.pageNumber = this.pageNumber + 1;
+        }
+      });
   }
 
   getInfoCustomer() {
@@ -103,7 +106,8 @@ export class PurchaseHistoryComponent implements OnInit {
       this.invoiceIdPage = invoiceId;
       this.purchaseProducts = purchaseProducts.content;
       this.productTotalPages = purchaseProducts.totalPages;
-      this.productPageNumber = purchaseProducts.pageabel.pageNumber;
+      this.productPageNumber = purchaseProducts.pageable.pageNumber;
+      this.pageSize = purchaseProducts.pageable.pageSize;
     });
   }
 

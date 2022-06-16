@@ -1,0 +1,88 @@
+<div class="p-4"></div>
+<div class="row" style="width:100%">
+  <div class="col-6" style="margin-left: 200px">
+    <!--    <h1>Chào mừng đến với C1121G1 Store - Mua được thì mua</h1>-->
+    <img id="login-image" src="../assets/img/login-image.png" alt="hihi">
+  </div>
+
+  <div class="col-3 p-5 mt-5 mb-5 login-form" style="background-color: #f6f6f8; border-radius: 10px">
+    <form [formGroup]="loginForm" (ngSubmit)="login(errorModalBtn, closeErrorModal)">
+      <div class="form-group ">
+        <label for="username"><h4>Tài khoản: </h4></label>
+        <input type="email" class="form-control form-control-lg" id="username" aria-describedby="emailHelp"
+               formControlName="username">
+        <div *ngIf="usernameForm?.touched">
+          <p class="text-danger" *ngIf="usernameForm?.errors?.required">Vui lòng nhập tên tài khoản.</p>
+          <p class="text-danger" *ngIf="usernameForm?.errors?.maxlength">Vui lòng đúng định dạng.</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password"><h4>Mật khẩu: </h4></label>
+        <div class="input-group" *ngIf="!showPassword">
+          <input type="password" class="form-control form-control-lg password" id="password" formControlName="password">
+          <div class="input-group-prepend">
+            <i (click)="toggleShowPassword()" class="fa-solid fa-eye input-group-text eye-icon"
+               style="cursor: pointer; pointer-events: all;">
+            </i>
+          </div>
+        </div>
+        <div class="input-group" *ngIf="showPassword">
+          <input type="text" class="form-control form-control-lg" formControlName="password">
+          <div class="input-group-prepend">
+            <i (click)="toggleShowPassword()" class="fa-solid fa-eye-slash input-group-text eye-icon"
+               style="cursor: pointer; pointer-events: all;">
+            </i>
+          </div>
+        </div>
+        <div *ngIf="password?.touched">
+          <p class="text-danger" *ngIf="password?.errors?.required">Vui lòng nhập mật khẩu.</p>
+          <p class="text-danger" *ngIf="password?.errors?.maxlength">Vui lòng đúng định dạng.</p>
+        </div>
+      </div>
+
+      <p class="text-danger">{{errorMessage}}</p>
+
+      <!-- 2 column grid layout for inline styling -->
+      <div class="row mb-4">
+        <div class="col d-flex justify-content-center">
+          <!-- Checkbox -->
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="form2Example31" formControlName="remember_me">
+            <label class="form-check-label" for="form2Example31">Duy trì đăng nhập</label>
+          </div>
+        </div>
+
+        <div class="col">
+          <!-- Simple link -->
+          <a [routerLink]="['/forgot-password']" class="text-danger">Quên mật khẩu?</a>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <input [disabled]="!loginForm.valid" type="submit" class="btn btn-grad-red btn-block mb-4 btn-lg"
+             value="Đăng nhập">
+    </form>
+  </div>
+</div>
+<div class="p-4"></div>
+
+<button [hidden]="true" #errorModalBtn data-toggle="modal" data-target="#errorModal"></button>
+
+<!--error modal-->
+<div id="errorModal" class="modal fade">
+  <div class="modal-dialog modal-confirm modal-confirm-danger">
+    <div class="modal-content">
+      <div class="modal-header modal-header-danger justify-content-center">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+      </div>
+      <div class="modal-body text-center">
+        <h4>Thông báo</h4>
+        <p>Hệ thống đang bảo trì, vui lòng thử lại sau vài phút nữa.</p>
+        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">THỬ LẠI</button>
+      </div>
+    </div>
+  </div>
+</div>

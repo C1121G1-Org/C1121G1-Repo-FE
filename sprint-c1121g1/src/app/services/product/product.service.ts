@@ -35,21 +35,15 @@ export class ProductService {
     return this.http.post<any>(this.productApi + '/create', product);
   }
 
-
-
-
   /*
     Created by TuanPA
     Date: 9:08 3/6/2022
     Function: find by id
 */
 
-
-  findById(id: number): Observable<Product> {
-    return this.http.get<Product>(this.productApi + '/' + id);
+  findById(id: number): Observable<any> {
+    return this.http.get<any>(this.productApi + '/' + id);
   }
-
-
 
   /*
     Created by TuanPA
@@ -61,18 +55,23 @@ export class ProductService {
     return this.http.patch<any>(this.productApi + '/' + 'update/' + id, value);
   }
 
-
-  listAll(): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list`);
-  }
-
   /*
    Created by tamHT
    Time: 13:37 03/06/2022
    Method: pageProduct()
  */
-  getAllProductPage(pageable, name, price): Observable<any> {
-    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}`);
+  getAllProductPage(pageable, name, price, searchByQuantity , sort): Observable<any> {
+    return this.http.get<any>(`${this.apiBaseUrl}/api/product/list?page=${pageable}&keyName=${name}&keyPrice=${price}&keyQuantity=${searchByQuantity}&keySort=${sort}`);
+  }
+  /*
+  Created by hieuMMT
+  Time: 9:25 03/06/2022
+  Function: delete product
+*/
+  deleteProductById(id): Observable<any> {
+    console.log(id);
+    // @ts-ignore
+    return this.http.patch<any>(this.productApi + '/delete/' + id);
   }
 
 }

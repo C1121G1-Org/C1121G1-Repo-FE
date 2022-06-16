@@ -1,1 +1,205 @@
-<p>invoice-history works!</p>
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Thông tin chi tiết</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-center">
+          <section class="make-color container">
+
+
+            <div class="tbl-header">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                  <th>STT</th>
+                  <th>SẢN PHẨM</th>
+                  <th>SỐ LƯỢNG</th>
+                </tr>
+                </thead>
+              </table>
+            </div>
+
+            <div class="tbl-content">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                <tr *ngFor="let product of productsInvoice;let i = index">
+                  <td>{{ detailPageNumbers * detailPageNum + (i + 1)}}</td>
+                  <td>{{product.productName}}</td>
+                  <td>{{product.quantity}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="row my-3">
+              <div class="row col-4 ml-0">
+              </div>
+
+              <div class="col-4 d-flex justify-content-center">
+                <p class="page-link">{{(pageDetail + 1) + '/' + totalPagesDetail}}</p>
+              </div>
+              <div class="col-4">
+                <!--Pagination-->
+                <nav class="d-flex justify-content-end wow fadeIn">
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <button
+                        [ngStyle]="{'background-color': pageDetail <= 0 ? 'gray' : 'white','color': pageDetail <= 0  ? 'white' : 'blue'}"
+                        [disabled]="pageDetail <= 0" class="page-link" (click)="previousDetail()">Trước
+                      </button>
+                    </li>
+                    <li class="page-item " aria-current="page">
+                      <button [disabled]="true" class="page-link">{{pageDetail + 1}}</button>
+                    </li>
+                    <li class="page-item">
+                      <button
+                        [ngStyle]="{'background-color': pageDetail >= totalPagesDetail - 1 ? 'gray' : 'white','color': pageDetail >= totalPagesDetail - 1 ? 'white' : 'blue'}"
+                        [disabled]="pageDetail >= totalPagesDetail - 1" class="page-link" (click)="nextDetail()">Sau
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-grad-red" data-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  Created by CongNV-->
+<!--  Date : 08/06/2022-->
+<!--  Function: Search,Pageable,sort-->
+
+<div class="d-flex justify-content-center">
+  <section class="make-color container">
+    <!--for demo wrap-->
+    <h1 class="my-5">LỊCH SỬ MUA BÁN</h1>
+
+    <div class="mb-3 row">
+      <div class="col-12">
+        <form class="form-row ml-1" [formGroup]="formSearch">
+          <input (change)="changeKeyword()" formControlName="keyword" style="width: 250px"
+                 class="header-search search-input" ype="search" placeholder="Tìm..." aria-label="Search">
+          <button class="btn btn-grad-blue mx-1" type="submit" style="width: 150px" (click)="getSearch('','',0)">
+            <i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm
+          </button>
+        </form>
+      </div>
+    </div>
+    <div *ngIf="message">
+
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0.5">
+          <tbody>
+          <tr>
+            <td class="d-flex justify-content-center font-weight-bold text-uppercase text-danger"><h4><strong>Không tìm thấy dữ liệu</strong></h4> </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div *ngIf="!message">
+      <div class="tbl-header">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <thead>
+          <tr>
+            <th style="width: 100px">STT</th>
+            <th>
+              <div>
+                <a *ngIf="checkDateTime == true" (click)="sortDateTime()">
+                  <i class="fa fa-sort-amount-desc" aria-hidden="false"></i>NGÀY
+                </a>
+                <a *ngIf="checkDateTime == false" (click)="sortDateTime()">
+                  <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>NGÀY
+                </a>
+              </div>
+            </th>
+            <th>
+              THỜI GIAN
+            </th>
+            <th style="width: 250px">
+              <div>
+                <a *ngIf="checkCustomer == true" (click)="sortCustomer()">
+                  <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>HỌ TÊN KHÁCH HÀNG
+                </a>
+                <a *ngIf="checkCustomer == false" (click)="sortCustomer()">
+                  <i class="fa fa-sort-alpha-desc" aria-hidden="false"></i>HỌ TÊN KHÁCH HÀNG
+                </a>
+              </div>
+            </th>
+            <th style="width: 250px">THÔNG TIN SẢN PHẨM</th>
+            <th>
+              <div>
+                <a *ngIf="checkTotalMoney == true" (click)="sortTotalMoney()">
+                  <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i> TỔNG TIỀN
+                </a>
+                <a *ngIf="checkTotalMoney == false" (click)="sortTotalMoney()">
+                  <i class="fa fa-sort-numeric-asc" aria-hidden="false"></i> TỔNG TIỀN
+                </a>
+              </div>
+            </th>
+          </tr>
+          </thead>
+        </table>
+      </div>
+      <div class="tbl-content">
+        <table cellpadding="0" cellspacing="0" border="0">
+          <tbody>
+          <tr *ngFor="let invoice of invoiceList ;let i = index">
+            <td style="width: 100px">{{ pageNumbers * pageNum + (i + 1)}}</td>
+            <td>{{invoice.createDate | date : 'dd/MM/yyyy'}}</td>
+            <td style="width: 150px">{{invoice.createTime}}</td>
+            <td style="width: 260px">{{invoice.customerName}}</td>
+            <td style="width: 250px"><a class="btn btn-grad-red" data-toggle="modal"
+                                        data-target="#staticBackdrop"
+                                        (click)="getInvoiceDetailId(invoice.invoiceId)">Chi tiết</a></td>
+            <td style="width: 150px">{{invoice.totalMoney | currency :'VND' : ''}} đ</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="row my-3">
+      <div class="row col-4 ml-0">
+      </div>
+
+      <div class="col-4 d-flex justify-content-center">
+        <p class="page-link">{{(page + 1) + '/' + totalPages}}</p>
+      </div>
+      <div class="col-4">
+        <!--Pagination-->
+        <nav class="d-flex justify-content-end wow fadeIn">
+          <ul class="pagination">
+            <li class="page-item">
+              <button
+                [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}"
+                [disabled]="first" class="page-link" (click)="previous()">Trước
+              </button>
+            </li>
+            <li class="page-item " aria-current="page">
+              <button [disabled]="true" class="page-link">{{page + 1}}</button>
+            </li>
+            <li class="page-item">
+              <button
+                [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}"
+                [disabled]="last" class="page-link" (click)="next()">Sau
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </section>
+</div>

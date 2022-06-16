@@ -1,7 +1,7 @@
 
 <!-- Button trigger modal-->
-<!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">-->
-<!--  Quét mã QR-->
+<!--<button type="button" class="btn btn-grad-blue" data-toggle="modal" data-target="#exampleModal">-->
+<!--  <i class="fa fa-paper-plane"></i> Quét mã QR-->
 <!--</button>-->
 
 <!-- Modal -->
@@ -9,9 +9,11 @@
      aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">QUÉT MÃ QR</h5>
-        <button id="btnCloseModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <div class="modal-header" style="background-color: #D70018">
+        <h5 class="modal-title text-center text-white" id="exampleModalLabel">QUÉT MÃ QR</h5>
+
+        <button (click)="resetValueInputs()" id="btnCloseModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -21,7 +23,7 @@
             <div class="col-6">
               <p class="{{alertClass}}">{{message}}</p>
               <label for="select"><strong>Chọn Chức năng :</strong></label>
-              <select [(ngModel)]="typeQRScan" id="select" class="form-control mb-2">
+              <select #selectQR (change)="changeFunction($event.target)" id="select" class="form-control mb-2">
                 <option value="1">Quét mã</option>
                 <option value="2">Kiểm tra mã</option>
               </select>
@@ -30,7 +32,7 @@
                   <div class="row d-flex justify-content-center">
                     <div class="file">
                       <label for="img1">Hình Ảnh <span class="text-danger">(*):</span></label>
-                      <input (change)="readFile1($event.target)" accept="image/png"  name="img" id="img1" type="file" class="file__input">
+                      <input #imageInput1 (change)="readFile1($event.target)" accept="image/png"  name="img" id="img1" type="file" class="file__input">
                       <label for="img1" class="file__label">
                         <i class="fa fa-upload"></i>
                       </label>
@@ -43,7 +45,7 @@
                   <div class="row d-flex justify-content-center">
                     <div class="file">
                       <label for="img">Hình Ảnh <span class="text-danger">(*):</span></label>
-                      <input (change)="readFile2($event.target)" accept="image/png" name="img" id="img" type="file" class="file__input">
+                      <input #imageInput2 (change)="readFile2($event.target)" accept="image/png" name="img" id="img" type="file" class="file__input">
                       <label for="img" class="file__label">
                         <i class="fa fa-upload"></i>
                       </label>
@@ -58,7 +60,7 @@
         </div>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button (click)="scanQRCode()" type="button" class="btn btn-danger col-3">Xác nhận</button>
+        <button (click)="scanQRCode()" type="button" class="btn btn-grad-blue col-3"><i class="fa fa-paper-plane"></i> Xác nhận</button>
       </div>
     </div>
   </div>
