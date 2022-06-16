@@ -191,7 +191,7 @@ export class CustomerListComponent implements OnInit {
   }
 
   clearAll() {
-    this.searchForm.reset();
+    this.searchForm.get('inputSearch').setValue('');
     this.nameCustomer = '';
     this.phoneNumber = '';
     this.ngOnInit();

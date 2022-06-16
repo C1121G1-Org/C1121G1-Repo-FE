@@ -16,11 +16,10 @@ Function: Search,Pageable
 })
 export class InvoiceHistoryComponent implements OnInit {
 
+
   invoiceList: InvoiceDto[] = [];
   productsInvoice: InvoiceDto[] = [];
 
-  productName = '';
-  productQuantity = 0;
   pageNum: number;
   pageNumbers: number;
   detailPageNum: number;
@@ -34,10 +33,12 @@ export class InvoiceHistoryComponent implements OnInit {
   sort = '';
   page = 0;
   totalPages = 0;
+
   pageDetail = 0;
   totalPagesDetail = 0;
   message = false;
-  checkDate = true;
+
+  checkDateTime = true;
   checkCustomer = true;
   checkTotalMoney = true;
 
@@ -86,8 +87,6 @@ export class InvoiceHistoryComponent implements OnInit {
           this.first = data.first;
           this.last = (data.pageable.offset + data.pageable.pageSize) >= data.totalElements;
         }
-
-
       },
       error => {
         console.log(error);
@@ -127,32 +126,31 @@ export class InvoiceHistoryComponent implements OnInit {
     }
   }
 
-
-  sortDate() {
-    if (this.checkDate === true) {
-      this.sort = 'sortDateAsc';
+  sortDateTime() {
+    if (this.checkDateTime === true) {
+      this.sort = 'sortDateTimeAsc';
       this.invoiceService.getAll(this.keyword, this.sort, this.page).subscribe(data => {
         this.invoiceList = data.content;
         this.page = data.number;
         this.totalPages = data.totalPages;
-        this.checkDate = false;
+        this.checkDateTime = false;
       }, error => {
         console.log(error);
       });
-
     } else {
-      this.sort = 'sortDateDesc';
+      this.sort = 'sortDateTimeDesc';
       this.invoiceService.getAll(this.keyword, this.sort, this.page).subscribe(data => {
         this.invoiceList = data.content;
         this.page = data.number;
         this.totalPages = data.totalPages;
-        this.checkDate = true;
+        this.checkDateTime = true;
       }, error => {
         console.log(error);
       });
 
     }
   }
+
 
   sortCustomer() {
     if (this.checkCustomer === true) {
@@ -165,7 +163,6 @@ export class InvoiceHistoryComponent implements OnInit {
       }, error => {
         console.log(error);
       });
-
     } else {
       this.sort = 'sortCustomerDesc';
       this.invoiceService.getAll(this.keyword, this.sort, this.page).subscribe(data => {
@@ -176,7 +173,6 @@ export class InvoiceHistoryComponent implements OnInit {
       }, error => {
         console.log(error);
       });
-
     }
   }
 
@@ -191,7 +187,6 @@ export class InvoiceHistoryComponent implements OnInit {
       }, error => {
         console.log(error);
       });
-
     } else {
       this.sort = 'sortTotalMoneyDesc';
       this.invoiceService.getAll(this.keyword, this.sort, this.page).subscribe(data => {
@@ -202,16 +197,11 @@ export class InvoiceHistoryComponent implements OnInit {
       }, error => {
         console.log(error);
       });
-
     }
   }
 
-  reset() {
-    this.getSearch('', '', this.page);
-  }
-
   changeKeyword() {
-      this.keyword = this.formSearch.get('keyword').value;
-      this.page = 0;
+    this.keyword = this.formSearch.get('keyword').value;
+    this.page = 0;
   }
 }

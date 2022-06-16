@@ -8,16 +8,13 @@ import {finalize} from 'rxjs/operators';
 import {formatDate} from '@angular/common';
 import {CategoryService} from '../../../services/category/category.service';
 import {Category} from '../../../models/category';
-
-
-
 @Component({
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-  imgVip = 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
+  imgVip = 'https://icon-library.com/images/photograph-icon/photograph-icon-17.jpg';
   productForm: FormGroup;
   selectedImage: any = null;
   flagCheckImage: boolean;
@@ -26,6 +23,9 @@ export class ProductCreateComponent implements OnInit {
   productName: string;
   errorProductName: string;
   categoryList: Category[] = [];
+  // tslint:disable-next-line:variable-name
+  product_price = '';
+  // price: any;
   constructor(private productService: ProductService,
               private categoryService: CategoryService,
               private router: Router,
@@ -34,7 +34,7 @@ export class ProductCreateComponent implements OnInit {
     this.productForm = new FormGroup({
       id: new FormControl(''),
       name: new FormControl('', [Validators.required, Validators.maxLength(255)]),
-      price: new FormControl('', [Validators.required, Validators.pattern('^(([0]*[1-9][0-9]*)|[1-9][0-9]*)$')]),
+      price: new FormControl(''),
       image: new FormControl(''),
       screenSize: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       camera: new FormControl('', [Validators.required, Validators.maxLength(50)]),
@@ -49,12 +49,34 @@ export class ProductCreateComponent implements OnInit {
     return t1 && t2 ? t1.id === t2.id : t1 === t2;
   }
   ngOnInit(): void {
+    // this.productForm.valueChanges.subscribe(form => {
+    //   if (form.price) {
+    //     this.productForm.patchValue({
+    //       price: this.currencyPipe.transform(form.price.replace(/\D/g, '').replace(/^0+/, ''), 'USD', 'symbol', '1.0-0')
+    //     }, {emitEvent: false});
+    //   }
+    // });
     console.log(this.validateImange(this.imgVip));
     this.productForm.controls.categoryDto.setValue('');
     this.categoryService.getAll().subscribe(data => {
       this.categoryList = data;
     });
   }
+  // onImageChangeFromFile($event: any) {
+  //   if ($event.target.files && $event.target.files[0]) {
+  //     const file = $event.target.files[0];
+  //     console.log(file);
+  //     console.log(file.type);
+  //     if (file.type == 'image/jpeg') {
+  //       console.log('correct');
+  //
+  //     } else {
+  //       this.productForm.reset();
+  //       this.productForm.controls.imageInput.setValidators([Validators.required]);
+  //       this.productForm.get('imageInput').updateValueAndValidity();
+  //     }
+  //   }
+  // }
   validateImange(e): boolean {
     return e == 'https://t4.ftcdn.net/jpg/04/70/29/97/360_F_470299797_UD0eoVMMSUbHCcNJCdv2t8B2g1GVqYgs.jpg';
   }
@@ -64,6 +86,11 @@ export class ProductCreateComponent implements OnInit {
   */
   showPreview(event: any) {
     this.selectedImage = event.target.files[0];
+    console.log('aaaaa');
+    const ext = this.selectedImage.name.substring(this.selectedImage.name.length - 3);
+    console.log(ext);
+    if (this.selectedImage.name != 'jpg') {
+    }
     if (this.selectedImage) {
       this.alertImage = '';
     }
@@ -81,11 +108,36 @@ export class ProductCreateComponent implements OnInit {
   getCurrentDateTime(): string {
     return formatDate(new Date(), 'dd-MM-yyyyhhmmssa', 'en-US');
   }
+  CommaFormatted(event) {
+    // skip for arrow keys
+    if (event.which >= 37 && event.which <= 40) {
+      return;
+    }
+    // format number
+    if (this.product_price) {
+      this.product_price = this.product_price.replace(/\D/g, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+  }
+  numberCheck(args) {
+    if (args.key === 'e' || args.key === '+' || args.key === '-') {
+      return false;
+    } else {
+      return true;
+    }
+  }
   /*
       Created by TuanPA
       Date: 9:08 3/6/2022
   */
   save(errorModalBtn: HTMLButtonElement, successButton: HTMLButtonElement) {
+    let arr = this.product_price.split(',');
+    let money = '';
+    for (let a of arr) {
+      money += a;
+    }
+    money = money.trim();
+    this.productForm.controls.price.setValue(money);
     // if (this.validateImange(this.imgVip)){
     //   this.flagCheckImage = true;
     //   this.productForm.controls.image.setErrors({existed: 'Empty! Please input!'});
@@ -137,8 +189,11 @@ export class ProductCreateComponent implements OnInit {
                 console.log('success');
               }, error => {
                 console.log(this.productForm.value);
-                errorModalBtn.click();
-                this.errorProductName = error.error.errorMap.name;
+                // tslint:disable-next-line:no-conditional-assignment
+                if (this.errorProductName = error.error.errorMap.name) {
+                  console.log(this.errorProductName);
+                  errorModalBtn.click();
+                }
               }
             );
           });
@@ -183,6 +238,14 @@ export class ProductCreateComponent implements OnInit {
       this.productForm.controls.categoryDto.updateValueAndValidity();
     } else {
       this.productForm.controls.categoryDto.setErrors({empty: 'Empty! Please input!'});
+    }
+  }
+  checkValidatePrice(input: any) {
+    if (input.target.value != '') {
+      this.productForm.controls.price.setErrors({empty: null});
+      this.productForm.controls.categoryDto.updateValueAndValidity();
+    } else {
+      this.productForm.controls.price.setErrors({empty: 'Empty! Please input!'});
     }
   }
 }

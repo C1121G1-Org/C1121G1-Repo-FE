@@ -45,8 +45,11 @@ export class EmployeeUpdateComponent implements OnInit {
     this.age = Math.floor((checkDay / (1000 * 3600 * 24)) / 365);
     if (this.age < 18) {
       this.editEmployeeForm.get('dateOfBirth').setErrors({check: true});
+    }else if (this.age >= 100) {
+      this.editEmployeeForm.get('dateOfBirth').setErrors({checkAge: true});
     }
   }
+
 
   ngOnInit(): void {
     this.employeeService.getAllPosition().subscribe(
@@ -92,7 +95,7 @@ export class EmployeeUpdateComponent implements OnInit {
       console.log(next.positionDto.positionName);
 
     }, error => {
-      this.router.navigate(['/employee/list']);
+      this.router.navigate(['/error']);
     });
   }
 

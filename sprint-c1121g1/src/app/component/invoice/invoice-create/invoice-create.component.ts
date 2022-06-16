@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-
 import {ProductService} from '../../../services/product/product.service';
 import {ProductInvoice} from '../../../dto/productInvoice';
 import {InvoiceDetail} from '../../../dto/InvoiceDetail';
@@ -9,11 +8,7 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import {ICustomer} from '../../../models/ICustomer';
 import {IProduct} from '../../../dto/iProduct';
-
-
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-
 /*
  Created by LongNHL
  Time: 9:30 2/06/2022
@@ -25,10 +20,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./invoice-create.component.css']
 })
 export class InvoiceCreateComponent implements OnInit {
-
   invoiceForm: FormGroup;
-
-
   currentProduct: IProduct;
   customer: ICustomer = {};
   productList: IProduct[] = [];
@@ -42,17 +34,16 @@ export class InvoiceCreateComponent implements OnInit {
   checkOnchange: boolean;
   flagProduct = false;
   flagProductNull = true;
-  flagNoProduct = true;
   errorList: string[] = [];
   dict: { key, value }[];
-
-
+  flagNoProduct = true;
+  age: number;
   constructor(private fb: FormBuilder,
               private productService: ProductService,
               private invoiceService: InvoiceService) {
     this.invoiceForm = this.fb.group({
       payments: this.fb.control('', [Validators.required]),
-      totalMoney: this.fb.control('', [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
+      totalMoney: this.fb.control(this.money, [Validators.required, Validators.pattern('^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$')]),
       customerDto: this.fb.group({
         id: this.fb.control(''),
         customerName: this.fb.control('', [Validators.required, Validators.pattern('^([A-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\\s{1}[A-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$')]),
@@ -66,20 +57,15 @@ export class InvoiceCreateComponent implements OnInit {
       products: this.fb.array(this.productList.map(product => this.createProducts(product))
       ),
     });
-
   }
-
   get products() {
     return this.invoiceForm.get('products') as FormArray;
   }
-
   get customerDto() {
     return this.invoiceForm.get('customerForm') as FormGroup;
   }
-
   ngOnInit(): void {
   }
-
   getCustomerModal(customerModal: any) {
     this.customer = customerModal;
     if (this.customer != null) {
@@ -87,12 +73,10 @@ export class InvoiceCreateComponent implements OnInit {
     }
     this.chooseCustomer();
   }
-
   chooseCustomer() {
     const customerForm = this.createCustomer(this.customer);
     this.invoiceForm.controls.customerDto.patchValue(customerForm.value);
   }
-
   createCustomer(customer: ICustomer) {
     return this.fb.group({
       id: [customer.id],
@@ -104,17 +88,14 @@ export class InvoiceCreateComponent implements OnInit {
       gender: [customer.gender]
     });
   }
-
   getProductQR(productQR: any) {
     this.currentProduct = productQR;
     this.chooseProduct();
   }
-
   getProductModal(productModal: any) {
     this.currentProduct = productModal;
     this.chooseProduct();
   }
-
   createProducts(product: ProductInvoice) {
     return this.fb.group({
       id: [product.id],
@@ -123,11 +104,9 @@ export class InvoiceCreateComponent implements OnInit {
       quantity: [1, [Validators.required, Validators.min(0), Validators.pattern('^[0]?[1-9]+[0-9]*$')]]
     });
   }
-
   getProducts(form): Array<any> {
     return form.controls.products.controls;
   }
-
   chooseProduct() {
     this.flagNoProduct = false;
     const productForm = this.createProducts(this.currentProduct);
@@ -135,10 +114,9 @@ export class InvoiceCreateComponent implements OnInit {
       this.flagProductNull = true;
     }
     let flag = false;
-
+    // check duplicate product
     const myArray = this.getProducts(this.invoiceForm);
-
-    const test = myArray.filter(data => data.controls.id.value == this.currentProduct.id && this.currentProduct.id != null);
+    const test = myArray.filter(data => data.controls.id.value === this.currentProduct.id && this.currentProduct.id != null);
     if (test.length > 0) {
       flag = true;
     } else {
@@ -158,19 +136,17 @@ export class InvoiceCreateComponent implements OnInit {
       button.click();
     }
     this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
+    console.log(this.money);
   }
-
   howMessageSuccess() {
     const that = this;
     this.flagProduct = false;
     this.flagProductNull = true;
-
     setTimeout(() => {
       that.flagProduct = true;
       that.flagProductNull = false;
     }, 1000);
   }
-
   deleteProduct(i: number, length: number) {
     this.products.removeAt(i);
     console.log(this.products.controls.length);
@@ -181,30 +157,27 @@ export class InvoiceCreateComponent implements OnInit {
       this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
     }
   }
-
   getTotalMoney() {
     this.money = this.products.getRawValue().reduce((sum, p) => sum + (p.quantity * p.price), 0).toFixed(2);
     // tslint:disable-next-line:radix
     if (isNaN(parseInt(this.money)) || parseInt(this.money) <= 0) {
       this.money = null;
     }
-
   }
-
   createInvoice(success: HTMLButtonElement) {
-    if (this.invoiceForm.get('customerDto.customerName').value == '') {
+    if (this.invoiceForm.get('customerDto.customerName').value === '') {
       this.invoiceForm.get('customerDto.customerName').setErrors({empty: true});
     }
-    if (this.invoiceForm.get('customerDto.phoneNumber').value == '') {
+    if (this.invoiceForm.get('customerDto.phoneNumber').value === '') {
       this.invoiceForm.get('customerDto.phoneNumber').setErrors({empty: true});
     }
-    if (this.invoiceForm.get('customerDto.dateOfBirth').value == '') {
+    if (this.invoiceForm.get('customerDto.dateOfBirth').value === '') {
       this.invoiceForm.get('customerDto.dateOfBirth').setErrors({empty: true});
     }
-    if (this.invoiceForm.get('customerDto.address').value == '') {
+    if (this.invoiceForm.get('customerDto.address').value === '') {
       this.invoiceForm.get('customerDto.address').setErrors({empty: true});
     }
-    if (this.invoiceForm.get('customerDto.email').value == '') {
+    if (this.invoiceForm.get('customerDto.email').value === '') {
       this.invoiceForm.get('customerDto.email').setErrors({empty: true});
     }
     this.invoiceDetail = this.invoiceForm.value;
@@ -230,11 +203,20 @@ export class InvoiceCreateComponent implements OnInit {
       });
     });
   }
-
   onchanges() {
     this.checkOnchange = !this.checkOnchange;
   }
-
+  check() {
+    const birthDay = new Date(this.invoiceForm.get('customerDto.dateOfBirth').value);
+    // @ts-ignore
+    const checkDay = Math.abs(Date.now() - birthDay);
+    this.age = Math.floor((checkDay / (1000 * 3600 * 24)) / 365);
+    if (this.age < 18) {
+      this.invoiceForm.get('customerDto.dateOfBirth').setErrors({check: true});
+    }else if (this.age > 100){
+      this.invoiceForm.get('customerDto.dateOfBirth').setErrors({checkMax: true});
+    }
+  }
   /*
    Created by LongNHL
    Time: 9:30 2/06/2022
@@ -243,7 +225,6 @@ export class InvoiceCreateComponent implements OnInit {
   print(yes: string) {
     this.printInvoice = yes;
   }
-
   generatePDF(action) {
     const docDefinition = {
       content: [
@@ -306,13 +287,15 @@ export class InvoiceCreateComponent implements OnInit {
           style: 'sectionHeader'
         },
         {
-          text: 'Bổ sung chi tiết',
-          margin: [0, 0, 0, 15]
+          columns: [
+            [{text: 'Bổ sung chi tiết', margin: [0, 0, 0, 15]}],
+            [{text: 'Chữ ký nhân viên', alignment: 'right', italics: true}],
+          ]
+
         },
         {
           columns: [
             [{qr: `c1121G1.codegym@gmail.com`, fit: '50'}],
-            [{text: 'Chữ ký', alignment: 'right', italics: true}],
           ]
         },
         {
@@ -340,7 +323,4 @@ export class InvoiceCreateComponent implements OnInit {
       pdfMake.createPdf(docDefinition).download();
     }
   }
-
-
 }
-

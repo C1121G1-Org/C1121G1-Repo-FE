@@ -47,8 +47,11 @@
               </div>
 
               <div>
-                <h2 class="text-danger d-flex justify-content-center" style="padding: 164px ; font-size: 35px"
-                    *ngIf="message">Không tìm thấy khách hàng.</h2>
+                <img style="height: 100px ; margin-left: 500px"  *ngIf="message" src="assets/img/tim%20kiem%20khong%20thay.png">
+                <h2 class="text-danger d-flex justify-content-center" style="height: 280px ; font-size: 35px"
+                    *ngIf="message">
+                  Không tìm thấy sản phẩm.
+                </h2>
                 <!--           hiển thị message lỗi-->
                 <div *ngIf="!message">
                   <div class="tbl-header">

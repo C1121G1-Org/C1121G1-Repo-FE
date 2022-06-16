@@ -1,137 +1,3 @@
-<!--  Created by CongNV-->
-<!--  Date : 04/06/2022-->
-<!--  Function: Search,Pageable-->
-<!--<div class="container-fluid mt-5" style="width:70%; box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;-->
-<!--background-color: #d9e4f5;-->
-<!--background-image: linear-gradient(315deg, #d9e4f5 0%, #f5e3e6 74%); ">-->
-<!--  <h1 style="text-align: center" class="mb-3">LỊCH SỬ MUA BÁN</h1>-->
-<!--  <div class="row">-->
-
-<!--        <div class="col-2">-->
-<!--          <button *ngIf="checkDate == false" (click)="sortDate()" class="btn btn-grad-blue mx-1">-->
-<!--            <i class="fa fa-sort-amount-asc" aria-hidden="false"></i> Sắp xếp ngày-->
-<!--          </button>-->
-<!--          <button *ngIf="checkDate == false" (click)="sortDate()" class="btn btn-grad-blue mx-1">-->
-<!--            <i class="fa fa-sort-amount-desc" aria-hidden="false"></i> Sắp xếp ngày-->
-<!--          </button>-->
-<!--    </div>-->
-
-<!--    <div class="col-2">-->
-<!--      <button *ngIf="checkCustomer == true" (click)="sortCustomer()" class="btn btn-grad-blue mx-1">-->
-<!--        <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>Sắp xếp tên-->
-<!--      </button>-->
-<!--      <button *ngIf="checkCustomer == false" (click)="sortCustomer()" class="btn btn-grad-blue mx-1">-->
-<!--        <i class="fa fa-sort-alpha-desc" aria-hidden="false"></i>Sắp xếp tên-->
-<!--      </button>-->
-<!--    </div>-->
-
-<!--    <div class="col-2">-->
-<!--      <button *ngIf="checkTotalMoney == true" (click)="sortTotalMoney()" class="btn btn-grad-blue mx-1">-->
-<!--        <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i> Sắp xếp giá tiền-->
-<!--      </button>-->
-<!--      <button *ngIf="checkTotalMoney == false" (click)="sortTotalMoney()" class="btn btn-grad-blue mx-1">-->
-<!--        <i class="fa fa-sort-numeric-asc" aria-hidden="false"></i> Sắp xếp giá tiền-->
-<!--      </button>-->
-<!--    </div>-->
-
-
-<!--    <div class="col-4">-->
-<!--      <nav class="navbar navbar-light col-12">-->
-<!--        <div>-->
-<!--          <form [formGroup]="formSearch" class="d-flex">-->
-<!--            <input  (change)="changeKeyword()" formControlName="keyword" class="form-control me-2"-->
-<!--                   type="search"-->
-<!--                   placeholder="Tìm..."-->
-<!--                   aria-label="Search">-->
-<!--            <button class="btn btn-grad-blue mx-1" type="submit" style="width: 150px" (click)="getSearch('','',0)">-->
-<!--              <i class="fa fa-search" aria-hidden="true"></i>Tìm kiếm-->
-<!--            </button>-->
-<!--          </form>-->
-<!--        </div>-->
-<!--      </nav>-->
-<!--    </div>-->
-
-<!--    <div class="col-8"></div>-->
-
-<!--  </div>-->
-
-<!--  <table *ngIf="!message" class="table">-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--      <th>STT</th>-->
-<!--      <th>-->
-<!--        <div>-->
-<!--          <a *ngIf="checkDate == true" (click)="sortDate()">-->
-<!--            <i class="fa fa-sort-amount-desc" aria-hidden="false"></i>NGÀY-->
-<!--          </a>-->
-<!--          <a *ngIf="checkDate == false" (click)="sortDate()">-->
-<!--            <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>NGÀY-->
-<!--          </a>-->
-<!--        </div>-->
-<!--      </th>-->
-<!--      <th>THỜI GIAN</th>-->
-<!--      <th>-->
-<!--        <div>-->
-<!--        <a *ngIf="checkCustomer == true" (click)="sortCustomer()" >-->
-<!--          <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i>HỌ TÊN KHÁCH HÀNG-->
-<!--        </a>-->
-<!--        <a *ngIf="checkCustomer == false" (click)="sortCustomer()" >-->
-<!--          <i class="fa fa-sort-alpha-desc" aria-hidden="false"></i>HỌ TÊN KHÁCH HÀNG-->
-<!--        </a>-->
-<!--      </div>-->
-<!--      </th>-->
-<!--      <th>THÔNG TIN SẢN PHẨM</th>-->
-<!--      <th>-->
-<!--        <div >-->
-<!--          <a *ngIf="checkTotalMoney == true" (click)="sortTotalMoney()" >-->
-<!--            <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i> TỔNG TIỀN-->
-<!--          </a>-->
-<!--          <a *ngIf="checkTotalMoney == false" (click)="sortTotalMoney()" >-->
-<!--            <i class="fa fa-sort-numeric-asc" aria-hidden="false"></i> TỔNG TIỀN-->
-<!--          </a>-->
-<!--        </div>-->
-<!--      </th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--    <tr *ngFor="let invoice of invoiceList ;let i = index">-->
-<!--      <td>{{ pageNumbers * pageNum + (i + 1)}}</td>-->
-<!--      <td>{{invoice.createDate }}</td>-->
-<!--      <td>{{invoice.createTime}}</td>-->
-<!--      <td>{{invoice.customerName}}</td>-->
-<!--      <td style="text-align: center"><a class="btn btn-grad-red mx-1" data-toggle="modal"-->
-<!--                                        data-target="#staticBackdrop"-->
-<!--                                        (click)="getInvoiceDetailId(invoice.quantity,invoice.productName)">Chi tiết</a>-->
-<!--      </td>-->
-<!--      <td>{{invoice.totalMoney | currency :'VND' : ''}} đ</td>-->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--  </table>-->
-<!--  <div *ngIf="message == true" style="text-align: center;color: red; margin-top: 100px"><h1>Không thể tìm thấy kết-->
-<!--    quả</h1></div>-->
-
-<!--  <div class="row">-->
-<!--    <nav aria-label="Page navigation example">-->
-<!--      <ul class="pagination justify-content-end">-->
-<!--        <li class="page-item">-->
-<!--          <button [disabled]="page < 1" class="page-link" (click)="previous()" style="width: 35px">-->
-<!--            <i class="fa fa-angle-left" aria-hidden="true"></i>-->
-<!--          </button>-->
-<!--        </li>-->
-<!--        <li class="page-item"><a class="page-link">{{page + 1}}/{{+totalPages}}</a></li>-->
-<!--        <li class="page-item">-->
-<!--          <button [disabled]="page >= totalPages - 1" class="page-link" (click)="next()" style="width: 35px">-->
-<!--            <i class="fa fa-angle-right" aria-hidden="true"></i>-->
-<!--          </button>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </nav>-->
-<!--  </div>-->
-
-<!--</div>-->
-
-
-<!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
      aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -150,8 +16,8 @@
             <div class="tbl-header">
               <table cellpadding="0" cellspacing="0" border="0">
                 <thead>
-                <tr >
-                  <th >STT</th>
+                <tr>
+                  <th>STT</th>
                   <th>SẢN PHẨM</th>
                   <th>SỐ LƯỢNG</th>
                 </tr>
@@ -237,8 +103,7 @@
         <table cellpadding="0" cellspacing="0" border="0.5">
           <tbody>
           <tr>
-            <td class="d-flex justify-content-center font-weight-bold text-uppercase" style="color: red"> Không tìm thấy kết quả
-            </td>
+            <td class="d-flex justify-content-center font-weight-bold text-uppercase text-danger"><h4><strong>Không tìm thấy dữ liệu</strong></h4> </td>
           </tr>
           </tbody>
         </table>
@@ -248,19 +113,21 @@
       <div class="tbl-header">
         <table cellpadding="0" cellspacing="0" border="0">
           <thead>
-          <tr >
-            <th  style="width: 100px">STT</th>
-            <th >
+          <tr>
+            <th style="width: 100px">STT</th>
+            <th>
               <div>
-                <a *ngIf="checkDate == true" (click)="sortDate()">
+                <a *ngIf="checkDateTime == true" (click)="sortDateTime()">
                   <i class="fa fa-sort-amount-desc" aria-hidden="false"></i>NGÀY
                 </a>
-                <a *ngIf="checkDate == false" (click)="sortDate()">
+                <a *ngIf="checkDateTime == false" (click)="sortDateTime()">
                   <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>NGÀY
                 </a>
               </div>
             </th>
-            <th>THỜI GIAN</th>
+            <th>
+              THỜI GIAN
+            </th>
             <th style="width: 250px">
               <div>
                 <a *ngIf="checkCustomer == true" (click)="sortCustomer()">
@@ -272,7 +139,7 @@
               </div>
             </th>
             <th style="width: 250px">THÔNG TIN SẢN PHẨM</th>
-            <th >
+            <th>
               <div>
                 <a *ngIf="checkTotalMoney == true" (click)="sortTotalMoney()">
                   <i class="fa fa-sort-numeric-desc" aria-hidden="true"></i> TỔNG TIỀN
@@ -291,12 +158,12 @@
           <tbody>
           <tr *ngFor="let invoice of invoiceList ;let i = index">
             <td style="width: 100px">{{ pageNumbers * pageNum + (i + 1)}}</td>
-            <td>{{invoice.createDate }}</td>
+            <td>{{invoice.createDate | date : 'dd/MM/yyyy'}}</td>
             <td style="width: 150px">{{invoice.createTime}}</td>
             <td style="width: 260px">{{invoice.customerName}}</td>
             <td style="width: 250px"><a class="btn btn-grad-red" data-toggle="modal"
-                   data-target="#staticBackdrop"
-                   (click)="getInvoiceDetailId(invoice.invoiceId)">Chi tiết</a></td>
+                                        data-target="#staticBackdrop"
+                                        (click)="getInvoiceDetailId(invoice.invoiceId)">Chi tiết</a></td>
             <td style="width: 150px">{{invoice.totalMoney | currency :'VND' : ''}} đ</td>
           </tr>
           </tbody>
@@ -336,5 +203,3 @@
     </div>
   </section>
 </div>
-
-

@@ -2,8 +2,8 @@ import {Component, EventEmitter, OnInit, Output, SimpleChanges} from '@angular/c
 import {IProduct} from '../../../models/IProduct';
 import {Router} from '@angular/router';
 import {ProductService} from '../../../services/product/product.service';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Product} from "../../../models/product";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Product} from '../../../models/product';
 
 @Component({
   selector: 'app-product-list',
@@ -31,31 +31,35 @@ export class ProductListComponent implements OnInit {
   idClick: number;
   getName: string;
   formSearch: FormGroup;
-  pageSize: number
-  flagClick = false;
+  pageSize: number;
+  flagClick: boolean;
   chosenItem: Product;
   checkSort = false;
   checkSelected = true;
   sort = 'priceDesc';
-  checkSortName =false;
-  checkSortQuantity =false;
+  checkSortName = false;
+  checkSortQuantity = false;
   checkSortCpu = false;
   checkSortMemory = false;
+
 
   constructor(private productService: ProductService, private router: Router) {
     this.formSearch = new FormGroup({
       searchKey: new FormControl('', Validators.pattern('^[0-9a-zA-Zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ\\s]*$'))
-    })
+    });
   }
 
 
   ngOnInit(): void {
+    this.flagClick = false;
+    this.idClick = undefined;
+    this.getName = '';
     this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
   }
 
   activeProject(index: number, product: Product): void {
     if (this.activeProjectIndex != index) {
-      this.flagClick = true
+      this.flagClick = true;
       this.activeProjectIndex = index;
     } else {
       this.flagClick = !this.flagClick;
@@ -65,6 +69,7 @@ export class ProductListComponent implements OnInit {
       this.idClick = product.id;
     } else {
       this.idClick = undefined;
+      this.getName = '';
     }
     console.log(this.chosenItem);
   }
@@ -91,42 +96,41 @@ export class ProductListComponent implements OnInit {
 
   checkProductEdit(errorButton: HTMLButtonElement) {
     if (this.idClick) {
-      this.router.navigateByUrl("/product/edit/" + this.idClick)
+      this.router.navigateByUrl('/product/edit/' + this.idClick);
     } else {
       errorButton.click();
     }
   }
 
-  getModalProduct(pageNumber, searchByName, searchByPrice, searchByQuantity,sort) {
+  getModalProduct(pageNumber, searchByName, searchByPrice, searchByQuantity, sort) {
     this.message = false;
-    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice, searchByQuantity,sort).subscribe((res: any) => {
+    this.productService.getAllProductPage(pageNumber, searchByName, searchByPrice, searchByQuantity, sort).subscribe((res: any) => {
       this.productList = res.content;
-      console.log(res)
+      console.log(res);
       console.log(this.productList);
       this.pageNumber = res.pageable.pageNumber;
       this.totalPages = res.totalPages;
       this.first = res.first;
       this.last = (res.pageable.offset + res.pageable.pageSize) >= res.totalElements;
-      this.pageSize = res.pageable.pageSize
+      this.pageSize = res.pageable.pageSize;
     }, error => {
       this.message = true;
     });
   }
-
   nextPage() {
-    this.getModalProduct(this.pageNumber + 1, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
+    this.getModalProduct(this.pageNumber + 1, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
   }
 
   previousPage() {
-    this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
+    this.getModalProduct(this.pageNumber - 1, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
   }
 
 
   search(value: any) {
     value = value.trim();
     if (!this.formSearch.valid) {
-      this.searchByName = '123abcxyz'
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
+      this.searchByName = '123abcxyz';
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
     }
     this.currentProduct = null;
     this.pageNumber = 0;
@@ -134,17 +138,17 @@ export class ProductListComponent implements OnInit {
       this.searchByPrice = value;
       this.searchByName = '';
       this.searchByQuantity = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
     } else if (this.checkSearch === 'quantity') {
       this.searchByPrice = '';
       this.searchByName = '';
       this.searchByQuantity = value;
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
     } else {
       this.searchByQuantity = '';
       this.searchByName = value;
       this.searchByPrice = '';
-      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity,this.sort);
+      this.getModalProduct(this.pageNumber, this.searchByName, this.searchByPrice, this.searchByQuantity, this.sort);
     }
   }
 
@@ -168,7 +172,7 @@ export class ProductListComponent implements OnInit {
     this.searchValue = '';
     this.searchByPrice = '';
     this.searchByName = '';
-    this.sort = 'priceDesc'
+    this.sort = 'priceDesc';
     this.ngOnInit();
   }
 

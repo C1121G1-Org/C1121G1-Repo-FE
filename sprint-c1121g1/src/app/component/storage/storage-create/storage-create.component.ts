@@ -8,15 +8,12 @@ import {Router} from '@angular/router';
 import {StorageService} from '../../../services/storage/storage.service';
 import {gteValidateDate} from '../../../services/storage/gte-validate-date';
 import {Employee} from '../../../models/employee';
-
 declare var $: any;
-
 @Component({
   selector: 'app-storage-create',
   templateUrl: './storage-create.component.html',
   styleUrls: ['./storage-create.component.css']
 })
-
 /*
   Created by khoaVC
   Role: Admin, Storekeeper
@@ -24,7 +21,6 @@ declare var $: any;
   Component: StorageCreateComponent
   Function: all function
 */
-
 export class StorageCreateComponent implements OnInit {
   createForm: FormGroup;
   productData: Product = {};
@@ -33,15 +29,11 @@ export class StorageCreateComponent implements OnInit {
   today: string;
   image = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   check: boolean;
-
   @ViewChild('btnSuccess', {static: true}) btnSuccess: ElementRef;
   @ViewChild('btnFailed', {static: true}) btnFailed: ElementRef;
-
   constructor(private fb: FormBuilder, private securityService: SecurityService, private router: Router,
               private storageService: StorageService) {
   }
-
-
   ngOnInit(): void {
     this.getToday();
     this.createForm = this.fb.group({
@@ -57,31 +49,24 @@ export class StorageCreateComponent implements OnInit {
     this.supplierData = {};
     this.image = 'https://uniquartz.co.nz/wp-content/uploads/2018/06/image_large.png';
   }
-
   get createdDate() {
     return this.createForm.get('createdDate');
   }
-
   get status() {
     return this.createForm.get('status');
   }
-
   get quantity() {
     return this.createForm.get('quantity');
   }
-
   get createdEmployeeDto() {
     return this.createForm.get('createdEmployeeDto');
   }
-
   get productDto() {
     return this.createForm.get('productDto');
   }
-
   get supplierDto() {
     return this.createForm.get('supplierDto');
   }
-
   // GET TODAY
   getToday() {
     const todayTemp = new Date();
@@ -102,12 +87,10 @@ export class StorageCreateComponent implements OnInit {
     }
     this.today = todayFullYear + '-' + todayMonthString + '-' + todayDateString;
   }
-
   receiveProduct(item: any) {
     this.productData = item;
     this.image = this.productData.image;
   }
-
   getEmployee() {
     this.securityService.getPersonalInformation().subscribe(
       (response) => {
@@ -119,7 +102,6 @@ export class StorageCreateComponent implements OnInit {
       }
     );
   }
-
   receiveProductFlag(flag: any) {
     // if (flag){
     //   this.securityService.getPersonalInformation().subscribe(
@@ -133,27 +115,24 @@ export class StorageCreateComponent implements OnInit {
     //     );
     // }
   }
-
   receiveSupplier(item: any) {
     this.supplierData = item;
   }
-
   receiveSupplierFlag(flag: any) {
     if (flag) {
     }
   }
-
   importProduct() {
     console.log(this.createForm.value);
     if (this.createForm.invalid) {
       if (this.productData.id === undefined) {
-        this.productDto.setErrors({existed: true, message: 'Hãy chọn sản phẩm!'});
+        this.productDto.setErrors({existed: true, message: 'Hãy chọn sản phẩm.'});
       }
       if (this.supplierData.id === undefined) {
-        this.supplierDto.setErrors({existed: true, message: 'Hãy chọn nhà cung cấp!'});
+        this.supplierDto.setErrors({existed: true, message: 'Hãy chọn nhà cung cấp.'});
       }
       if (this.quantity.value === null) {
-        this.quantity.setErrors({empty: true, message: 'Hãy nhập số lượng của sản phẩm!'});
+        this.quantity.setErrors({empty: true, message: 'Hãy nhập số lượng của sản phẩm.'});
       }
       this.router.navigateByUrl('/storage/create');
     } else {
@@ -167,9 +146,7 @@ export class StorageCreateComponent implements OnInit {
         }
       );
     }
-
   }
-
   checkOnChange() {
     this.check = !this.check;
   }

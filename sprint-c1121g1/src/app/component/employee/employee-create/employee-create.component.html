@@ -43,7 +43,7 @@
               <div
                 *ngIf="createEmployeeForm.get('employeeName').errors?.pattern&&(employeeName?.dirty ||employeeName?.touched)"
                 style="color: red">
-                phải là chữ
+                Phải là chữ
               </div>
               <div class="form-group">
                 <label for="dateOfBirth">Ngày Tháng Năm Sinh <span class="text-danger">(*):</span></label>
@@ -57,12 +57,17 @@
                 <div
                   *ngIf="createEmployeeForm.get('dateOfBirth').errors?.pattern&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
                   style="color: red">
-                  nhập đúng định dạng.
+                  Nhập đúng định dạng.
                 </div>
                 <div
                   *ngIf="createEmployeeForm.get('dateOfBirth').errors?.check&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
                   style="color: red">
-                  nhân viên phải trên 18 tuổi ;
+                  Nhân viên phải trên 18 tuổi .
+                </div>
+                <div
+                  *ngIf="createEmployeeForm.get('dateOfBirth').errors?.checkAge&&(dateOfBirth?.dirty ||dateOfBirth?.touched)"
+                  style="color: red">
+                  Nhân viên quá 100 tuổi rồi  .
                 </div>
 
               </div>
@@ -97,7 +102,7 @@
                 <div
                   *ngIf="createEmployeeForm.get('phoneNumber').errors?.pattern&&(phoneNumber?.dirty ||phoneNumber?.touched)"
                   style="color: red">
-                  nhập đúng định dạng , VD: 0905139871.
+                  Nhập đúng định dạng , VD: 0905139871.
                 </div>
 
               </div>
@@ -115,7 +120,7 @@
                 </div>
                 <div *ngIf="createEmployeeForm.get('idCard').errors?.pattern&&(idCard?.dirty ||idCard?.touched)"
                      style="color: red">
-                  nhập đúng định dạng số CMND/CCCD , VD: 048203000188.
+                  Nhập đúng định dạng số CMND/CCCD , VD: 048203000188.
                 </div>
                 <div>
                   <p style="color: red" *ngIf=" errorIdCard!= ''">{{errorIdCard}}</p>
@@ -130,7 +135,7 @@
                     Không được bỏ trống.
                   </div>
                   <div *ngIf="createEmployeeForm.get('accountDto.email')?.errors?.pattern&&(email?.dirty ||email?.touched)" style="color: red">
-                    nhập đúng định dạng email, VD: abcxyz@codegym.com .
+                    Nhập đúng định dạng email, VD: abcxyz@codegym.com .
                   </div>
                   <div>
                     <p style="color: red" *ngIf=" errorEmailEmployee!= ''">{{errorEmailEmployee}}</p>
@@ -170,12 +175,12 @@
                   <div
                     *ngIf="createEmployeeForm.get('accountDto.encryptPassword').errors?.minlength&&(encryptPassword?.dirty ||userName?.touched)"
                     style="color: red">
-                    passWord ngắn quá
+                    Mật khẩu không đủ mạnh
                   </div>
                   <div
                     *ngIf="createEmployeeForm.get('accountDto.encryptPassword').errors?.maxlength&&(encryptPassword?.dirty ||userName?.touched)"
                     style="color: red">
-                    Quá dài rồi bạn ơi
+                    Quá dài rồi bạn ơi có thể bạn sẽ quên đó
                   </div>
 
                 </div>
@@ -188,6 +193,7 @@
                 <label for="position">Chức vụ <span class="text-danger">(*):</span></label>
                 <select [compareWith]="comparefn" name="position" id="position" formControlName="positionDto"
                         class="form-control">
+                  <option value="" disabled selected>Vui lòng chọn vị trí</option>
                   <option *ngFor="let p of positiones" [ngValue]="p">{{p.positionName}}</option>
                 </select>
                 <div *ngIf="createEmployeeForm.get('positionDto').errors?.required&&(positionDto?.dirty ||positionDto?.touched)" style="color: red">
@@ -197,8 +203,7 @@
             </div>
             <p></p>
             <div class="text-center" style="margin: auto">
-              <button type="submit" class="btn btn-grad-blue mx-1" style="margin-right: 20px">THÊM MỚI <i
-                class="fa fa-paper-plane"></i></button>
+              <button (click)="changeSpinFlag()" type="submit" class="btn btn-grad-blue mx-1" style="margin-right: 20px"><i *ngIf="!spinFlag" class="fa fa-paper-plane"></i> <span *ngIf="spinFlag" class="spinner-border spinner-border-sm" role="status"></span> THÊM MỚI </button>
               <button type="button" class="btn btn-grad-red mx-1" routerLink="/employee/list" > <i class="fa-solid fa-right-from-bracket"></i>HUỶ
               </button>
             </div>

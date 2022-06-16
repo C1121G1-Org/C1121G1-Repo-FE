@@ -105,7 +105,7 @@
                 <div class="form-group">
                   <label for="contactNo">Ngày sinh <span class="text-danger">(*)</span>:</label>
                   <input type="date" class="form-control" name="contactNo" id="Age" formControlName="dateOfBirth"
-                         [value]="customer.dateOfBirth" [readOnly]="disableFlag">
+                         [value]="customer.dateOfBirth" [readOnly]="disableFlag" (change)="check()">
                   <div *ngIf="invoiceForm.get('customerDto.dateOfBirth').invalid
                        && (invoiceForm.get('customerDto.dateOfBirth')?.touched||invoiceForm.get('customerDto.dateOfBirth')?.dirty)">
                     <small *ngIf="invoiceForm.get('customerDto.dateOfBirth')?.errors?.required" class="messageError">
@@ -113,6 +113,12 @@
                     </small>
                     <small *ngIf="invoiceForm.get('customerDto.dateOfBirth')?.errors?.pattern" class="messageError">
                       Vui lòng nhập đúng định dạng ngày sinh !
+                    </small>
+                    <small *ngIf="invoiceForm.get('customerDto.dateOfBirth')?.errors?.check" class="messageError">
+                      Vui lòng nhập ngày sinh lớn hơn 18 tuổi !
+                    </small>
+                    <small *ngIf="invoiceForm.get('customerDto.dateOfBirth')?.errors?.checkMax" class="messageError">
+                      Vui lòng nhập ngày sinh bé hơn 100 tuổi !
                     </small>
                   </div>
                   <small class="messageError"
@@ -195,18 +201,8 @@
                 </tbody>
               </table>
               <div *ngIf="flagNoProduct">
-                <p>Vui lòng chọn sản phẩm</p>
+                <p class="messageError">Vui lòng chọn sản phẩm !</p>
               </div>
-              <!--              <div *ngIf="flagProductNull">-->
-              <!--                <span class="messageError"-->
-              <!--                      *ngIf="errorMap['productList']!=null" class="messageError">{{errorMap['productList']}}-->
-              <!--                </span>-->
-              <!--              </div>-->
-              <!--              <div >-->
-              <!--                <div class="messageError" *ngFor ="let err of dict;let i = index" >-->
-              <!--                  <p>{{dict[i].value}}</p>-->
-              <!--                </div>-->
-              <!--              </div>-->
               <div *ngIf="flagProductNull">
                     <span class="messageError"
                           *ngIf="errorMap['productList']!=null" class="messageError">{{errorMap['productList']}}

@@ -4,7 +4,6 @@
   Time: 10:00 03/06/2022
   Template: modal list all Suppliers
 -->
-
 <div style="display: flex  ; justify-content: center ">
   <div class="modal fade" id="supplierModal" data-backdrop="static" data-keyboard="false" tabindex="-1"
        aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -49,7 +48,6 @@
                 </div>
               </div>
               <div>
-
                 <!--              phần hiên thị lỗi-->
                 <h2 class="text-danger d-flex justify-content-center" style="padding: 150px ; font-size: 35px"
                     *ngIf="errorFlag">KHÔNG TÌM THẤY DỮ LIỆU!</h2>
@@ -89,7 +87,6 @@
                     </div>
                   </div>
                   <br>
-
                   <div class="row my-3 ml-3">
                     <div class="row col-4 mx-10">
                       <button (click)="sendItem()" type="button"
@@ -106,10 +103,8 @@
                     <div class="col-4 d-flex justify-content-center">
                       <li class="page-link" style="width:90px ; height: 40px ;text-align: center ; line-height: 35px ; color: blue; box-sizing: border-box ; background-color: white ; cursor: pointer">{{(pageNumber + 1) + '/' + totalPages}}</li>
                     </div>
-
                     <div class="col-4 ml-0" *ngIf="!errorFlag">
                       <!--Pagination-->
-
                       <nav class="d-flex justify-content-end wow fadeIn">
                         <ul class="pagination">
                           <li *ngIf="!first " style="color: #333333" class="page-item"><a
@@ -138,7 +133,6 @@
     </div>
   </div>
 </div>
-
 <button #btnNoneSelectedModal type="button" class="btn btn-primary" data-toggle="modal" data-target="#noneSelectedModal"
         [hidden]="true">
 </button>

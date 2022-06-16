@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Product} from '../../../models/product';
 import {SaleReportService} from '../../../services/report/sale-report.service';
 
+
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title);
 Chart.register(...registerables);
 
@@ -20,6 +21,7 @@ Chart.register(...registerables);
 })
 export class SaleReportComponent implements OnInit {
   product: Product = {};
+  products: Product[] = [];
 
   chart1 = Chart.getChart('');
   chart2 = Chart.getChart('');
@@ -29,7 +31,7 @@ export class SaleReportComponent implements OnInit {
   formSearch = new FormGroup({
     startDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
     endDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
-    typeReport: new FormControl('ALL', Validators.required),
+    typeReport: new FormControl('', Validators.required),
     productId: new FormControl('', Validators.required)
   });
 
@@ -37,6 +39,17 @@ export class SaleReportComponent implements OnInit {
   totalInvoices = 0;
 
   constructor(private saleReportService: SaleReportService) {
+    this.saleReportService.getListProduct().subscribe(data => {
+      this.products = data;
+      this.formSearch = new FormGroup({
+        startDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+        endDay: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+        typeReport: new FormControl('ALL', Validators.required),
+        productId: new FormControl(this.products[0].id, Validators.required)
+      });
+    }, err => {
+      console.log(err);
+    });
   }
 
   ngOnInit(): void {
@@ -45,7 +58,7 @@ export class SaleReportComponent implements OnInit {
 
   sumArr(arr) {
     let total = 0;
-    for (const a of arr) {
+    for (let a of arr) {
       total += +a;
     }
     return total;
@@ -54,11 +67,11 @@ export class SaleReportComponent implements OnInit {
 
   showSaleReport() {
     if (this.getStartDay().value == '') {
-      this.getStartDay().setErrors({empty: true});
+      this.getStartDay().setErrors({empty: true})
     }
 
     if (this.getEndDay().value == '') {
-      this.getEndDay().setErrors({empty: true});
+      this.getEndDay().setErrors({empty: true})
     }
 
     if (this.getTypeReport().value == 'ID' && this.getProductId().value == '') {
@@ -69,20 +82,24 @@ export class SaleReportComponent implements OnInit {
     this.chart2?.destroy();
 
     if (this.formSearch.valid) {
-      const xValues = [];
-      const sales = [];
-      const invoices = [];
-      const startDay = this.formSearch.get('startDay').value;
-      const endDay = this.formSearch.get('endDay').value;
-      const productId = this.formSearch.get('productId').value;
+      let xValues = [];
+      let sales = [];
+      let invoices = [];
+      let startDay = this.formSearch.get('startDay').value;
+      let endDay = this.formSearch.get('endDay').value;
+      let productId = '';
+      if (this.formSearch.get('typeReport').value == 'ID') {
+        productId = this.formSearch.get('productId').value;
+      }
+
       this.saleReportService.getAllSaleReports(startDay, endDay, productId).subscribe(data => {
 
         this.notFound = '';
         this.alertClass = '';
 
-        for (const dt of data.data) {
-          const date = dt.date.split('-');
-          const newDate = date[0] + '/' + date[1];
+        for (let dt of data.data) {
+          let date = dt.date.split("-");
+          let newDate = date[0] + "/" + date[1];
           xValues.push(newDate);
           invoices.push(dt.invoiceQuantity);
           sales.push(dt.totalMoney);
@@ -118,7 +135,7 @@ export class SaleReportComponent implements OnInit {
               label: 'Đơn hàng ( Đơn )',
               // fill: false,
               data: invoices.map(value => {
-                return value.toFixed(0);
+                return value.toFixed(0)
               }),
               // pointRadius: 3,
               // pointBackgroundColor: 'blue',
@@ -129,8 +146,7 @@ export class SaleReportComponent implements OnInit {
               // tension: 0.5
             }]
           },
-          options: {
-          }
+          options: {}
         });
       }, error => {
 
@@ -166,11 +182,9 @@ export class SaleReportComponent implements OnInit {
 
   changeTypeReport() {
 
-    const type = this.formSearch.get('typeReport').value;
+    let type = this.formSearch.get('typeReport').value;
 
-    // tslint:disable-next-line:triple-equals
     if (type != 'ID') {
-      this.formSearch.get('productId').setValue('');
       this.formSearch.get('productId').disable();
     } else {
       this.formSearch.get('productId').enable();
@@ -179,12 +193,12 @@ export class SaleReportComponent implements OnInit {
 
   getProductFromQRCode(product: any) {
     this.product = product;
-    console.log(this.product);
+    console.log(product);
   }
 
   checkDay() {
-    const date1 = new Date(this.formSearch.get('startDay')?.value);
-    const date2 = new Date(this.formSearch.get('endDay')?.value);
+    let date1 = new Date(this.formSearch.get('startDay')?.value);
+    let date2 = new Date(this.formSearch.get('endDay')?.value);
     if (date1?.getTime() > date2?.getTime()) {
       this.formSearch.get('endDay').setErrors({errDate: true});
     }

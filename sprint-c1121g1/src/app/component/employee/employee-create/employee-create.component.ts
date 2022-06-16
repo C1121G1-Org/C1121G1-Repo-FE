@@ -83,6 +83,7 @@ export class EmployeeCreateComponent implements OnInit {
       email: new FormControl('', Validators.compose([Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')])),
     }),
   });
+  spinFlag = false;
 
   check() {
     const birthDay = new Date(this.createEmployeeForm.get('dateOfBirth').value) ;
@@ -91,8 +92,11 @@ export class EmployeeCreateComponent implements OnInit {
     this.age = Math.floor((checkDay / (1000 * 3600 * 24)) / 365);
     if (this.age < 18) {
       this.createEmployeeForm.get('dateOfBirth').setErrors({check: true});
+    }else if (this.age >= 100) {
+      this.createEmployeeForm.get('dateOfBirth').setErrors({checkAge: true});
     }
   }
+
 
   constructor(private router: Router,
               private employeeService: EmployeeService,
@@ -126,6 +130,7 @@ export class EmployeeCreateComponent implements OnInit {
         fileRef.getDownloadURL().subscribe((url) => {
           this.createEmployeeForm.patchValue({image: url});
           this.employeeService.saveEmployee(this.createEmployeeForm.value).subscribe(() => {
+            this.spinFlag = true;
             successBtn.click();
           }, error => {
             this.errorIdCard = error.error.errorMap.idCard;
@@ -145,5 +150,9 @@ export class EmployeeCreateComponent implements OnInit {
       console.log(e);
       this.imgVip = reader.result as string;
     };
+  }
+
+  changeSpinFlag() {
+    this.spinFlag = true;
   }
 }

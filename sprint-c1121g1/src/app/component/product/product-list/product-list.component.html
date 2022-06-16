@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center">
   <section class="make-color container">
     <!--for demo wrap-->
-    <h1 class="my-5">Thông tin hàng hóa</h1>
+    <h1 class="my-5 d-flex justify-content-center">Thông tin hàng hóa</h1>
 
     <div class="mb-3 row">
       <div class="row col-10 ml-1">
@@ -33,27 +33,13 @@
       </div>
     </div>
     <div *ngIf="message">
-      <!--      <div class="tbl-header">-->
-      <!--        <table cellpadding="0" cellspacing="0" border="0.5">-->
-      <!--          <thead>-->
-      <!--          <tr>-->
-      <!--            <th>STT</th>-->
-      <!--            <th>Tên</th>-->
-      <!--            <th>Giá (VND)</th>-->
-      <!--            <th>CPU</th>-->
-      <!--            <th>Lưu Trữ</th>-->
-      <!--            <th>Số Lượng</th>-->
-      <!--          </tr>-->
-      <!--          </thead>-->
-      <!--        </table>-->
-      <!--      </div>-->
       <div class="tbl-content">
         <table cellpadding="0" cellspacing="0" border="0.5">
-          <tbody>
-          <tr>
-            <td class="d-flex justify-content-center font-weight-bold text-uppercase" style="color: red"> Không tìm thấy sản phẩm</td>
-          </tr>
-          </tbody>
+          <div class="d-flex justify-content-center font-weight-bold text-uppercase" style="color: red;font-size: 22px"> Không tìm
+            thấy sản phẩm
+          </div>
+          <img style="display: block;margin-left: auto;margin-right: auto;width: 25rem; height: 17rem"
+               src="https://i.pinimg.com/564x/e9/b0/77/e9b077c17f5e9c342748eb2136fc6a30.jpg" alt="">
         </table>
       </div>
     </div>
@@ -62,7 +48,7 @@
         <table cellpadding="0" cellspacing="0" border="0">
           <thead>
           <tr>
-            <th>STT</th>
+            <th style="width: 6rem">STT</th>
             <th (click)="changeSortName()">
               <i *ngIf="checkSortName" class="fa-solid fa-arrow-down-1-9"></i>
               <i *ngIf="!checkSortName" class="fa-solid fa-arrow-up-9-1"></i>
@@ -78,7 +64,7 @@
               <i *ngIf="!checkSortCpu" class="fa-solid fa-arrow-up-9-1"></i>
               Chipset
             </th>
-            <th (click)="changeSortMemory()" >
+            <th (click)="changeSortMemory()">
               <i *ngIf="checkSortMemory" class="fa-solid fa-arrow-down-1-9"></i>
               <i *ngIf="!checkSortMemory" class="fa-solid fa-arrow-up-9-1"></i>
               Bộ nhớ trong
@@ -86,7 +72,8 @@
             <th (click)="changeSortQuantity()">
               <i *ngIf="checkSortQuantity" class="fa-solid fa-arrow-down-1-9"></i>
               <i *ngIf="!checkSortQuantity" class="fa-solid fa-arrow-up-9-1"></i>
-              Số Lượng (Chiếc)</th>
+              Số Lượng (Chiếc)
+            </th>
           </tr>
           </thead>
         </table>
@@ -97,7 +84,7 @@
           <tr *ngFor="let product of productList; index as i,
           let j=index" routerLinkActive="active" (click)="activeProject(j,product)"
               [ngStyle]="{'background-color': activeProjectIndex === j && flagClick ? '#84c0ec' : ''}">
-            <td>{{(pageNumber*pageSize)+(i+1)}}</td>
+            <td style="width: 6rem">&nbsp;{{(pageNumber * pageSize) + (i + 1)}}</td>
             <td class="desc" data-toggle="tooltip" data-placement="top" title="{{product.name}}">
               {{product.name}}
             </td>
@@ -123,21 +110,27 @@
         </button>
       </div>
 
-      <div class="col-4 d-flex justify-content-center">
+      <div *ngIf="!message" class="col-4 d-flex justify-content-center">
         <p class="page-link">{{(pageNumber + 1) + '/' + totalPages}}</p>
       </div>
       <div class="col-4">
         <!--Pagination-->
         <nav class="d-flex justify-content-end wow fadeIn">
-          <ul class="pagination">
+          <ul class="pagination" *ngIf="!message">
             <li class="page-item">
-              <button [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}" [disabled]="first" class="page-link" (click)="previousPage()">Trước</button>
+              <button
+                [ngStyle]="{'background-color': first === true ? 'gray' : 'white','color': first === true ? 'white' : 'blue'}"
+                [disabled]="first" class="page-link" (click)="previousPage()">Trước
+              </button>
             </li>
             <li class="page-item" aria-current="page">
               <button [disabled]="true" class="page-link">{{pageNumber + 1}}</button>
             </li>
             <li class="page-item">
-              <button [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}" [disabled]="last" class ="page-link" (click)="nextPage()">Sau</button>
+              <button
+                [ngStyle]="{'background-color': last === true ? 'gray' : 'white','color': last === true ? 'white' : 'blue'}"
+                [disabled]="last" class="page-link" (click)="nextPage()">Sau
+              </button>
             </li>
           </ul>
         </nav>
@@ -186,7 +179,9 @@
         <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>
         <div class="d-flex justify-content-center">
           <button type="button" class="btn btn-grad-blue mx-3" #cancel data-dismiss="modal">Hủy</button>
-          <button (click)="deleteProduct(sucessButton,cancel,errorModalBtn)" type="button" class="btn btn-grad-red">Xóa</button>
+          <button (click)="deleteProduct(sucessButton,cancel,errorModalBtn)" type="button" class="btn btn-grad-red">
+            Xóa
+          </button>
         </div>
       </div>
     </div>

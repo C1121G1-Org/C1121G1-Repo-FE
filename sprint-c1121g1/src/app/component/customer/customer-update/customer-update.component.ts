@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CustomerService} from '../../../services/customer/customer.service';
 import {Router, ActivatedRoute, ParamMap} from '@angular/router';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Customer} from '../../../models/customer';
 import {CustomerDto} from '../../../dto/customer-dto';
 // @ts-ignore
@@ -31,10 +31,10 @@ export class CustomerUpdateComponent implements OnInit {
               private activeRoute: ActivatedRoute) {
     this.editForm = new FormGroup({
       id: new FormControl(''),
-      customerName: new FormControl('', [Validators.required, Validators.pattern('^([^0-9]*)$')]),
+      customerName: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.pattern('^([A-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+)((\\s{1}[A-vxyỳọáầảấờễàạằệếýộậốũứĩõúữịỗìềểẩớặòùồợãụủíỹắẫựỉỏừỷởóéửỵẳẹèẽổẵẻỡơôưăêâđ]+){1,})$')]),
       phoneNumber: new FormControl('', [Validators.required, Validators.pattern('^(090\\d{7})|(091\\d{7})|(\\(\\+84\\)90\\d{7})|(\\(\\+84\\)91\\d{7})$')]),
-      dateOfBirth: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{5,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')]),
+      dateOfBirth: new FormControl('', [Validators.required, Validators.pattern('^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$')]),
+      email: new FormControl('', [Validators.required, Validators.pattern('^[a-z][a-z0-9_\\.]{1,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,}){1,}$')]),
       address: new FormControl('', [Validators.required]),
       gender: new FormControl('', [Validators.required]),
     });
@@ -108,11 +108,11 @@ export class CustomerUpdateComponent implements OnInit {
       const customer = this.editForm.value;
       this.customerService.updateCustomer(id, customer).subscribe(async res => {
         openSuccessModalBtn.click();
-        await this.wait(3000);
+        /*await this.wait(3000);
         if (this.flag == false){
           openSuccessModalBtn.click();
         }
-        this.router.navigate(['/customer/list']);
+        this.router.navigate(['/customer/list']);*/
       }, e => {
         errorModalBtn.click();
         console.log(e);
@@ -123,6 +123,8 @@ export class CustomerUpdateComponent implements OnInit {
   wait(ms){
     return new Promise(r => setTimeout(r, ms));
   }
+
+
 
 
   checkConfirm() {

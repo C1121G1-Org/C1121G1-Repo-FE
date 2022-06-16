@@ -17,15 +17,26 @@
                   <!--                  <small class="form-text text-danger" *ngIf="errorProductName!=''">{{errorProductName}}</small>-->
                   <div
                     *ngIf="productForm.controls.name.invalid && (productForm.controls.name.dirty || productForm.controls.name.touched|| productForm.controls.name.errors?.empty)">
-                    <small *ngIf="name.errors?.maxlength" class="text-form text-danger">Tên phải ngắn hơn 250 kí tự</small>
+                    <small *ngIf="name.errors?.maxlength" class="text-form text-danger">Tên phải ngắn hơn 250 kí
+                      tự</small>
                     <small
                       *ngIf="productForm.controls.name.hasError('required') || productForm.controls.name.errors.empty"
                       class="form-text text-danger">Vui lòng nhập tên hàng hóa.</small>
                   </div>
                 </div>
                 <div class="form-group col-md-6">
-                  <label for="price">Giá <span class="text-danger">(*):</span></label>
-                  <input type="text" id=price formControlName="price" class="form-control" name="price">
+                  <label>Giá <span class="text-danger">(*):</span></label>
+                  <input class="form-control"
+                         (click)="CommaFormatted($event)"
+                         (change)="checkValidatePrice($event)"
+                         type="text"
+                         name="product_price"
+                         [(ngModel)]="product_price" [ngModelOptions]="{standalone: true}"
+                         autocomplete="off"
+                         (keydown)="numberCheck($event)"
+                         (keyup)="CommaFormatted($event)"
+                  />
+                  <!--                  <input type="text" id=price formControlName="price" class="form-control" name="price">-->
                   <!--                  <input onChange="format_curency(this);" type="text" id=price formContronlName="price" class="form-control" name="price">-->
                   <span>VND</span>
                   <div
@@ -207,8 +218,10 @@
         <p>Bạn có muốn hủy thêm mới hàng hóa không ?</p>
         <!--        <p style="color: red">Lưu ý! Thao tác này không thể hoàn tác</p>-->
         <div class="d-flex justify-content-center">
-          <a [routerLink]="['/listProduct']"  style="width: 100px;" type="button" class="btn btn-grad-blue mx-3" data-dismiss="modal" >Có</a>
-          <button  type="button"  style="width: 100px;" class="btn btn-grad-red" #cancel data-dismiss="modal" >Không</button>
+          <a [routerLink]="['/listProduct']" style="width: 100px;" type="button" class="btn btn-grad-blue mx-3"
+             data-dismiss="modal">Có</a>
+          <button type="button" style="width: 100px;" class="btn btn-grad-red" #cancel data-dismiss="modal">Không
+          </button>
         </div>
       </div>
     </div>

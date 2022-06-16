@@ -28,7 +28,7 @@
                   </ul>
                 </div>
               </li>
-              <li *ngIf="['ROLE_ADMIN', 'ROLE_STAFF'].indexOf(role)!==-1"><a  href="#">Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
+              <li *ngIf="['ROLE_ADMIN', 'ROLE_STAFF'].indexOf(role)!==-1"><a>Quản lý báo cáo<i class="fa-solid fa-angle-right"></i></a>
                 <div class="sub-menu-2">
                   <ul>
                     <li><a [routerLink]="['/sale-report/list']">Quản lý báo cáo bán hàng</a></li>

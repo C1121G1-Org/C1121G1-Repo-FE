@@ -33,31 +33,29 @@
           <!-- Search form -->
           <br>
           <div class="navbar-nav ms-auto d-flex flex-row">
-            <div class=" mb-3 col-md-3">
+            <div style="height: 45px; width: 70px">
               <label>Từ ngày: </label>
             </div>
 
-            <div class=" mb-3 col-md-3">
-              <label>Đến ngày: </label>
-            </div>
-          </div>
-
-          <div class="navbar-nav ms-auto d-flex flex-row">
             <div class="input-group mb-3 col-md-3">
               <input type="date" class="form-control"
                      [(ngModel)]="startDate">
+            </div>
+
+            <div style="height: 45px; width: 80px">
+              <label>Đến ngày: </label>
             </div>
 
             <div class="input-group mb-3 col-md-3">
               <input type="date" class="form-control"
                      [(ngModel)]="endDate">
             </div>
-          </div>
 
-          <div>
-            <button type="button" class="btn btn-grad-blue"
-                    (click)="detailPurchaseHitory()">Tìm kiếm
-            </button>
+            <div class="input-group mb-3 col-md-3">
+              <button type="button" class="btn btn-grad-blue"
+                      (click)="detailPurchaseHitory()">Tìm kiếm
+              </button>
+            </div>
           </div>
 
           <h5>Chi tiết lịch sử mua hàng: </h5>
@@ -157,68 +155,72 @@
 <div class="modal fade" id="deleteModal" tabindex="-1">
   <div class="modal-dialog">
     <div class="modal-content">
+      <div class="d-flex justify-content-center">
+        <section class="make-color container">
+          <!--for demo wrap-->
+          <h4 class="my-5 text-center">Sản phẩm mua trong đơn hàng</h4>
 
-      <div class="make-color">
-        <h5>Sản phẩm đã mua trong đơn hàng: </h5>
+          <div class="make-color">
+            <div class="tbl-header">
+              <table cellpadding="0" cellspacing="0" border="0">
+                <thead>
+                <tr>
+                  <th scope="col">STT</th>
+                  <th scope="col">Tên sản phẩm</th>
+                  <th scope="col">Số lượng</th>
+                </tr>
+                </thead>
+              </table>
+            </div>
 
-        <div class="tbl-header">
-          <table cellpadding="0" cellspacing="0" border="0">
-            <thead>
-            <tr>
-              <th scope="col">STT</th>
-              <th scope="col">Tên sản phẩm</th>
-              <th scope="col">Số lượng</th>
-            </tr>
-            </thead>
-          </table>
-        </div>
+            <div class="tbl-content">
+              <table class=" table table-bordered table-responsive-md">
+                <tbody>
+                <tr *ngFor="let purchaseProduct of purchaseProducts, index as i">
+                  <td>{{i + 1}}</td>
+                  <td>{{purchaseProduct.productName}}</td>
+                  <td>{{purchaseProduct.quantity}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
 
-        <div class="tbl-content">
-          <table class=" table table-bordered table-responsive-md">
-            <tbody>
-            <tr *ngFor="let purchaseProduct of purchaseProducts, index as i">
-              <td>{{i + 1}}</td>
-              <td>{{purchaseProduct.productName}}</td>
-              <td>{{purchaseProduct.quantity}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+          <div class="row my-3">
+            <div class="row col-4 ml-0">
 
-      <div class="row my-3">
-        <div class="row col-4 ml-0">
+            </div>
 
-        </div>
-
-        <div class="col-4 d-flex justify-content-center">
-          <p class="page-link">{{(productPageNumber + 1) + '/' + productTotalPages}}</p>
-        </div>
-        <div class="col-4">
-          <!--Pagination-->
-          <nav class="d-flex justify-content-end wow fadeIn">
-            <ul class="pagination">
-              <li class="page-item">
-                <button [ngStyle]="{'background-color': (productPageNumber <= 0) ? 'gray' :
+            <div class="col-4 d-flex justify-content-center">
+              <p class="page-link">{{(productPageNumber + 1) + '/' + productTotalPages}}</p>
+            </div>
+            <div class="col-4">
+              <!--Pagination-->
+              <nav class="d-flex justify-content-end wow fadeIn">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <button [ngStyle]="{'background-color': (productPageNumber <= 0) ? 'gray' :
             'white','color': (productPageNumber <= 0) ? 'white' : 'blue'}"
-                        [disabled]="(productPageNumber <= 0)" class="page-link"
-                        (click)="productPreviousPage()">Trước
-                </button>
-              </li>
-              <li class="page-item " aria-current="page">
-                <button [disabled]="true" class="page-link">{{productPageNumber + 1}}</button>
-              </li>
-              <li class="page-item">
-                <button [ngStyle]="{'background-color':
+                            [disabled]="(productPageNumber <= 0)" class="page-link"
+                            (click)="productPreviousPage()">Trước
+                    </button>
+                  </li>
+                  <li class="page-item " aria-current="page">
+                    <button [disabled]="true" class="page-link">{{productPageNumber + 1}}</button>
+                  </li>
+                  <li class="page-item">
+                    <button [ngStyle]="{'background-color':
                 (productPageNumber >= productTotalPages - 1) ? 'gray' :'white',
                 'color': (productPageNumber >= productTotalPages - 1) ? 'white' : 'blue'}"
-                        [disabled]="(productPageNumber >= productPageNumber - 1)" class="page-link"
-                        (click)="productNextPage()">Sau
-                </button>
-              </li>
-            </ul>
-          </nav>
-        </div>
+                            [disabled]="(productPageNumber >= productPageNumber - 1)" class="page-link"
+                            (click)="productNextPage()">Sau
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </div>

@@ -1,10 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {ReportCustomerDto} from '../../dto/report-customer-dto';
-import {PurchaseHistoryDto} from '../../dto/purchase-history-dto';
-import {PurchaseProductDto} from '../../dto/purchase-product-dto';
-
 
 /*
     Created by TuanNQ
