@@ -1,5 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './common/header/header.component';
@@ -11,22 +12,33 @@ import {InvoiceModule} from './component/invoice/invoice.module';
 import {SupplierModule} from './component/supplier/supplier.module';
 import {StorageModule} from './component/storage/storage.module';
 import {HomepageModule} from './component/homepage/homepage.module';
-import {ReportModule} from './component/report/report.module';
+
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {SecurityModule} from './component/security/security.module';
+import {HttpClientModule} from '@angular/common/http';
+import {ReportModule} from './component/report/report.module';
+import {CKEditorModule} from 'ckeditor4-angular';
+import {ErrorComponent} from './error/error.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {TokenInterceptorService} from './services/security/token-interceptor.service';
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ErrorComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     EmployeeModule,
     ProductModule,
     CustomerModule,
@@ -36,7 +48,10 @@ import {TokenInterceptorService} from './services/security/token-interceptor.ser
     HomepageModule,
     ReportModule,
     SecurityModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig)
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    HttpClientModule,
+    CKEditorModule
+
   ],
   providers: [
     /*
@@ -50,6 +65,7 @@ import {TokenInterceptorService} from './services/security/token-interceptor.ser
       multi: true
     }
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

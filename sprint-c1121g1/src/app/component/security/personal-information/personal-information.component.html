@@ -6,7 +6,7 @@
           <div class="card-body">
             <h4 class="card-title" style="font-size: 35px">THÔNG TIN CÁ NHÂN</h4>
             <p>Quản lý thông tin cá nhân của bạn</p>
-            <form [formGroup]="personalInformationForm" (ngSubmit)="update(openSuccessModalBtn, closeModalBtn)">
+            <form [formGroup]="personalInformationForm" (ngSubmit)="update(openSuccessModalBtn, closeModalBtn, errorModalBtn, closeErrorModal)">
               <div class="row" style="padding: 10px 50px">
                 <div style="display: flex ; justify-content: center" class="col-md-12 pb-4">
                   <input name="image" id="image" type="file" class="file__input" (change)="showReview($event)" accept="image/jpeg, image/jpg">
@@ -115,10 +115,11 @@
         </div>
       </div>
       <div class="modal-body text-center">
-        <h4>Thông báo</h4>
-        <p>Hệ thống đang bảo trì, vui lòng thử lại sau vài phút nữa.</p>
-        <button #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
+        <h4>Ooops!</h4>
+        <p>Cập nhật thông tin cá nhân thất bại, vui lòng thử lại.</p>
+        <button (click)="refresh()" #closeErrorModal class="btn-modal btn-grad-red" data-dismiss="modal">Thử lại</button>
       </div>
     </div>
   </div>
 </div>
+

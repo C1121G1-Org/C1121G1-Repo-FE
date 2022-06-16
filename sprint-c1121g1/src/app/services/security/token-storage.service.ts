@@ -31,7 +31,7 @@ export class TokenStorageService {
   }
 
   public getToken(): string {
-    if (localStorage.getItem(TOKEN_KEY) != null) {
+    if (localStorage.getItem(TOKEN_KEY) !== null) {
       return localStorage.getItem(TOKEN_KEY);
     } else {
       return sessionStorage.getItem(TOKEN_KEY);
@@ -54,5 +54,17 @@ export class TokenStorageService {
     } else {
       return JSON.parse(sessionStorage.getItem(USER_KEY));
     }
+  }
+
+  public setRememberFlag() {
+    window.localStorage.setItem('Remember', 'true');
+  }
+
+  public setNoRememberFlag() {
+    window.localStorage.setItem('Remember', 'false');
+  }
+
+  public getRememberFlag() {
+    return window.localStorage.getItem('Remember');
   }
 }

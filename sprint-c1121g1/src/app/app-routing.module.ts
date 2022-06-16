@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {HomepageRoutingModule} from './component/homepage/homepage-routing.module';
-import {HomepageModule} from './component/homepage/homepage.module';
+import {NgModule} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 import {ProductListBestsellerComponent} from './component/homepage/product-list-bestseller/product-list-bestseller.component';
-
+import {ReportModule} from './component/report/report.module';
 
 const routes: Routes = [
-  {path: '', component: ProductListBestsellerComponent}
+  {path: '', component: ProductListBestsellerComponent},
 ];
 
 @NgModule({
+
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
